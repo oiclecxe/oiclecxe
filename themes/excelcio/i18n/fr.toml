@@ -19,6 +19,8 @@ notFoundText = "Le lien est peut-être erroné, ou la page a été déplacée."
 previous = "Précédent"
 next = "Suivant"
 
+clientsLabel = "Ils nous font confiance"
+
 [itemCount]
 one = "{{ .Count }} contenu"
 other = "{{ .Count }} contenus"

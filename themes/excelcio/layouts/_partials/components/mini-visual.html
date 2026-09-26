@@ -1,0 +1,52 @@
+{{- /*
+  Small stylised “product” illustration (reference platform visuals), pure SVG, decorative.
+  Context: dict "type" (bars | grid | line | kpi | search | table | report), "seed".
+*/ -}}
+{{- $type := .type | default "bars" -}}
+{{- $h := hash.FNV32a (.seed | default $type) -}}
+<svg class="mini-visual mini-visual--{{ $type }}" viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+  <g class="mv-frame"><rect x="0.5" y="0.5" width="239" height="149"/></g>
+  {{- if eq $type "bars" }}
+  <text class="mv-label" x="12" y="20">VENTES · T3</text>
+  {{- range $i := seq 0 7 }}
+    {{- $v := add 22 (mod (div $h (add $i 3)) 70) }}
+  <rect class="mv-bar{{ if eq $i 5 }} mv-accent{{ end }}" x="{{ add 14 (mul $i 27) }}" y="{{ sub 136 $v }}" width="16" height="{{ $v }}" style="--i: {{ $i }}"/>
+  {{- end }}
+  {{- else if eq $type "grid" }}
+  <text class="mv-label" x="12" y="20">WIDGETS</text>
+  {{- range $r := seq 0 3 }}{{ range $c := seq 0 7 }}
+    {{- $on := eq (mod (div $h (add (mul $r 8) $c 1)) 5) 0 }}
+  <rect class="mv-cell{{ if $on }} mv-accent{{ end }}" x="{{ add 14 (mul $c 27) }}" y="{{ add 34 (mul $r 26) }}" width="20" height="20"/>
+  {{- end }}{{ end }}
+  {{- else if eq $type "line" }}
+  <text class="mv-label" x="12" y="20">TENDANCE</text>
+  {{- $pts := slice }}
+  {{- range $i := seq 0 9 }}{{ $pts = $pts | append (printf "%d,%d" (add 14 (mul $i 23)) (sub 126 (mod (div $h (add $i 2)) 80))) }}{{ end }}
+  <polyline class="mv-line" points="{{ delimit $pts " " }}"/>
+  {{- range $i, $p := $pts }}{{ $xy := split $p "," }}<circle class="mv-dot{{ if eq $i 6 }} mv-accent{{ end }}" cx="{{ index $xy 0 }}" cy="{{ index $xy 1 }}" r="3"/>{{ end }}
+  {{- else if eq $type "kpi" }}
+  <text class="mv-label" x="12" y="20">INDICATEURS</text>
+  {{- range $i, $l := slice "CA" "MARGE" "PANIER" }}
+  <g transform="translate({{ add 12 (mul $i 76) }},34)"><rect class="mv-card" width="68" height="100"/><text class="mv-label" x="8" y="18">{{ $l }}</text><text class="mv-kpi{{ if eq $i 1 }} mv-accent-text{{ end }}" x="8" y="58">+{{ add 3 (mod (div $h (add $i 2)) 18) }}%</text><rect class="mv-bar" x="8" y="76" width="{{ add 20 (mod (div $h (add $i 5)) 32) }}" height="6"/></g>
+  {{- end }}
+  {{- else if eq $type "search" }}
+  <rect class="mv-card" x="12" y="14" width="216" height="26"/>
+  <text class="mv-label" x="22" y="31">▸ ventes par région ce trimestre</text>
+  {{- range $i := seq 0 3 }}
+  <text class="mv-label" x="14" y="{{ add 64 (mul $i 22) }}">{{ index (slice "NORD" "OUEST" "EST" "SUD") $i }}</text>
+  <rect class="mv-bar{{ if eq $i 1 }} mv-accent{{ end }}" x="62" y="{{ add 55 (mul $i 22) }}" width="{{ add 40 (mod (div $h (add $i 3)) 120) }}" height="10"/>
+  {{- end }}
+  {{- else if eq $type "table" }}
+  <text class="mv-label" x="12" y="20">BUDGET 2027</text>
+  {{- range $r := seq 0 4 }}
+  <line class="mv-rule" x1="12" x2="228" y1="{{ add 32 (mul $r 22) }}" y2="{{ add 32 (mul $r 22) }}"/>
+  {{- range $c := seq 0 3 }}
+  <text class="mv-label{{ if and (eq $r 2) (eq $c 3) }} mv-accent-text{{ end }}" x="{{ add 14 (mul $c 56) }}" y="{{ add 47 (mul $r 22) }}">{{ if eq $c 0 }}{{ index (slice "Q1" "Q2" "Q3" "Q4" "TOTAL") $r }}{{ else }}{{ add 100 (mod (div $h (add (mul $r 4) $c 2)) 900) }}{{ end }}</text>
+  {{- end }}{{ end }}
+  {{- else }}
+  <text class="mv-label" x="12" y="20">RAPPORT MENSUEL</text>
+  {{- range $i := seq 0 5 }}
+  <rect class="mv-bar{{ if eq $i 0 }} mv-accent{{ end }}" x="12" y="{{ add 34 (mul $i 18) }}" width="{{ cond (eq $i 0) 120 (add 90 (mod (div $h (add $i 2)) 120)) }}" height="7"/>
+  {{- end }}
+  {{- end }}
+</svg>

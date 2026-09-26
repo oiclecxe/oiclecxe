@@ -1,0 +1,61 @@
+@layer components {
+  /* Pill tabs (reference). Without JS the tab list is hidden and every panel is shown. */
+  .tabs__list {
+    display: none;
+    gap: 0;
+    margin-bottom: var(--sp-9);
+    padding: var(--sp-1);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+  }
+
+  .js .tabs__list {
+    display: inline-flex;
+  }
+
+  .tabs__tab {
+    min-height: 2.625rem;
+    padding: 0 var(--sp-6);
+    border-radius: var(--radius-pill);
+    color: var(--fg);
+    font-size: var(--fs-body);
+    transition:
+      color var(--dur-fast) var(--ease-standard),
+      background-color var(--dur-fast) var(--ease-standard);
+  }
+
+  .tabs__tab:hover {
+    background: var(--surface-hover);
+  }
+
+  .tabs__tab[aria-selected="true"] {
+    background: var(--badge-bg);
+    color: var(--badge-fg);
+  }
+
+  .tabs__panel + .tabs__panel {
+    margin-top: var(--sp-10);
+  }
+
+  .js .tabs__panel + .tabs__panel {
+    margin-top: 0;
+  }
+
+  .tabs__panel-title {
+    margin-bottom: var(--sp-5);
+    font-size: var(--fs-h4);
+  }
+
+  .js .tabs__panel-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .tabs__panel:focus-visible {
+    outline-offset: 8px;
+  }
+}

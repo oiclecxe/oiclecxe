@@ -1,0 +1,31 @@
+{{- /*
+  Heading with the reference's two-part style and word-by-word reveal.
+  Context: dict
+    "title" string, or map {lines: [{accent, text}], lead, rest}
+    "tag"   heading tag (default h2)
+    "id"    id attribute
+    "class" extra classes
+    "reveal" bool (default true)
+*/ -}}
+{{- $t := .title -}}
+{{- $tag := .tag | default "h2" -}}
+{{- $reveal := cond (isset . "reveal") .reveal true -}}
+{{- $i := 0 -}}
+{{- $parts := slice -}}
+{{- if reflect.IsMap $t }}
+  {{- range $t.lines }}
+    {{- $line := slice }}
+    {{- with .accent }}{{ $w := partial "components/words.html" (dict "text" . "start" $i) }}{{ $i = $w.next }}{{ $line = $line | append (printf `<span class="title__accent">%s</span>` $w.html) }}{{ end }}
+    {{- with .text }}{{ $w := partial "components/words.html" (dict "text" . "start" $i) }}{{ $i = $w.next }}{{ $line = $line | append (printf `<span class="title__lead">%s</span>` $w.html) }}{{ end }}
+    {{- $parts = $parts | append (printf `<span class="title__line">%s</span>` (delimit $line " ")) }}
+  {{- end }}
+  {{- with $t.lead }}{{ $w := partial "components/words.html" (dict "text" . "start" $i) }}{{ $i = $w.next }}{{ $parts = $parts | append (printf `<span class="title__lead">%s</span>` $w.html) }}{{ end }}
+  {{- with $t.rest }}{{ $w := partial "components/words.html" (dict "text" . "start" $i) }}{{ $i = $w.next }}{{ $parts = $parts | append (printf `<span class="title__rest">%s</span>` $w.html) }}{{ end }}
+{{- else }}
+  {{- $w := partial "components/words.html" (dict "text" $t) }}
+  {{- $parts = $parts | append (printf `<span class="title__lead">%s</span>` $w.html) }}
+{{- end -}}
+{{- $attrs := printf `class="%s"` (trim (printf "title %s %s" (cond $reveal "reveal" "") (.class | default "")) " ") -}}
+{{- with .id }}{{ $attrs = printf `%s id="%s"` $attrs . }}{{ end -}}
+{{- if $reveal }}{{ $attrs = printf `%s data-reveal` $attrs }}{{ end -}}
+{{- printf `<%s %s>%s</%s>` $tag $attrs (delimit $parts " ") $tag | safeHTML -}}

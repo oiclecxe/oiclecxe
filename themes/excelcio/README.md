@@ -68,10 +68,32 @@ Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-al
 | `components/page-hero.html`, `components/breadcrumb.html` | En-tête des pages intérieures |
 | `icon.html` | Icône SVG inline (`name`, `class`, `label`) |
 | `image.html` | Image responsive AVIF/WebP (`page`, `src`, `alt`, `sizes`, `priority`) ; échec du build si `alt` manque |
-| `sections/hero.html` | Hero de l'accueil |
+| `components/title.html` | Titre en deux temps avec apparition mot par mot (`title` : texte, ou `{lines: [{accent, text}], lead, rest}`) |
+| `components/words.html` | Découpe un texte en mots animables (retourne `html`, `next`) |
+| `components/mini-visual.html` | Illustration SVG de tableau de bord (`type` : bars, grid, line, kpi, search, table, report) |
 | `hooks/head-end.html`, `hooks/body-end.html` | Points d'extension vides, à surcharger depuis le site |
 
-Classes CSS : `.btn` (`--primary`, `--secondary`, `--sm`), `.link-arrow`, `.icon-btn`, `.badge` (`--alt`), `.eyebrow` (`--mono`), `.title__lead` / `.title__rest` / `.title__accent`, `.statement`, `.card` (`__title`, `__title-accent`, `__corner`, `__text`), `.accordion` (`__item`, `__summary`, `__icon`, `__body`), `.split`, `.grid` (`--2` à `--5`), `.prose`.
+### Sections (`sections:` du front matter)
+
+| `type` | Ambiance | Champs |
+|---|---|---|
+| `hero` | brand | `title`, `primary` et `secondary` `{label, url}`, `logos` (liste de noms) |
+| `architecture` | light | `title` (`lines`, `rest`), `top` et `bottom` `{label, detail}`, `band1` et `band2` `{label, items}` |
+| `features` | light | `title`, `tabs: [{label, cards: [{title, accent, text, url}]}]` |
+| `expertises` | light-alt | `title`, `items: [{title, badges, text, url, link}]` |
+| `statement` | light | `text` |
+| `case-studies` | dark-alt | `title`, `items: [{title, client, sector, url}]` |
+| `faq` | dark | `title`, `items: [{q, a}]` (émet le JSON-LD `FAQPage`) |
+| `platform` | dark-alt | `title`, `items: [{name, text, url, visual}]` |
+| `trainings` | dark-alt | `title`, `cta {label, url}`, `items: [{date, city, title, text, url}]` |
+| `proof` | dark-alt | `title`, `stats: [{value, suffix, label}]`, `quote {before, highlight, after, author, role}` |
+| `cta` | brand | `title`, `primary`, `secondary`, `badges` |
+
+Chaque bloc accepte `hidden: true`.
+
+Classes CSS : `.btn` (`--primary`, `--secondary`, `--sm`), `.link-arrow`, `.icon-btn`, `.badge` (`--alt`), `.eyebrow` (`--mono`), `.title__lead` / `.title__rest` / `.title__accent`, `.statement`, `.card` (`__title`, `__title-accent`, `__corner`, `__text`), `.accordion` (`__item`, `__summary`, `__icon`, `__body`), `.tabs`, `.carousel`, `.item-list`, `.rows`, `.stats`, `.quote`, `.split`, `.grid` (`--2` à `--5`), `.prose`.
+
+Animations : `data-reveal` + `.reveal` (mots d'un titre) ou `.reveal-block` (bloc) déclenchent l'apparition au défilement ; `--delay` décale un bloc. Tout reste visible sans JS et en mouvement réduit.
 
 La page `/styleguide/` (développement uniquement) présente tous les tokens et composants, avec les contrastes calculés en direct.
 

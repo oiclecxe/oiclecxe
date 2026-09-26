@@ -18,4 +18,8 @@
 @import "./components/footer.css";
 @import "./components/page-hero.css";
 @import "./components/hero.css";
+@import "./components/reveal.css";
+@import "./components/tabs.css";
+@import "./components/carousel.css";
+@import "./components/sections.css";
 @import "./utilities.css";

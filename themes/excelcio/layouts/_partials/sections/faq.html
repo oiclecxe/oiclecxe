@@ -1,0 +1,30 @@
+{{- /*
+  FAQ: title on the left (1/3), accordion on the right (2/3), first item open.
+  Emits schema.org FAQPage structured data.
+  Context: dict "page" "data" "index". data: title, items [{q, a}]
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-dark" aria-labelledby="{{ $id }}">
+  <div class="container split">
+    <div class="split__aside--sticky">
+      {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
+    </div>
+    <div class="accordion">
+      {{- range $i, $item := $d.items }}
+      <details class="accordion__item"{{ if eq $i 0 }} open{{ end }}>
+        <summary class="accordion__summary">
+          <h3 class="accordion__question">{{ $item.q }}</h3>
+          {{- partialCached "icon.html" (dict "name" "plus" "class" "accordion__icon") "plus" "accordion__icon" }}
+        </summary>
+        <div class="accordion__body">{{ $item.a | $.page.RenderString (dict "display" "block") }}</div>
+      </details>
+      {{- end }}
+    </div>
+  </div>
+  {{- $entities := slice }}
+  {{- range $d.items }}
+    {{- $entities = $entities | append (dict "@type" "Question" "name" (.q | plainify) "acceptedAnswer" (dict "@type" "Answer" "text" (.a | plainify))) }}
+  {{- end }}
+  <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $entities | jsonify | safeJS }}</script>
+</section>

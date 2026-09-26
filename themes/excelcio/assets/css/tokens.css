@@ -102,6 +102,24 @@
     --dev-flag-bg: #FFD400;
     --dev-flag-fg: #000;
 
+    /* Diagram tints derived from the brand colour (architecture section).
+       Band 1: white text (≥ 4.5:1). Band 2: ink text (≥ 4.5:1). */
+    --tint-1-a: #6E1522;
+    --tint-1-b: #7F1A28;
+    --tint-1-c: #8C1C2B;
+    --tint-1-d: #A82234;
+    --tint-2-a: #E9A1AB;
+    --tint-2-b: #EDB0B8;
+    --tint-2-c: #F1BFC6;
+    --tint-2-d: #F4CDD2;
+    --tint-2-e: #F7DBDF;
+    --tint-2-f: #FAE8EB;
+
+    /* Case-study card backgrounds (placeholders until real visuals exist) */
+    --story-1: var(--brand);
+    --story-2: var(--dark-3);
+    --story-3: var(--brand-strong);
+
     /* Default tone = dark page */
     --bg: var(--dark-1);
     --fg: var(--text-on-dark);

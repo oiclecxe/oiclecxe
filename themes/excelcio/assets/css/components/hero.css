@@ -27,4 +27,60 @@
   .hero__pillars {
     margin-top: var(--sp-12);
   }
+
+  /* Entrance animation, CSS only: words then actions then pillars (0.36 s, +55 ms per word). */
+  .hero__title .w {
+    display: inline-block;
+    animation: hero-word-in var(--dur-reveal) var(--ease-out) both;
+    animation-delay: calc(0.1s + var(--i, 0) * var(--stagger));
+  }
+
+  .hero__actions,
+  .hero__pillars,
+  .hero .logos {
+    animation: hero-block-in var(--dur-slow) var(--ease-out) both;
+  }
+
+  .hero__actions {
+    animation-delay: 0.45s;
+  }
+
+  .hero__pillars {
+    animation-delay: 0.6s;
+  }
+
+  .hero .logos {
+    animation-name: hero-fade-in;
+    animation-timing-function: var(--ease-fade);
+    animation-delay: 0.5s;
+  }
+
+  @keyframes hero-word-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.35em);
+    }
+  }
+
+  @keyframes hero-block-in {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+  }
+
+  @keyframes hero-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__title .w,
+    .hero__actions,
+    .hero__pillars,
+    .hero .logos {
+      animation: none;
+    }
+  }
 }

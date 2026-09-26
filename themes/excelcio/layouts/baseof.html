@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
 <head>
+  {{- /* Enables reveal states only when JS runs; shows everything if main.js has not started after 3 s. */}}
+  <script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__themeReady)document.documentElement.classList.add("reveal-fallback")},3000)</script>
   {{- partial "head/meta.html" . }}
   {{- partialCached "head/fonts.html" . }}
   {{- partialCached "head/css.html" . }}

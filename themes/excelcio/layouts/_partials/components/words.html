@@ -1,0 +1,13 @@
+{{- /*
+  Splits a plain-text string into word spans for the word-by-word reveal.
+  Context: dict "text" (string), "start" (index of the first word, default 0).
+  Returns: dict "html" (safe HTML) "next" (index after the last word).
+*/ -}}
+{{- $start := .start | default 0 -}}
+{{- $out := slice -}}
+{{- range split (trim (string .text) " ") " " }}
+  {{- if . }}
+    {{- $out = $out | append (printf `<span class="w" style="--i:%d">%s</span>` (add $start (len $out)) (htmlEscape .)) }}
+  {{- end }}
+{{- end -}}
+{{- return dict "html" (delimit $out " " | safeHTML) "next" (add $start (len $out)) -}}

@@ -1,13 +1,15 @@
 {{- /*
-  Home hero: brand-coloured block, full viewport height, content at the bottom,
-  breathing squares on the right. Context: dict "page" "data" "index".
-  data: title, primary {label, url}, secondary {label, url}
+  Home hero: brand block, full viewport height, content at the bottom,
+  breathing squares on the right, client logo band.
+  Context: dict "page" "data" "index".
+  data: title, primary {label, url}, secondary {label, url}, logos (slice of names)
 */ -}}
 {{- $d := .data -}}
 <section class="section tone-brand squares-host hero" aria-labelledby="hero-title">
   {{- partial "components/squares.html" (dict "seed" "hero" "cols" 3 "rows" 10 "density" 70) }}
   <div class="container hero__inner">
-    <h1 class="hero__title title--display" id="hero-title">{{ $d.title }}</h1>
+    {{- /* Hero entrance is a pure CSS animation that starts at first paint (no JS dependency, good LCP). */}}
+    {{- partial "components/title.html" (dict "title" $d.title "tag" "h1" "id" "hero-title" "class" "hero__title title--display" "reveal" false) }}
     <div class="btn-row btn-row--stack hero__actions">
       {{- with $d.primary }}<a class="btn btn--primary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
       {{- with $d.secondary }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
@@ -18,4 +20,17 @@
     </div>
     {{- end }}
   </div>
+  {{- with $d.logos }}
+  <div class="logos" aria-label="{{ T "clientsLabel" }}" role="region">
+    <div class="logos__track">
+      {{- range seq 2 }}
+      <ul class="logos__list" role="list"{{ if eq . 2 }} aria-hidden="true"{{ end }}>
+        {{- range $d.logos }}
+        <li class="logos__item">{{ partialCached "icon.html" (dict "name" "logo-mark") "logo-mark" }}{{ . }}</li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+  </div>
+  {{- end }}
 </section>

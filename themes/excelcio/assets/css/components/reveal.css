@@ -1,0 +1,52 @@
+@layer components {
+  /*
+   * Reveal on scroll (reference: words 0.36 s, +55 ms per word; blocks 0.6 s).
+   * Hidden states only apply when JS runs (html.js, set inline in <head>);
+   * html.reveal-fallback shows everything if the module failed to load.
+   */
+  .js .reveal .w {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+
+  .reveal .w {
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      transform var(--dur-reveal) var(--ease-out);
+    transition-delay: calc(var(--delay, 0s) + var(--i, 0) * var(--stagger));
+  }
+
+  .js .reveal.is-visible .w {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .reveal-block {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      opacity var(--dur-slow) var(--ease-out) var(--delay, 0s),
+      transform var(--dur-slow) var(--ease-out) var(--delay, 0s);
+  }
+
+  .js .reveal-block.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-fallback .reveal .w,
+  .reveal-fallback .reveal-block {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal .w,
+    .js .reveal-block {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
