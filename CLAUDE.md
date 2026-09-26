@@ -8,9 +8,9 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
 - Périmètre de la V1 : **Lots 0 à 2** (étude de la référence, socle et design system, page d'accueil). S'arrêter après le Lot 2.
-- Lot en cours : **Lot 0 — Étude de la référence**
+- Lot en cours : **Lot 0 — Étude de la référence** : terminé, en attente de validation (décisions ⏳ dans `docs/DECISIONS.md`)
 - Lots validés : aucun
-- En attente de l'utilisateur : logo Excelcio (SVG) → `assets/images/logo.svg`, attendu au Lot 1
+- Logo Excelcio fourni : `assets/images/logo.svg`
 
 ## Méthode de travail
 

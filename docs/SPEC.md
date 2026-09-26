@@ -55,7 +55,9 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 | Contenu | Structure complète + **placeholders**. La rédaction réelle sera faite ensuite par l'équipe Excelcio |
 | Référence la référence | **Coller au plus juste** : esthétique, typographie, organisation des pages, animations |
 | Couleurs | Principale **#A82234** (rgb 168, 34, 52), fond **#1A171B** (rgb 26, 23, 27), palette dérivée |
-| Mode d'affichage | **Sombre uniquement** (pas de bascule clair/sombre) |
+| Mode d'affichage | ~~Sombre uniquement~~ → **Avenant Lot 0** : ambiances de section alternées comme la référence (aplat bordeaux, clair, sombre), sans bascule clair/sombre. Voir `docs/DECISIONS.md` et `relevé de la référence (Lot 0)` |
+| Effets visuels | **Avenant Lot 0** : pas de halos, dégradés, grilles de fond ni halo au pointeur (§ 5.1 et § 9 amendés) ; aplats, angles droits, champ de carrés animé |
+| Polices | **Avenant Lot 0** : Geist + JetBrains Mono (SIL OFL 1.1), auto-hébergées |
 | Langues | FR seul, i18n Hugo configurée pour ajouter EN plus tard |
 | Fonctions dynamiques | Formulaire de contact, recherche interne, inscriptions formations/événements, newsletter |
 | Hébergement | Local pour l'instant ; formulaires via une couche d'abstraction configurable avec mode simulé (§ 10) |
