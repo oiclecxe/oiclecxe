@@ -1,0 +1,17 @@
+{{- /*
+  Training card: code, title, level / duration / format tags.
+  Context: page, or dict "page" "level" (heading level of the title, default 3).
+*/ -}}
+{{- $p := . -}}{{- $h := 3 -}}
+{{- if reflect.IsMap . }}{{ $p = .page }}{{ $h = .level | default 3 }}{{ end -}}
+<a class="card card--training" href="{{ $p.RelPermalink }}">
+  {{- with $p.Params.code }}<p class="card__key mono">{{ . }}</p>{{ end }}
+  {{- printf `<h%d class="card__title">%s</h%d>` $h (htmlEscape $p.Title) $h | safeHTML }}
+  {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
+  <p class="card__facts">
+    {{- with $p.Params.level }}<span class="tag">{{ . }}</span>{{ end }}
+    {{- with $p.Params.durationDays }}<span class="tag">{{ T "days" . }}</span>{{ end }}
+    {{- with $p.Params.format }}<span class="tag">{{ . }}</span>{{ end }}
+    {{- if not (or $p.Params.level $p.Params.durationDays $p.Params.format) }}<span class="tag tag--tbc">{{ T "detailsTBC" }}</span>{{ end }}
+  </p>
+</a>

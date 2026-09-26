@@ -101,6 +101,34 @@ Animations : `data-reveal` + `.reveal` (mots d'un titre) ou `.reveal-block` (blo
 
 La page `/styleguide/` (développement uniquement) présente tous les tokens et composants, avec les contrastes calculés en direct.
 
+## Types de contenu et gabarits
+
+Les gabarits sont choisis par **type** (champ `type`, en général posé par `cascade` dans le `_index.md` de la rubrique), ce qui rend le thème indépendant des adresses du site.
+
+| Type | Gabarits | Archetype (`hugo new content --kind …`) |
+|---|---|---|
+| `solution` | `solution/section.html`, `solution/page.html` | `solution.md` |
+| `expertise` | `expertise/section.html`, `expertise/page.html` | `expertise.md` |
+| `training` | `training/section.html` (catalogue filtrable, prochaines sessions), `training/page.html` | `training.md` |
+| `case-study` | `case-study/section.html` (filtrable), `case-study/page.html` | `case-study.md` |
+| `article` | `article/section.html` (à la une, pagination), `article/page.html` (sommaire) | `article.md` |
+| `event` | `event/section.html` (à venir / passés), `event/page.html` | `event.md` |
+| `job` | `job/section.html`, `job/page.html` | `job.md` |
+| `contact`, `search`, `site-map` | `contact/page.html`, `search/page.html`, `site-map/page.html` | — |
+| autre | `page.html`, `section.html` (pages claires ; `sections:` accepté) | `default.md` |
+
+Relations automatiques : les contenus citent des solutions (`solutions: [qlik]`) et des expertises (`expertises: [finance]`) par le nom de dossier de la page cible ; `_partials/func/related.html` les retrouve.
+
+Pages intérieures : ambiances claires, header plein dès le haut (`header: solid` implicite hors accueil et 404), appel à l'action final `params.cta` (remplaçable par `cta:` ou supprimable par `cta: false`).
+
+### Shortcodes
+
+`callout`, `figure`, `video` (façade YouTube, rien n'est chargé avant le clic), `button`, `cta`, `stats`, `columns`. Syntaxe : `docs/CONTENU.md` du site.
+
+### Points d'accroche pour le Lot 4
+
+`contact/page.html` utilise `_partials/forms/contact.html` s'il existe ; `search/page.html` utilise `_partials/search/page.html` s'il existe. Le lien « Explorer avec l'IA » du footer n'apparaît que si la page d'accueil publie le format de sortie `llms` (Lot 5).
+
 ## Surcharges
 
 Pour adapter un fichier, créer le fichier de même chemin dans le site (système de fichiers unifié de Hugo), par exemple `layouts/_partials/hooks/body-end.html` pour ajouter un outil d'analytics.

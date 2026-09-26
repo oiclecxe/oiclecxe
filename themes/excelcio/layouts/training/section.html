@@ -1,0 +1,81 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- $trainings := .Pages }}
+
+  {{- /* Solutions present in the catalogue, in the order of the solution pages. */}}
+  {{- $slugs := slice }}
+  {{- range where site.RegularPages "Type" "solution" }}
+    {{- $s := .File.ContentBaseName }}
+    {{- if where $trainings "Params.solutions" "intersect" (slice $s) }}{{ $slugs = $slugs | append $s }}{{ end }}
+  {{- end }}
+
+  {{- /* Filter values actually present in the trainings. */}}
+  {{- $solutionValues := slice }}
+  {{- range $slugs }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .)) }}{{ end }}
+  {{- $levels := slice }}{{ $formats := slice }}
+  {{- range $trainings }}
+    {{- with .Params.level }}{{ if not (in $levels .) }}{{ $levels = $levels | append . }}{{ end }}{{ end }}
+    {{- with .Params.format }}{{ if not (in $formats .) }}{{ $formats = $formats | append . }}{{ end }}{{ end }}
+  {{- end }}
+  {{- $levelValues := slice }}{{ range $levels }}{{ $levelValues = $levelValues | append (dict "value" (urlize .) "label" .) }}{{ end }}
+  {{- $formatValues := slice }}{{ range $formats }}{{ $formatValues = $formatValues | append (dict "value" (urlize .) "label" .) }}{{ end }}
+
+  <section class="section tone-light" id="par-solution" aria-labelledby="catalogue-title">
+    <div class="container">
+      <div class="rows-head">
+        <h2 id="catalogue-title">{{ T "catalogueTitle" (dict "Count" (len $trainings)) }}</h2>
+      </div>
+      {{- partial "components/filters.html" (dict "id" "trainings" "filters" (slice
+          (dict "name" "solution" "label" (T "filterSolution") "values" $solutionValues)
+          (dict "name" "level" "label" (T "filterLevel") "values" $levelValues)
+          (dict "name" "format" "label" (T "filterFormat") "values" $formatValues))) }}
+
+      <div data-filter-scope="trainings">
+        {{- range $slugs }}
+          {{- $slug := . }}
+          {{- $group := where $trainings "Params.solutions" "intersect" (slice $slug) }}
+        <section class="catalogue-group" data-filter-group aria-labelledby="group-{{ $slug }}">
+          <h3 class="catalogue-group__title" id="group-{{ $slug }}">{{ partial "func/solution-name.html" $slug }} <span class="catalogue-group__count">{{ len $group }}</span></h3>
+          <ul class="grid grid--3" role="list">
+            {{- range $group }}
+            <li data-filter-item data-solution="{{ delimit .Params.solutions " " }}" data-level="{{ with .Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with .Params.format }}{{ urlize . }}{{ end }}">
+              {{- partial "components/training-card.html" (dict "page" . "level" 4) }}
+            </li>
+            {{- end }}
+          </ul>
+        </section>
+        {{- end }}
+      </div>
+      <p class="lead filters__empty" data-filters-empty hidden>{{ T "noResults" }}</p>
+    </div>
+  </section>
+
+  {{- /* Upcoming sessions across the catalogue. */}}
+  {{- $sessions := slice }}
+  {{- range $trainings }}
+    {{- $t := . }}
+    {{- range .Params.sessions }}
+      {{- if and .start (ge (time .start).Unix now.Unix) }}{{ $sessions = $sessions | append (dict "start" (time .start) "city" .city "format" .format "page" $t) }}{{ end }}
+    {{- end }}
+  {{- end }}
+  <section class="section tone-light-alt" id="sessions" aria-labelledby="sessions-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="sessions-title">{{ T "upcomingSessions" }}</h2>
+      {{- with sort $sessions "start" }}
+      <ul class="rows" role="list">
+        {{- range first 12 . }}
+        <li class="rows__item">
+          <p class="rows__key mono">{{ partial "components/date.html" (dict "page" .page "date" .start "format" ":date_medium") }} · {{ .city | default .format }}</p>
+          <h3 class="rows__title"><a class="rows__link" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a></h3>
+          <div class="rows__body"><a class="link-arrow" href="{{ .page.RelPermalink }}#inscription">{{ T "register" }}{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a></div>
+        </li>
+        {{- end }}
+      </ul>
+      {{- else }}
+      <p class="lead">{{ T "noSessions" }}</p>
+      {{- end }}
+    </div>
+  </section>
+
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

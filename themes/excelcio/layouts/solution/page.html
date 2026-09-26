@@ -1,0 +1,63 @@
+{{- define "main" }}
+  {{- $slug := .File.ContentBaseName }}
+  {{- $name := .Params.partnerName | default .Title }}
+  {{- $badges := slice }}{{ with .Params.partnerLevel }}{{ $badges = $badges | append . }}{{ end }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (T "solutionEyebrow") "badges" $badges "lead" (.Params.tagline | default .Description)
+      "actions" (slice (dict "label" (T "ctaContact") "url" "/contact/") (dict "label" (T "seeTrainings") "url" "#formations" "style" "secondary"))) }}
+
+  {{- with .Params.features }}
+  <section class="section tone-light" aria-labelledby="features-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="features-title">{{ T "featuresTitle" (dict "Name" $name) }}</h2>
+      <ul class="grid grid--3" role="list">
+        {{- range . }}
+        <li class="reveal-block" data-reveal>
+          <div class="card card--static">
+            <h3 class="card__title">{{ .title }}</h3>
+            <p class="card__text">{{ .text }}</p>
+          </div>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with .Content }}
+  <section class="section tone-light">
+    <div class="container split">
+      <h2 class="split__aside--sticky">{{ T "whatWeBring" (dict "Name" site.Title) }}</h2>
+      <div class="prose">{{ . }}</div>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- $trainings := partial "func/related.html" (dict "type" "training" "key" "solutions" "slug" $slug) }}
+  <section class="section tone-light-alt" id="formations" aria-labelledby="trainings-title">
+    <div class="container">
+      <div class="rows-head">
+        <h2 id="trainings-title">{{ T "trainingsFor" (dict "Name" $name) }}</h2>
+        <a class="btn btn--secondary" href="{{ "/formations/" | relLangURL }}?solution={{ $slug }}">{{ T "seeCatalogue" }}</a>
+      </div>
+      {{- with $trainings }}
+        {{- partial "components/training-rows.html" . }}
+      {{- else }}
+      <p class="lead">{{ T "noTrainings" }}</p>
+      {{- end }}
+    </div>
+  </section>
+
+  {{- with partial "func/related.html" (dict "type" "case-study" "key" "solutions" "slug" $slug) }}
+    {{- partial "sections/case-studies.html" (dict "page" $ "index" 50 "data" (dict "title" (T "relatedCases") "pages" . "tone" "tone-light")) }}
+  {{- end }}
+
+  {{- with .Params.faq }}
+    {{- partial "sections/faq.html" (dict "page" $ "index" 60 "data" (dict "title" (T "faqTitle") "items" . "tone" "tone-light-alt")) }}
+  {{- end }}
+
+  {{- with partial "func/related.html" (dict "type" "article" "key" "solutions" "slug" $slug) }}
+    {{- partial "components/article-strip.html" (dict "pages" (first 3 .) "title" (T "relatedArticles")) }}
+  {{- end }}
+
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

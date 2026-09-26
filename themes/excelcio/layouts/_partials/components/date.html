@@ -1,0 +1,11 @@
+{{- /*
+  Human-readable date in a <time> element. Pages still marked as placeholders
+  show “[Date à confirmer]”, their front matter date only serving for sorting.
+  Context: dict "page" "date" (defaults to page date) "format" (default ":date_long").
+*/ -}}
+{{- $date := .date | default .page.Date -}}
+{{- if .page.Params.placeholder -}}
+<span class="date date--tbc">{{ T "dateTBC" }}</span>
+{{- else -}}
+<time datetime="{{ time.Format "2006-01-02" $date }}">{{ time.Format (.format | default ":date_long") $date }}</time>
+{{- end -}}

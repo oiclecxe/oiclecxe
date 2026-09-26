@@ -8,7 +8,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
 - Périmètre : V1 (lots 0 à 2) validée ; **étendu au Lot 3** (27/09/2026). S'arrêter après le Lot 3.
-- Lot en cours : **Lot 3 — Gabarits des rubriques et contenu placeholder** : à démarrer
+- Lot en cours : **Lot 3 — Gabarits des rubriques et contenu placeholder** : terminé, en attente de validation
 - Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026)
 - Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
@@ -60,7 +60,7 @@ hugo server --buildDrafts --disableFastRender          # développement (http://
 hugo --environment production --gc --minify            # build de production dans public/
 npx pagefind --site public                             # index de recherche (après le build)
 hugo --templateMetrics --templateMetricsHints          # performance des gabarits
-hugo new content fr/formations/mon-slug/index.md       # nouveau contenu via archetype
+hugo new content --kind training formations/mon-slug/index.md   # chemin relatif à content/fr ; --kind = type
 ```
 
 Pour tester la recherche : build de production, puis Pagefind, puis servir `public/` avec un serveur statique (voir README).

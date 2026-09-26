@@ -1,0 +1,28 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- $cases := .Pages }}
+  {{- $sectors := slice }}{{ $solutions := slice }}
+  {{- range $cases }}
+    {{- with .Params.sector }}{{ if not (in $sectors .) }}{{ $sectors = $sectors | append . }}{{ end }}{{ end }}
+    {{- range .Params.solutions }}{{ if not (in $solutions .) }}{{ $solutions = $solutions | append . }}{{ end }}{{ end }}
+  {{- end }}
+  {{- $sectorValues := slice }}{{ range $sectors }}{{ $sectorValues = $sectorValues | append (dict "value" (urlize .) "label" .) }}{{ end }}
+  {{- $solutionValues := slice }}{{ range $solutions }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .)) }}{{ end }}
+  <section class="section tone-light" aria-labelledby="cases-title">
+    <div class="container">
+      <h2 class="visually-hidden" id="cases-title">{{ .Title }}</h2>
+      {{- partial "components/filters.html" (dict "id" "cases" "filters" (slice
+          (dict "name" "sector" "label" (T "filterSector") "values" $sectorValues)
+          (dict "name" "solution" "label" (T "filterSolution") "values" $solutionValues))) }}
+      <ul class="grid grid--3" role="list" data-filter-scope="cases">
+        {{- range $i, $c := $cases }}
+        <li data-filter-item data-sector="{{ with $c.Params.sector }}{{ urlize . }}{{ end }}" data-solution="{{ delimit ($c.Params.solutions | default slice) " " }}">
+          {{- partial "components/story-card.html" (dict "title" ($c.Params.result | default $c.Title) "client" $c.Params.client "sector" $c.Params.sector "target" $c "url" $c.RelPermalink "index" $i) }}
+        </li>
+        {{- end }}
+      </ul>
+      <p class="lead filters__empty" data-filters-empty hidden>{{ T "noResults" }}</p>
+    </div>
+  </section>
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

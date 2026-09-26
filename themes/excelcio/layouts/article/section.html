@@ -1,0 +1,35 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- $pager := .Paginate (.Pages.ByDate.Reverse) }}
+  <section class="section tone-light" aria-labelledby="articles-title">
+    <div class="container">
+      <h2 class="visually-hidden" id="articles-title">{{ .Title }}</h2>
+      {{- $items := $pager.Pages }}
+      {{- if and (eq $pager.PageNumber 1) $items }}
+      <div class="featured">
+        {{- partial "components/article-card.html" (dict "page" (index $items 0) "index" 0 "large" true) }}
+        {{- with after 1 $items | first 4 }}
+        <ul class="featured__side" role="list">
+          {{- range . }}
+          <li class="featured__item">
+            <p class="article-card__meta">{{ partial "components/date.html" (dict "page" .) }}</p>
+            <h3 class="featured__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          </li>
+          {{- end }}
+        </ul>
+        {{- end }}
+      </div>
+      {{- partial "components/newsletter-band.html" . }}
+      {{- $items = after 1 $items }}
+      {{- end }}
+      {{- with $items }}
+      <ul class="grid grid--3 articles-grid" role="list">
+        {{- range $i, $a := . }}
+        <li>{{ partial "components/article-card.html" (dict "page" $a "index" (add $i 1)) }}</li>
+        {{- end }}
+      </ul>
+      {{- end }}
+      {{- partial "components/pager.html" $pager }}
+    </div>
+  </section>
+{{- end }}

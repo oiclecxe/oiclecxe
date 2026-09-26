@@ -1,0 +1,11 @@
+{{- /* Renders the ordered `sections` front matter list of a page (see README). Context: page. */ -}}
+{{- range $i, $section := .Params.sections }}
+  {{- if not .hidden }}
+    {{- $tpl := printf "sections/%s.html" .type }}
+    {{- if templates.Exists (printf "_partials/%s" $tpl) }}
+      {{- partial $tpl (dict "page" $ "data" $section "index" $i) }}
+    {{- else }}
+      {{- warnf "%s : section inconnue %q (partial _partials/%s absent)" $.RelPermalink .type $tpl }}
+    {{- end }}
+  {{- end }}
+{{- end -}}

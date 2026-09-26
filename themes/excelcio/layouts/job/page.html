@@ -1,0 +1,34 @@
+{{- define "main" }}
+  {{- $p := . }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (T "jobEyebrow")) }}
+  <section class="section tone-light">
+    <div class="container with-aside">
+      <div class="with-aside__main">
+        <dl class="facts">
+          <div class="facts__item"><dt>{{ T "factContract" }}</dt><dd>{{ .Params.contract | default "[Contrat]" }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factPlace" }}</dt><dd>{{ .Params.location | default "[Lieu]" }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factRemote" }}</dt><dd>{{ .Params.remote | default "[Télétravail]" }}</dd></div>
+        </dl>
+        {{- range $key := slice "missions" "profile" }}
+          {{- with index $p.Params $key }}
+        <section class="block" aria-labelledby="{{ $key }}-title">
+          <h2 class="block__title" id="{{ $key }}-title">{{ T (printf "job_%s" $key) }}</h2>
+          <ul class="check-list" role="list">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+        </section>
+          {{- end }}
+        {{- end }}
+        {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+      </div>
+      <aside class="with-aside__aside" aria-labelledby="apply-title">
+        <div class="register-box">
+          <h2 class="register-box__title" id="apply-title">{{ T "applyTitle" }}</h2>
+          {{- with site.Params.organization.jobsEmail }}
+          <a class="btn btn--primary" href="mailto:{{ . }}?subject={{ (printf "%s — %s" (T "applySubject") $p.Title) | urlquery }}">{{ T "applyCta" }}</a>
+          <p class="register-box__note">{{ . }}</p>
+          {{- end }}
+        </div>
+      </aside>
+    </div>
+  </section>
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

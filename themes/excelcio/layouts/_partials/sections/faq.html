@@ -5,7 +5,7 @@
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
-<section class="section tone-dark" aria-labelledby="{{ $id }}">
+<section class="section {{ $d.tone | default "tone-dark" }}" aria-labelledby="{{ $id }}">
   <div class="container split">
     <div class="split__aside--sticky">
       {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}

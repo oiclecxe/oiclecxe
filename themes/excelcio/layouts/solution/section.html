@@ -1,0 +1,22 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  <section class="section tone-light">
+    <div class="container">
+      {{- with .Content }}<div class="prose section__head">{{ . }}</div>{{ end }}
+      <ul class="grid grid--3" role="list">
+        {{- range .Pages }}
+        <li class="reveal-block" data-reveal>
+          <a class="card card--solution" href="{{ .RelPermalink }}">
+            <h2 class="card__title">{{ .Params.partnerName | default .Title }}
+              {{- with .Params.tagline }}<span class="card__title-accent">{{ . }}</span>{{ end }}</h2>
+            {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
+            {{- with .Params.partnerLevel }}<p><span class="badge">{{ . }}</span></p>{{ end }}
+            {{- with .Description }}<p class="card__text">{{ . }}</p>{{ end }}
+          </a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

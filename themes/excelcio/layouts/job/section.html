@@ -1,0 +1,31 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- with .Content }}
+  <section class="section tone-light">
+    <div class="container"><div class="prose">{{ . }}</div></div>
+  </section>
+  {{- end }}
+  {{- partial "components/sections.html" . }}
+  <section class="section tone-light-alt" id="offres" aria-labelledby="jobs-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="jobs-title">{{ T "jobsTitle" }}</h2>
+      {{- with .Pages }}
+      <ul class="rows" role="list">
+        {{- range . }}
+        <li class="rows__item">
+          <p class="rows__key mono">{{ .Params.contract | default "[Contrat]" }} · {{ .Params.location | default "[Lieu]" }}</p>
+          <h3 class="rows__title"><a class="rows__link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <div class="rows__body">{{ with or .Params.summary .Description }}<p>{{ . }}</p>{{ end }}</div>
+        </li>
+        {{- end }}
+      </ul>
+      {{- else }}
+      <p class="lead">{{ T "noJobs" }}</p>
+      {{- end }}
+      {{- with site.Params.organization.jobsEmail }}
+      <p class="spontaneous">{{ T "spontaneous" }} <a href="mailto:{{ . }}">{{ . }}</a></p>
+      {{- end }}
+    </div>
+  </section>
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

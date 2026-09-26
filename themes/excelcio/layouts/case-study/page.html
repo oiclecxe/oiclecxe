@@ -1,0 +1,56 @@
+{{- define "main" }}
+  {{- $p := . }}
+  {{- $badges := slice }}
+  {{- range .Params.solutions }}{{ $badges = $badges | append (partial "func/solution-name.html" .) }}{{ end }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (printf "%s · %s" (.Params.client | default "") (.Params.sector | default "")) "badges" $badges "lead" (.Params.summary | default .Description)) }}
+
+  {{- with .Params.image }}
+  <section class="section tone-light case-visual">
+    <div class="container">{{ partial "image.html" (dict "page" $p "src" . "alt" $p.Params.imageAlt "sizes" "(min-width: 91.125rem) 1458px, 85vw" "priority" true) }}</div>
+  </section>
+  {{- end }}
+
+  <section class="section tone-light">
+    <div class="container">
+      {{- range $key := slice "context" "challenge" "solution" }}
+        {{- with index $p.Params $key }}
+      <div class="split case-part reveal-block" data-reveal>
+        <h2 class="case-part__title">{{ T (printf "case_%s" $key) }}</h2>
+        <div class="prose">{{ . | $p.RenderString (dict "display" "block") }}</div>
+      </div>
+        {{- end }}
+      {{- end }}
+      {{- with .Content }}<div class="split case-part"><span></span><div class="prose">{{ . }}</div></div>{{ end }}
+    </div>
+  </section>
+
+  {{- $quote := .Params.quote }}
+  {{- if or .Params.results $quote }}
+  <section class="section tone-light-alt" aria-labelledby="results-title">
+    <div class="container proof">
+      <div class="proof__figures">
+        <h2 id="results-title">{{ T "case_results" }}</h2>
+        {{- with .Params.results }}
+        <dl class="stats">
+          {{- range . }}
+          <div class="stats__item"><dt class="stats__label">{{ .label }}</dt><dd class="stats__value">{{ .value }}</dd></div>
+          {{- end }}
+        </dl>
+        {{- end }}
+      </div>
+      {{- with $quote }}
+      <figure class="quote">
+        <blockquote class="quote__text"><p>{{ .text }}</p></blockquote>
+        <figcaption class="quote__author"><span class="quote__name">{{ .author }}</span><span class="quote__role">{{ .role }}</span></figcaption>
+      </figure>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- $others := where (where site.RegularPages "Type" "case-study") "Permalink" "ne" .Permalink }}
+  {{- with first 4 $others }}
+    {{- partial "sections/case-studies.html" (dict "page" $p "index" 70 "data" (dict "title" (T "otherCases") "pages" . "tone" "tone-light")) }}
+  {{- end }}
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

@@ -1,0 +1,12 @@
+{{- /* Numbered pagination (reference blog). Context: pager. */ -}}
+{{- if gt .TotalPages 1 }}
+<nav class="pager" aria-label="{{ T "pagination" }}">
+  {{- with .Prev }}<a class="icon-btn" href="{{ .URL }}" rel="prev" aria-label="{{ T "previous" }}">{{ partialCached "icon.html" (dict "name" "arrow-left") "arrow-left" }}</a>{{ end }}
+  <ol class="pager__list" role="list">
+    {{- range .Pagers }}
+    <li><a class="pager__link" href="{{ .URL }}"{{ if eq . $ }} aria-current="page"{{ end }}>{{ .PageNumber }}</a></li>
+    {{- end }}
+  </ol>
+  {{- with .Next }}<a class="icon-btn" href="{{ .URL }}" rel="next" aria-label="{{ T "next" }}">{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>{{ end }}
+</nav>
+{{- end -}}

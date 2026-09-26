@@ -124,6 +124,7 @@
     --story-1: var(--brand);
     --story-2: var(--dark-3);
     --story-3: var(--brand-strong);
+    --video-veil: rgb(19 16 20 / 0.35);
     --scrim: rgb(19 16 20 / 0.78); /* legibility overlay on photos (functional, not decorative) */
 
     /* Default tone = dark page */

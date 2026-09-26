@@ -7,6 +7,8 @@ import { initTabs } from './tabs.js';
 import { initCarousels } from './carousel.js';
 import { initCounters } from './counters.js';
 import { initProgress } from './progress.js';
+import { initFilters } from './filters.js';
+import { initVideos } from './video.js';
 
 window.__themeReady = true;
 
@@ -15,6 +17,8 @@ initHeader();
 initMenu();
 initMobileNav();
 initTabs();
+initFilters();
+initVideos();
 initCarousels();
 initCounters();
 initReveal();

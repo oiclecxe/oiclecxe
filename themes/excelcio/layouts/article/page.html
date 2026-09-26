@@ -1,0 +1,44 @@
+{{- define "main" }}
+  {{- $p := . }}
+  <section class="section tone-light page-hero article-hero">
+    <div class="container">
+      {{- partial "components/breadcrumb.html" . }}
+      <p class="article-card__meta">
+        {{- with .Params.categories }}<span class="article-card__cat">{{ delimit . " · " }}</span> · {{ end }}
+        {{- partial "components/date.html" (dict "page" .) }} · {{ T "readingTime" .ReadingTime }}</p>
+      {{- partial "components/title.html" (dict "title" .Title "tag" "h1" "class" "page-hero__title") }}
+      {{- with .Description }}<p class="lead page-hero__lead">{{ . }}</p>{{ end }}
+      {{- with .Params.authors }}<p class="article-hero__authors">{{ T "by" }} {{ delimit . ", " }}</p>{{ end }}
+    </div>
+  </section>
+
+  {{- with .Params.image }}
+  <section class="section tone-light case-visual">
+    <div class="container">{{ partial "image.html" (dict "page" $p "src" . "alt" $p.Params.imageAlt "sizes" "(min-width: 91.125rem) 1458px, 85vw" "priority" true) }}</div>
+  </section>
+  {{- end }}
+
+  <section class="section tone-light">
+    <div class="container with-aside with-aside--left">
+      {{- $toc := .TableOfContents }}
+      {{- if in $toc "<li>" }}
+      <aside class="with-aside__aside toc" aria-labelledby="toc-title">
+        <p class="eyebrow" id="toc-title">{{ T "tocTitle" }}</p>
+        {{ $toc }}
+      </aside>
+      {{- end }}
+      <div class="with-aside__main">
+        <div class="prose">{{ .Content }}</div>
+        {{- with .Params.tags }}
+        <p class="tag-cloud article-tags">{{ range . }}{{ $tag := . }}{{ with site.GetPage (printf "/tags/%s" (urlize .)) }}<a class="tag" href="{{ .RelPermalink }}">{{ $tag }}</a>{{ else }}<span class="tag">{{ $tag }}</span>{{ end }}{{ end }}</p>
+        {{- end }}
+      </div>
+    </div>
+  </section>
+
+  {{- partial "components/newsletter-band.html" (dict "tone" "tone-light-alt" "section" true) }}
+
+  {{- with first 3 (site.RegularPages.Related .) }}
+    {{- partial "components/article-strip.html" (dict "pages" . "title" (T "relatedArticles")) }}
+  {{- end }}
+{{- end }}

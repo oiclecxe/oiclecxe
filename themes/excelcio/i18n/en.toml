@@ -1,3 +1,4 @@
+# --- Navigation and shell
 skipToContent = "Skip to content"
 mainNav = "Main navigation"
 footerNav = "Sitemap"
@@ -18,9 +19,131 @@ notFoundTitle = "This page does not exist (anymore)."
 notFoundText = "The link may be wrong, or the page has moved."
 previous = "Previous"
 next = "Next"
-
+pagination = "Pagination"
 clientsLabel = "They trust us"
+noItems = "Nothing here yet."
+dateTBC = "[Date to be confirmed]"
+ctaContact = "Contact us"
+faqTitle = "Frequently asked questions"
+videoPlay = "Play the video"
+by = "By"
+
+# --- Filters
+filtersLabel = "Filter"
+filterAll = "All"
+filterReset = "Reset"
+filterSolution = "Solution"
+filterLevel = "Level"
+filterFormat = "Format"
+filterSector = "Sector"
+noResults = "No results for these criteria."
+
+# --- Solutions
+solutionEyebrow = "Partner solution"
+seeTrainings = "See the trainings"
+featuresTitle = "What {{ .Name }} enables"
+whatWeBring = "What {{ .Name }} brings"
+trainingsFor = "{{ .Name }} trainings"
+seeCatalogue = "Full catalogue"
+noTrainings = "No training published for this solution yet."
+relatedCases = "Case studies"
+relatedArticles = "Read also"
+
+# --- Trainings
+trainingEyebrow = "Training"
+durationTBC = "[Duration]"
+detailsTBC = "[Details to complete]"
+upcomingSessions = "Upcoming sessions"
+noSessions = "No public session is scheduled yet. Contact us to organise a session on your premises."
+noSessionsTraining = "No session scheduled yet."
+register = "Register"
+registerTitle = "Registration"
+registerRequest = "Request a session"
+intraNote = "Also available as an in-company training."
+relatedTrainings = "Related trainings"
+factCode = "Code"
+factDuration = "Duration"
+factLevel = "Level"
+factFormat = "Format"
+factPrice = "Price"
+priceOnRequest = "On request"
+training_objectives = "Objectives"
+training_audience = "Audience"
+training_prerequisites = "Prerequisites"
+training_program = "Programme"
+
+# --- Case studies
+case_context = "Context"
+case_challenge = "Challenge"
+case_solution = "Solution"
+case_results = "Results"
+otherCases = "Other case studies"
+
+# --- Expertise
+expertiseEyebrow = "Area of expertise"
+discoverExpertise = "Discover the expertise"
+benefitsTitle = "What you gain"
+ourApproach = "Our approach"
+kpisTitle = "Key indicators"
+
+# --- Articles
+tocTitle = "Contents"
+newsletterTitle = "Get our news"
+newsletterText = "Product news, customer stories and training dates."
+newsletterCta = "Subscribe"
+
+# --- Events
+eventEyebrow = "Event"
+eventPast = "Past event"
+eventsUpcoming = "Upcoming"
+eventsPast = "Past events"
+noEventsUpcoming = "No event scheduled yet."
+eventProgram = "Programme"
+eventSpeakers = "Speakers"
+online = "Online"
+factDate = "Date"
+factPlace = "Place"
+
+# --- Jobs
+jobEyebrow = "Job offer"
+jobsTitle = "Open positions"
+noJobs = "No open position at the moment."
+spontaneous = "Spontaneous application:"
+factContract = "Contract"
+factRemote = "Remote work"
+job_missions = "Responsibilities"
+job_profile = "Profile"
+applyTitle = "Apply"
+applyCta = "Send my application"
+applySubject = "Application"
+
+# --- Contact, search
+formSoon = "Contact form"
+formSoonText = "The form is coming soon. Meanwhile, write to us:"
+contactDirect = "Write to us"
+contactGeneral = "Contact"
+contactJobs = "Careers"
+officesTitle = "Our offices"
+seeMap = "See the map"
+searchSoon = "Search"
+searchSoonText = "Site search is coming soon. Meanwhile, see the sitemap."
 
 [itemCount]
 one = "{{ .Count }} item"
 other = "{{ .Count }} items"
+
+[days]
+one = "{{ .Count }} day"
+other = "{{ .Count }} days"
+
+[catalogueTitle]
+one = "{{ .Count }} training"
+other = "{{ .Count }} trainings"
+
+[readingTime]
+one = "{{ .Count }} min read"
+other = "{{ .Count }} min read"
+
+[resultCount]
+one = "{{ .Count }} result"
+other = "{{ .Count }} results"

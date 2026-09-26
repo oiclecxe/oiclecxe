@@ -1,0 +1,6 @@
+{{- /* Generic flat card linking to a page: title, summary. Context: page. */ -}}
+<a class="card" href="{{ .RelPermalink }}">
+  <h2 class="card__title">{{ .LinkTitle }}</h2>
+  {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
+  {{- with or .Params.summary .Description }}<p class="card__text">{{ . | plainify | truncate 180 }}</p>{{ end }}
+</a>

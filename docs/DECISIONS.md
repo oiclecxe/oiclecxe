@@ -105,3 +105,19 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-27 — Niveaux de partenariat** (fournis par l'utilisateur) : Qlik = « Partenaire Elite », Jedox = « Partenaire certifié ». Les autres solutions (Vizlib, Tableau, Power BI, ThoughtSpot, IBM Cognos) n'ont **aucun badge**, ni réel ni placeholder.
 
 - **2026-09-27 — Header des pages intérieures** : apparence inchangée (barre sombre, logo et texte blancs), confirmée par l'utilisateur. Seule différence avec l'accueil : la barre est sombre dès le haut de la page (pas de transparence au-dessus d'une section claire) ; masquage au défilement vers le bas et réapparition vers le haut conservés.
+
+## Lot 3 — Pages intérieures
+
+- **2026-09-27 — Gabarits choisis par type** (`solution`, `expertise`, `training`, `case-study`, `article`, `event`, `job`, `contact`, `search`, `site-map`), posés par `cascade` dans les `_index.md` des rubriques. Le thème reste indépendant des adresses françaises du site ; les archetypes portent les mêmes noms (`hugo new content --kind training formations/…`). Les chemins de `hugo new content` sont relatifs à `content/fr` (commande corrigée dans le README et `CLAUDE.md`).
+
+- **2026-09-27 — Catalogue : 28 formations** aux intitulés et identifiants d'URL du site actuel (relevés le 27/09/2026 sur excelcio.com/formations/), réparties en Qlik (18, QlikView inclus), Vizlib (1), Jedox (2), Power BI (2), Tableau (3). Le CDC prévoyait 8 formations fictives ; l'utilisateur a demandé le catalogue réel. Codes, niveaux, durées, formats, prix, programmes et sessions restent en placeholders.
+
+- **2026-09-27 — Filtres construits d'après les valeurs présentes** (catalogue, cas clients) : un filtre n'apparaît qu'avec au moins deux valeurs différentes, pour ne pas inventer de niveaux ou de formats. Aujourd'hui, seul le filtre « Solution » est visible. État conservé dans l'URL (`?solution=qlik`) ; sans JavaScript, catalogue complet groupé par solution.
+
+- **2026-09-27 — Dates des contenus provisoires** affichées « [Date à confirmer] » : les dates du front matter ne servent qu'au tri. Pour les événements, `date` est la date de publication (jamais future, sinon la page n'est pas publiée) et `start` la date de l'événement.
+
+- **2026-09-27 — Formulaires, recherche et llms.txt différés** : la page contact affiche les e-mails et un emplacement pour le formulaire, la page recherche renvoie au plan du site, le lien « Explorer avec l'IA » du footer est masqué tant que `llms.txt` n'existe pas. Des points d'accroche sont prévus pour les Lots 4 et 5.
+
+- **2026-09-27 — Inscription aux formations et événements** : sans URL externe, le bouton mène à `/contact/?formation=<slug>` (ou `?evenement=`), que le formulaire du Lot 4 pourra pré-remplir.
+
+- **2026-09-27 — Appel à l'action final des pages intérieures** : `params.cta` du site (placeholder), remplaçable ou supprimable page par page.

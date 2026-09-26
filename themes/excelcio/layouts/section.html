@@ -1,21 +1,17 @@
 {{- define "main" }}
   {{- partial "components/page-hero.html" . }}
-  <section class="section tone-dark section--flush-top">
+  <section class="section tone-light">
     <div class="container">
-      {{- with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+      {{- with .Content }}<div class="prose section__head">{{ . }}</div>{{ end }}
       {{- with .Pages }}
       <ul class="grid grid--3" role="list">
         {{- range . }}
-        <li>
-          <a class="card" href="{{ .RelPermalink }}">
-            <h2 class="card__title">{{ .Title }}</h2>
-            {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
-            {{- with .Summary }}<p class="card__text">{{ . | plainify | truncate 180 }}</p>{{ end }}
-          </a>
-        </li>
+        <li>{{ partial "components/page-card.html" . }}</li>
         {{- end }}
       </ul>
       {{- end }}
     </div>
   </section>
+  {{- partial "components/sections.html" . }}
+  {{- partial "components/page-cta.html" . }}
 {{- end }}

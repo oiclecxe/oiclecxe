@@ -1,0 +1,7 @@
+{{- /*
+  Returns the regular pages of a given type whose front matter list `key`
+  contains `slug` (e.g. trainings whose `solutions` include "qlik").
+  Context: dict "type" "key" "slug". Returns: pages.
+*/ -}}
+{{- $pages := where site.RegularPages "Type" .type -}}
+{{- return where $pages (printf "Params.%s" .key) "intersect" (slice .slug) -}}

@@ -1,0 +1,5 @@
+{{- /* Processed image with caption. Usage: {{< figure src="photo.jpg" alt="…" caption="…" >}} */ -}}
+<figure class="figure">
+  {{- partial "image.html" (dict "page" .Page "src" (.Get "src") "alt" (.Get "alt") "decorative" (eq (.Get "decorative") "true") "sizes" "(min-width: 62em) 42rem, 100vw") }}
+  {{- with .Get "caption" }}<figcaption class="figure__caption">{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

@@ -1,0 +1,83 @@
+{{- define "main" }}
+  {{- $p := . }}
+  {{- $solutions := slice }}{{ range .Params.solutions }}{{ $solutions = $solutions | append (partial "func/solution-name.html" .) }}{{ end }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (printf "%s · %s" (T "trainingEyebrow") (delimit $solutions ", ")) "lead" (.Params.summary | default .Description)) }}
+
+  <section class="section tone-light">
+    <div class="container with-aside">
+      <div class="with-aside__main">
+        <dl class="facts">
+          <div class="facts__item"><dt>{{ T "factCode" }}</dt><dd class="mono">{{ .Params.code | default "[XX]" }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factDuration" }}</dt><dd>{{ with .Params.durationDays }}{{ T "days" . }}{{ else }}{{ T "durationTBC" }}{{ end }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factLevel" }}</dt><dd>{{ .Params.level | default "[Niveau]" }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factFormat" }}</dt><dd>{{ .Params.format | default "[Format]" }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factPrice" }}</dt><dd>{{ with .Params.price }}{{ . }}{{ else }}{{ T "priceOnRequest" }}{{ end }}</dd></div>
+        </dl>
+
+        {{- range $key := slice "objectives" "audience" "prerequisites" }}
+          {{- with index $p.Params $key }}
+        <section class="block" aria-labelledby="{{ $key }}-title">
+          <h2 class="block__title" id="{{ $key }}-title">{{ T (printf "training_%s" $key) }}</h2>
+          <ul class="check-list" role="list">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+        </section>
+          {{- end }}
+        {{- end }}
+
+        {{- with .Params.program }}
+        <section class="block" aria-labelledby="program-title">
+          <h2 class="block__title" id="program-title">{{ T "training_program" }}</h2>
+          <div class="accordion">
+            {{- range $i, $m := . }}
+            <details class="accordion__item"{{ if eq $i 0 }} open{{ end }}>
+              <summary class="accordion__summary"><h3 class="accordion__question">{{ $m.title }}</h3>{{ partialCached "icon.html" (dict "name" "plus" "class" "accordion__icon") "plus" "accordion__icon" }}</summary>
+              <div class="accordion__body"><ul class="check-list" role="list">{{ range $m.items }}<li>{{ . }}</li>{{ end }}</ul></div>
+            </details>
+            {{- end }}
+          </div>
+        </section>
+        {{- end }}
+
+        {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+      </div>
+
+      <aside class="with-aside__aside" id="inscription" aria-labelledby="register-title">
+        <div class="register-box">
+          <h2 class="register-box__title" id="register-title">{{ T "registerTitle" }}</h2>
+          {{- $sessions := slice }}
+          {{- range .Params.sessions }}{{ if and .start (ge (time .start).Unix now.Unix) }}{{ $sessions = $sessions | append . }}{{ end }}{{ end }}
+          {{- with $sessions }}
+          <ul class="register-box__sessions" role="list">
+            {{- range sort . "start" }}
+            <li>{{ partial "components/date.html" (dict "page" $p "date" (time .start) "format" ":date_medium") }} · {{ .city | default .format }}</li>
+            {{- end }}
+          </ul>
+          {{- else }}
+          <p class="register-box__text">{{ T "noSessionsTraining" }}</p>
+          {{- end }}
+          {{- $reg := .Params.registration }}
+          {{- if and $reg (eq $reg.type "external") $reg.url }}
+          <a class="btn btn--primary" href="{{ $reg.url }}" rel="noopener">{{ T "register" }}</a>
+          {{- else }}
+          <a class="btn btn--primary" href="{{ "/contact/" | relLangURL }}?formation={{ .File.ContentBaseName }}">{{ T "registerRequest" }}</a>
+          {{- end }}
+          <p class="register-box__note">{{ T "intraNote" }}</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {{- $related := slice }}
+  {{- with .Params.solutions }}
+    {{- $related = where (partial "func/related.html" (dict "type" "training" "key" "solutions" "slug" (index . 0))) "Permalink" "ne" $p.Permalink }}
+  {{- end }}
+  {{- with first 4 $related }}
+  <section class="section tone-light-alt" aria-labelledby="related-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="related-title">{{ T "relatedTrainings" }}</h2>
+      <ul class="grid grid--4" role="list">{{ range . }}<li>{{ partial "components/training-card.html" . }}</li>{{ end }}</ul>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

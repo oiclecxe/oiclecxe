@@ -1,0 +1,18 @@
+{{- /* One section of the HTML sitemap, recursive. Context: section page. */ -}}
+{{- if not .Params.sitemapHide }}
+<li>
+  <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  {{- $children := .Pages }}
+  {{- with $children }}
+  <ul role="list">
+    {{- range . }}
+      {{- if .IsSection }}
+        {{- partial "components/sitemap-branch.html" . }}
+      {{- else }}
+    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    {{- end }}
+  </ul>
+  {{- end }}
+</li>
+{{- end -}}

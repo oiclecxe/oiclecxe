@@ -1,0 +1,33 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- $today := now.Unix }}
+  {{- $upcoming := slice }}{{ $past := slice }}
+  {{- range .Pages.ByParam "start" }}
+    {{- $end := .Params.end | default .Params.start }}
+    {{- if and $end (ge (time $end).Unix $today) }}{{ $upcoming = $upcoming | append . }}{{ else }}{{ $past = $past | append . }}{{ end }}
+  {{- end }}
+  {{- range $block := slice (dict "id" "upcoming" "title" (T "eventsUpcoming") "items" $upcoming "tone" "tone-light" "empty" (T "noEventsUpcoming"))
+                          (dict "id" "past" "title" (T "eventsPast") "items" ($past | collections.Reverse) "tone" "tone-light-alt" "empty" "") }}
+    {{- if or $block.items $block.empty }}
+  <section class="section {{ $block.tone }}" aria-labelledby="{{ $block.id }}-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="{{ $block.id }}-title">{{ $block.title }}</h2>
+      {{- with $block.items }}
+      <ul class="rows" role="list">
+        {{- range . }}
+        <li class="rows__item">
+          <p class="rows__key mono">{{ partial "components/date.html" (dict "page" . "date" (time .Params.start) "format" ":date_medium") }} · {{ if .Params.online }}{{ T "online" }}{{ else }}{{ .Params.city | default "[Ville]" }}{{ end }}</p>
+          <h3 class="rows__title"><a class="rows__link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <div class="rows__body">{{ with or .Params.summary .Description }}<p>{{ . }}</p>{{ end }}</div>
+        </li>
+        {{- end }}
+      </ul>
+      {{- else }}
+      <p class="lead">{{ $block.empty }}</p>
+      {{- end }}
+    </div>
+  </section>
+    {{- end }}
+  {{- end }}
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

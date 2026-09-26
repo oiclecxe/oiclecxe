@@ -63,10 +63,10 @@ sections:
     eyebrow: "Cas clients"
     title: "[À RÉDIGER — Titre de la section, 3 mots]"
     items:
-      - { title: "[À RÉDIGER — Résultat du cas 1, 6 mots]", client: "Client 1", sector: "[Secteur]", url: "/cas-clients/" }
-      - { title: "[À RÉDIGER — Résultat du cas 2, 6 mots]", client: "Client 2", sector: "[Secteur]", url: "/cas-clients/" }
-      - { title: "[À RÉDIGER — Résultat du cas 3, 6 mots]", client: "Client 3", sector: "[Secteur]", url: "/cas-clients/" }
-      - { title: "[À RÉDIGER — Résultat du cas 4, 6 mots]", client: "Client 4", sector: "[Secteur]", url: "/cas-clients/" }
+      - { title: "[À RÉDIGER — Résultat du cas 1, 6 mots]", client: "Client 1", sector: "[Secteur]", url: "/cas-clients/client-1/" }
+      - { title: "[À RÉDIGER — Résultat du cas 2, 6 mots]", client: "Client 2", sector: "[Secteur]", url: "/cas-clients/client-2/" }
+      - { title: "[À RÉDIGER — Résultat du cas 3, 6 mots]", client: "Client 3", sector: "[Secteur]", url: "/cas-clients/client-3/" }
+      - { title: "[À RÉDIGER — Résultat du cas 4, 6 mots]", client: "Client 4", sector: "[Secteur]", url: "/cas-clients/client-4/" }
 
   - type: faq
     title: { lead: "Vos questions,", rest: "nos réponses" }

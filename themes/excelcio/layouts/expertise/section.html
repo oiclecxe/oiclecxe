@@ -1,0 +1,18 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  <section class="section tone-light">
+    <div class="container">
+      {{- with .Content }}<div class="prose section__head">{{ . }}</div>{{ end }}
+      <ul class="item-list item-list--wide" role="list">
+        {{- range .Pages }}
+        <li class="item-list__item reveal-block" data-reveal>
+          <h2 class="item-list__title">{{ .Title }}{{ range .Params.solutions }} <span class="badge">{{ partial "func/solution-name.html" . }}</span>{{ end }}</h2>
+          {{- with or .Params.summary .Description }}<p class="item-list__text">{{ . }}</p>{{ end }}
+          <a class="link-arrow item-list__link" href="{{ .RelPermalink }}">{{ T "discoverExpertise" }}<span class="visually-hidden"> : {{ .Title }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- partial "components/page-cta.html" . }}
+{{- end }}
