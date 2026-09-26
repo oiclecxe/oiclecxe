@@ -23,11 +23,12 @@ sections:
     top: { label: "Vos sources de données", detail: "ERP, CRM, fichiers, bases de données" }
     band1:
       label: "Plateformes BI"
-      items: ["Qlik", "Power BI", "Tableau", "ThoughtSpot"]
+      items: ["Qlik", "Power BI", "Tableau"]
     band2:
       label: "Usages métiers"
       items: ["Pilotage de direction", "Commercial", "Supply chain", "Finance", "Planification", "Reporting"]
     bottom: { label: "Vos décisions", detail: "[À RÉDIGER — 5 mots]" }
+
 
   - type: features
     title: "Ce qui nous distingue"
