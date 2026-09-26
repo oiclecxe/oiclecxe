@@ -1,0 +1,18 @@
+{{- with resources.Get "js/main.js" }}
+  {{- $opts := dict
+    "minify" hugo.IsProduction
+    "sourceMap" (cond hugo.IsDevelopment "inline" "")
+    "target" "es2022"
+    "format" "esm"
+    "params" (dict "desktopQuery" "(min-width: 62em)")
+  }}
+  {{- with . | js.Build $opts }}
+    {{- if hugo.IsDevelopment }}
+<script type="module" src="{{ .RelPermalink }}"></script>
+    {{- else }}
+      {{- with . | fingerprint }}
+<script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

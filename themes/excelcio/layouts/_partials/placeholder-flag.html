@@ -1,0 +1,7 @@
+{{- /* Development-only marker for pages still holding placeholder content. */ -}}
+{{- if and hugo.IsDevelopment site.Params.dev.showPlaceholders .Params.placeholder }}
+<p class="placeholder-flag" aria-hidden="true">{{ T "placeholder" }}</p>
+{{- end -}}
+{{- if and hugo.IsProduction .Params.placeholder }}
+  {{- warnf "Contenu provisoire (placeholder) : %s" .RelPermalink }}
+{{- end -}}

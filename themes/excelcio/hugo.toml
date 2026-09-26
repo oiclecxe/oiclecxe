@@ -1,0 +1,65 @@
+# Thème excelcio — configuration et valeurs par défaut.
+# Chaque paramètre est documenté dans themes/excelcio/README.md.
+# Le site redéfinit uniquement ce qu'il change (config/_default/params.toml).
+
+[module]
+  [module.hugoVersion]
+    min = "0.166.0"
+
+[params]
+  description = ""
+
+  [params.logo]
+    # Chemins dans assets/. Vides = nom du site affiché en texte.
+    default = ""
+    onDark = ""
+    compactOnDark = ""
+    alt = ""
+
+  [params.organization]
+    name = ""
+    legalName = ""
+    registration = ""
+    email = ""
+    jobsEmail = ""
+
+  [params.header]
+    ctaLabel = ""
+    ctaURL = ""
+    searchURL = ""
+
+  [params.footer]
+    headline = ""
+    aiLabel = ""
+    aiURL = ""
+
+  [params.dev]
+    showPlaceholders = false
+
+  # Local fallback font (Arial) adjusted to Geist metrics to limit layout shift.
+  # Measured in Edge on 26/09/2026 (canvas measureText, Geist variable 400).
+  [params.fontFallback]
+    sizeAdjust = "102.54%"
+    ascent = "98.5%"
+    descent = "29.26%"
+
+  # Couleurs de marque, injectées dans le CSS par @import "hugo:vars".
+  # Chaque clé devient une propriété personnalisée : brand → --brand.
+  [params.style]
+    brand = "#A82234"
+    brand-strong = "#8C1C2B"
+    ink = "#1A171B"
+    accent = "#D42A40"
+    accent-on-dark = "#FF6B7F"
+    dark-0 = "#131014"
+    dark-1 = "#1A171B"
+    dark-2 = "#241F25"
+    dark-3 = "#2E282F"
+    light-1 = "#FFFFFF"
+    light-2 = "#FAF7F6"
+    text-on-light = "#1A171B"
+    body-on-light = "#5C5358"
+    muted-on-light = "#8A7F84"
+    text-on-dark = "#FFFFFF"
+    body-on-dark = "#CAC3C7"
+    muted-on-dark = "#A0969B"

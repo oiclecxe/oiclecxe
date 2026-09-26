@@ -1,0 +1,10 @@
+{{- /* Inner-page hero with breadcrumb. Context: page. */ -}}
+<section class="section tone-dark page-hero">
+  <div class="container">
+    {{- partial "components/breadcrumb.html" . }}
+    <h1 class="page-hero__title">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p class="lead page-hero__lead">{{ . }}</p>
+    {{- end }}
+  </div>
+</section>

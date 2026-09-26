@@ -1,0 +1,21 @@
+{{- /*
+  Site logo. Context: dict
+    "variant" (key of site.Params.logo: default, onDark, compactOnDark),
+    "height"  (rendered height in px, default 32), "class".
+  Falls back to the site title as text when no file is configured.
+*/ -}}
+{{- $variant := .variant | default "default" -}}
+{{- $height := .height | default 32 -}}
+{{- $path := index site.Params.logo $variant | default site.Params.logo.default -}}
+{{- $alt := site.Params.logo.alt | default site.Title -}}
+{{- with and $path (resources.Get $path) }}
+  {{- $img := . | fingerprint }}
+  {{- $width := 0 }}
+  {{- with findRESubmatch `viewBox="[-\d.]+ [-\d.]+ ([\d.]+) ([\d.]+)"` .Content 1 }}
+    {{- $vb := index . 0 }}
+    {{- $width = math.Round (div (mul (float (index $vb 1)) $height) (float (index $vb 2))) | int }}
+  {{- end }}
+<img src="{{ $img.RelPermalink }}" alt="{{ $alt }}"{{ with $width }} width="{{ . }}"{{ end }} height="{{ $height }}"{{ with $.class }} class="{{ . }}"{{ end }}>
+{{- else }}
+<span class="site-header__logo-text">{{ site.Title }}</span>
+{{- end -}}

@@ -1,0 +1,48 @@
+@layer components {
+  /* Inner-page hero (dark), used by the default page and section templates. */
+  .page-hero {
+    padding-top: calc(var(--header-h) + var(--sp-13));
+    padding-bottom: var(--sp-12);
+  }
+
+  .page-hero__title {
+    max-width: var(--measure-display);
+  }
+
+  .page-hero__lead {
+    margin-top: var(--sp-6);
+  }
+
+  .page-hero .btn-row {
+    margin-top: var(--sp-8);
+  }
+
+  .breadcrumb {
+    margin-bottom: var(--sp-8);
+    font-size: var(--fs-nav);
+    color: var(--fg-muted);
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    list-style: none;
+    padding: 0;
+  }
+
+  .breadcrumb li + li::before {
+    content: "/";
+    margin-right: var(--sp-2);
+    color: var(--fg-muted);
+  }
+
+  .breadcrumb a {
+    color: var(--fg-body);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--fg);
+  }
+}

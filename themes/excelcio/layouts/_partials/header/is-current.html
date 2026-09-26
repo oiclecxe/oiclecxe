@@ -1,0 +1,15 @@
+{{- /*
+  Returns true when a menu entry (or one of its children) points to the current section.
+  Context: dict "entry" (menu entry) "section" (string).
+*/ -}}
+{{- $section := .section -}}
+{{- $urls := slice .entry.URL -}}
+{{- range .entry.Children }}{{ $urls = $urls | append .URL }}{{ end -}}
+{{- $match := false -}}
+{{- if $section }}
+  {{- range $urls }}
+    {{- $first := index (split (strings.Trim . "/") "/") 0 }}
+    {{- if eq $first $section }}{{ $match = true }}{{ end }}
+  {{- end }}
+{{- end -}}
+{{- return $match -}}

@@ -1,0 +1,16 @@
+[fr]
+  contentDir = "content/fr"
+  label = "Français"
+  locale = "fr-FR"
+  direction = "ltr"
+  weight = 1
+  title = "Excelcio"
+
+# Anglais : décommenter, créer content/en/ et menus.en.toml.
+# [en]
+#   contentDir = "content/en"
+#   label = "English"
+#   locale = "en-GB"
+#   direction = "ltr"
+#   weight = 2
+#   title = "Excelcio"

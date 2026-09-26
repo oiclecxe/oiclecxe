@@ -1,0 +1,75 @@
+@layer components {
+  /*
+   * “Breathing squares” field: large white squares at very low opacity
+   * fading in and out, each with its own duration and delay.
+   */
+  .squares {
+    --cell: clamp(4.5rem, 6.95vw, 6.25rem);
+    position: absolute;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), var(--cell));
+    grid-auto-rows: var(--cell);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .squares--top {
+    top: 0;
+  }
+
+  .squares--bottom {
+    bottom: 0;
+  }
+
+  .squares__cell {
+    grid-column: var(--c);
+    grid-row: var(--r);
+    background: var(--white);
+    opacity: 0;
+    animation: squares-breathe var(--dur, 8s) ease-in-out var(--delay, 0s) infinite backwards;
+  }
+
+  @keyframes squares-breathe {
+    0%,
+    8% {
+      opacity: 0;
+    }
+
+    42%,
+    58% {
+      opacity: var(--peak, 0.08);
+    }
+
+    92%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .squares__cell {
+      animation: none;
+      opacity: calc(var(--peak, 0.08) * 0.6);
+    }
+  }
+
+  @media (max-width: 47.99em) {
+    .squares {
+      --cell: 3.5rem;
+      opacity: 0.7;
+    }
+  }
+
+  /* Content sitting above the field. */
+  .squares-host {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .squares-host > .container {
+    position: relative;
+    z-index: 1;
+  }
+}

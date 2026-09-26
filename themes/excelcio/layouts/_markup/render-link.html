@@ -1,0 +1,17 @@
+{{- /* Markdown links: external links get rel="noopener"; internal page links are checked. */ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- $href := .Destination -}}
+{{- $external := and $u.IsAbs (ne $u.Host (urls.Parse site.BaseURL).Host) -}}
+{{- if and (not $u.IsAbs) $u.Path (not (strings.HasPrefix $u.Path "mailto:")) }}
+  {{- with or (.PageInner.GetPage $u.Path) (site.GetPage $u.Path) }}
+    {{- $href = .RelPermalink }}
+    {{- with $u.RawQuery }}{{ $href = printf "%s?%s" $href . }}{{ end }}
+    {{- with $u.Fragment }}{{ $href = printf "%s#%s" $href . }}{{ end }}
+  {{- else }}
+    {{- with $.PageInner.Resources.Get $u.Path }}
+      {{- $href = .RelPermalink }}
+    {{- end }}
+  {{- end }}
+{{- end -}}
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} rel="noopener"{{ end }}>{{ .Text }}</a>
+{{- /* chomp trailing newline */ -}}

@@ -1,0 +1,19 @@
+{{- $title := cond .IsHome site.Title (printf "%s · %s" (or .Params.seo.title .Title) site.Title) -}}
+{{- $description := or .Description .Params.summary site.Params.description -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+{{- with $description }}
+<meta name="description" content="{{ . | plainify | strings.TrimSpace }}">
+{{- end }}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="theme-color" content="{{ site.Params.style.ink }}">
+<meta name="color-scheme" content="dark light">
+{{- if or hugo.IsDevelopment .Params.seo.noindex }}
+<meta name="robots" content="noindex, nofollow">
+{{- end }}
+{{- with site.Params.logo.default }}
+  {{- with resources.Get . }}
+<link rel="icon" href="{{ (. | fingerprint).RelPermalink }}" type="image/svg+xml">
+  {{- end }}
+{{- end }}

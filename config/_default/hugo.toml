@@ -1,0 +1,21 @@
+baseURL = "http://localhost:1313/"
+title = "Excelcio"
+defaultContentLanguage = "fr"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = false
+disableKinds = ["rss"]
+
+[[module.imports]]
+  path = "excelcio"
+
+[taxonomies]
+  secteur = "secteurs"
+  tag = "tags"
+
+[build]
+  [build.buildStats]
+    enable = false
+
+[security]
+  [security.funcs]
+    getenv = ["^HUGO_", "^CI$"]

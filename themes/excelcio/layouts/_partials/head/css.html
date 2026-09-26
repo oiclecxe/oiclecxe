@@ -1,0 +1,17 @@
+{{- with resources.Get "css/main.css" }}
+  {{- $opts := dict
+    "minify" hugo.IsProduction
+    "sourceMap" (cond hugo.IsDevelopment "linked" "none")
+    "target" (slice "chrome129" "edge129" "firefox130" "safari18")
+    "vars" site.Params.style
+  }}
+  {{- with . | css.Build $opts }}
+    {{- if hugo.IsDevelopment }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

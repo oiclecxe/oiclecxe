@@ -1,0 +1,34 @@
+{{- /*
+  Desktop navigation with full-width mega-menu panels.
+  Each entry with children renders a link (works without JS) plus a
+  disclosure button that opens the panel. Children are grouped in columns
+  by params.group; params.featured children go to the bottom row.
+  Context: dict "section" (current section name).
+*/ -}}
+{{- $section := .section -}}
+<nav class="nav" aria-label="{{ T "mainNav" }}">
+  <ul class="nav__list" role="list" data-nav>
+    {{- range site.Menus.main }}
+      {{- $current := partial "header/is-current.html" (dict "entry" . "section" $section) }}
+      {{- if .HasChildren }}
+        {{- $panelID := printf "mega-%s" .Identifier }}
+    <li class="nav__item" data-nav-item>
+      <div class="nav__pill">
+        <a class="nav__link" href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="{{ $panelID }}" data-nav-toggle>
+          <span class="visually-hidden">{{ T "submenuToggle" (dict "Name" .Name) }}</span>
+          {{- partialCached "icon.html" (dict "name" "chevron-down") "chevron-down" -}}
+        </button>
+      </div>
+      {{- partial "header/mega.html" (dict "entry" . "id" $panelID) }}
+    </li>
+      {{- else }}
+    <li class="nav__item">
+      <div class="nav__pill">
+        <a class="nav__link" href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
+      </div>
+    </li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</nav>
