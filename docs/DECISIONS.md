@@ -64,3 +64,30 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-26 — Licence du thème** : propriétaire (Excelcio). ⏳ À confirmer par l'utilisateur.
 
 - **2026-09-26 — ⏳ Node.js 16** : Lighthouse en ligne de commande (recette du Lot 2) demande Node ≥ 18. En attendant, la recette du Lot 2 utilisera Lighthouse 9 (compatible Node 16) avec Edge, ou la mesure dans les outils de développement d'Edge.
+
+## Lot 2 — Page d'accueil
+
+- **2026-09-26 — Ordre et ambiances de l'accueil** (option A validée) : hero (bordeaux) · architecture et ce qui nous distingue (clair) · expertises (clair alterné) · manifeste (clair) · cas clients (sombre alterné) · FAQ (sombre) · solutions, prochaines formations et preuves (sombre alterné) · CTA (bordeaux) · footer.
+
+- **2026-09-26 — Section « Prochaines formations »** ajoutée (absente de la référence), avec le composant « liste de lignes » des pages produit de la référence : clé en mono, titre, texte et lien.
+
+- **2026-09-26 — Cas clients sans photo.** Faute de visuels, les cartes carrées ont un fond de marque avec le champ de carrés. Le logo client est un pictogramme neutre suivi de « Client N ».
+
+- **2026-09-26 — Mini-visuels des solutions** : illustrations SVG stylisées de tableaux de bord (barres, grille, courbe, indicateurs, recherche, tableau, rapport). Les chiffres affichés sont **décoratifs** (générés, `aria-hidden`), à l'image des visuels de la référence ; ce ne sont pas des données réelles.
+
+- **2026-09-26 — Animation du hero en CSS pur.** Elle démarre dès le premier affichage, sans attendre le JavaScript, pour ne pas retarder le LCP (le titre du hero est le plus grand élément visible). Les autres sections se révèlent au défilement via IntersectionObserver. Sans JS ou en mouvement réduit, tout est visible immédiatement.
+
+- **2026-09-26 — Titres découpés en mots par Hugo** (`components/words.html`), et non par JavaScript : pas de reflow au chargement, et le HTML reste lisible sans JS.
+
+- **2026-09-26 — FAQ : données structurées `FAQPage`** émises par la section (SPEC § 8.1), en avance sur le Lot 5.
+
+- **2026-09-26 — ⏳ Mesure Lighthouse.** Les mesures locales (Edge headless, processeur ralenti ×4, réseau 4G lent) donnent LCP = FCP, TBT ≈ 0 et CLS = 0. Leurs valeurs absolues ne sont pas fiables : la machine est chargée, et la page 404 presque vide mesure autant que l'accueil. Le score Lighthouse officiel demande de télécharger Lighthouse via `npx` : accord de l'utilisateur requis.
+
+- **2026-09-27 — Mesure Lighthouse reportée** à la demande de l'utilisateur. Le critère « Lighthouse mobile ≥ 95 » du Lot 2 reste ouvert ; il sera traité plus tard, au plus tard à la recette (Lot 6).
+
+
+- **2026-09-27 — Barre de progression de lecture** en haut de l'écran, sur toutes les pages (demande de l'utilisateur ; élément de la référence omis au relevé du Lot 0). Elle reprend la référence : 4 px, fixe, au-dessus du header, décorative (`aria-hidden`). Couleur `--accent-on-dark` (#FF6B7F), lisible sur le bordeaux comme sur le sombre. Elle avance en CSS pur (`animation-timeline: scroll()`) là où c'est supporté, avec repli JavaScript (`progress.js`) ailleurs, Firefox notamment.
+
+
+- **2026-09-27 — Image des cartes cas clients reprise automatiquement de la fiche liée** (demande de l'utilisateur). La carte cherche la page pointée par `url` ; si celle-ci déclare `image` et `imageAlt`, la photo remplit la carte, via `image.html` en AVIF et WebP. Sinon, la carte garde l'aplat avec le champ de carrés. Des voiles dégradés en haut et en bas (`--scrim`) garantissent la lisibilité du texte : c'est un usage **fonctionnel** du dégradé, distinct des dégradés décoratifs écartés au Lot 0. Testé sur une copie jetable du projet, avec une fiche munie d'une image, une fiche sans image et une carte sans fiche.
+

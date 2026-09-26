@@ -1,0 +1,27 @@
+{{- /*
+  Upcoming training sessions, as a feature list (reference /cloud rows):
+  mono key (date · city), title, text + link. Context: dict "page" "data" "index".
+  data: title, cta {label, url}, items [{date, city, title, text, url}]
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-dark-alt" aria-labelledby="{{ $id }}" id="sessions">
+  <div class="container">
+    <div class="rows-head">
+      {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "title--section") }}
+      {{- with $d.cta }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
+    </div>
+    <ul class="rows" role="list">
+      {{- range $d.items }}
+      <li class="rows__item reveal-block" data-reveal>
+        <p class="rows__key mono">{{ .date }} · {{ .city }}</p>
+        <h3 class="rows__title">{{ .title }}</h3>
+        <div class="rows__body">
+          <p>{{ .text }}</p>
+          <a class="link-arrow" href="{{ .url | relLangURL }}">{{ T "readMore" }}<span class="visually-hidden"> : {{ .title }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+        </div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

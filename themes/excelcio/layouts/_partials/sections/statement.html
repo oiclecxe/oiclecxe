@@ -1,0 +1,7 @@
+{{- /* Centred manifesto sentence. Context: dict "page" "data" "index". data: text */ -}}
+{{- $w := partial "components/words.html" (dict "text" .data.text) -}}
+<section class="section tone-light statement-section">
+  <div class="container">
+    <p class="statement reveal" data-reveal>{{ $w.html }}</p>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+{{- /*
+  Case studies carousel (reference “Proven in production”): square cards bleeding
+  off the right edge, previous/next buttons. Scrollable without JS.
+  Context: dict "page" "data" "index". data: title, items [{title, client, sector, url}]
+
+  Card image: taken automatically from the linked case study page (its `image`
+  and `imageAlt` front matter, page resource or global asset). Without an image,
+  the card keeps the brand block with breathing squares.
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-dark-alt carousel-section" aria-labelledby="{{ $id }}" data-carousel>
+  <div class="container carousel__head">
+    {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
+    <div class="carousel__controls">
+      <button class="icon-btn" type="button" data-carousel-prev aria-label="{{ T "previous" }}" disabled>{{ partialCached "icon.html" (dict "name" "arrow-left") "arrow-left" }}</button>
+      <button class="icon-btn" type="button" data-carousel-next aria-label="{{ T "next" }}">{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</button>
+    </div>
+  </div>
+  <div class="carousel__viewport" tabindex="0" role="region" aria-labelledby="{{ $id }}" data-carousel-viewport>
+    <ul class="carousel__track" role="list">
+      {{- range $i, $item := $d.items }}
+        {{- $target := site.GetPage (strings.TrimSuffix "/" $item.url) }}
+        {{- $href := $item.url | relLangURL }}
+        {{- $image := "" }}
+        {{- with $target }}
+          {{- $href = .RelPermalink }}
+          {{- with .Params.image }}{{ $image = . }}{{ end }}
+        {{- end }}
+      <li class="carousel__slide">
+        <a class="story{{ if $image }} story--photo{{ else }} story--{{ add (mod $i 3) 1 }}{{ end }}" href="{{ $href }}">
+          {{- if $image }}
+          <div class="story__media">
+            {{- partial "image.html" (dict "page" $target "src" $image "alt" $target.Params.imageAlt "sizes" "(min-width: 62em) 476px, 80vw" "widths" (slice 480 800 1000)) }}
+          </div>
+          {{- else }}
+            {{- partial "components/squares.html" (dict "seed" (printf "story-%d" $i) "cols" 5 "rows" 5 "density" 45) }}
+          {{- end }}
+          <h3 class="story__title">{{ $item.title }}</h3>
+          {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "story__corner") "arrow-up-right" "story__corner" }}
+          <p class="story__meta"><span class="story__client">{{ partialCached "icon.html" (dict "name" "logo-mark") "logo-mark" }}{{ $item.client }}</span><span class="story__sector">{{ $item.sector }}</span></p>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

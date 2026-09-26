@@ -15,6 +15,22 @@
     padding-top: 0;
   }
 
+  /*
+   * Adjacent sections sharing the same tone read as one band: the second one
+   * drops its top padding so the gap between them stays one section padding.
+   * Sections with different tones keep full padding. Works whatever the order
+   * or hidden blocks in the `sections` front matter (hidden blocks render nothing).
+   */
+  :is(
+    .tone-brand + .tone-brand,
+    .tone-light + .tone-light,
+    .tone-light-alt + .tone-light-alt,
+    .tone-dark + .tone-dark,
+    .tone-dark-alt + .tone-dark-alt
+  ) {
+    padding-top: 0;
+  }
+
   /* Page shell */
   .site-main {
     display: block;

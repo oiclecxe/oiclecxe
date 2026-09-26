@@ -19,6 +19,8 @@ notFoundText = "The link may be wrong, or the page has moved."
 previous = "Previous"
 next = "Next"
 
+clientsLabel = "They trust us"
+
 [itemCount]
 one = "{{ .Count }} item"
 other = "{{ .Count }} items"

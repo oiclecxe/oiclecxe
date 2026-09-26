@@ -1,0 +1,22 @@
+{{- /*
+  Partner solutions (reference “The platform”): two-part title, columns with
+  name, sentence, stylised visual and link. Context: dict "page" "data" "index".
+  data: title, items [{name, text, url, visual}]
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-dark-alt" aria-labelledby="{{ $id }}">
+  <div class="container">
+    {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "section__head title--section") }}
+    <ul class="platform" role="list">
+      {{- range $i, $item := $d.items }}
+      <li class="platform__item reveal-block" data-reveal style="--delay: {{ mul (mod $i 4) 0.06 }}s">
+        <h3 class="platform__name">{{ $item.name }}</h3>
+        <p class="platform__text">{{ $item.text }}</p>
+        <div class="platform__visual">{{ partial "components/mini-visual.html" (dict "type" $item.visual "seed" $item.name) }}</div>
+        <a class="link-arrow" href="{{ $item.url | relLangURL }}">{{ T "readMore" }}<span class="visually-hidden"> : {{ $item.name }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

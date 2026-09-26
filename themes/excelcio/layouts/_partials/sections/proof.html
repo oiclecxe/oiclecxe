@@ -1,0 +1,37 @@
+{{- /*
+  Proof block: two-part title and key figures on the left, highlighted quote on the right.
+  Context: dict "page" "data" "index".
+  data: title, stats [{value, suffix, label}], quote {before, highlight, after, author, role}
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-dark-alt" aria-labelledby="{{ $id }}">
+  <div class="container proof">
+    <div class="proof__figures">
+      {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
+      <dl class="stats">
+        {{- range $d.stats }}
+        <div class="stats__item reveal-block" data-reveal>
+          <dt class="stats__label">{{ .label }}</dt>
+          <dd class="stats__value">
+            {{- if findRE `^\d+$` (string .value) }}
+            <span class="visually-hidden">{{ .value }}{{ .suffix }}</span><span aria-hidden="true"><span data-count-to="{{ .value }}">{{ .value }}</span>{{ .suffix }}</span>
+            {{- else }}{{ .value }}{{ .suffix }}{{ end -}}
+          </dd>
+        </div>
+        {{- end }}
+      </dl>
+    </div>
+    {{- with $d.quote }}
+    <figure class="quote reveal" data-reveal>
+      <blockquote class="quote__text">
+        <p>{{ (partial "components/words.html" (dict "text" .before)).html }} <mark class="quote__mark">{{ .highlight }}</mark> {{ (partial "components/words.html" (dict "text" .after "start" 30)).html }}</p>
+      </blockquote>
+      <figcaption class="quote__author">
+        <span class="quote__name">{{ .author }}</span>
+        <span class="quote__role">{{ .role }}</span>
+      </figcaption>
+    </figure>
+    {{- end }}
+  </div>
+</section>

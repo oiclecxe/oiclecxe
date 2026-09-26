@@ -1,0 +1,171 @@
+@layer components {
+  .carousel__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-10);
+  }
+
+  .carousel__controls {
+    display: flex;
+    gap: var(--sp-2);
+    flex: none;
+  }
+
+  /* The track starts on the container edge and bleeds off the right of the viewport. */
+  /* Percentages resolve against the section width (scrollbar excluded), like .container. */
+  .carousel__viewport {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding-inline: calc((100% - var(--container)) / 2);
+    scroll-padding-inline: calc((100% - var(--container)) / 2);
+    scrollbar-width: none;
+  }
+
+  .carousel__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel__viewport:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .carousel__track {
+    display: flex;
+    gap: var(--sp-4);
+    width: max-content;
+  }
+
+  .carousel__slide {
+    scroll-snap-align: start;
+    width: min(80vw, 29.75rem);
+  }
+
+  /* Square story card (photo placeholders: brand tones + breathing squares). */
+  .story {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 1;
+    padding: var(--sp-7);
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--story-1);
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .story--2 {
+    background: var(--story-2);
+  }
+
+  .story--3 {
+    background: var(--story-3);
+  }
+
+  /* Photo card: image fills the square; top and bottom scrims keep text readable (AA). */
+  .story--photo {
+    background: var(--dark-3);
+  }
+
+  .story__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .story__media picture,
+  .story__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .story--photo::before,
+  .story--photo::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    height: 45%;
+    pointer-events: none;
+  }
+
+  .story--photo::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--scrim), transparent);
+  }
+
+  .story--photo::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--scrim), transparent);
+  }
+
+  .story--photo .story__corner {
+    z-index: 1;
+  }
+
+  .story .squares {
+    --cell: 4.5rem;
+    opacity: 0.9;
+  }
+
+  .story__title {
+    position: relative;
+    z-index: 1;
+    max-width: 85%;
+    color: var(--white);
+    font-size: var(--fs-h3-lg);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .story__corner {
+    position: absolute;
+    top: var(--sp-7);
+    right: var(--sp-7);
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: transform 0.16s var(--ease-out);
+  }
+
+  .story:hover .story__corner {
+    transform: translate(3px, -3px);
+  }
+
+  .story__meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sp-4);
+  }
+
+  .story__client {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-title);
+  }
+
+  .story__client .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .story__sector {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-caps);
+    text-transform: uppercase;
+    color: var(--white-86);
+  }
+}

@@ -1,0 +1,37 @@
+{{- /*
+  “What sets us apart”: title, tabs, grid of 4 flat cards per tab.
+  Without JS every panel is shown, each with its own heading.
+  Context: dict "page" "data" "index". data: title, tabs [{label, cards [{title, accent, text, url}]}]
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-light" aria-labelledby="{{ $id }}">
+  <div class="container">
+    {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "section__head--tight") }}
+    <div class="tabs" data-tabs>
+      {{- if gt (len $d.tabs) 1 }}
+      <div class="tabs__list" role="tablist" aria-labelledby="{{ $id }}">
+        {{- range $i, $tab := $d.tabs }}
+        <button class="tabs__tab" type="button" role="tab" id="{{ $id }}-tab-{{ $i }}" aria-controls="{{ $id }}-panel-{{ $i }}" aria-selected="{{ cond (eq $i 0) "true" "false" }}"{{ if ne $i 0 }} tabindex="-1"{{ end }}>{{ $tab.label }}</button>
+        {{- end }}
+      </div>
+      {{- end }}
+      {{- range $i, $tab := $d.tabs }}
+      <div class="tabs__panel" role="tabpanel" id="{{ $id }}-panel-{{ $i }}" aria-labelledby="{{ $id }}-tab-{{ $i }}" data-tab-panel>
+        <h3 class="tabs__panel-title">{{ $tab.label }}</h3>
+        <ul class="grid grid--4" role="list">
+          {{- range $c, $card := $tab.cards }}
+          <li class="reveal-block" data-reveal style="--delay: {{ mul $c 0.06 }}s">
+            <a class="card" href="{{ $card.url | relLangURL }}">
+              <h4 class="card__title">{{ $card.title }}<span class="card__title-accent">{{ $card.accent }}</span></h4>
+              {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
+              <p class="card__text">{{ $card.text }}</p>
+            </a>
+          </li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>

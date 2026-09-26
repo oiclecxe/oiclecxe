@@ -1,0 +1,38 @@
+{{- /*
+  “How it fits together”: two-part title on the left, stacked tile diagram on the right.
+  Context: dict "page" "data" "index".
+  data: title, top {label, detail}, band1 {label, items}, band2 {label, items}, bottom {label, detail}
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-light" aria-labelledby="{{ $id }}">
+  <div class="container split split--half arch">
+    <div class="arch__intro">
+      {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "arch__title") }}
+    </div>
+    <figure class="arch__diagram reveal-block" data-reveal aria-labelledby="{{ $id }}-cap">
+      <figcaption id="{{ $id }}-cap" class="visually-hidden">
+        {{ $d.top.label }} → {{ $d.band1.label }} ({{ delimit $d.band1.items ", " }}) → {{ $d.band2.label }} ({{ delimit $d.band2.items ", " }}) → {{ $d.bottom.label }}
+      </figcaption>
+      <div class="arch__node" aria-hidden="true">
+        <span class="arch__node-label">{{ $d.top.label }}</span>
+        {{- with $d.top.detail }}<span class="arch__node-detail">{{ . }}</span>{{ end }}
+      </div>
+      {{- range $b, $band := slice $d.band1 $d.band2 }}
+      <div class="arch__band arch__band--{{ add $b 1 }}" aria-hidden="true">
+        <span class="arch__band-label">{{ $band.label }}</span>
+        <ul class="arch__tiles" role="list" style="--n: {{ len $band.items }}">
+          {{- range $i, $item := $band.items }}
+          <li class="arch__tile" style="--i: {{ $i }}">{{ $item }}</li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+      <div class="arch__node" aria-hidden="true">
+        <span class="arch__node-label">{{ $d.bottom.label }}</span>
+        {{- with $d.bottom.detail }}<span class="arch__node-detail">{{ . }}</span>{{ end }}
+      </div>
+      <span class="arch__pulse" aria-hidden="true"></span>
+    </figure>
+  </div>
+</section>

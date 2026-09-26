@@ -1,6 +1,6 @@
 # CLAUDE.md — excelcio.com (Hugo)
 
-Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo**, dans l'esprit visuel de la référence, en mode sombre, aux couleurs `#A82234` / `#1A171B`.
+Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo**, dans l'esprit visuel de la référence, aux couleurs `#A82234` / `#1A171B`. Sections en ambiances alternées comme la référence : aplats bordeaux, sections claires, sections sombres (voir `docs/DECISIONS.md`, Lot 0).
 
 **Source de vérité : `docs/SPEC.md`** (le *quoi*). Ce fichier donne le *comment* : consignes permanentes, conventions et commandes. En cas de conflit, SPEC.md l'emporte ; signale-le.
 
@@ -8,8 +8,9 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
 - Périmètre de la V1 : **Lots 0 à 2** (étude de la référence, socle et design system, page d'accueil). S'arrêter après le Lot 2.
-- Lot en cours : **Lot 1 — Socle et design system** : terminé, en attente de validation
-- Lots validés : Lot 0 (26/09/2026)
+- Lot en cours : **Lot 2 — Page d'accueil** : terminé ; mesure Lighthouse reportée à la demande de l'utilisateur (27/09/2026)
+- Lots validés : Lot 0, Lot 1 (26/09/2026)
+- En suspens : score Lighthouse officiel (téléchargement de Lighthouse via `npx` à autoriser ; Node 16 installé, ≥ 18 requis pour la version récente)
 - Logo Excelcio fourni : `assets/images/logo.svg`
 
 ## Méthode de travail
@@ -28,7 +29,8 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - **Pas de contenu inventé** : textes en placeholders `[À RÉDIGER — consigne…]`, chiffres en `[XX]`, `placeholder: true` dans le front matter. Jamais de *lorem ipsum*, de faux clients, de faux témoignages ni de faux chiffres. Faits réels autorisés : SPEC § 7.4. **Aucun nom ni logo de client réel** (« Client 1 », « Client 2 »…), même ceux du site actuel. Le logo Excelcio est fourni par l'utilisateur, ne pas le récupérer en ligne.
 - **Zéro tiers au chargement** : pas de CDN, pas de Google Fonts distant, pas de framework JS. Polices auto-hébergées.
 - **Amélioration progressive** : chaque page est lisible et navigable sans JavaScript.
-- `#A82234` n'est **jamais** une couleur de texte sur fond sombre (contraste 2,5:1). Utiliser le token `--c-brand-light`.
+- `#A82234` (`--brand`) n'est **jamais** une couleur de texte sur fond sombre (contraste 2,5:1). Utiliser `--accent-on-dark` (ou le rôle `--fg-accent` d'une ambiance sombre).
+- Pas de halos, dégradés décoratifs, grilles de fond ni halo au pointeur (décision du Lot 0) : aplats, angles droits, champ de carrés animé.
 - Aucune couleur, taille ou durée en dur : uniquement les tokens de `tokens.css`.
 - Aucun texte d'interface en dur dans les gabarits : `T "cle"` et `i18n/fr.toml`.
 

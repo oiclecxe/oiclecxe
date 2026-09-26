@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
 <head>
+  {{- /* Enables reveal states only when JS runs; shows everything if main.js has not started after 3 s. */}}
+  <script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__themeReady)document.documentElement.classList.add("reveal-fallback")},3000)</script>
   {{- partial "head/meta.html" . }}
   {{- partialCached "head/fonts.html" . }}
   {{- partialCached "head/css.html" . }}
@@ -9,6 +11,7 @@
 </head>
 <body data-header="{{ or .Params.header `overlay` }}">
   <a class="skip-link" href="#main">{{ T "skipToContent" }}</a>
+  <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
   {{- /* Cached per section: the header only depends on the current section. */}}
   {{- partialCached "header/header.html" . site.Language.Lang .Section }}
   <main id="main" class="site-main" tabindex="-1">

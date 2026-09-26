@@ -1,0 +1,27 @@
+{{- /*
+  Expertise list: sticky two-part title on the left, items on the right (reference “use cases”).
+  Context: dict "page" "data" "index". data: title, items [{title, badges, text, url, link}]
+*/ -}}
+{{- $d := .data -}}
+{{- $id := printf "s%d-title" .index -}}
+<section class="section tone-light-alt" aria-labelledby="{{ $id }}">
+  <div class="container split split--half">
+    <div class="split__aside--sticky">
+      {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
+    </div>
+    <ul class="item-list" role="list">
+      {{- range $d.items }}
+      <li class="item-list__item reveal-block" data-reveal>
+        <h3 class="item-list__title">
+          {{- .title }}
+          {{- range .badges }} <span class="badge">{{ . }}</span>{{ end -}}
+        </h3>
+        <p class="item-list__text">{{ .text }}</p>
+        {{- if .url }}
+        <a class="link-arrow item-list__link" href="{{ .url | relLangURL }}">{{ .link | default (T "readMore") }}<span class="visually-hidden"> : {{ .title }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
