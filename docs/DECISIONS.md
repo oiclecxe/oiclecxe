@@ -16,11 +16,13 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-26 — Pages de référence étudiées : `/cloud`, `/use-cases/knowledge-graphs`, `/blog`.**
   Raison : elles sont équivalentes, respectivement, aux pages Solutions, Offre et Actualités (voir `relevé de la référence` § 6).
 
-- **2026-09-26 — Polices proposées : Geist + JetBrains Mono** (celles de la référence, sous licence SIL OFL 1.1).
-  ⏳ Validation de l'utilisateur et accord pour le téléchargement.
+- **2026-09-26 — Polices : Geist + JetBrains Mono** (celles de la référence, sous licence SIL OFL 1.1), auto-hébergées depuis les paquets Fontsource. Validé par l'utilisateur, téléchargement autorisé.
 
-- **2026-09-26 — ⏳ Ambiance des sections.** La référence alterne des aplats de marque, des sections claires et des sections sombres, alors que le CDC impose « sombre uniquement ». Options A et B dans `relevé de la référence` § 9.
+- **2026-09-26 — Ambiance des sections : option A, « coller à la référence ».** Validé par l'utilisateur ; remplace le « sombre uniquement » du CDC (§ 2, § 5.1).
+  - Accueil : hero et CTA en aplat bordeaux ; sections claires (architecture, ce qui distingue, expertises, manifeste) ; sections sombres (cas clients, FAQ, solutions, preuves) ; footer sombre.
+  - Pages intérieures sombres, CTA final bordeaux ; listes de contenus (actualités) en clair, comme le blog de la référence.
+  - Conséquence : le thème gère 5 ambiances de section (`brand`, `light`, `light-alt`, `dark`, `dark-alt`), chacune redéfinissant ses propres couleurs locales. `color-scheme` passe de `dark` à `light dark` selon la section.
 
-- **2026-09-26 — ⏳ Halos, dégradés et grilles de fond du CDC** (§ 5.1, § 9) **absents de la référence.** Proposition : les remplacer par des aplats et par le champ de carrés animé.
+- **2026-09-26 — Pas de halos, dégradés, grilles de fond ni halo au pointeur.** Validé par l'utilisateur ; remplace le CDC § 5.1 (`--g-brand`, `--g-text`, `--c-brand-glow`) et § 9 (halo des cartes, bordures en dégradé, fonds décoratifs). Remplacés par des aplats, des cartes à angles droits, le champ de carrés animé, l'apparition des titres mot par mot et la citation surlignée (voir `relevé de la référence` § 5 et § 7.1).
 
-- **2026-09-26 — ⏳ Variante claire du logo** pour les fonds bordeaux et sombres, dérivée du fichier fourni. Son symbole rouge `#D80C0C` et son texte gris `#313131` sont peu lisibles sur ces fonds.
+- **2026-09-26 — Logo : variante blanche dérivée** (`assets/images/logo-light.svg`) pour les fonds bordeaux et sombres. Symbole et « Excelcio » en blanc, signature en blanc à 70 %. Validé par l'utilisateur. L'original reste utilisé sur les fonds clairs.
