@@ -1,0 +1,266 @@
+{{- /* Design system page (development only; never rendered in production). */ -}}
+{{- define "head" }}
+  {{- with resources.Get "css/styleguide.css" | css.Build (dict "vars" site.Params.style) }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{- end }}
+{{- end }}
+
+{{- define "main" }}
+{{- $tones := slice
+  (dict "class" "tone-brand" "name" "brand" "use" "Hero, CTA final")
+  (dict "class" "tone-light" "name" "light" "use" "Sections claires")
+  (dict "class" "tone-light-alt" "name" "light-alt" "use" "Section claire alternée, listes")
+  (dict "class" "tone-dark" "name" "dark" "use" "Sections sombres, pages intérieures")
+  (dict "class" "tone-dark-alt" "name" "dark-alt" "use" "Section sombre alternée")
+  (dict "class" "tone-deep" "name" "deep" "use" "Footer, mega-menu")
+-}}
+<section class="section tone-dark page-hero">
+  <div class="container">
+    <p class="eyebrow">{{ T "placeholder" }} · dev</p>
+    <h1 class="page-hero__title"><span class="title__lead">{{ .Title }}.</span> <span class="title__rest">Tokens, composants, états.</span></h1>
+    <p class="lead page-hero__lead">{{ .Description }}</p>
+    <nav class="sg-toc" aria-label="Sommaire">
+      <a href="#couleurs">Couleurs</a><a href="#ambiances">Ambiances</a><a href="#typographie">Typographie</a><a href="#boutons">Boutons</a>
+      <a href="#badges">Badges et libellés</a><a href="#cartes">Cartes</a><a href="#accordeon">Accordéon</a><a href="#carres">Champ de carrés</a>
+      <a href="#icones">Icônes</a><a href="#espacements">Espacements</a><a href="#mouvement">Mouvement</a>
+    </nav>
+  </div>
+</section>
+
+{{- /* Colours */}}
+<section class="section tone-dark-alt" id="couleurs">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Couleurs.</span> <span class="title__rest">Paramètres <code>params.style</code>, injectés par hugo:vars.</span></h2>
+    <ul class="sg-swatches" role="list">
+      {{- range $k, $v := site.Params.style }}
+      <li class="sg-swatch">
+        <span class="sg-swatch__chip" style="background: var(--{{ $k }})"></span>
+        <code>--{{ $k }}</code>
+        <span class="sg-muted">{{ $v }}</span>
+      </li>
+      {{- end }}
+    </ul>
+    <h3 class="sg-subtitle">Contrastes (calculés en direct)</h3>
+    <table class="sg-table" data-contrast-table>
+      <thead><tr><th scope="col">Texte</th><th scope="col">Fond</th><th scope="col">Exemple</th><th scope="col">Ratio</th><th scope="col">Usage</th></tr></thead>
+      <tbody>
+        {{- range slice
+          (slice "white" "brand" "normal") (slice "brand" "white" "normal") (slice "white" "brand-strong" "normal")
+          (slice "text-on-light" "light-1" "normal") (slice "body-on-light" "light-1" "normal") (slice "body-on-light" "light-2" "normal")
+          (slice "muted-on-light" "light-1" "large") (slice "muted-on-light" "light-2" "large") (slice "accent" "light-1" "normal") (slice "accent" "light-2" "normal")
+          (slice "white" "accent" "normal") (slice "brand" "light-2" "normal")
+          (slice "text-on-dark" "dark-1" "normal") (slice "body-on-dark" "dark-1" "normal") (slice "body-on-dark" "dark-2" "normal") (slice "body-on-dark" "dark-0" "normal")
+          (slice "muted-on-dark" "dark-0" "normal") (slice "muted-on-dark" "dark-1" "normal") (slice "muted-on-dark" "dark-2" "normal") (slice "muted-on-dark" "dark-3" "normal")
+          (slice "accent-on-dark" "dark-0" "normal") (slice "accent-on-dark" "dark-1" "normal") (slice "accent-on-dark" "dark-2" "normal")
+          (slice "brand" "dark-1" "decorative")
+        }}
+        <tr data-contrast data-level="{{ index . 2 }}">
+          <td><code>--{{ index . 0 }}</code></td>
+          <td><code>--{{ index . 1 }}</code></td>
+          <td><span class="sg-sample" style="color: var(--{{ index . 0 }}); background: var(--{{ index . 1 }})">Aa Exemple</span></td>
+          <td data-ratio>…</td>
+          <td class="sg-muted">{{ index . 2 }}</td>
+        </tr>
+        {{- end }}
+      </tbody>
+    </table>
+    <p class="sg-note">Seuils WCAG 2.2 AA : 4,5:1 texte normal, 3:1 grand texte (≥ 24 px ou ≥ 18,7 px gras) et composants. « decorative » : paire interdite pour du texte.</p>
+  </div>
+</section>
+
+{{- /* Tones */}}
+<section class="section tone-dark" id="ambiances">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Ambiances.</span> <span class="title__rest">Chaque section choisit un ton ; les composants suivent.</span></h2>
+  </div>
+</section>
+{{- range $tones }}
+<section class="section {{ .class }} sg-tone">
+  <div class="container">
+    <p class="eyebrow">.{{ .class }} — {{ .use }}</p>
+    <h2 class="sg-tone__title"><span class="title__lead">Titre affirmatif en deux temps.</span> <span class="title__rest">Complément atténué, avec un <span class="title__accent">mot en accent</span>.</span></h2>
+    <p class="lead sg-tone__text">Texte courant sur fond <strong>{{ .name }}</strong>. Les couleurs locales (<code>--fg</code>, <code>--fg-body</code>, <code>--fg-muted</code>, <code>--fg-accent</code>, <code>--surface</code>) sont redéfinies par le ton.</p>
+    <div class="btn-row sg-row">
+      <a class="btn btn--primary" href="#ambiances">Action principale</a>
+      <a class="btn btn--secondary" href="#ambiances">Action secondaire</a>
+      <a class="link-arrow" href="#ambiances">Lien fléché {{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+      <span class="badge">Badge</span>
+      <span class="badge badge--alt">Badge alt</span>
+    </div>
+    <div class="grid grid--3 sg-row">
+      <a class="card" href="#ambiances">
+        <h3 class="card__title">Carte à angles droits.<span class="card__title-accent">Sous-titre en accent.</span></h3>
+        {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
+        <p class="card__text">Fond <code>--surface</code>, survol <code>--surface-hover</code> en 0,42 s.</p>
+      </a>
+    </div>
+  </div>
+</section>
+{{- end }}
+
+{{- /* Typography */}}
+<section class="section tone-light" id="typographie">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Typographie.</span> <span class="title__rest">Geist et JetBrains Mono, échelle fluide de 390 à 1440 px.</span></h2>
+    <div class="sg-type">
+      {{- range slice
+        (slice "--fs-display" "H1 · 40 → 88 px · 0,98 · −0,035 em" "sg-t-display")
+        (slice "--fs-stat" "Chiffre clé · 56 → 86 px" "sg-t-stat")
+        (slice "--fs-statement" "Manifeste · 30 → 56 px" "sg-t-statement")
+        (slice "--fs-h2" "H2 · 26 → 48 px · 1,05 · −0,04 em" "sg-t-h2")
+        (slice "--fs-h3-lg" "H3 large · 22 → 30 px" "sg-t-h3lg")
+        (slice "--fs-h3" "H3 · 20 → 28 px" "sg-t-h3")
+        (slice "--fs-h4" "H4 · 20 px" "sg-t-h4")
+        (slice "--fs-lead" "Chapeau · 17 px" "sg-t-lead")
+        (slice "--fs-body" "Texte · 16 px · 1,45" "sg-t-body")
+        (slice "--fs-ui" "Interface · 14 px" "sg-t-ui")
+        (slice "--fs-nav" "Navigation · 13 px" "sg-t-nav")
+      }}
+      <div class="sg-type__row">
+        <code class="sg-muted">{{ index . 0 }}</code>
+        <p class="{{ index . 2 }}">La donnée au service des décisions</p>
+        <span class="sg-muted">{{ index . 1 }}</span>
+      </div>
+      {{- end }}
+      <div class="sg-type__row">
+        <code class="sg-muted">.eyebrow</code>
+        <span class="eyebrow">Surtitre en capitales</span>
+        <span class="sg-muted">12 px · 500 · +0,08 em</span>
+      </div>
+      <div class="sg-type__row">
+        <code class="sg-muted">.eyebrow--mono</code>
+        <span class="eyebrow eyebrow--mono">Colonne de footer</span>
+        <span class="sg-muted">JetBrains Mono 12 px · 600 · +0,1 em</span>
+      </div>
+      <div class="sg-type__row">
+        <code class="sg-muted">.statement</code>
+        <p class="statement">Une phrase manifeste, centrée, en gris.</p>
+        <span class="sg-muted">Manifeste</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{- /* Buttons */}}
+<section class="section tone-light-alt" id="boutons">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Boutons.</span> <span class="title__rest">Pilules, 48 px ; petit format 36 px.</span></h2>
+    <div class="btn-row sg-row">
+      <a class="btn btn--primary" href="#boutons">Primaire</a>
+      <a class="btn btn--secondary" href="#boutons">Secondaire</a>
+      <a class="btn btn--primary btn--sm" href="#boutons">Petit</a>
+      <a class="btn btn--secondary btn--sm" href="#boutons">Petit contour</a>
+      <a class="btn btn--primary" aria-disabled="true">Désactivé</a>
+      <button class="icon-btn" type="button" aria-label="Précédent">{{ partialCached "icon.html" (dict "name" "arrow-left") "arrow-left" }}</button>
+      <button class="icon-btn" type="button" aria-label="Suivant">{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</button>
+      <button class="icon-btn" type="button" aria-label="Désactivé" disabled>{{ partialCached "icon.html" (dict "name" "arrow-left") "arrow-left" }}</button>
+    </div>
+    <p class="sg-note">États : survol (fond atténué 0,15 s), focus clavier (anneau <code>--focus</code> 2 px, décalage 3 px), désactivé (opacité 0,45).</p>
+  </div>
+</section>
+
+{{- /* Badges */}}
+<section class="section tone-light" id="badges">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Badges et libellés.</span></h2>
+    <div class="btn-row sg-row">
+      <span class="badge">Solution</span>
+      <span class="badge badge--alt">Catégorie</span>
+      <span class="eyebrow">Eyebrow</span>
+      <span class="eyebrow eyebrow--mono">Mono</span>
+    </div>
+  </div>
+</section>
+
+{{- /* Cards */}}
+<section class="section tone-light" id="cartes">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Cartes.</span> <span class="title__rest">Grille de 4, gouttière 12 px.</span></h2>
+    <ul class="grid grid--4" role="list">
+      {{- range seq 4 }}
+      <li>
+        <a class="card" href="#cartes">
+          <h3 class="card__title">[Titre {{ . }}].<span class="card__title-accent">[Complément en accent].</span></h3>
+          {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
+          <p class="card__text">[À RÉDIGER — Texte de carte, 35 mots max, aligné en bas.]</p>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+
+{{- /* Accordion */}}
+<section class="section tone-dark-alt" id="accordeon">
+  <div class="container split">
+    <h2 class="split__aside--sticky"><span class="title__lead">Accordéon.</span> <span class="title__rest">details / summary.</span></h2>
+    <div class="accordion">
+      {{- range $i, $_ := seq 3 }}
+      <details class="accordion__item"{{ if eq $i 0 }} open{{ end }}>
+        <summary class="accordion__summary">[Question {{ add $i 1 }} ?] {{ partialCached "icon.html" (dict "name" "plus" "class" "accordion__icon") "plus" "accordion__icon" }}</summary>
+        <div class="accordion__body"><p>[À RÉDIGER — Réponse. Première question ouverte par défaut, les autres fermées.]</p></div>
+      </details>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+{{- /* Squares */}}
+<section class="section tone-brand squares-host sg-squares" id="carres">
+  {{- partial "components/squares.html" (dict "seed" "styleguide" "anchor" "bottom" "cols" 8 "rows" 5 "density" 70) }}
+  <div class="container">
+    <h2><span class="title__lead">Champ de carrés.</span> <span class="title__rest">Carrés blancs, opacité 0 → 5–10 %, cycles de 5,5 à 10,5 s désynchronisés. Statiques en mouvement réduit.</span></h2>
+  </div>
+</section>
+
+{{- /* Icons */}}
+<section class="section tone-dark" id="icones">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Icônes.</span> <span class="title__rest">SVG inline, trait 1,75.</span></h2>
+    <ul class="sg-icons" role="list">
+      {{- range resources.Match "icons/*.svg" }}
+        {{- $name := path.BaseName .Name }}
+      <li>{{ partialCached "icon.html" (dict "name" $name) $name }}<code>{{ $name }}</code></li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+
+{{- /* Spacing */}}
+<section class="section tone-dark-alt" id="espacements">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Espacements.</span> <span class="title__rest">Base 4 px ; sections 48 → 160 px ; conteneur 85 %, max 1458 px.</span></h2>
+    <ul class="sg-spaces" role="list">
+      {{- range seq 14 }}
+      <li><code>--sp-{{ . }}</code><span class="sg-space" style="width: var(--sp-{{ . }})"></span></li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+
+{{- /* Motion */}}
+<section class="section tone-dark" id="mouvement">
+  <div class="container">
+    <h2 class="section__head"><span class="title__lead">Mouvement.</span> <span class="title__rest">Seuls transform, opacity et filter sont animés.</span></h2>
+    <table class="sg-table">
+      <thead><tr><th scope="col">Token</th><th scope="col">Valeur</th><th scope="col">Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>--dur-fast</code></td><td>0,15 s</td><td class="sg-muted">Couleurs de boutons et liens</td></tr>
+        <tr><td><code>--dur-base</code></td><td>0,3 s</td><td class="sg-muted">Header, mega-menu, accordéon</td></tr>
+        <tr><td><code>--dur-reveal</code> + <code>--stagger</code></td><td>0,36 s, +55 ms par mot</td><td class="sg-muted">Apparition des titres (Lot 2)</td></tr>
+        <tr><td><code>--dur-surface</code></td><td>0,42 s</td><td class="sg-muted">Fond des cartes au survol</td></tr>
+        <tr><td><code>--dur-slow</code></td><td>0,6 s</td><td class="sg-muted">Apparition des sections, bandeau de logos</td></tr>
+        <tr><td><code>--ease-out</code></td><td>cubic-bezier(0.33, 0, 0.2, 1)</td><td class="sg-muted">Entrées</td></tr>
+        <tr><td><code>--ease-soft</code></td><td>cubic-bezier(0.33, 1, 0.68, 1)</td><td class="sg-muted">Surfaces</td></tr>
+        <tr><td><code>--ease-nav</code></td><td>cubic-bezier(0.525, 0, 0, 1)</td><td class="sg-muted">Navigation</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+{{- end }}
+
+{{- define "scripts" }}
+  {{- with resources.Get "js/styleguide.js" | js.Build }}
+<script type="module" src="{{ .RelPermalink }}"></script>
+  {{- end }}
+{{- end }}

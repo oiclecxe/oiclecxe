@@ -1,0 +1,44 @@
+{{- /*
+  Responsive image: AVIF + WebP + original, srcset, explicit dimensions.
+  Context: dict
+    "page"      page (to resolve page resources)
+    "src"       path of a page resource or a global asset
+    "alt"       alternative text (required unless "decorative" is true)
+    "decorative" bool
+    "sizes"     sizes attribute (default "100vw")
+    "widths"    slice of widths (default 480 800 1200 1600)
+    "priority"  bool: LCP image (eager, fetchpriority high)
+    "class"
+*/ -}}
+{{- $img := "" -}}
+{{- with .page }}{{ $img = .Resources.Get $.src }}{{ end -}}
+{{- if not $img }}{{ $img = resources.Get .src }}{{ end -}}
+{{- if and (not .alt) (not .decorative) }}
+  {{- errorf "image.html : texte alternatif manquant pour %q" .src }}
+{{- end -}}
+{{- with $img }}
+  {{- if eq .MediaType.SubType "svg" }}
+<img src="{{ .RelPermalink }}" alt="{{ $.alt }}"{{ with $.class }} class="{{ . }}"{{ end }} loading="{{ cond $.priority "eager" "lazy" }}">
+  {{- else }}
+    {{- $widths := $.widths | default (slice 480 800 1200 1600) }}
+    {{- $sizes := $.sizes | default "100vw" }}
+    {{- $fallback := .Resize (printf "%dx webp" (math.Min 1200 .Width | int)) }}
+<picture>
+    {{- range slice "avif" "webp" }}
+      {{- $fmt := . }}
+      {{- $set := slice }}
+      {{- range $widths }}
+        {{- if le . $img.Width }}
+          {{- $r := $img.Resize (printf "%dx %s" . $fmt) }}
+          {{- $set = $set | append (printf "%s %dw" $r.RelPermalink $r.Width) }}
+        {{- end }}
+      {{- end }}
+  <source type="image/{{ $fmt }}" srcset="{{ delimit $set ", " }}" sizes="{{ $sizes }}">
+    {{- end }}
+  <img src="{{ $fallback.RelPermalink }}" width="{{ $fallback.Width }}" height="{{ $fallback.Height }}" alt="{{ $.alt }}"{{ with $.class }} class="{{ . }}"{{ end }}
+    {{- if $.priority }} loading="eager" fetchpriority="high"{{ else }} loading="lazy" decoding="async"{{ end }}>
+</picture>
+  {{- end }}
+{{- else }}
+  {{- warnf "image.html : image introuvable %q" .src }}
+{{- end -}}

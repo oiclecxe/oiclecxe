@@ -1,0 +1,30 @@
+@layer components {
+  /* Home hero: 100vh, content aligned to the bottom (reference). */
+  .hero {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: calc(var(--header-h) + var(--sp-13));
+    padding-bottom: var(--sp-12);
+  }
+
+  @media (min-width: 62em) {
+    .hero {
+      padding-bottom: 8.75rem;
+    }
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero__actions {
+    margin-top: var(--sp-8);
+  }
+
+  .hero__pillars {
+    margin-top: var(--sp-12);
+  }
+}

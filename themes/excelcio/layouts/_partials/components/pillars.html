@@ -1,0 +1,6 @@
+{{- /* Three short “pillars”: bold lead word + sentence. Context: slice of {title, text}. */ -}}
+<div class="pillars">
+  {{- range . }}
+  <p class="pillar"><span class="pillar__title">{{ .title }}</span> {{ .text }}</p>
+  {{- end }}
+</div>

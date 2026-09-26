@@ -1,0 +1,80 @@
+# Thème Hugo `excelcio`
+
+Thème sur mesure pour excelcio.com : aplats de couleur de marque, sections claires et sombres, cartes à angles droits, champ de carrés animé. Sans framework ni dépendance tierce au chargement.
+
+- Hugo **≥ 0.166.0**, système de gabarits actuel (`home.html`, `page.html`, `section.html`, `_partials/`, `_shortcodes/`, `_markup/`)
+- CSS natif assemblé par `css.Build`, couleurs de marque injectées par `@import "hugo:vars"`
+- JavaScript natif en modules, assemblé par `js.Build` (≈ 1,3 Ko gzip)
+- Polices auto-hébergées : Geist et JetBrains Mono (SIL OFL 1.1, licences dans `assets/fonts/`)
+
+## Installation
+
+Le thème est importé comme module local :
+
+```toml
+# config/_default/hugo.toml
+[[module.imports]]
+  path = "excelcio"
+```
+
+Il construit un site vide sans erreur : tous les paramètres ont une valeur par défaut dans [`hugo.toml`](hugo.toml).
+
+## Paramètres (`params`)
+
+| Paramètre | Rôle |
+|---|---|
+| `description` | Meta description par défaut |
+| `logo.default` / `logo.onDark` / `logo.compactOnDark` / `logo.alt` | Chemins dans `assets/` : logo sur fond clair, sur fond sombre, version compacte du header. Vide = nom du site en texte |
+| `organization.name` / `legalName` / `registration` / `email` / `jobsEmail` | Informations légales affichées dans le footer |
+| `header.ctaLabel` / `header.ctaURL` | Bouton d'action du header |
+| `header.searchURL` | Lien de l'icône de recherche |
+| `pillars` | Liste de `{title, text}` : 3 piliers affichés sous le titre du hero et dans le footer |
+| `footer.headline` | Signature affichée en grand dans le footer |
+| `footer.aiLabel` / `footer.aiURL` | Lien « Explorer avec l'IA » (vers `llms.txt`) |
+| `style.*` | Couleurs de marque : chaque clé devient `--clé` en CSS (`brand`, `ink`, `accent`, `dark-0…3`, `light-1…2`, `*-on-light`, `*-on-dark`) |
+| `fontFallback.sizeAdjust` / `ascent` / `descent` | Métriques de la police de secours (limite le décalage de mise en page) |
+| `dev.showPlaceholders` | Affiche le repère « Contenu provisoire » en développement |
+
+## Données (`data/`, facultatives)
+
+- `social.yaml` : liste de `{name, icon, url}` (icônes : `linkedin`, `x`, `youtube`)
+- `offices.yaml` : liste de `{city, address, postalCode}`
+
+## Menus
+
+- `main` : navigation principale. Une entrée avec des enfants ouvre un mega-menu ; `params.group` range l'enfant dans une colonne, `params.featured = true` le place dans la rangée basse, `params.description` ajoute un sous-titre.
+- `footer` : une entrée parente par colonne, les enfants sont les liens.
+
+## Front matter reconnu
+
+| Clé | Rôle |
+|---|---|
+| `sections` | Liste ordonnée de blocs `{type: …}` rendus par `_partials/sections/<type>.html` (accueil et pages modulaires). `hidden: true` masque un bloc |
+| `header` | `overlay` (défaut : le header se superpose à la première section) ou `solid` |
+| `placeholder` | `true` : contenu provisoire (repère en dev, avertissement au build de production) |
+| `seo.title` / `seo.noindex` | Surcharges SEO |
+
+## Ambiances de section
+
+Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-alt`, `tone-dark`, `tone-dark-alt`, `tone-deep`. Chaque ton redéfinit `--bg`, `--fg`, `--fg-body`, `--fg-muted` (grand texte), `--fg-accent`, `--surface`, `--line`, `--focus` ; les composants n'utilisent que ces rôles.
+
+## Composants et partials
+
+| Partial | Usage |
+|---|---|
+| `components/logo.html` | Logo (`variant`, `height`) |
+| `components/pillars.html` | Trois piliers |
+| `components/squares.html` | Champ de carrés (`seed`, `anchor`, `cols`, `rows`, `density`) |
+| `components/page-hero.html`, `components/breadcrumb.html` | En-tête des pages intérieures |
+| `icon.html` | Icône SVG inline (`name`, `class`, `label`) |
+| `image.html` | Image responsive AVIF/WebP (`page`, `src`, `alt`, `sizes`, `priority`) ; échec du build si `alt` manque |
+| `sections/hero.html` | Hero de l'accueil |
+| `hooks/head-end.html`, `hooks/body-end.html` | Points d'extension vides, à surcharger depuis le site |
+
+Classes CSS : `.btn` (`--primary`, `--secondary`, `--sm`), `.link-arrow`, `.icon-btn`, `.badge` (`--alt`), `.eyebrow` (`--mono`), `.title__lead` / `.title__rest` / `.title__accent`, `.statement`, `.card` (`__title`, `__title-accent`, `__corner`, `__text`), `.accordion` (`__item`, `__summary`, `__icon`, `__body`), `.split`, `.grid` (`--2` à `--5`), `.prose`.
+
+La page `/styleguide/` (développement uniquement) présente tous les tokens et composants, avec les contrastes calculés en direct.
+
+## Surcharges
+
+Pour adapter un fichier, créer le fichier de même chemin dans le site (système de fichiers unifié de Hugo), par exemple `layouts/_partials/hooks/body-end.html` pour ajouter un outil d'analytics.

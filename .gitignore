@@ -4,3 +4,5 @@ resources/_gen/
 node_modules/
 docs/reference/*.png
 docs/reference/*.jpg
+
+.claude/

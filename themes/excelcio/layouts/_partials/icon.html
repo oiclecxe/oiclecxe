@@ -1,0 +1,17 @@
+{{- /*
+  Inline SVG icon from assets/icons/<name>.svg, decorative by default.
+  Context: dict "name" (required), "class" (optional), "label" (optional: makes it meaningful).
+*/ -}}
+{{- $path := printf "icons/%s.svg" .name -}}
+{{- with resources.Get $path }}
+  {{- $class := trim (printf "icon %s" ($.class | default "")) " " }}
+  {{- $attrs := printf `class="%s" focusable="false"` $class }}
+  {{- if $.label }}
+    {{- $attrs = printf `%s role="img" aria-label="%s"` $attrs (htmlEscape $.label) }}
+  {{- else }}
+    {{- $attrs = printf `%s aria-hidden="true"` $attrs }}
+  {{- end }}
+  {{- replace (trim .Content "\n") "<svg " (printf "<svg %s " $attrs) 1 | safeHTML }}
+{{- else }}
+  {{- warnf "icon.html: icône introuvable %q" $path }}
+{{- end -}}

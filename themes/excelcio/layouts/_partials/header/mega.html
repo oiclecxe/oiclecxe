@@ -1,0 +1,53 @@
+{{- /*
+  Mega-menu panel. Context: dict "entry" (menu entry with children) "id" (panel id).
+*/ -}}
+{{- $groups := slice -}}
+{{- $featured := slice -}}
+{{- range .entry.Children }}
+  {{- if .Params.featured }}
+    {{- $featured = $featured | append . }}
+  {{- else }}
+    {{- $g := or .Params.group "" }}
+    {{- if not (in $groups $g) }}{{ $groups = $groups | append $g }}{{ end }}
+  {{- end }}
+{{- end -}}
+<div class="mega" id="{{ .id }}" data-mega>
+  <div class="container mega__inner">
+    <div class="mega__grid">
+      {{- range $groups }}
+        {{- $group := . }}
+      <div class="mega__group">
+        {{- with $group }}<span class="eyebrow">{{ . }}</span>{{ end }}
+        <ul class="mega__list" role="list">
+          {{- range $.entry.Children }}
+            {{- if and (not .Params.featured) (eq (or .Params.group "") $group) }}
+          <li>
+            <a class="mega__link" href="{{ .URL | relLangURL }}">
+              <span class="mega__link-title">{{ .Name }}</span>
+              {{- with .Params.description }}<span class="mega__link-desc">{{ . }}</span>{{ end }}
+            </a>
+          </li>
+            {{- end }}
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+  {{- with $featured }}
+  <div class="mega__featured">
+    <div class="container mega__inner">
+      <ul class="mega__featured-list" role="list">
+        {{- range . }}
+        <li>
+          <a class="mega__link" href="{{ .URL | relLangURL }}">
+            <span class="mega__link-title">{{ .Name }}</span>
+            {{- with .Params.description }}<span class="mega__link-desc">{{ . }}</span>{{ end }}
+          </a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </div>
+  {{- end }}
+</div>

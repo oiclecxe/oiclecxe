@@ -1,0 +1,42 @@
+{{- /*
+  Mobile navigation built on <details>: usable without JavaScript.
+  JS adds scroll locking, Escape to close and focus management.
+  Context: dict "section".
+*/ -}}
+{{- $section := .section -}}
+<details class="mobile-nav" data-mobile-nav>
+  <summary class="mobile-nav__toggle" aria-label="{{ T "openMenu" }}" data-label-open="{{ T "openMenu" }}" data-label-close="{{ T "closeMenu" }}">
+    {{- partialCached "icon.html" (dict "name" "menu" "class" "icon--menu") "menu" "icon--menu" -}}
+    {{- partialCached "icon.html" (dict "name" "close" "class" "icon--close") "close" "icon--close" -}}
+  </summary>
+  <div class="mobile-nav__panel">
+    <nav aria-label="{{ T "mainNav" }}">
+      <ul class="mobile-nav__list" role="list">
+        {{- range site.Menus.main }}
+          {{- $current := partial "header/is-current.html" (dict "entry" . "section" $section) }}
+        <li>
+          {{- if .HasChildren }}
+            {{- $parentURL := .URL }}
+          <details class="mobile-nav__group">
+            <summary>{{ .Name }}{{ partialCached "icon.html" (dict "name" "chevron-down") "chevron-down" }}</summary>
+            <ul class="mobile-nav__sub" role="list">
+              <li><a href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a></li>
+              {{- range .Children }}
+                {{- if ne .URL $parentURL }}
+              <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+                {{- end }}
+              {{- end }}
+            </ul>
+          </details>
+          {{- else }}
+          <a class="mobile-nav__link" href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ul>
+    </nav>
+    {{- with site.Params.header.ctaURL }}
+    <a class="btn btn--primary mobile-nav__cta" href="{{ . | relLangURL }}">{{ site.Params.header.ctaLabel }}</a>
+    {{- end }}
+  </div>
+</details>

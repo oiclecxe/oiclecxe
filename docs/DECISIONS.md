@@ -26,3 +26,41 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-26 — Pas de halos, dégradés, grilles de fond ni halo au pointeur.** Validé par l'utilisateur ; remplace le CDC § 5.1 (`--g-brand`, `--g-text`, `--c-brand-glow`) et § 9 (halo des cartes, bordures en dégradé, fonds décoratifs). Remplacés par des aplats, des cartes à angles droits, le champ de carrés animé, l'apparition des titres mot par mot et la citation surlignée (voir `relevé de la référence` § 5 et § 7.1).
 
 - **2026-09-26 — Logo : variante blanche dérivée** (`assets/images/logo-light.svg`) pour les fonds bordeaux et sombres. Symbole et « Excelcio » en blanc, signature en blanc à 70 %. Validé par l'utilisateur. L'original reste utilisé sur les fonds clairs.
+
+## Lot 1 — Socle et design system
+
+- **2026-09-26 — Thème importé en module local** `[[module.imports]] path = "excelcio"`, avec `module.hugoVersion.min = "0.166.0"`.
+  Raison : SPEC § 11.2 et § 16.
+
+- **2026-09-26 — Palette dérivée** (valeurs par défaut dans `themes/excelcio/hugo.toml`, `[params.style]`). Les contrastes sont vérifiés en direct sur `/styleguide/` :
+
+  | Texte / fond | Ratio | Usage |
+  |---|---|---|
+  | blanc / `brand #A82234` | 7,13:1 | Texte sur aplat bordeaux, bouton sur fond clair |
+  | blanc 82 % / `brand` | 5,2:1 (calculé) | Texte courant sur bordeaux |
+  | blanc 64 % / `brand` | 3,7:1 (calculé) | Seconde phrase des grands titres seulement |
+  | `text-on-light #1A171B` / blanc | 17,76:1 | Titres sur clair |
+  | `body-on-light #5C5358` / blanc et `#FAF7F6` | 7,41 et 6,95:1 | Texte courant sur clair |
+  | `muted-on-light #8A7F84` / blanc et `#FAF7F6` | 3,85 et 3,61:1 | Grand texte seulement |
+  | `accent #D42A40` / blanc et `#FAF7F6` | 4,99 et 4,69:1 | Mots en accent, badges (texte blanc : 4,99:1) |
+  | `body-on-dark #CAC3C7` / `dark-0…2` | 9,4 à 10,9:1 | Texte courant sur sombre |
+  | `muted-on-dark #A0969B` / `dark-0…3` | 5,0 à 6,6:1 | Texte atténué sur sombre |
+  | `accent-on-dark #FF6B7F` / `dark-0…2` | 5,9 à 6,9:1 | Accent sur sombre, anneau de focus |
+  | `brand` / `dark-1` | 2,49:1 | Interdit pour du texte (décoratif) |
+
+- **2026-09-26 — Logo compact pour le header** (`logo-light-compact.svg`, sans la signature « Esprit d'expertise »).
+  Raison : à 32 px de haut, la signature ferait environ 4 px et serait illisible. Le logo complet reste dans le footer. Une version compacte colorée (`logo-compact.svg`) est prête pour les fonds clairs.
+
+- **2026-09-26 — Icônes dessinées pour le projet** (SVG en trait, `themes/excelcio/assets/icons/`), sans bibliothèque tierce. Les pictogrammes LinkedIn, X et YouTube sont des évocations simplifiées, à remplacer par les logos officiels si Excelcio le souhaite.
+
+- **2026-09-26 — Police de secours** : Arial ajustée aux métriques de Geist, mesurées dans Edge (`size-adjust: 102.54%`, `ascent-override: 98.5%`, `descent-override: 29.26%`).
+
+- **2026-09-26 — Navigation accessible sans JavaScript.**
+  - Desktop : chaque rubrique est un lien vers sa page, plus un bouton distinct (chevron) qui ouvre le mega-menu.
+  - Mobile : `<details>`/`<summary>`, amélioré par JS (verrouillage du défilement, Échap, piège à focus).
+
+- **2026-09-26 — Header superposé.** Il ne prend pas de place dans le flux et se superpose à la première section (`data-header="overlay"` par défaut). Une page peut demander `header: solid` dans son front matter.
+
+- **2026-09-26 — Licence du thème** : propriétaire (Excelcio). ⏳ À confirmer par l'utilisateur.
+
+- **2026-09-26 — ⏳ Node.js 16** : Lighthouse en ligne de commande (recette du Lot 2) demande Node ≥ 18. En attendant, la recette du Lot 2 utilisera Lighthouse 9 (compatible Node 16) avec Edge, ou la mesure dans les outils de développement d'Edge.

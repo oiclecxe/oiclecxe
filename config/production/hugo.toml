@@ -1,0 +1,8 @@
+# Le guide de style n'est jamais publié en production.
+[[cascade]]
+  [cascade.build]
+    render = "never"
+    list = "never"
+    publishResources = false
+  [cascade.target]
+    path = "{/styleguide,/styleguide/**}"

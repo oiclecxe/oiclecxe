@@ -1,0 +1,13 @@
+{{- define "main" }}
+  {{- /* The home page is built from the ordered `sections` list of its front matter. */}}
+  {{- range $i, $section := .Params.sections }}
+    {{- if not .hidden }}
+      {{- $tpl := printf "sections/%s.html" .type }}
+      {{- if templates.Exists (printf "_partials/%s" $tpl) }}
+        {{- partial $tpl (dict "page" $ "data" $section "index" $i) }}
+      {{- else }}
+        {{- warnf "home: section inconnue %q (partial _partials/%s absent)" .type $tpl }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

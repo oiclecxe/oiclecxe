@@ -1,0 +1,40 @@
+@layer components {
+  .badge {
+    display: inline-block;
+    padding: var(--sp-1) var(--sp-2);
+    background: var(--badge-bg);
+    color: var(--badge-fg);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    letter-spacing: var(--ls-caps);
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  .badge--alt {
+    background: var(--brand);
+    color: var(--white);
+  }
+
+  .tone-brand .badge--alt {
+    background: var(--ink);
+  }
+
+  /* Development-only marker for placeholder content. */
+  .placeholder-flag {
+    position: fixed;
+    left: var(--sp-4);
+    bottom: var(--sp-4);
+    z-index: var(--z-skip);
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: var(--radius-pill);
+    background: var(--dev-flag-bg);
+    color: var(--dev-flag-fg);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-caps);
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+}

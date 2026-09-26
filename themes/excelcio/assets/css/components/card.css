@@ -1,0 +1,53 @@
+@layer components {
+  /* Flat card with square corners (reference: “What makes it different”). */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    min-height: 18.75rem;
+    padding: var(--sp-4);
+    background: var(--surface);
+    color: var(--fg-body);
+    text-decoration: none;
+    transition: background-color var(--dur-surface) var(--ease-soft);
+  }
+
+  a.card:hover {
+    background: var(--surface-hover);
+  }
+
+  .card__title {
+    padding-right: var(--sp-8);
+    font-size: var(--fs-h3);
+    line-height: 1.25;
+    letter-spacing: var(--ls-title);
+    color: var(--fg);
+  }
+
+  .card__title-accent {
+    display: block;
+    color: var(--fg-accent);
+    transition: color var(--dur-surface) var(--ease-soft);
+  }
+
+  .card__corner {
+    position: absolute;
+    top: var(--sp-4);
+    right: var(--sp-4);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--fg);
+    transition: transform 0.16s var(--ease-out);
+  }
+
+  a.card:hover .card__corner {
+    transform: translate(2px, -2px);
+  }
+
+  .card__text {
+    margin-top: auto;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+}

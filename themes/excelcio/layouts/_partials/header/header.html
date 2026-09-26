@@ -1,0 +1,26 @@
+{{- /* Site header. Context: page. Only .Section is used (the partial is cached per section). */ -}}
+{{- $section := .Section -}}
+<header class="site-header" data-site-header>
+  <div class="site-header__bar">
+    <div class="container site-header__inner">
+      <a class="site-header__logo" href="{{ "/" | relLangURL }}" data-nav-logo>
+        {{- partial "components/logo.html" (dict "variant" "compactOnDark") }}
+      </a>
+
+      {{- partial "header/nav.html" (dict "section" $section) }}
+
+      <div class="site-header__actions">
+        {{- with site.Params.header.searchURL }}
+        <a class="site-header__search" href="{{ . | relLangURL }}" aria-label="{{ T "search" }}">
+          {{- partialCached "icon.html" (dict "name" "search") "search" -}}
+        </a>
+        {{- end }}
+        {{- with site.Params.header.ctaURL }}
+        <a class="btn btn--primary btn--sm site-header__cta" href="{{ . | relLangURL }}">{{ site.Params.header.ctaLabel }}</a>
+        {{- end }}
+        {{- partial "header/mobile-nav.html" (dict "section" $section) }}
+      </div>
+    </div>
+  </div>
+</header>
+<div class="site-overlay" data-site-overlay aria-hidden="true"></div>

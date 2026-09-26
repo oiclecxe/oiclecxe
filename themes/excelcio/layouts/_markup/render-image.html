@@ -1,0 +1,3 @@
+{{- /* Markdown images go through the shared image partial (processing, srcset, dimensions, alt check). */ -}}
+{{- partial "image.html" (dict "page" .PageInner "src" .Destination "alt" .PlainText "title" .Title) -}}
+{{- /* chomp trailing newline */ -}}

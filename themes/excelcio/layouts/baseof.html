@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+<head>
+  {{- partial "head/meta.html" . }}
+  {{- partialCached "head/fonts.html" . }}
+  {{- partialCached "head/css.html" . }}
+  {{- block "head" . }}{{ end }}
+  {{- partial "hooks/head-end.html" . }}
+</head>
+<body data-header="{{ or .Params.header `overlay` }}">
+  <a class="skip-link" href="#main">{{ T "skipToContent" }}</a>
+  {{- /* Cached per section: the header only depends on the current section. */}}
+  {{- partialCached "header/header.html" . site.Language.Lang .Section }}
+  <main id="main" class="site-main" tabindex="-1">
+    {{- block "main" . }}{{ end }}
+  </main>
+  {{- partialCached "footer/footer.html" . site.Language.Lang }}
+  {{- partial "placeholder-flag.html" . }}
+  {{- partialCached "head/js.html" . }}
+  {{- block "scripts" . }}{{ end }}
+  {{- partial "hooks/body-end.html" . }}
+</body>
+</html>

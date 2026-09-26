@@ -1,0 +1,32 @@
+{{- /*
+  “Breathing squares” decorative field (reference effect).
+  Deterministic pseudo-random layout: the same seed always gives the same field.
+  Context: dict
+    "seed"    string (default "squares")
+    "anchor"  "top" | "bottom" (default "top")
+    "cols"    number of columns, counted from the right edge (default 6)
+    "rows"    number of rows (default 9)
+    "density" 0–100, probability near the anchored corner (default 55)
+*/ -}}
+{{- $seed := .seed | default "squares" -}}
+{{- $anchor := .anchor | default "top" -}}
+{{- $cols := .cols | default 6 -}}
+{{- $rows := .rows | default 9 -}}
+{{- $density := .density | default 55 -}}
+<div class="squares squares--{{ $anchor }}" style="--cols: {{ $cols }}" aria-hidden="true">
+  {{- range $r := seq $rows }}
+    {{- range $c := seq $cols }}
+      {{- /* Distance from the anchored corner (right edge, top or bottom row), 0 → 1. */}}
+      {{- $rowFromAnchor := cond (eq $anchor "bottom") (sub $rows $r) (sub $r 1) }}
+      {{- $dist := div (float (add (sub $cols $c) $rowFromAnchor)) (float (add $cols $rows)) }}
+      {{- $chance := mul (float $density) (sub 1.0 $dist) }}
+      {{- $h := hash.FNV32a (printf "%s-%d-%d" $seed $r $c) }}
+      {{- if lt (float (mod $h 100)) $chance }}
+        {{- $dur := add 5.5 (div (float (mod (div $h 7) 50)) 10.0) }}
+        {{- $delay := div (float (mod (div $h 11) 23)) 10.0 }}
+        {{- $peak := add 0.05 (div (float (mod (div $h 13) 6)) 100.0) }}
+  <span class="squares__cell" style="--c: {{ $c }}; --r: {{ $r }}; --dur: {{ $dur }}s; --delay: {{ $delay }}s; --peak: {{ $peak }}"></span>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+</div>

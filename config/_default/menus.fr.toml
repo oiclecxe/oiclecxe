@@ -1,0 +1,390 @@
+# Menu principal (mega-menu).
+# Enfants : params.group = titre de colonne ; params.featured = true pour la rangée basse ;
+# params.description = sous-titre facultatif.
+
+# --- Offre ---------------------------------------------------------------
+[[main]]
+  identifier = "offre"
+  name = "Offre"
+  url = "/offre/"
+  weight = 10
+[[main]]
+  parent = "offre"
+  name = "Domaines d'expertise"
+  url = "/offre/expertise/"
+  weight = 11
+  [main.params]
+    group = "Nos métiers"
+[[main]]
+  parent = "offre"
+  name = "Conseil en acquisition"
+  url = "/offre/conseil-acquisition/"
+  weight = 12
+  [main.params]
+    group = "Nos métiers"
+[[main]]
+  parent = "offre"
+  name = "Déploiement"
+  url = "/offre/deploiement/"
+  weight = 13
+  [main.params]
+    group = "Nos métiers"
+[[main]]
+  parent = "offre"
+  name = "Pilotage de direction"
+  url = "/offre/expertise/pilotage-direction/"
+  weight = 21
+  [main.params]
+    group = "Expertises métier"
+[[main]]
+  parent = "offre"
+  name = "Commercial"
+  url = "/offre/expertise/commercial/"
+  weight = 22
+  [main.params]
+    group = "Expertises métier"
+[[main]]
+  parent = "offre"
+  name = "Supply chain"
+  url = "/offre/expertise/supply-chain/"
+  weight = 23
+  [main.params]
+    group = "Expertises métier"
+[[main]]
+  parent = "offre"
+  name = "Finance"
+  url = "/offre/expertise/finance/"
+  weight = 24
+  [main.params]
+    group = "Expertises métier"
+[[main]]
+  parent = "offre"
+  name = "Toute l'offre"
+  url = "/offre/"
+  weight = 90
+  [main.params]
+    featured = true
+    description = "Expertise métier, conseil en acquisition, déploiement"
+
+# --- Solutions -----------------------------------------------------------
+[[main]]
+  identifier = "solutions"
+  name = "Solutions"
+  url = "/solutions/"
+  weight = 20
+[[main]]
+  parent = "solutions"
+  name = "Qlik"
+  url = "/solutions/qlik/"
+  weight = 11
+  [main.params]
+    group = "Analyse et visualisation"
+[[main]]
+  parent = "solutions"
+  name = "Vizlib"
+  url = "/solutions/vizlib/"
+  weight = 12
+  [main.params]
+    group = "Analyse et visualisation"
+[[main]]
+  parent = "solutions"
+  name = "Tableau"
+  url = "/solutions/tableau/"
+  weight = 13
+  [main.params]
+    group = "Analyse et visualisation"
+[[main]]
+  parent = "solutions"
+  name = "Power BI"
+  url = "/solutions/power-bi/"
+  weight = 14
+  [main.params]
+    group = "Analyse et visualisation"
+[[main]]
+  parent = "solutions"
+  name = "ThoughtSpot"
+  url = "/solutions/thoughtspot/"
+  weight = 15
+  [main.params]
+    group = "Analyse et visualisation"
+[[main]]
+  parent = "solutions"
+  name = "Jedox"
+  url = "/solutions/jedox/"
+  weight = 21
+  [main.params]
+    group = "Planification et reporting"
+[[main]]
+  parent = "solutions"
+  name = "IBM Cognos"
+  url = "/solutions/ibm-cognos/"
+  weight = 22
+  [main.params]
+    group = "Planification et reporting"
+[[main]]
+  parent = "solutions"
+  name = "Toutes les solutions"
+  url = "/solutions/"
+  weight = 90
+  [main.params]
+    featured = true
+    description = "Sept éditeurs partenaires"
+
+# --- Formations ----------------------------------------------------------
+[[main]]
+  identifier = "formations"
+  name = "Formations"
+  url = "/formations/"
+  weight = 30
+[[main]]
+  parent = "formations"
+  name = "Catalogue des formations"
+  url = "/formations/"
+  weight = 11
+  [main.params]
+    group = "Se former"
+[[main]]
+  parent = "formations"
+  name = "Formations par solution"
+  url = "/formations/#par-solution"
+  weight = 12
+  [main.params]
+    group = "Se former"
+[[main]]
+  parent = "formations"
+  name = "Prochaines sessions"
+  url = "/formations/#sessions"
+  weight = 13
+  [main.params]
+    group = "Se former"
+[[main]]
+  parent = "formations"
+  name = "690+ sessions depuis 2018"
+  url = "/formations/"
+  weight = 90
+  [main.params]
+    featured = true
+    description = "Découvrir le catalogue"
+
+# --- Cas clients ---------------------------------------------------------
+[[main]]
+  identifier = "cas-clients"
+  name = "Cas clients"
+  url = "/cas-clients/"
+  weight = 40
+
+# --- Ressources ----------------------------------------------------------
+[[main]]
+  identifier = "ressources"
+  name = "Ressources"
+  url = "/actualites/"
+  weight = 50
+[[main]]
+  parent = "ressources"
+  name = "Actualités"
+  url = "/actualites/"
+  weight = 11
+  [main.params]
+    group = "Contenus"
+[[main]]
+  parent = "ressources"
+  name = "Événements"
+  url = "/evenements/"
+  weight = 12
+  [main.params]
+    group = "Contenus"
+[[main]]
+  parent = "ressources"
+  name = "Newsletter"
+  url = "/newsletter/"
+  weight = 90
+  [main.params]
+    featured = true
+    description = "Recevoir nos actualités"
+
+# --- Entreprise ----------------------------------------------------------
+[[main]]
+  identifier = "entreprise"
+  name = "Entreprise"
+  url = "/a-propos/"
+  weight = 60
+[[main]]
+  parent = "entreprise"
+  name = "À propos"
+  url = "/a-propos/"
+  weight = 11
+  [main.params]
+    group = "Excelcio"
+[[main]]
+  parent = "entreprise"
+  name = "Recrutement"
+  url = "/recrutement/"
+  weight = 12
+  [main.params]
+    group = "Excelcio"
+[[main]]
+  parent = "entreprise"
+  name = "Contact"
+  url = "/contact/"
+  weight = 13
+  [main.params]
+    group = "Excelcio"
+[[main]]
+  parent = "entreprise"
+  name = "Paris · Rennes · Nantes"
+  url = "/contact/"
+  weight = 90
+  [main.params]
+    featured = true
+    description = "Nos trois bureaux"
+
+# Menu du footer : une entrée parente par colonne.
+[[footer]]
+  identifier = "f-offre"
+  name = "Offre"
+  weight = 10
+[[footer]]
+  parent = "f-offre"
+  name = "Domaines d'expertise"
+  url = "/offre/expertise/"
+  weight = 1
+[[footer]]
+  parent = "f-offre"
+  name = "Conseil en acquisition"
+  url = "/offre/conseil-acquisition/"
+  weight = 2
+[[footer]]
+  parent = "f-offre"
+  name = "Déploiement"
+  url = "/offre/deploiement/"
+  weight = 3
+[[footer]]
+  parent = "f-offre"
+  name = "Cas clients"
+  url = "/cas-clients/"
+  weight = 4
+
+[[footer]]
+  identifier = "f-solutions"
+  name = "Solutions"
+  weight = 20
+[[footer]]
+  parent = "f-solutions"
+  name = "Qlik"
+  url = "/solutions/qlik/"
+  weight = 1
+[[footer]]
+  parent = "f-solutions"
+  name = "Vizlib"
+  url = "/solutions/vizlib/"
+  weight = 2
+[[footer]]
+  parent = "f-solutions"
+  name = "Tableau"
+  url = "/solutions/tableau/"
+  weight = 3
+[[footer]]
+  parent = "f-solutions"
+  name = "Power BI"
+  url = "/solutions/power-bi/"
+  weight = 4
+[[footer]]
+  parent = "f-solutions"
+  name = "ThoughtSpot"
+  url = "/solutions/thoughtspot/"
+  weight = 5
+[[footer]]
+  parent = "f-solutions"
+  name = "Jedox"
+  url = "/solutions/jedox/"
+  weight = 6
+[[footer]]
+  parent = "f-solutions"
+  name = "IBM Cognos"
+  url = "/solutions/ibm-cognos/"
+  weight = 7
+
+[[footer]]
+  identifier = "f-formations"
+  name = "Formations"
+  weight = 30
+[[footer]]
+  parent = "f-formations"
+  name = "Catalogue"
+  url = "/formations/"
+  weight = 1
+[[footer]]
+  parent = "f-formations"
+  name = "Prochaines sessions"
+  url = "/formations/#sessions"
+  weight = 2
+
+[[footer]]
+  identifier = "f-ressources"
+  name = "Ressources"
+  weight = 40
+[[footer]]
+  parent = "f-ressources"
+  name = "Actualités"
+  url = "/actualites/"
+  weight = 1
+[[footer]]
+  parent = "f-ressources"
+  name = "Événements"
+  url = "/evenements/"
+  weight = 2
+[[footer]]
+  parent = "f-ressources"
+  name = "Newsletter"
+  url = "/newsletter/"
+  weight = 3
+[[footer]]
+  parent = "f-ressources"
+  name = "Recherche"
+  url = "/recherche/"
+  weight = 4
+
+[[footer]]
+  identifier = "f-entreprise"
+  name = "Entreprise"
+  weight = 50
+[[footer]]
+  parent = "f-entreprise"
+  name = "À propos"
+  url = "/a-propos/"
+  weight = 1
+[[footer]]
+  parent = "f-entreprise"
+  name = "Recrutement"
+  url = "/recrutement/"
+  weight = 2
+[[footer]]
+  parent = "f-entreprise"
+  name = "Contact"
+  url = "/contact/"
+  weight = 3
+
+[[footer]]
+  identifier = "f-legal"
+  name = "Informations"
+  weight = 60
+[[footer]]
+  parent = "f-legal"
+  name = "Mentions légales"
+  url = "/mentions-legales/"
+  weight = 1
+[[footer]]
+  parent = "f-legal"
+  name = "Confidentialité"
+  url = "/confidentialite/"
+  weight = 2
+[[footer]]
+  parent = "f-legal"
+  name = "Accessibilité"
+  url = "/accessibilite/"
+  weight = 3
+[[footer]]
+  parent = "f-legal"
+  name = "Plan du site"
+  url = "/plan-du-site/"
+  weight = 4

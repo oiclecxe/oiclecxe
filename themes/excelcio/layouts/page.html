@@ -1,0 +1,16 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- with .Content }}
+  <section class="section tone-dark section--flush-top">
+    <div class="container">
+      <div class="prose">{{ . }}</div>
+    </div>
+  </section>
+  {{- end }}
+  {{- range $i, $section := .Params.sections }}
+    {{- $tpl := printf "sections/%s.html" .type }}
+    {{- if templates.Exists (printf "_partials/%s" $tpl) }}
+      {{- partial $tpl (dict "page" $ "data" $section "index" $i) }}
+    {{- end }}
+  {{- end }}
+{{- end }}

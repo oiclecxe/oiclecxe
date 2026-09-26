@@ -1,0 +1,38 @@
+# Paramètres propres au site Excelcio.
+# Les valeurs par défaut et la documentation de chaque paramètre sont dans themes/excelcio/hugo.toml.
+
+description = "[À RÉDIGER — Description du site en 150 caractères : cabinet de conseil et de formation en Business Intelligence, partenaire des principaux éditeurs.]"
+
+[logo]
+  default = "images/logo.svg"
+  onDark = "images/logo-light.svg"
+  compactOnDark = "images/logo-light-compact.svg"
+  alt = "Excelcio"
+
+[organization]
+  name = "Excelcio"
+  legalName = "[À RÉDIGER — Raison sociale]"
+  registration = "[À RÉDIGER — Forme juridique, capital, RCS, SIREN]"
+  email = "contact@excelcio.com"
+  jobsEmail = "rh@excelcio.com"
+
+[header]
+  ctaLabel = "Nous contacter"
+  ctaURL = "/contact/"
+  searchURL = "/recherche/"
+
+# Les trois piliers, affichés sous le titre du hero et rappelés dans le footer.
+[[pillars]]
+  title = "Conseil."
+  text = "[À RÉDIGER — Une phrase sur le conseil en acquisition de solutions BI, 15 mots max.]"
+[[pillars]]
+  title = "Déploiement."
+  text = "[À RÉDIGER — Une phrase sur le déploiement et l'expertise métier, 15 mots max.]"
+[[pillars]]
+  title = "Formation."
+  text = "[À RÉDIGER — Une phrase sur l'offre de formation, 15 mots max.]"
+
+[footer]
+  headline = "[À RÉDIGER — Signature de marque en une ligne, 8 mots max.]"
+  aiLabel = "Explorer avec l'IA"
+  aiURL = "/llms.txt"

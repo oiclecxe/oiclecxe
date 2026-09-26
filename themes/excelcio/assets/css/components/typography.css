@@ -1,0 +1,112 @@
+@layer components {
+  /* Two-part heading: a solid lead sentence followed by a muted one. */
+  .title__lead {
+    color: var(--fg);
+  }
+
+  .title__rest {
+    display: block;
+    color: var(--fg-muted);
+  }
+
+  .title__rest--inline {
+    display: inline;
+  }
+
+  .title__accent {
+    color: var(--fg-accent);
+  }
+
+  .title--display {
+    max-width: var(--measure-display);
+  }
+
+  .title--section {
+    max-width: var(--measure-heading);
+  }
+
+  .statement {
+    font-size: var(--fs-statement);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--fg-muted);
+    text-align: center;
+    max-width: 55rem;
+    margin-inline: auto;
+    text-wrap: balance;
+  }
+
+  /* Small caps label (mega-menu groups, footer columns, feature keys). */
+  .eyebrow {
+    display: block;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-caps);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .eyebrow--mono {
+    font-family: var(--font-mono);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-mono-caps);
+    color: var(--fg);
+  }
+
+  .lead {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-relaxed);
+    color: var(--fg-body);
+    max-width: var(--measure-text);
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Rich text from Markdown. */
+  .prose {
+    max-width: var(--measure-text);
+    color: var(--fg-body);
+    line-height: var(--lh-relaxed);
+  }
+
+  .prose > * + * {
+    margin-top: var(--sp-5);
+  }
+
+  .prose h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-title);
+    letter-spacing: var(--ls-title);
+    margin-top: var(--sp-11);
+  }
+
+  .prose h3 {
+    font-size: var(--fs-h4);
+    margin-top: var(--sp-9);
+  }
+
+  .prose a {
+    color: var(--fg);
+  }
+
+  .prose a:hover {
+    color: var(--fg-accent);
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: var(--sp-6);
+  }
+
+  .prose li + li {
+    margin-top: var(--sp-2);
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--line);
+    padding-left: var(--sp-5);
+    color: var(--fg);
+  }
+}

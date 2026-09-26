@@ -1,0 +1,15 @@
+[goldmark]
+  [goldmark.renderer]
+    unsafe = false
+  [goldmark.parser]
+    [goldmark.parser.attribute]
+      block = true
+      title = true
+
+[highlight]
+  noClasses = false
+  lineNos = false
+
+[tableOfContents]
+  startLevel = 2
+  endLevel = 3
