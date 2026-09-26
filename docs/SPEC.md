@@ -58,6 +58,9 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 | Mode d'affichage | ~~Sombre uniquement~~ → **Avenant Lot 0** : ambiances de section alternées comme la référence (aplat bordeaux, clair, sombre), sans bascule clair/sombre. Voir `docs/DECISIONS.md` et `relevé de la référence (Lot 0)` |
 | Effets visuels | **Avenant Lot 0** : pas de halos, dégradés, grilles de fond ni halo au pointeur (§ 5.1 et § 9 amendés) ; aplats, angles droits, champ de carrés animé |
 | Polices | **Avenant Lot 0** : Geist + JetBrains Mono (SIL OFL 1.1), auto-hébergées |
+| Pages intérieures | **Avenant du 27/09/2026** : ambiances **claires** (`light`, `light-alt`), header en barre sombre pleine ; footer sombre et CTA bordeaux inchangés |
+| Catalogue de formations | **Avenant du 27/09/2026** : intitulés publics du site actuel repris ; le reste en placeholders |
+| Périmètre | **Avenant du 27/09/2026** : V1 validée (lots 0 à 2), périmètre étendu au Lot 3 |
 | Langues | FR seul, i18n Hugo configurée pour ajouter EN plus tard |
 | Fonctions dynamiques | Formulaire de contact, recherche interne, inscriptions formations/événements, newsletter |
 | Hébergement | Local pour l'instant ; formulaires via une couche d'abstraction configurable avec mode simulé (§ 10) |

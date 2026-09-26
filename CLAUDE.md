@@ -1,15 +1,17 @@
 # CLAUDE.md — excelcio.com (Hugo)
 
-Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo**, dans l'esprit visuel de la référence, aux couleurs `#A82234` / `#1A171B`. Sections en ambiances alternées comme la référence : aplats bordeaux, sections claires, sections sombres (voir `docs/DECISIONS.md`, Lot 0).
+Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo**, dans l'esprit visuel de la référence, aux couleurs `#A82234` / `#1A171B`. Accueil en ambiances alternées comme la référence (aplats bordeaux, sections claires, sections sombres) ; **pages intérieures claires** avec header en barre sombre pleine (voir `docs/DECISIONS.md`).
 
 **Source de vérité : `docs/SPEC.md`** (le *quoi*). Ce fichier donne le *comment* : consignes permanentes, conventions et commandes. En cas de conflit, SPEC.md l'emporte ; signale-le.
 
 ## État d'avancement
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
-- Périmètre de la V1 : **Lots 0 à 2** (étude de la référence, socle et design system, page d'accueil). S'arrêter après le Lot 2.
-- Lot en cours : **Lot 2 — Page d'accueil** : terminé ; mesure Lighthouse reportée à la demande de l'utilisateur (27/09/2026)
-- Lots validés : Lot 0, Lot 1 (26/09/2026)
+- Périmètre : V1 (lots 0 à 2) validée ; **étendu au Lot 3** (27/09/2026). S'arrêter après le Lot 3.
+- Lot en cours : **Lot 3 — Gabarits des rubriques et contenu placeholder** : à démarrer
+- Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026)
+- Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
+- Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
 - En suspens : score Lighthouse officiel (téléchargement de Lighthouse via `npx` à autoriser ; Node 16 installé, ≥ 18 requis pour la version récente)
 - Logo Excelcio fourni : `assets/images/logo.svg`
 

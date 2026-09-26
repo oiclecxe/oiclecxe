@@ -91,3 +91,13 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Image des cartes cas clients reprise automatiquement de la fiche liée** (demande de l'utilisateur). La carte cherche la page pointée par `url` ; si celle-ci déclare `image` et `imageAlt`, la photo remplit la carte, via `image.html` en AVIF et WebP. Sinon, la carte garde l'aplat avec le champ de carrés. Des voiles dégradés en haut et en bas (`--scrim`) garantissent la lisibilité du texte : c'est un usage **fonctionnel** du dégradé, distinct des dégradés décoratifs écartés au Lot 0. Testé sur une copie jetable du projet, avec une fiche munie d'une image, une fiche sans image et une carte sans fiche.
 
+
+## Préparation du Lot 3
+
+- **2026-09-27 — Lot 2 validé** par l'utilisateur et fusionné dans `main`. Le périmètre s'étend au Lot 3.
+
+- **2026-09-27 — Pages intérieures claires** (demande de l'utilisateur ; remplace « pages intérieures sombres » du Lot 0 et de `relevé de la référence` § 6.2–6.3). En-têtes et contenus des pages intérieures en ambiances `light` et `light-alt`, comme la liste du blog de la référence. Conséquence : sur ces pages, le header ne se superpose plus à la première section (texte blanc illisible sur fond clair) ; il devient une barre sombre pleine (`header: solid`), comme sur le blog de la référence. Le footer reste sombre ; l'appel à l'action final reste un aplat bordeaux.
+
+- **2026-09-27 — Catalogue de formations : intitulés publics du site actuel** repris tels quels (faits réels autorisés, par extension du SPEC § 7.4). Descriptions, programmes, durées, prix et sessions restent en placeholders tant qu'ils ne sont pas relevés et validés.
+
+- **2026-09-27 — Photos de test** `photo_001.jpg` et `photo_002.jpg` déposées à la racine par l'utilisateur, **pour les tests uniquement** : non versionnées (`.gitignore`), jamais publiées comme contenu réel.

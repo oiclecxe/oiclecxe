@@ -6,3 +6,6 @@ docs/reference/*.png
 docs/reference/*.jpg
 
 .claude/
+
+# Images de test déposées par l'utilisateur (non versionnées)
+/photo_*.jpg
