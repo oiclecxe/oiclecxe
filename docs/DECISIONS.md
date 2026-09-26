@@ -82,3 +82,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-26 — FAQ : données structurées `FAQPage`** émises par la section (SPEC § 8.1), en avance sur le Lot 5.
 
 - **2026-09-26 — ⏳ Mesure Lighthouse.** Les mesures locales (Edge headless, processeur ralenti ×4, réseau 4G lent) donnent LCP = FCP, TBT ≈ 0 et CLS = 0. Leurs valeurs absolues ne sont pas fiables : la machine est chargée, et la page 404 presque vide mesure autant que l'accueil. Le score Lighthouse officiel demande de télécharger Lighthouse via `npx` : accord de l'utilisateur requis.
+
+- **2026-09-27 — Mesure Lighthouse reportée** à la demande de l'utilisateur. Le critère « Lighthouse mobile ≥ 95 » du Lot 2 reste ouvert ; il sera traité plus tard, au plus tard à la recette (Lot 6).
+
