@@ -11,6 +11,7 @@
 </head>
 <body data-header="{{ or .Params.header `overlay` }}">
   <a class="skip-link" href="#main">{{ T "skipToContent" }}</a>
+  <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
   {{- /* Cached per section: the header only depends on the current section. */}}
   {{- partialCached "header/header.html" . site.Language.Lang .Section }}
   <main id="main" class="site-main" tabindex="-1">

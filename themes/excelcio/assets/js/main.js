@@ -6,9 +6,11 @@ import { initReveal } from './reveal.js';
 import { initTabs } from './tabs.js';
 import { initCarousels } from './carousel.js';
 import { initCounters } from './counters.js';
+import { initProgress } from './progress.js';
 
 window.__themeReady = true;
 
+initProgress();
 initHeader();
 initMenu();
 initMobileNav();

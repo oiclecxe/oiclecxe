@@ -85,3 +85,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Mesure Lighthouse reportée** à la demande de l'utilisateur. Le critère « Lighthouse mobile ≥ 95 » du Lot 2 reste ouvert ; il sera traité plus tard, au plus tard à la recette (Lot 6).
 
+
+- **2026-09-27 — Barre de progression de lecture** en haut de l'écran, sur toutes les pages (demande de l'utilisateur ; élément de la référence omis au relevé du Lot 0). Elle reprend la référence : 4 px, fixe, au-dessus du header, décorative (`aria-hidden`). Couleur `--accent-on-dark` (#FF6B7F), lisible sur le bordeaux comme sur le sombre. Elle avance en CSS pur (`animation-timeline: scroll()`) là où c'est supporté, avec repli JavaScript (`progress.js`) ailleurs, Firefox notamment.
+

@@ -95,6 +95,8 @@ Chaque bloc accepte `hidden: true`.
 
 Classes CSS : `.btn` (`--primary`, `--secondary`, `--sm`), `.link-arrow`, `.icon-btn`, `.badge` (`--alt`), `.eyebrow` (`--mono`), `.title__lead` / `.title__rest` / `.title__accent`, `.statement`, `.card` (`__title`, `__title-accent`, `__corner`, `__text`), `.accordion` (`__item`, `__summary`, `__icon`, `__body`), `.tabs`, `.carousel`, `.item-list`, `.rows`, `.stats`, `.quote`, `.split`, `.grid` (`--2` à `--5`), `.prose`.
 
+Barre de progression de lecture : présente sur toutes les pages (`baseof.html`), tokens `--progress-h` et `--progress-color`.
+
 Animations : `data-reveal` + `.reveal` (mots d'un titre) ou `.reveal-block` (bloc) déclenchent l'apparition au défilement ; `--delay` décale un bloc. Tout reste visible sans JS et en mouvement réduit.
 
 La page `/styleguide/` (développement uniquement) présente tous les tokens et composants, avec les contrastes calculés en direct.

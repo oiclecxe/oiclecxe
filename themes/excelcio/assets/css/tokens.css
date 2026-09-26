@@ -91,6 +91,11 @@
     --z-base: 1;
     --z-overlay: 90;
     --z-header: 100;
+    --z-progress: 110;
+
+    /* Reading progress bar (reference: 4 px, bright accent, above the header) */
+    --progress-h: 0.25rem;
+    --progress-color: var(--accent-on-dark);
     --z-skip: 200;
 
     /* Utility colours */
