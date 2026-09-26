@@ -101,3 +101,7 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-27 — Catalogue de formations : intitulés publics du site actuel** repris tels quels (faits réels autorisés, par extension du SPEC § 7.4). Descriptions, programmes, durées, prix et sessions restent en placeholders tant qu'ils ne sont pas relevés et validés.
 
 - **2026-09-27 — Photos de test** `photo_001.jpg` et `photo_002.jpg` déposées à la racine par l'utilisateur, **pour les tests uniquement** : non versionnées (`.gitignore`), jamais publiées comme contenu réel.
+
+- **2026-09-27 — Niveaux de partenariat** (fournis par l'utilisateur) : Qlik = « Partenaire Elite », Jedox = « Partenaire certifié ». Les autres solutions (Vizlib, Tableau, Power BI, ThoughtSpot, IBM Cognos) n'ont **aucun badge**, ni réel ni placeholder.
+
+- **2026-09-27 — Header des pages intérieures** : apparence inchangée (barre sombre, logo et texte blancs), confirmée par l'utilisateur. Seule différence avec l'accueil : la barre est sombre dès le haut de la page (pas de transparence au-dessus d'une section claire) ; masquage au défilement vers le bas et réapparition vers le haut conservés.
