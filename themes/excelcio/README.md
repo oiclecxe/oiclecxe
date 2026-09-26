@@ -82,7 +82,7 @@ Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-al
 | `features` | light | `title`, `tabs: [{label, cards: [{title, accent, text, url}]}]` |
 | `expertises` | light-alt | `title`, `items: [{title, badges, text, url, link}]` |
 | `statement` | light | `text` |
-| `case-studies` | dark-alt | `title`, `items: [{title, client, sector, url}]` |
+| `case-studies` | dark-alt | `title`, `items: [{title, client, sector, url}]` ; image reprise automatiquement de la page liée (`image`, `imageAlt`), sinon aplat + champ de carrés |
 | `faq` | dark | `title`, `items: [{q, a}]` (émet le JSON-LD `FAQPage`) |
 | `platform` | dark-alt | `title`, `items: [{name, text, url, visual}]` |
 | `trainings` | dark-alt | `title`, `cta {label, url}`, `items: [{date, city, title, text, url}]` |

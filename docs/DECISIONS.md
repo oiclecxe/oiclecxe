@@ -88,3 +88,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Barre de progression de lecture** en haut de l'écran, sur toutes les pages (demande de l'utilisateur ; élément de la référence omis au relevé du Lot 0). Elle reprend la référence : 4 px, fixe, au-dessus du header, décorative (`aria-hidden`). Couleur `--accent-on-dark` (#FF6B7F), lisible sur le bordeaux comme sur le sombre. Elle avance en CSS pur (`animation-timeline: scroll()`) là où c'est supporté, avec repli JavaScript (`progress.js`) ailleurs, Firefox notamment.
 
+
+- **2026-09-27 — Image des cartes cas clients reprise automatiquement de la fiche liée** (demande de l'utilisateur). La carte cherche la page pointée par `url` ; si celle-ci déclare `image` et `imageAlt`, la photo remplit la carte, via `image.html` en AVIF et WebP. Sinon, la carte garde l'aplat avec le champ de carrés. Des voiles dégradés en haut et en bas (`--scrim`) garantissent la lisibilité du texte : c'est un usage **fonctionnel** du dégradé, distinct des dégradés décoratifs écartés au Lot 0. Testé sur une copie jetable du projet, avec une fiche munie d'une image, une fiche sans image et une carte sans fiche.
+
