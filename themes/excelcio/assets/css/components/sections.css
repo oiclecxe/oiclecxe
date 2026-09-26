@@ -436,6 +436,16 @@
   .proof {
     display: grid;
     gap: var(--sp-11);
+  }
+
+  /* Divider only when the block continues a section of the same tone. */
+  :is(
+    .tone-brand + .tone-brand,
+    .tone-light + .tone-light,
+    .tone-light-alt + .tone-light-alt,
+    .tone-dark + .tone-dark,
+    .tone-dark-alt + .tone-dark-alt
+  ) > .proof {
     padding-top: var(--section-pad);
     border-top: var(--border) solid var(--line);
   }

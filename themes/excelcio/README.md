@@ -91,6 +91,8 @@ Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-al
 
 Chaque bloc accepte `hidden: true`.
 
+**Espacement automatique** : deux blocs voisins de même ambiance forment une seule bande ; le second perd sa marge haute, pour que l'écart reste d'une marge de section. Deux blocs d'ambiances différentes gardent leurs marges complètes. La règle est calculée par le CSS d'après les voisins réellement affichés : retirer, masquer ou réordonner des blocs ne demande aucun réglage. Le filet au-dessus de `proof` n'apparaît que lorsqu'il prolonge un bloc de même ambiance.
+
 Classes CSS : `.btn` (`--primary`, `--secondary`, `--sm`), `.link-arrow`, `.icon-btn`, `.badge` (`--alt`), `.eyebrow` (`--mono`), `.title__lead` / `.title__rest` / `.title__accent`, `.statement`, `.card` (`__title`, `__title-accent`, `__corner`, `__text`), `.accordion` (`__item`, `__summary`, `__icon`, `__body`), `.tabs`, `.carousel`, `.item-list`, `.rows`, `.stats`, `.quote`, `.split`, `.grid` (`--2` à `--5`), `.prose`.
 
 Animations : `data-reveal` + `.reveal` (mots d'un titre) ou `.reveal-block` (bloc) déclenchent l'apparition au défilement ; `--delay` décale un bloc. Tout reste visible sans JS et en mouvement réduit.
