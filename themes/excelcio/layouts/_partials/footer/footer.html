@@ -48,7 +48,13 @@
     {{- with hugo.Data.offices }}
     <p class="site-footer__offices">
       <span class="eyebrow eyebrow--mono">{{ T "offices" }}</span>
-      {{ delimit (apply . "index" "." "city") " · " }}
+      {{- $cities := delimit (apply . "index" "." "city") " · " }}
+      {{- /* Links to the offices of the contact page when the site has one. */}}
+      {{- with partial "func/url-of-type.html" "contact" }}
+      <a href="{{ . }}#offices">{{ $cities }}</a>
+      {{- else }}
+      {{ $cities }}
+      {{- end }}
     </p>
     {{- end }}
 
