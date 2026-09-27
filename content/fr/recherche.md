@@ -1,7 +1,7 @@
 ---
 title: "Recherche"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Recherchez dans le site d’Excelcio : formations, solutions, cas clients, domaines d’expertise, actualités et événements."
+placeholder: false
 weight: 73
 type: search
 seo:

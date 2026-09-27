@@ -1,7 +1,7 @@
 ---
 title: "Cas clients"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Depuis 2008, Excelcio accompagne plus de 350 clients pour leur fournir des réponses concrètes qui les aident à mieux piloter leur activité."
+placeholder: false
 weight: 40
 cascade:
   type: case-study

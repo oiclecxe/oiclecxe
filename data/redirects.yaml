@@ -63,6 +63,9 @@
   to: /formations/?solution=tableau
 - from: /formulaire-formations-vizlib/
   to: /formations/?solution=vizlib
+- from: /offre/formations/*
+  to: /formations/?solution=qlik
+  check: true
 - from: /devis-formation/
   to: /inscription/
   check: true
@@ -76,10 +79,11 @@
   to: /formations/
   check: true
 
-# Cas clients (les anciennes pages portent des noms de clients : non reprises une à une)
-- from: /clients/*
+# Cas clients (mêmes identifiants que les anciennes pages)
+- from: /clients/
   to: /cas-clients/
-  check: true
+- from: /clients/*
+  to: /cas-clients/:splat
 
 # Contact
 - from: /demande-demo/
@@ -96,6 +100,44 @@
   to: /confidentialite/
 - from: /cookies/
   to: /confidentialite/
+
+# Articles des 12 derniers mois, repris un à un (les plus anciens mènent à la liste des actualités)
+- from: /2025/10/13/qlik-sense-saas-sept-2025/
+  to: /actualites/qlik-sense-saas-sept-2025/
+- from: /2025/11/25/qlik-sense-saas-octobre-2025/
+  to: /actualites/qlik-sense-saas-octobre-2025/
+- from: /2026/01/09/consultant-data-visualization-analytics/
+  to: /recrutement/consultant-data-visualization-analytics/
+- from: /2026/01/22/qlik-sense-saas-novembre-2025/
+  to: /actualites/qlik-sense-saas-novembre-2025/
+- from: /2026/01/23/qlik-sense-saas-decembre-2025/
+  to: /actualites/qlik-sense-saas-decembre-2025/
+- from: /2026/02/13/qlik-cloud-janvier-2026/
+  to: /actualites/qlik-cloud-janvier-2026/
+- from: /2026/02/17/gain-efficacite-processus-financiers-jedox/
+  to: /actualites/gain-efficacite-processus-financiers-jedox/
+- from: /2026/02/23/vizlib-valeur-ajoutee-qlik/
+  to: /evenements/webinar-vizlib-qlik/
+- from: /2026/03/16/qlik-cloud-fevrier-2026/
+  to: /actualites/qlik-cloud-fevrier-2026/
+- from: /2026/04/13/qlik-cloud-mars-2026/
+  to: /actualites/qlik-cloud-mars-2026/
+- from: /2026/04/28/certification-nps-2025/
+  to: /actualites/certification-nps-2025/
+- from: /2026/05/11/qlik-cloud-avril-2026/
+  to: /actualites/qlik-cloud-avril-2026/
+- from: /2026/05/20/automatiser-le-reporting-financier-multi-societes-avec-jedox/
+  to: /evenements/jedox-elevate-paris-2026/
+- from: /2026/06/03/ouest-france-gagne-en-productivite-grace-a-jedox/
+  to: /evenements/webinar-ouest-france-jedox/
+- from: /2026/06/05/qlik-cloud-mai-2026/
+  to: /actualites/qlik-cloud-mai-2026/
+- from: /2026/07/17/ai-reality-tour-2026/
+  to: /evenements/ai-reality-tour/
+- from: /2026/07/24/qlik-cloud-juin-2026/
+  to: /actualites/qlik-cloud-juin-2026/
+- from: /2026/09/07/formations-inter-entreprises-2026/
+  to: /actualites/formations-inter-entreprises-2026/
 
 # Actualités : articles, catégories et étiquettes non repris un à un → liste des actualités
 - from: /category/*

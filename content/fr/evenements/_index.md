@@ -1,7 +1,7 @@
 ---
 title: "Événements"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Webinaires, témoignages clients et rencontres autour de Qlik, Jedox et Vizlib : les événements organisés par Excelcio et ses partenaires."
+placeholder: false
 weight: 51
 cascade:
   type: event
