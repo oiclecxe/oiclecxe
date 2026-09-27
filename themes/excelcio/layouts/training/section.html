@@ -2,12 +2,22 @@
   {{- partial "components/page-hero.html" . }}
   {{- $trainings := .Pages }}
 
-  {{- /* Solutions present in the catalogue, in the order of the solution pages. */}}
+  {{- /*
+    Solutions come from the trainings themselves (single source of truth): every
+    value cited in a `solutions` field gets a tag and a group, even without a
+    solution page. Solutions having a page come first, in page order; the others
+    follow alphabetically. Trainings citing no solution go to an “other” group.
+  */}}
+  {{- $cited := slice }}
+  {{- range $trainings }}{{ range .Params.solutions }}{{ if not (in $cited .) }}{{ $cited = $cited | append . }}{{ end }}{{ end }}{{ end }}
   {{- $slugs := slice }}
-  {{- range where site.RegularPages "Type" "solution" }}
+  {{- range (where site.RegularPages "Type" "solution").ByWeight }}
     {{- $s := .File.ContentBaseName }}
-    {{- if where $trainings "Params.solutions" "intersect" (slice $s) }}{{ $slugs = $slugs | append $s }}{{ end }}
+    {{- if in $cited $s }}{{ $slugs = $slugs | append $s }}{{ end }}
   {{- end }}
+  {{- range sort (complement $slugs $cited) }}{{ $slugs = $slugs | append . }}{{ end }}
+  {{- $orphans := slice }}
+  {{- range $trainings }}{{ if not .Params.solutions }}{{ $orphans = $orphans | append . }}{{ end }}{{ end }}
 
   {{- /* Filter values actually present in the trainings. */}}
   {{- $solutionValues := slice }}
@@ -39,6 +49,18 @@
           <ul class="grid grid--3" role="list">
             {{- range $group }}
             <li data-filter-item data-solution="{{ delimit .Params.solutions " " }}" data-level="{{ with .Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with .Params.format }}{{ urlize . }}{{ end }}">
+              {{- partial "components/training-card.html" (dict "page" . "level" 4) }}
+            </li>
+            {{- end }}
+          </ul>
+        </section>
+        {{- end }}
+        {{- with $orphans }}
+        <section class="catalogue-group" data-filter-group aria-labelledby="group-other">
+          <h3 class="catalogue-group__title" id="group-other">{{ T "otherTrainings" }} <span class="catalogue-group__count">{{ len . }}</span></h3>
+          <ul class="grid grid--3" role="list">
+            {{- range . }}
+            <li data-filter-item data-solution="" data-level="{{ with .Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with .Params.format }}{{ urlize . }}{{ end }}">
               {{- partial "components/training-card.html" (dict "page" . "level" 4) }}
             </li>
             {{- end }}

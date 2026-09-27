@@ -1,4 +1,10 @@
-{{- /* Returns the display name of a solution slug (title of the solution page, or the slug). Context: slug string. */ -}}
-{{- $name := . -}}
+{{- /*
+  Returns the display name of a solution slug: `partnerName` (or title) of the
+  solution page when it exists; otherwise a name derived from the slug
+  ("google-looker" → "Google Looker"). Context: slug string.
+*/ -}}
+{{- $words := slice -}}
+{{- range split (replaceRE "[-_]+" " " .) " " }}{{ $words = $words | append (strings.FirstUpper .) }}{{ end -}}
+{{- $name := delimit $words " " -}}
 {{- with index (where (where site.RegularPages "Type" "solution") "File.ContentBaseName" .) 0 }}{{ $name = .Params.partnerName | default .Title }}{{ end -}}
 {{- return $name -}}

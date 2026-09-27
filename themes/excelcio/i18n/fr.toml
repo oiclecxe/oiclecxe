@@ -39,6 +39,7 @@ filterLevel = "Niveau"
 filterFormat = "Format"
 filterSector = "Secteur"
 noResults = "Aucun résultat pour ces critères."
+otherTrainings = "Autres formations"
 
 # --- Solutions
 solutionEyebrow = "Solution partenaire"
