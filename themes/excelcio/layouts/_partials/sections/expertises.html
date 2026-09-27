@@ -20,7 +20,7 @@
       <li class="item-list__item reveal-block" data-reveal>
         <h3 class="item-list__title">
           {{- .LinkTitle }}
-          {{- range .Params.solutions }} <span class="badge">{{ partial "func/solution-name.html" . }}</span>{{ end -}}
+          {{- range partial "func/as-list.html" .Params.solutions }} <span class="badge">{{ partial "func/solution-name.html" . }}</span>{{ end -}}
         </h3>
         {{- with or .Params.summary .Description }}<p class="item-list__text">{{ . }}</p>{{ end }}
         <a class="link-arrow item-list__link" href="{{ .RelPermalink }}">{{ $d.linkLabel | default (T "discoverExpertise") }}<span class="visually-hidden"> : {{ .LinkTitle }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>

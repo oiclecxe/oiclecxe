@@ -9,7 +9,7 @@ placeholder: true
 image: ""        # fichier du dossier de la page (ex. cover.jpg) ; imageAlt obligatoire si image
 imageAlt: ""
 client: "Client N"   # aucun nom réel sans accord écrit du client
-sector: ""
+sector: []           # secteur(s) d'activité, ex. [industrie, distribution]
 result: "[À RÉDIGER — Résultat marquant, 6 mots]"
 solutions: []
 expertises: []       # slugs des pages expertises, ex. [finance]

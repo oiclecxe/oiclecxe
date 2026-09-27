@@ -1,0 +1,7 @@
+{{- /*
+  Display name of a free classification value: separators become spaces and the
+  first letter is capitalized ("grande-distribution" → "Grande distribution",
+  "Industrie" unchanged). Context: string.
+*/ -}}
+{{- $name := replaceRE "[-_]+" " " (string .) | strings.FirstUpper -}}
+{{- return $name -}}

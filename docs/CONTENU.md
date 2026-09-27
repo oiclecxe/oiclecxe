@@ -55,6 +55,8 @@ Liste ordonnée `sections:` ; chaque bloc a un `type`. Réordonner, supprimer ou
 
 **Chaque information n'est saisie qu'une fois.** Les blocs « Expertises », « Cas clients », « Solutions » et « Prochaines formations » **lisent les fiches** : pour changer un nom, un résultat ou une accroche, modifiez la fiche, l'accueil suit. Dans ces blocs, on choisit seulement quoi afficher : rien (toutes les fiches, par ordre de `weight`), `items: ["/cas-clients/client-1", …]` (fiches choisies, dans cet ordre) et `limit` (nombre maximum). Champs de chaque type : `themes/excelcio/README.md`, tableau « Sections ». Les trois piliers sous le titre et la signature du footer sont dans `config/_default/params.toml`.
 
+**Champs de classement** (`solutions`, `expertises`, `sector`) : ils acceptent une valeur seule (`solutions: qlik`) ou une liste (`solutions: [qlik, snowflake]`). Les étiquettes de filtre et les regroupements sont construits à partir des valeurs réellement saisies dans les fiches : une nouvelle valeur apparaît sans autre réglage.
+
 ### Solutions — `content/fr/solutions/<solution>/index.md`
 
 | Champ | Rôle |
@@ -92,7 +94,7 @@ Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses 
 
 ### Cas clients — `content/fr/cas-clients/<cas>/index.md`
 
-`client` (**aucun nom réel sans accord écrit du client**), `sector` (secteur d'activité en clair, ex. `"Industrie"` : il crée l'étiquette de filtre de la page Cas clients ; écrivez-le à l'identique d'une fiche à l'autre ; le filtre n'apparaît qu'à partir de deux secteurs différents), `result` (titre de la carte), `solutions`, `expertises`, `context`, `challenge`, `solution` (Markdown accepté), `results` (liste `{ value, label }`), `quote` (`{ text, author, role }`), `image` et `imageAlt`. L'image de la fiche est **reprise automatiquement** sur les cartes de l'accueil et des listes ; sans image, la carte garde l'aplat de couleur.
+`client` (**aucun nom réel sans accord écrit du client**), `sector` (secteur(s) d'activité, une valeur ou une liste, ex. `[industrie, distribution]` : chaque valeur crée une étiquette du filtre de la page Cas clients, avec une majuscule initiale ; `industrie` et `Industrie` sont regroupés ; le filtre n'apparaît qu'à partir de deux secteurs différents), `result` (titre de la carte), `solutions`, `expertises`, `context`, `challenge`, `solution` (Markdown accepté), `results` (liste `{ value, label }`), `quote` (`{ text, author, role }`), `image` et `imageAlt`. L'image de la fiche est **reprise automatiquement** sur les cartes de l'accueil et des listes ; sans image, la carte garde l'aplat de couleur.
 
 ### Actualités — `content/fr/actualites/<article>/index.md`
 

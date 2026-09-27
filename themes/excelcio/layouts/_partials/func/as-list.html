@@ -1,0 +1,8 @@
+{{- /*
+  Normalizes a front matter value to a list, so that classification fields
+  accept either one value or a list: "qlik" → ["qlik"], ["qlik", "snowflake"]
+  unchanged, empty → []. Context: any value.
+*/ -}}
+{{- $list := slice -}}
+{{- if reflect.IsSlice . }}{{ $list = . }}{{ else if . }}{{ $list = slice . }}{{ end -}}
+{{- return $list -}}

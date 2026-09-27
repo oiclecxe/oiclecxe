@@ -1,7 +1,7 @@
 {{- define "main" }}
   {{- $p := . }}
   {{- $slug := .File.ContentBaseName }}
-  {{- $badges := slice }}{{ range .Params.solutions }}{{ $badges = $badges | append (partial "func/solution-name.html" .) }}{{ end }}
+  {{- $badges := slice }}{{ range partial "func/as-list.html" .Params.solutions }}{{ $badges = $badges | append (partial "func/solution-name.html" .) }}{{ end }}
   {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (T "expertiseEyebrow") "badges" $badges "lead" (.Params.summary | default .Description)
       "actions" (slice (dict "label" (T "ctaContact") "url" "/contact/"))) }}
 

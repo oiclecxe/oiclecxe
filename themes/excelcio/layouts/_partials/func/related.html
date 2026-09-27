@@ -1,7 +1,13 @@
 {{- /*
-  Returns the regular pages of a given type whose front matter list `key`
-  contains `slug` (e.g. trainings whose `solutions` include "qlik").
-  Context: dict "type" "key" "slug". Returns: pages.
+  Returns the regular pages of a given type whose front matter field `key`
+  contains `slug` (e.g. trainings whose `solutions` include "qlik"). The field
+  may hold one value or a list. Context: dict "type" "key" "slug". Returns: pages.
 */ -}}
-{{- $pages := where site.RegularPages "Type" .type -}}
-{{- return where $pages (printf "Params.%s" .key) "intersect" (slice .slug) -}}
+{{- $pages := slice -}}
+{{- $slug := urlize .slug -}}
+{{- range where site.RegularPages "Type" .type -}}
+  {{- $values := slice -}}
+  {{- range partial "func/as-list.html" (index .Params $.key) }}{{ $values = $values | append (urlize .) }}{{ end -}}
+  {{- if in $values $slug }}{{ $pages = $pages | append . }}{{ end -}}
+{{- end -}}
+{{- return $pages -}}

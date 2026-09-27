@@ -2,14 +2,11 @@
   {{- partial "components/page-hero.html" . }}
   {{- $cases := .Pages }}
 
-  {{- /*
-    Sectors come from the case studies themselves (single source of truth): every
-    `sector` value gets a filter tag, in alphabetical order.
-  */}}
-  {{- $sectors := slice }}
-  {{- range $cases }}{{ with .Params.sector }}{{ if not (in $sectors .) }}{{ $sectors = $sectors | append . }}{{ end }}{{ end }}{{ end }}
+  {{- /* Sectors come from the case studies themselves (one value or a list per page), in alphabetical order. */}}
+  {{- $facet := partial "func/facet.html" (dict "pages" $cases "key" "sector") }}
   {{- $sectorValues := slice }}
-  {{- range sort $sectors }}{{ $sectorValues = $sectorValues | append (dict "value" (urlize .) "label" . "count" (len (where $cases "Params.sector" .))) }}{{ end }}
+  {{- range $facet.values }}{{ $sectorValues = $sectorValues | append (dict "value" .value "label" (partial "func/term-name.html" .raw) "count" .count) }}{{ end }}
+  {{- $sectorValues = sort $sectorValues "label" }}
 
   <section class="section tone-light" aria-labelledby="cases-title">
     <div class="container">
@@ -18,8 +15,9 @@
           (dict "name" "sector" "label" (T "filterSector") "values" $sectorValues "style" "tags"))) }}
 
       <ul class="grid grid--3" role="list" data-filter-scope="cases">
-        {{- range $i, $c := $cases }}
-        <li data-filter-item data-sector="{{ with $c.Params.sector }}{{ urlize . }}{{ end }}">
+        {{- range $i, $item := $facet.items }}
+          {{- $c := $item.page }}
+        <li data-filter-item data-sector="{{ delimit $item.values " " }}">
           {{- partial "components/story-card.html" (dict "title" ($c.Params.result | default $c.Title) "client" $c.Params.client "sector" $c.Params.sector "target" $c "url" $c.RelPermalink "index" $i) }}
         </li>
         {{- end }}

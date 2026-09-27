@@ -1,6 +1,6 @@
 {{- define "main" }}
   {{- $p := . }}
-  {{- $solutions := slice }}{{ range .Params.solutions }}{{ $solutions = $solutions | append (partial "func/solution-name.html" .) }}{{ end }}
+  {{- $solutions := slice }}{{ range partial "func/as-list.html" .Params.solutions }}{{ $solutions = $solutions | append (partial "func/solution-name.html" .) }}{{ end }}
   {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (printf "%s · %s" (T "trainingEyebrow") (delimit $solutions ", ")) "lead" (.Params.summary | default .Description)) }}
 
   <section class="section tone-light">
@@ -68,7 +68,7 @@
   </section>
 
   {{- $related := slice }}
-  {{- with .Params.solutions }}
+  {{- with partial "func/as-list.html" .Params.solutions }}
     {{- $related = where (partial "func/related.html" (dict "type" "training" "key" "solutions" "slug" (index . 0))) "Permalink" "ne" $p.Permalink }}
   {{- end }}
   {{- with first 4 $related }}

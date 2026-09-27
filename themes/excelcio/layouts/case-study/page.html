@@ -1,8 +1,10 @@
 {{- define "main" }}
   {{- $p := . }}
   {{- $badges := slice }}
-  {{- range .Params.solutions }}{{ $badges = $badges | append (partial "func/solution-name.html" .) }}{{ end }}
-  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (printf "%s · %s" (.Params.client | default "") (.Params.sector | default "")) "badges" $badges "lead" (.Params.summary | default .Description)) }}
+  {{- range partial "func/as-list.html" .Params.solutions }}{{ $badges = $badges | append (partial "func/solution-name.html" .) }}{{ end }}
+  {{- $sectors := slice }}
+  {{- range partial "func/as-list.html" .Params.sector }}{{ $sectors = $sectors | append (partial "func/term-name.html" .) }}{{ end }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (delimit (slice (.Params.client | default "") (delimit $sectors ", ")) " · ") "badges" $badges "lead" (.Params.summary | default .Description)) }}
 
   {{- with .Params.image }}
   <section class="section tone-light case-visual">

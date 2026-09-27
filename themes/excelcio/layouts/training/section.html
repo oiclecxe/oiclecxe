@@ -4,24 +4,25 @@
 
   {{- /*
     Solutions come from the trainings themselves (single source of truth): every
-    value cited in a `solutions` field gets a tag and a group, even without a
-    solution page. Solutions having a page come first, in page order; the others
-    follow alphabetically. Trainings citing no solution go to an “other” group.
+    value cited in a `solutions` field (one value or a list) gets a tag and a
+    group, even without a solution page. Solutions having a page come first, in
+    page order; the others follow alphabetically. Trainings citing no solution go
+    to an “other” group.
   */}}
-  {{- $cited := slice }}
-  {{- range $trainings }}{{ range .Params.solutions }}{{ if not (in $cited .) }}{{ $cited = $cited | append . }}{{ end }}{{ end }}{{ end }}
+  {{- $facet := partial "func/facet.html" (dict "pages" $trainings "key" "solutions") }}
+  {{- $counts := dict }}{{ range $facet.values }}{{ $counts = merge $counts (dict .value .count) }}{{ end }}
   {{- $slugs := slice }}
   {{- range (where site.RegularPages "Type" "solution").ByWeight }}
-    {{- $s := .File.ContentBaseName }}
-    {{- if in $cited $s }}{{ $slugs = $slugs | append $s }}{{ end }}
+    {{- $s := urlize .File.ContentBaseName }}
+    {{- if isset $counts $s }}{{ $slugs = $slugs | append $s }}{{ end }}
   {{- end }}
+  {{- $cited := slice }}{{ range $facet.values }}{{ $cited = $cited | append .value }}{{ end }}
   {{- range sort (complement $slugs $cited) }}{{ $slugs = $slugs | append . }}{{ end }}
-  {{- $orphans := slice }}
-  {{- range $trainings }}{{ if not .Params.solutions }}{{ $orphans = $orphans | append . }}{{ end }}{{ end }}
+  {{- $orphans := $facet.orphans }}
 
   {{- /* Filter values actually present in the trainings. */}}
   {{- $solutionValues := slice }}
-  {{- range $slugs }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .) "count" (len (where $trainings "Params.solutions" "intersect" (slice .)))) }}{{ end }}
+  {{- range $slugs }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .) "count" (index $counts .)) }}{{ end }}
   {{- $levels := slice }}{{ $formats := slice }}
   {{- range $trainings }}
     {{- with .Params.level }}{{ if not (in $levels .) }}{{ $levels = $levels | append . }}{{ end }}{{ end }}
@@ -43,13 +44,14 @@
       <div data-filter-scope="trainings">
         {{- range $slugs }}
           {{- $slug := . }}
-          {{- $group := where $trainings "Params.solutions" "intersect" (slice $slug) }}
+          {{- $group := slice }}{{ range $facet.items }}{{ if in .values $slug }}{{ $group = $group | append . }}{{ end }}{{ end }}
         <section class="catalogue-group" data-filter-group aria-labelledby="group-{{ $slug }}">
           <h3 class="catalogue-group__title" id="group-{{ $slug }}">{{ partial "func/solution-name.html" $slug }} <span class="catalogue-group__count">{{ len $group }}</span></h3>
           <ul class="grid grid--3" role="list">
             {{- range $group }}
-            <li data-filter-item data-solution="{{ delimit .Params.solutions " " }}" data-level="{{ with .Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with .Params.format }}{{ urlize . }}{{ end }}">
-              {{- partial "components/training-card.html" (dict "page" . "level" 4) }}
+              {{- $t := .page }}
+            <li data-filter-item data-solution="{{ delimit .values " " }}" data-level="{{ with $t.Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with $t.Params.format }}{{ urlize . }}{{ end }}">
+              {{- partial "components/training-card.html" (dict "page" $t "level" 4) }}
             </li>
             {{- end }}
           </ul>
