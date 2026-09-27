@@ -12,7 +12,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026)
 - Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
-- En suspens : score Lighthouse officiel (téléchargement de Lighthouse via `npx` à autoriser ; Node 16 installé, ≥ 18 requis pour la version récente)
+- En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser). Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
 - Logo Excelcio fourni : `assets/images/logo.svg`
 
 ## Méthode de travail
