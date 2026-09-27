@@ -29,6 +29,7 @@ Ce guide explique comment remplir et modifier le contenu du site. Aucune connais
 | `image`, `imageAlt` | Image principale : nom d'un fichier placé **dans le dossier de la page** (ex. `cover.jpg`) et son texte alternatif, **obligatoire** (le build s'arrête sinon). Le site produit automatiquement les formats AVIF et WebP |
 | `placeholder` | `true` tant que le contenu est provisoire |
 | `seo.title`, `seo.noindex` | Titre différent pour les moteurs de recherche ; `noindex: true` pour exclure la page |
+| `schema` | Données structurées particulières : `{ service: true }` (page décrivant un service), `{ about: true, offices: true }` (page « À propos » et bureaux). Les autres types sont reconnus automatiquement |
 | `search` | `false` pour exclure la page de la recherche interne (pages légales, plan du site…). Par défaut, toutes les pages de contenu sont indexées |
 | `cta` | Appel à l'action en bas de page : `false` pour le retirer, ou un bloc `title`/`primary`/`secondary` pour le remplacer. Par défaut : celui de `config/_default/params.toml` |
 
@@ -156,6 +157,13 @@ Deuxième colonne
 
 La vidéo YouTube ne charge rien depuis YouTube tant que le visiteur n'a pas cliqué (respect de la vie privée).
 
-## 6. Menus et pied de page
+## 6. Redirections, référencement et agents IA
+
+- **Anciennes adresses** : `data/redirects.yaml` associe chaque ancienne adresse du site WordPress à la nouvelle page. Pour en ajouter une : `- from: /ancienne-adresse/` puis `  to: /nouvelle-adresse/`. Vérifier les lignes marquées `check: true`.
+- **Pages publiées pour les moteurs et les agents IA** (sitemap, `llms-full.txt`) : seulement les pages dont `placeholder` est passé à `false`. Retirer `placeholder: true` dès qu'une page est rédigée.
+- **Données structurées** : rien à saisir ; elles reprennent les champs des fiches. Une valeur encore entre crochets (`[Ville]`, `[À RÉDIGER…]`) n'y est jamais publiée. Les offres d'emploi n'affichent pas de date.
+- **Image de partage** : l'image de la fiche (`image`) si elle existe, sinon une image générée avec le titre de la page.
+
+## 7. Menus et pied de page
 
 `config/_default/menus.fr.toml` : menu principal (mega-menu) et colonnes du footer. Voir les commentaires en tête du fichier.

@@ -1,0 +1,10 @@
+{{- /*
+  Whether a page is meant for search engines and AI agents (sitemap, llms.txt):
+  not `seo.noindex`, not `sitemap.disable`, not a closed job offer, and in
+  production not a page still marked `placeholder: true`.
+  Context: page. Returns: bool.
+*/ -}}
+{{- $ok := not (or .Params.seo.noindex .Sitemap.Disable) -}}
+{{- if and (eq .Type "job") .IsPage (ne .Params.active true) }}{{ $ok = false }}{{ end -}}
+{{- if and hugo.IsProduction .Params.placeholder }}{{ $ok = false }}{{ end -}}
+{{- return $ok -}}

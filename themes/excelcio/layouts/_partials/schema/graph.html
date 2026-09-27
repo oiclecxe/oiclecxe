@@ -1,0 +1,26 @@
+{{- /*
+  JSON-LD structured data (SPEC § 13): one @graph per page.
+  Every page: Organization, WebSite (+ SearchAction), WebPage, BreadcrumbList.
+  Then, by content type: Course (training), Event, BlogPosting (article),
+  JobPosting (open offer), Service (solution, expertise, pages with
+  `schema: { service: true }`), ProfessionalService per office (contact page and
+  pages with `schema: { offices: true }`), FAQPage (real FAQ items only).
+  Placeholder values ("[À RÉDIGER…]", "[XX]"…) are never published (func/real.html).
+  Context: page.
+*/ -}}
+{{- $webpage := partial "schema/webpage.html" . -}}
+{{- $breadcrumb := false -}}
+{{- if not .IsHome }}{{ $breadcrumb = partial "schema/breadcrumb.html" . }}{{ end -}}
+{{- with $breadcrumb }}{{ $webpage = merge $webpage (dict "breadcrumb" (dict "@id" (index . "@id"))) }}{{ end -}}
+{{- $graph := slice (partial "schema/organization.html" .) (partial "schema/website.html" .) $webpage -}}
+{{- with $breadcrumb }}{{ $graph = $graph | append . }}{{ end -}}
+{{- /* Main entity only for pages with a real title. */}}
+{{- if and .IsPage (partial "func/real.html" .Title) }}
+  {{- with partial "schema/entity.html" . }}{{ $graph = $graph | append . }}{{ end }}
+{{- end -}}
+{{- if or (eq .Type "contact") .Params.schema.offices }}
+  {{- $graph = $graph | append (partial "schema/offices.html" .) }}
+{{- end -}}
+{{- with partial "schema/faq.html" . }}{{ $graph = $graph | append . }}{{ end -}}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
+{{- /* chomp */ -}}

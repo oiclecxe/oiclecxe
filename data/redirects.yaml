@@ -1,0 +1,128 @@
+# Redirections des anciennes adresses du site WordPress vers le nouveau site.
+# Source : sitemap de https://excelcio.com/ relevé le 27/09/2026 (556 adresses :
+# 84 pages, 121 articles, 335 étiquettes, 13 catégories, 3 auteurs).
+# Hugo en produit /_redirects (Netlify, Cloudflare Pages) et /redirects.htaccess (exemple Apache).
+#
+# from   : ancienne adresse (chemin). Un « * » final couvre tout ce qui suit (ex. /tag/*).
+#          Une adresse complète (https://…) redirige tout un domaine.
+# to     : nouvelle adresse ; « :splat » reprend la partie couverte par « * ».
+# status : 301 par défaut (déplacement permanent).
+# force  : true = rediriger même si un fichier existe à cette adresse.
+# check  : true = correspondance approximative, à vérifier par Excelcio.
+#
+# Adresses inchangées, sans redirection : /, /a-propos/, /actualites/, /contact/, /offre/,
+# /mentions-legales/, /formations/ et les 28 fiches formations (mêmes identifiants).
+
+# Domaine : l'ancien site est servi sans « www » ; le nouveau l'est avec.
+- from: "https://excelcio.com/*"
+  to: "https://www.excelcio.com/:splat"
+  force: true
+
+# Entreprise
+- from: /a-propos/societe/
+  to: /a-propos/
+- from: /a-propos/recrutement/
+  to: /recrutement/
+- from: /category/jobs/
+  to: /recrutement/
+- from: /remerciement-candidature/
+  to: /recrutement/
+  check: true
+- from: /author/*
+  to: /a-propos/
+  check: true
+
+# Offre
+- from: /conseil-en-acquisition/
+  to: /offre/conseil-acquisition/
+- from: /deploiement/
+  to: /offre/deploiement/
+- from: /domaines-dexpertise/
+  to: /offre/expertise/
+
+# Solutions (anciennes pages partenaires, mêmes identifiants)
+- from: /partenaires/
+  to: /solutions/
+- from: /partenaires/*
+  to: /solutions/:splat
+
+# Formations : anciens formulaires par solution → catalogue filtré
+- from: /formulaire-formations-jedox/
+  to: /formations/?solution=jedox
+- from: /formulaire-formations-nprinting/
+  to: /formations/formation-nprinting/
+- from: /formulaire-formations-power-bi/
+  to: /formations/?solution=power-bi
+- from: /formulaire-formations-qlik-cloud/
+  to: /formations/?solution=qlik
+- from: /formulaire-formations-qlik-sense/
+  to: /formations/?solution=qlik
+- from: /formulaire-formations-qlikview/
+  to: /formations/?solution=qlik
+- from: /formulaire-formations-tableau/
+  to: /formations/?solution=tableau
+- from: /formulaire-formations-vizlib/
+  to: /formations/?solution=vizlib
+- from: /devis-formation/
+  to: /inscription/
+  check: true
+- from: /remerciement-formations/
+  to: /formations/
+  check: true
+- from: /remerciement-inscription/
+  to: /formations/
+  check: true
+- from: /confirmation-inscription/
+  to: /formations/
+  check: true
+
+# Cas clients (les anciennes pages portent des noms de clients : non reprises une à une)
+- from: /clients/*
+  to: /cas-clients/
+  check: true
+
+# Contact
+- from: /demande-demo/
+  to: /contact/
+- from: /confirmation-telechargement/
+  to: /
+  check: true
+- from: /remerciement-replay/
+  to: /evenements/
+  check: true
+
+# Pages légales
+- from: /politique-de-confidentialite/
+  to: /confidentialite/
+- from: /cookies/
+  to: /confidentialite/
+
+# Actualités : articles, catégories et étiquettes non repris un à un → liste des actualités
+- from: /category/*
+  to: /actualites/
+- from: /tag/*
+  to: /actualites/
+- from: /2019/*
+  to: /actualites/
+  check: true
+- from: /2020/*
+  to: /actualites/
+  check: true
+- from: /2021/*
+  to: /actualites/
+  check: true
+- from: /2022/*
+  to: /actualites/
+  check: true
+- from: /2023/*
+  to: /actualites/
+  check: true
+- from: /2024/*
+  to: /actualites/
+  check: true
+- from: /2025/*
+  to: /actualites/
+  check: true
+- from: /2026/*
+  to: /actualites/
+  check: true

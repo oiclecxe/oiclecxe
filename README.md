@@ -63,6 +63,24 @@ Puis **redémarrer** `hugo server` la première fois (le dossier doit exister à
 
 Autre option sans Node.js : télécharger le binaire autonome `pagefind` (ou `pagefind_extended`) de la même version depuis la page des versions de Pagefind sur GitHub, puis `.\pagefind.exe --site public`.
 
+## SEO et agents IA
+
+Produits à chaque build (adresse du site : `https://www.excelcio.com/`, `baseURL` de `config/_default/hugo.toml`) :
+
+| Fichier | Contenu |
+|---|---|
+| `sitemap.xml` | Pages publiques : ni `noindex`, ni offre fermée, ni page encore `placeholder: true` (en production) |
+| `robots.txt` | Tout autorisé en production ; robots des agents IA réglés par `aiCrawlers.allow` (thème, défaut : autorisés) |
+| `llms.txt`, `llms-full.txt` | Présentation d'Excelcio et liens par rubrique ; texte intégral des pages publiées. Rubriques : `[[llms.sections]]` de `config/_default/params.toml` |
+| `…/index.md` | Version Markdown de chaque page, signalée dans le HTML (`<link rel="alternate" type="text/markdown">`) |
+| `_redirects`, `redirects.htaccess` | Redirections des anciennes adresses WordPress, générées depuis `data/redirects.yaml` (Netlify / Cloudflare Pages ; exemple Apache à recopier dans le `.htaccess`) |
+
+Chaque page porte aussi ses balises Open Graph et Twitter Card, une image de partage générée (aplat bordeaux et titre, 1200 × 630) quand elle n'a pas d'image, et ses données structurées JSON-LD (organisation, site, fil d'Ariane, puis formation, événement, article, offre d'emploi, service, bureaux ou FAQ selon la page). Aucune valeur provisoire (`[À RÉDIGER…]`, `[XX]`…) n'est publiée dans ces données.
+
+Tant que le contenu reste en placeholders, `sitemap.xml` et `llms-full.txt` sont presque vides en production : c'est voulu.
+
+**Redirections** : `data/redirects.yaml` a été prérempli depuis le sitemap du site actuel (556 adresses). Les lignes `check: true` sont des correspondances approximatives à vérifier. L'ancien site est servi sans « www » : la première règle redirige `excelcio.com` vers `www.excelcio.com`.
+
 ## Formulaires
 
 Trois formulaires : contact (`/contact/`), inscription à une formation ou à un événement (`/inscription/`), newsletter (fin d'article, liste des actualités, footer, `/newsletter/`). Réglages dans `config/_default/params.toml`, bloc `[forms]` :

@@ -22,9 +22,5 @@
       {{- end }}
     </div>
   </div>
-  {{- $entities := slice }}
-  {{- range $d.items }}
-    {{- $entities = $entities | append (dict "@type" "Question" "name" (.q | plainify) "acceptedAnswer" (dict "@type" "Answer" "text" (.a | plainify))) }}
-  {{- end }}
-  <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $entities | jsonify | safeJS }}</script>
+  {{- /* Structured data: the page graph (schema/faq.html) publishes real questions only. */}}
 </section>

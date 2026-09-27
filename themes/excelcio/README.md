@@ -40,6 +40,9 @@ Il construit un site vide sans erreur : tous les paramètres ont une valeur par 
 | `forms.captcha.provider` / `siteKey` | Emplacement de captcha, vide = désactivé (voir « Formulaires ») |
 | `search.bundlePath` | Dossier de l'index Pagefind (défaut `/pagefind/`) |
 | `search.shortcut` | `Ctrl/⌘ + K` ouvre la recherche (défaut `true`) |
+| `seo.country` | Code pays des adresses dans le JSON-LD (défaut `FR`) |
+| `aiCrawlers.allow` / `aiCrawlers.agents` | Robots des agents IA dans `robots.txt` : autorisés ou refusés (défaut : autorisés), liste des robots concernés |
+| `llms.sections` | Rubriques de `llms.txt` et `llms-full.txt` : liste de `{title, path}` (pages d'une section) ou `{title, types}` (types de contenu). Vide = une rubrique par section principale |
 | `style.*` | Couleurs de marque : chaque clé devient `--clé` en CSS (`brand`, `ink`, `accent`, `dark-0…3`, `light-1…2`, `*-on-light`, `*-on-dark`) |
 | `fontFallback.sizeAdjust` / `ascent` / `descent` | Métriques de la police de secours (limite le décalage de mise en page) |
 | `dev.showPlaceholders` | Affiche le repère « Contenu provisoire » en développement |
@@ -155,6 +158,28 @@ Interface sur l'API JavaScript de Pagefind, chargée au premier usage seulement 
 - Indexées : pages simples (`.IsPage`) sauf `search: false` et offres d'emploi fermées (`data-pagefind-body` sur `<main>`). Filtre et métadonnée `type` (Solution, Formation…) et `date` pour les articles et les événements.
 - Exclus de l'index (`data-pagefind-ignore`) : surtitre et boutons du hero, appels à l'action, bandeau newsletter, blocs de contenus liés. Formulaires, `nav` et `footer` sont ignorés par Pagefind.
 - Clavier : flèches haut et bas entre le champ et les résultats ; Échap ferme la fenêtre et rend le focus.
+
+## SEO et agents IA
+
+Formats de sortie définis par le thème (`hugo.toml`) : `markdown` (intégré à Hugo), `llms` (`/llms.txt`), `llmsfull` (`/llms-full.txt`), `redirects` (`/_redirects`), `htaccess` (`/redirects.htaccess`). **Hugo ne reprend pas le réglage `outputs` d'un thème** : le site les active dans sa propre configuration, par exemple :
+
+```toml
+[outputs]
+  home = ["html", "markdown", "llms", "llmsfull", "redirects", "htaccess"]
+  section = ["html", "markdown"]
+  page = ["html", "markdown"]
+  taxonomy = ["html", "markdown"]
+  term = ["html", "markdown"]
+```
+
+Gabarits : `home.llms.txt`, `home.llmsfull.txt`, `home.redirects`, `home.htaccess.htaccess`, `[kind].markdown.md` (via `_partials/markdown/page.md`), `robots.txt` (avec `enableRobotsTXT = true`), `sitemap.xml`.
+
+- **En-tête** (`head/meta.html`) : titre, description (avertissement de build en production si elle manque), canonique, `robots`, `hreflang` dès que le site est multilingue, Open Graph, Twitter Card (`twitter:site` déduit du lien X de `data/social.yaml`), lien vers la version Markdown.
+- **Image de partage** (`func/og-image.html`) : l'image de la page recadrée en 1200 × 630, sinon une image générée : aplat `style.brand`, type de contenu, titre et nom du site en Geist (`assets/fonts/Geist-Medium.ttf`, utilisée au build seulement ; licence OFL).
+- **JSON-LD** (`schema/graph.html`, un `@graph` par page) : `Organization`, `WebSite` + `SearchAction`, `WebPage` (ou `ContactPage`, `AboutPage`, `CollectionPage`, `SearchResultsPage`), `BreadcrumbList` ; puis `Course` + `CourseInstance` (formations), `Event`, `BlogPosting`, `JobPosting` (offres ouvertes, sans date), `Service` (solutions, expertises, pages avec `schema: { service: true }`), `ProfessionalService` par bureau (page contact, pages avec `schema: { offices: true }`), `FAQPage`. `schema: { about: true }` fait d'une page une `AboutPage`.
+- **Valeurs provisoires** : `func/real.html` écarte tout texte contenant une partie entre crochets. Une page au titre provisoire ne publie ni entité ni fil d'Ariane structuré ; un événement sans lieu connu ne publie pas d'`Event`.
+- **Pages publiques** (`func/public-page.html`) : ni `seo.noindex`, ni `sitemap.disable`, ni offre fermée, ni `placeholder: true` en production. Utilisé par le sitemap et `llms-full.txt`.
+- **Redirections** : `data/redirects.yaml`, liste de `{from, to, status, force, check}` ; `*` final = tout le chemin, `:splat` = partie reprise, `from` en `https://…` = tout un domaine.
 
 ## Surcharges
 

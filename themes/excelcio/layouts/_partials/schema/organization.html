@@ -1,0 +1,20 @@
+{{- /* Organization node (site.Params.organization, logo, hugo.Data.social). Context: page. Returns: dict. */ -}}
+{{- $org := site.Params.organization -}}
+{{- $o := dict
+  "@type" "Organization"
+  "@id" (printf "%s#organization" site.Home.Permalink)
+  "name" ($org.name | default site.Title)
+  "url" site.Home.Permalink
+-}}
+{{- with partial "func/real.html" ($org.legalName | default "") }}{{ $o = merge $o (dict "legalName" .) }}{{ end -}}
+{{- with partial "func/real.html" (site.Params.description | default "") }}{{ $o = merge $o (dict "description" .) }}{{ end -}}
+{{- with site.Params.logo.default }}{{ with resources.Get . }}
+  {{- $o = merge $o (dict "logo" (dict "@type" "ImageObject" "url" .Permalink)) }}
+{{- end }}{{ end -}}
+{{- with $org.email }}
+  {{- $o = merge $o (dict "email" . "contactPoint" (slice (dict "@type" "ContactPoint" "contactType" "customer service" "email" . "availableLanguage" (slice site.Language.Label)))) }}
+{{- end -}}
+{{- with hugo.Data.social }}
+  {{- $o = merge $o (dict "sameAs" (apply . "index" "." "url")) }}
+{{- end -}}
+{{- return $o -}}

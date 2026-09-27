@@ -1,0 +1,13 @@
+{{- /* BreadcrumbList node, same trail as the visible breadcrumb. Context: page (not home). Returns: dict, or false when a name is still a placeholder. */ -}}
+{{- $items := slice -}}
+{{- $i := 0 -}}
+{{- range .Ancestors.Reverse }}
+  {{- $i = add $i 1 }}
+  {{- $items = $items | append (dict "@type" "ListItem" "position" $i "name" (cond .IsHome (T "home") .LinkTitle) "item" .Permalink) }}
+{{- end -}}
+{{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1) "name" .LinkTitle "item" .Permalink) -}}
+{{- $ok := true -}}
+{{- range $items }}{{ if not (partial "func/real.html" .name) }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- $node := false -}}
+{{- if $ok }}{{ $node = dict "@type" "BreadcrumbList" "@id" (printf "%s#breadcrumb" .Permalink) "itemListElement" $items }}{{ end -}}
+{{- return $node -}}

@@ -1,0 +1,7 @@
+{{- /* _redirects (Netlify, Cloudflare Pages), generated from data/redirects.yaml. */ -}}
+# Généré par Hugo depuis data/redirects.yaml : ne pas modifier ce fichier.
+{{- range hugo.Data.redirects }}
+  {{- if ne .from .to }}
+{{ .from }} {{ .to }} {{ .status | default 301 }}{{ if .force }}!{{ end }}
+  {{- end }}
+{{- end }}

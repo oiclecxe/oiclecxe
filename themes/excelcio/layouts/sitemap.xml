@@ -1,0 +1,23 @@
+{{- /*
+  Sitemap: public pages only (func/public-page.html: no noindex, no closed job
+  offer, no placeholder page in production), with translations once the site is
+  multilingual.
+*/ -}}
+{{ printf "<?xml version=%q encoding=%q standalone=%q?>" "1.0" "utf-8" "yes" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{- range .Pages }}
+    {{- if and (ne .Kind "taxonomy") (ne .Kind "term") (partial "func/public-page.html" .) }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    {{- end }}
+    {{- if .IsTranslated }}
+      {{- range .AllTranslations }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}"/>
+      {{- end }}
+    {{- end }}
+  </url>
+    {{- end }}
+  {{- end }}
+</urlset>
