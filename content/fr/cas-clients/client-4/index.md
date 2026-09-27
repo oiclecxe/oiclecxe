@@ -6,7 +6,7 @@ placeholder: true
 date: 2026-04-01
 weight: 4
 client: "Client 4"
-sector: "[Secteur]"
+sector: "Pharmacie"
 result: "[À RÉDIGER — Résultat du cas 4, 6 mots]"
 solutions: [jedox]
 expertises: [finance]

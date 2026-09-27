@@ -8,3 +8,6 @@ cascade:
 ---
 
 [À RÉDIGER — Présentation d'Excelcio comme employeur : culture, métiers, parcours. 2 paragraphes.]
+
+
+Voilà un **test en gras** et un autre en *italique* : VIII^e^. ~~Barré~~

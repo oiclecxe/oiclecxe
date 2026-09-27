@@ -5,7 +5,7 @@ summary: "[À RÉDIGER — Objectif principal de la formation en une phrase.]"
 placeholder: true
 weight: 4
 code: ""
-solutions: [qlik]
+solutions: ["qlik"]
 level: ""
 durationDays: 0
 format: ""

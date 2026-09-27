@@ -5,8 +5,8 @@ summary: "[À RÉDIGER — Résumé du cas client 2, 25 mots max.]"
 placeholder: true
 date: 2026-02-01
 weight: 2
-client: "Client 2"
-sector: "[Secteur]"
+client: "Client B"
+sector: "Industrie"
 result: "[À RÉDIGER — Résultat du cas 2, 6 mots]"
 solutions: [power-bi]
 expertises: [commercial]

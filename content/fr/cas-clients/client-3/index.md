@@ -6,7 +6,7 @@ placeholder: true
 date: 2026-03-01
 weight: 3
 client: "Client 3"
-sector: "[Secteur]"
+sector: "Pharmacie"
 result: "[À RÉDIGER — Résultat du cas 3, 6 mots]"
 solutions: [qlik]
 expertises: [supply-chain]

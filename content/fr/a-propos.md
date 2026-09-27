@@ -11,7 +11,6 @@ weight: 70
 ## Excelcio en bref
 
 - Bureaux : Paris, Rennes, Nantes
-- Solutions accompagnées : Qlik, Vizlib, Tableau, Power BI, ThoughtSpot, Jedox, IBM Cognos
-- Plus de 690 sessions de formation depuis 2018
+- Solutions accompagnées : Qlik, Vizlib, Tableau, Power BI, Jedox, IBM Cognos
 - Domaines d'expertise : pilotage de direction, commercial, supply chain, finance
 - [À RÉDIGER — Date de création, effectif, autres faits vérifiables]

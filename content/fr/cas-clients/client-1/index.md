@@ -6,7 +6,7 @@ placeholder: true
 date: 2026-01-01
 weight: 1
 client: "Client A"
-sector: "[Secteur]"
+sector: ["industrie", "distribution"]
 result: "[À RÉDIGER — Résultat du cas 1, 6 mots]"
 solutions: [qlik]
 expertises: [finance]
