@@ -1,18 +1,14 @@
 ---
 title: "Commercial"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-summary: "[À RÉDIGER — Bénéfice principal pour cette direction, 25 mots max.]"
-placeholder: true
+description: "Pilotage commercial et connaissance client : retail, grande distribution, services, industrie, Excelcio valorise vos données pour mieux vendre."
+summary: "Améliorer la connaissance client et optimiser le pilotage des ventes, en capitalisant sur la donnée."
+placeholder: false
 weight: 2
 solutions: [qlik, tableau]
 benefits:
-  - { title: "[Bénéfice 1]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Bénéfice 2]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Bénéfice 3]", text: "[À RÉDIGER — 25 mots max.]" }
-kpis: ["[Indicateur 1]", "[Indicateur 2]", "[Indicateur 3]", "[Indicateur 4]"]
-faq:
-  - { q: "[À RÉDIGER — Question fréquente 1 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
-  - { q: "[À RÉDIGER — Question fréquente 2 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+  - { title: "Connaissance client", text: "Mieux connaître vos clients en capitalisant sur vos données." }
+  - { title: "Pilotage des ventes", text: "Un geste optimisé dans le pilotage de vos ventes." }
+  - { title: "Tous secteurs", text: "Retail fashion, grande distribution, services aux entreprises, industrie." }
 menus:
   main:
     parent: offre
@@ -21,4 +17,4 @@ menus:
       group: "Expertises métier"
 ---
 
-[À RÉDIGER — Notre approche pour cette direction : 2 à 3 paragraphes.]
+Qu’il s’agisse du retail fashion, de la grande distribution, des services aux entreprises ou de l’industrie, nous sommes tous en attente d’**une meilleure connaissance client** et d’**un geste optimisé dans le pilotage des ventes**, en capitalisant sur la donnée.

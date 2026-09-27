@@ -1,18 +1,15 @@
 ---
 title: "Supply chain"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-summary: "[À RÉDIGER — Bénéfice principal pour cette direction, 25 mots max.]"
-placeholder: true
+description: "Supply chain management : Excelcio accompagne le pilotage de la logistique et du transport, du suivi des flux amont jusqu’à l’expédition des produits."
+summary: "Piloter la logistique et le transport, des flux amont aux flux aval."
+placeholder: false
 weight: 3
 solutions: [qlik, thoughtspot]
 benefits:
-  - { title: "[Bénéfice 1]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Bénéfice 2]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Bénéfice 3]", text: "[À RÉDIGER — 25 mots max.]" }
-kpis: ["[Indicateur 1]", "[Indicateur 2]", "[Indicateur 3]", "[Indicateur 4]"]
-faq:
-  - { q: "[À RÉDIGER — Question fréquente 1 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
-  - { q: "[À RÉDIGER — Question fréquente 2 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+  - { title: "Flux amont", text: "Un suivi en qualité, en quantité et en délais." }
+  - { title: "Flux aval", text: "Réception, contrôle qualité, stockage, préparation et expédition optimisés." }
+  - { title: "Logistique et transport", text: "Un pilotage de bout en bout de vos opérations." }
+kpis: ["Qualité des flux amont", "Quantités", "Délais", "Contrôle qualité", "Stockage", "Expédition"]
 menus:
   main:
     parent: offre
@@ -21,4 +18,4 @@ menus:
       group: "Expertises métier"
 ---
 
-[À RÉDIGER — Notre approche pour cette direction : 2 à 3 paragraphes.]
+Excelcio accompagne ses clients dans **le pilotage de la logistique et du transport**, depuis le suivi des flux amont (qualité, quantité, délais) jusqu’aux flux aval, pour optimiser la réception, le contrôle qualité (produits, emballage…), le stockage, la préparation et l’expédition des produits livrés.

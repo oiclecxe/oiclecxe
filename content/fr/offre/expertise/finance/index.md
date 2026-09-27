@@ -1,18 +1,15 @@
 ---
 title: "Finance"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-summary: "[À RÉDIGER — Bénéfice principal pour cette direction, 25 mots max.]"
-placeholder: true
+description: "Pilotage financier : reporting financier, élaboration budgétaire et pilotage de la donnée financière, avec l’expérience des consultants Excelcio."
+summary: "Reporting financier, élaboration budgétaire et pilotage de la donnée financière."
+placeholder: false
 weight: 4
 solutions: [jedox, ibm-cognos]
 benefits:
-  - { title: "[Bénéfice 1]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Bénéfice 2]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Bénéfice 3]", text: "[À RÉDIGER — 25 mots max.]" }
-kpis: ["[Indicateur 1]", "[Indicateur 2]", "[Indicateur 3]", "[Indicateur 4]"]
-faq:
-  - { q: "[À RÉDIGER — Question fréquente 1 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
-  - { q: "[À RÉDIGER — Question fréquente 2 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+  - { title: "Reporting financier", text: "Des projets de reporting financier mis en œuvre avec vos équipes." }
+  - { title: "Élaboration budgétaire", text: "Des budgets construits et suivis dans un outil adapté." }
+  - { title: "Donnée financière", text: "Un pilotage fin de la donnée financière de l’entreprise." }
+kpis: ["Balance âgée", "Gestion des risques", "Cost control", "Performance des placements"]
 menus:
   main:
     parent: offre
@@ -21,4 +18,4 @@ menus:
       group: "Expertises métier"
 ---
 
-[À RÉDIGER — Notre approche pour cette direction : 2 à 3 paragraphes.]
+Excelcio met son expérience au service de ses clients dans la mise en œuvre de **projets de reporting financier et d’élaboration budgétaire**, ainsi que dans le pilotage de la donnée financière.
