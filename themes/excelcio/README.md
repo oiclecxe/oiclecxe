@@ -115,6 +115,23 @@ Animations : `data-reveal` + `.reveal` (mots d'un titre) ou `.reveal-block` (blo
 
 La page `/styleguide/` (développement uniquement) présente tous les tokens et composants, avec les contrastes calculés en direct.
 
+### Fonctions utilitaires (`_partials/func/`)
+
+Partials qui renvoient une valeur (`return`), à utiliser plutôt que de réécrire la règle :
+
+| Partial | Renvoie |
+|---|---|
+| `as-list.html` | Une valeur ou une liste, toujours sous forme de liste |
+| `facet.html`, `filter-values.html`, `filter-attrs.html` | Valeurs d'un champ de classement (compteurs, ordre, libellés) pour `components/filters.html`, et attributs `data-…` des éléments filtrés |
+| `solution-names.html`, `sector-names.html` | Noms affichables des solutions ou des secteurs cités par une page |
+| `solution-name.html`, `term-name.html` | Nom affichable d'une seule valeur |
+| `type-label.html` | Libellé d'un type de contenu (« Formation »…) |
+| `job-closed.html`, `event-past.html`, `external-registration.html` | Offre fermée ; événement terminé ; adresse d'inscription externe |
+| `org-name.html`, `markdown-url.html`, `url-of-type.html` | Nom de l'organisation ; adresse de la version Markdown d'une page ; adresse de la page d'un type (`registration`, `thanks`…) |
+| `real.html`, `public-page.html` | Valeur réelle (vide si placeholder) ; page publiable pour les moteurs |
+
+Côté JS, `assets/js/utils.js` regroupe les aides partagées (mouvement réduit, désélection d'une étiquette active).
+
 ## Types de contenu et gabarits
 
 Les gabarits sont choisis par **type** (champ `type`, en général posé par `cascade` dans le `_index.md` de la rubrique), ce qui rend le thème indépendant des adresses du site.

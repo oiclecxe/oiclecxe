@@ -5,9 +5,9 @@
 // Transition inspired by the breathing squares: leaving cards are covered square by
 // square, entering cards uncovered square by square (none with reduced motion).
 
-const MAX_DELAY_STEPS = 4; // square delays: 0 … 3 × --tile-stagger
+import { reducedMotion, onActiveTagClick } from './utils.js';
 
-const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MAX_DELAY_STEPS = 4; // square delays: 0 … 3 × --tile-stagger
 
 // Length of the longest square transition of a mask, in ms.
 function maskDuration(mask) {
@@ -140,14 +140,9 @@ export function initFilters() {
     const params = new URLSearchParams(window.location.search);
     names.forEach((name) => { if (params.get(name)) setValue(name, params.get(name)); });
 
-    // A click on the tag that is already active deselects it (no change event in that case).
-    form.addEventListener('click', (event) => {
-      const radio = event.target;
-      if (!(radio instanceof HTMLInputElement) || radio.type !== 'radio' || !radio.value) return;
-      if (selected[radio.name] === radio.value) {
-        setValue(radio.name, '');
-        apply();
-      }
+    onActiveTagClick(form, (name) => selected[name], (radio) => {
+      setValue(radio.name, '');
+      apply();
     });
     form.addEventListener('change', () => apply());
     form.addEventListener('reset', () => setTimeout(() => apply()));

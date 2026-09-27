@@ -1,11 +1,13 @@
 // Counts key figures up from 0 when they enter the viewport.
 // The final value is in the HTML (and in a visually hidden copy for screen readers).
+import { reducedMotion } from './utils.js';
+
 const DURATION = 1400;
 
 export function initCounters() {
   const counters = [...document.querySelectorAll('[data-count-to]')];
   if (counters.length === 0 || !('IntersectionObserver' in window)) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (reducedMotion()) return;
 
   const format = new Intl.NumberFormat(document.documentElement.lang || undefined);
 

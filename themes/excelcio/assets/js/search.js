@@ -2,6 +2,7 @@
 // dialog (header link, Ctrl/⌘ + K) and on the search page. Pagefind is loaded on
 // first use only; when the index is missing (e.g. `hugo server`), a message says so.
 import * as params from '@params';
+import { onActiveTagClick } from './utils.js';
 
 const PAGE_SIZE = { dialog: 6, page: 10 };
 
@@ -144,10 +145,7 @@ function initSearch(root) {
     type = event.target.value;
     search();
   });
-  // A click on the active type tag deselects it (no change event in that case).
-  filters.addEventListener('click', (event) => {
-    const radio = event.target;
-    if (!(radio instanceof HTMLInputElement) || !radio.value || radio.value !== type) return;
+  onActiveTagClick(filters, () => type, () => {
     type = '';
     search();
   });

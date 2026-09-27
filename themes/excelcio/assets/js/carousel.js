@@ -1,4 +1,6 @@
 // Horizontal carousel: previous/next buttons scroll by one slide; buttons disabled at the ends.
+import { reducedMotion } from './utils.js';
+
 export function initCarousels() {
   for (const root of document.querySelectorAll('[data-carousel]')) {
     const viewport = root.querySelector('[data-carousel-viewport]');
@@ -18,7 +20,7 @@ export function initCarousels() {
       next.disabled = viewport.scrollLeft >= max;
     };
 
-    const smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    const smooth = reducedMotion() ? 'auto' : 'smooth';
     prev.addEventListener('click', () => viewport.scrollBy({ left: -step(), behavior: smooth }));
     next.addEventListener('click', () => viewport.scrollBy({ left: step(), behavior: smooth }));
     viewport.addEventListener('scroll', update, { passive: true });
