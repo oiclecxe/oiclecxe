@@ -104,7 +104,7 @@ Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses 
 
 ### Recrutement — `content/fr/recrutement/`
 
-`_index.md` : présentation employeur. Chaque offre : `location`, `contract`, `remote`, `validThrough`, `missions`, `profile`, texte libre. Le bouton « Postuler » ouvre un e-mail vers l'adresse de recrutement (`config/_default/params.toml`).
+`_index.md` : présentation employeur. Chaque offre : **`active`** (`true` = annonce ouverte et listée ; `false` ou absent = poste fermé : l'offre disparaît de la liste et du plan du site, sa page reste accessible avec la mention « Ce poste n'est plus ouvert », sans bouton de candidature, et n'est pas indexée), `location`, `contract`, `remote`, `validThrough`, `missions`, `profile`, texte libre. Le bouton « Postuler » ouvre un e-mail vers l'adresse de recrutement (`config/_default/params.toml`). Si aucune offre n'est active, la page Recrutement l'indique et propose la candidature spontanée.
 
 ### Pages institutionnelles
 

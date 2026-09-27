@@ -9,7 +9,8 @@
   <section class="section tone-light-alt" id="offres" aria-labelledby="jobs-title">
     <div class="container">
       <h2 class="section__head--tight" id="jobs-title">{{ T "jobsTitle" }}</h2>
-      {{- with .Pages }}
+      {{- /* Only offers explicitly marked `active: true` are listed. */}}
+      {{- with where .Pages "Params.active" true }}
       <ul class="rows" role="list">
         {{- range . }}
         <li class="rows__item">

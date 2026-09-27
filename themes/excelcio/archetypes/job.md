@@ -8,6 +8,7 @@ draft: false
 placeholder: true
 image: ""        # fichier du dossier de la page (ex. cover.jpg) ; imageAlt obligatoire si image
 imageAlt: ""
+active: true          # true = annonce publiée et listée ; false = poste fermé (page conservée, non listée, non indexée)
 location: ""          # ex. Paris
 contract: ""          # CDI, CDD, Stage, Alternance
 remote: ""            # ex. « 2 jours par semaine »

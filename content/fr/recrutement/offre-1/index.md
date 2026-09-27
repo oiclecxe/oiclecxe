@@ -3,6 +3,7 @@ title: "[À RÉDIGER — Intitulé du poste 1]"
 description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
 summary: "[À RÉDIGER — Résumé du poste, 25 mots max.]"
 placeholder: true
+active: true   # true = annonce ouverte ; false = poste fermé
 location: "[Ville]"
 contract: "[Contrat]"
 remote: "[Télétravail]"

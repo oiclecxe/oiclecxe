@@ -1,9 +1,18 @@
 {{- define "main" }}
   {{- $p := . }}
-  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (T "jobEyebrow")) }}
+  {{- /* An offer is open only when explicitly marked `active: true`. A closed offer stays
+         reachable (old links) but shows a notice, no apply button, and is not indexed. */}}
+  {{- $open := eq .Params.active true }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (cond $open (T "jobEyebrow") (T "jobClosedEyebrow"))) }}
   <section class="section tone-light">
     <div class="container with-aside">
       <div class="with-aside__main">
+        {{- if not $open }}
+        <div class="job-closed" role="status">
+          <p class="job-closed__title">{{ T "jobClosed" }}</p>
+          <a class="link-arrow" href="{{ .Parent.RelPermalink }}#offres">{{ T "jobSeeOpen" }}{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+        </div>
+        {{- end }}
         <dl class="facts">
           <div class="facts__item"><dt>{{ T "factContract" }}</dt><dd>{{ .Params.contract | default "[Contrat]" }}</dd></div>
           <div class="facts__item"><dt>{{ T "factPlace" }}</dt><dd>{{ .Params.location | default "[Lieu]" }}</dd></div>
@@ -19,6 +28,7 @@
         {{- end }}
         {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
       </div>
+      {{- if $open }}
       <aside class="with-aside__aside" aria-labelledby="apply-title">
         <div class="register-box">
           <h2 class="register-box__title" id="apply-title">{{ T "applyTitle" }}</h2>
@@ -28,6 +38,7 @@
           {{- end }}
         </div>
       </aside>
+      {{- end }}
     </div>
   </section>
   {{- partial "components/page-cta.html" . }}

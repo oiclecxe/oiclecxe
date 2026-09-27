@@ -115,7 +115,7 @@ Les gabarits sont choisis par **type** (champ `type`, en général posé par `ca
 | `case-study` | `case-study/section.html` (filtrable), `case-study/page.html` | `case-study.md` |
 | `article` | `article/section.html` (à la une, pagination), `article/page.html` (sommaire) | `article.md` |
 | `event` | `event/section.html` (à venir / passés), `event/page.html` | `event.md` |
-| `job` | `job/section.html`, `job/page.html` | `job.md` |
+| `job` | `job/section.html` (offres `active: true` seulement ; message si aucune), `job/page.html` (offre fermée : mention, pas de candidature, `noindex`) | `job.md` |
 | `contact`, `search`, `site-map` | `contact/page.html`, `search/page.html`, `site-map/page.html` | — |
 | autre | `page.html`, `section.html` (pages claires ; `sections:` accepté) | `default.md` |
 

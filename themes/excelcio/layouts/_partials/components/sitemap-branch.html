@@ -6,6 +6,7 @@
   {{- with $children }}
   <ul role="list">
     {{- range . }}
+      {{- if and (eq .Type "job") .IsPage (ne .Params.active true) }}{{ continue }}{{ end }}
       {{- if .IsSection }}
         {{- partial "components/sitemap-branch.html" . }}
       {{- else }}

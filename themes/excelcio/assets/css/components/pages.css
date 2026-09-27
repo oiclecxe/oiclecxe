@@ -285,6 +285,26 @@
     color: var(--fg-accent);
   }
 
+  /* Closed job offer notice */
+  .job-closed {
+    display: grid;
+    gap: var(--sp-3);
+    justify-items: start;
+    margin-bottom: var(--sp-10);
+    padding: var(--sp-6) var(--sp-7);
+    border-left: 3px solid var(--brand);
+    background: var(--surface);
+  }
+
+  .job-closed__title {
+    color: var(--fg);
+    font-size: var(--fs-h4);
+  }
+
+  .job-closed .link-arrow {
+    font-size: var(--fs-ui);
+  }
+
   .spontaneous {
     margin-top: var(--sp-9);
     color: var(--fg-body);

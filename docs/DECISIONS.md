@@ -129,3 +129,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Affichage des sessions de formation** (composant `components/session.html`, commun à la fiche, au catalogue et à l'accueil) : période « 1 – 2 octobre 2026 », lieu et format. Les dates de session s'affichent toujours, même sur une fiche encore marquée `placeholder: true` : une date de session saisie est réelle. Une session reste listée jusqu'à la fin de son dernier jour (`end`, sinon `start`). Sur la fiche, le bouton devient « S'inscrire » dès qu'une session est programmée (« Demander une session » sinon).
 
+
+- **2026-09-27 — Offres d'emploi : champ `active`** (demande de l'utilisateur). Seules les offres `active: true` sont listées et figurent dans le plan du site. Une offre fermée (`false` ou champ absent : publication explicite) garde sa page (liens existants) avec la mention « Ce poste n'est plus ouvert », sans bouton de candidature, en `noindex`. Sans offre active, la page Recrutement affiche « Aucun poste n'est ouvert pour l'instant » et la candidature spontanée. À reprendre au Lot 5 : pas de `JobPosting` ni d'entrée `sitemap.xml` pour une offre fermée.
+
