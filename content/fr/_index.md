@@ -61,7 +61,7 @@ sections:
     title: "[À RÉDIGER — Titre de la section, 3 mots]"
     limit: 4
     # Les cartes sont lues dans content/fr/cas-clients/ (résultat, client, secteur, image), par ordre de « weight ».
-    # Pour choisir ou réordonner : items: ["/cas-clients/client-1", …]
+    # Pour choisir ou réordonner : items: ["/cas-clients/o2", …]
 
   - type: faq
     title: { lead: "Vos questions,", rest: "nos réponses" }

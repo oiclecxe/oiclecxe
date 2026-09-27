@@ -12,7 +12,7 @@
 
   <section class="section tone-light">
     <div class="container">
-      {{- range $key := slice "context" "challenge" "solution" }}
+      {{- range $key := slice "context" "challenge" "solution" "benefits" }}
         {{- with index $p.Params $key }}
       <div class="split case-part reveal-block" data-reveal>
         <h2 class="case-part__title">{{ T (printf "case_%s" $key) }}</h2>

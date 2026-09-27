@@ -16,6 +16,7 @@ expertises: []       # slugs des pages expertises, ex. [finance]
 context: "[À RÉDIGER — Contexte, 60 mots max.]"
 challenge: "[À RÉDIGER — Enjeu, 60 mots max.]"
 solution: "[À RÉDIGER — Solution mise en œuvre, 80 mots max.]"
+benefits: "[À RÉDIGER — Bénéfices obtenus, liste à puces possible.]"
 results:
   - { value: "[XX] %", label: "[À RÉDIGER — Indicateur]" }
 quote: { text: "[À RÉDIGER — Témoignage validé par le client.]", author: "[Prénom Nom]", role: "[Fonction]" }

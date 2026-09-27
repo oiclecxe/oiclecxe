@@ -70,7 +70,7 @@
   {{- end }}
 {{- end }}
 {{- if eq .Type "case-study" }}
-  {{- range $key := slice "context" "challenge" "solution" }}
+  {{- range $key := slice "context" "challenge" "solution" "benefits" }}
     {{- with index $p.Params $key }}
 
 ## {{ T (printf "case_%s" $key) }}

@@ -81,6 +81,7 @@ training_program = "Programme"
 case_context = "Contexte"
 case_challenge = "Enjeu"
 case_solution = "Solution"
+case_benefits = "Bénéfices"
 case_results = "Résultats"
 otherCases = "Autres cas clients"
 
