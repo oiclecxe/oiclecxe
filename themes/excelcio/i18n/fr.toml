@@ -210,6 +210,19 @@ typeEvent = "Événement"
 typeJob = "Offre d'emploi"
 typePage = "Page"
 
+# --- SEO and AI agents (Lot 5)
+factClient = "Client"
+factSolutions = "Solutions"
+factAuthors = "Auteurs"
+factURL = "Adresse"
+mdPages = "Pages"
+llmsOffices = "Implantations"
+llmsSolutions = "Solutions accompagnées"
+llmsContact = "Contact"
+llmsMarkdown = "Chaque page existe aussi en Markdown : ajouter index.md à son adresse."
+llmsFullIntro = "Texte intégral des pages publiées, par rubrique."
+courseDescription = "Formation {{ .Name }}{{ with .Solutions }} ({{ . }}){{ end }} proposée par {{ .Org }}."
+
 [itemCount]
 one = "{{ .Count }} contenu"
 other = "{{ .Count }} contenus"

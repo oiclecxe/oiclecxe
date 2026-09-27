@@ -4,6 +4,7 @@ description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
 placeholder: true
 weight: 70
 
+schema: { about: true, offices: true }   # données structurées : page « À propos » et bureaux
 ---
 
 [À RÉDIGER — Histoire et mission d'Excelcio, 2 paragraphes.]

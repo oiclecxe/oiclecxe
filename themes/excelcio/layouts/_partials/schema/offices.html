@@ -1,0 +1,27 @@
+{{- /*
+  One ProfessionalService node per office (hugo.Data.offices), attached to the
+  organization. Placeholder street addresses and postal codes are left out.
+  Context: page. Returns: slice of dicts (appended as separate graph nodes).
+*/ -}}
+{{- $org := site.Params.organization -}}
+{{- $nodes := slice -}}
+{{- $logo := "" -}}
+{{- with site.Params.logo.default }}{{ with resources.Get . }}{{ $logo = .Permalink }}{{ end }}{{ end -}}
+{{- range hugo.Data.offices }}
+  {{- $address := dict "@type" "PostalAddress" "addressLocality" .city "addressCountry" (site.Params.seo.country | default "FR") }}
+  {{- with partial "func/real.html" (.address | default "") }}{{ $address = merge $address (dict "streetAddress" .) }}{{ end }}
+  {{- with partial "func/real.html" (.postalCode | default "") }}{{ $address = merge $address (dict "postalCode" (string .)) }}{{ end }}
+  {{- $n := dict
+    "@type" "ProfessionalService"
+    "@id" (printf "%s#office-%s" site.Home.Permalink (urlize .city))
+    "name" (printf "%s %s" ($org.name | default site.Title) .city)
+    "url" site.Home.Permalink
+    "parentOrganization" (dict "@id" (printf "%s#organization" site.Home.Permalink))
+    "address" $address
+  }}
+  {{- with $org.email }}{{ $n = merge $n (dict "email" .) }}{{ end }}
+  {{- with $logo }}{{ $n = merge $n (dict "image" .) }}{{ end }}
+  {{- with partial "func/real.html" (.phone | default "") }}{{ $n = merge $n (dict "telephone" .) }}{{ end }}
+  {{- $nodes = $nodes | append $n }}
+{{- end -}}
+{{- return $nodes -}}

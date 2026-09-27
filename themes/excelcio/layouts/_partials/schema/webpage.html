@@ -1,0 +1,19 @@
+{{- /* WebPage node (ContactPage, AboutPage, CollectionPage, SearchResultsPage when relevant). Context: page. Returns: dict. */ -}}
+{{- $type := "WebPage" -}}
+{{- if eq .Type "contact" }}{{ $type = "ContactPage" }}
+{{- else if eq .Type "search" }}{{ $type = "SearchResultsPage" }}
+{{- else if .Params.schema.about }}{{ $type = "AboutPage" }}
+{{- else if and (not .IsHome) (not .IsPage) }}{{ $type = "CollectionPage" }}{{ end -}}
+{{- $p := dict
+  "@type" $type
+  "@id" (printf "%s#webpage" .Permalink)
+  "url" .Permalink
+  "name" (partial "func/real.html" .Title | default site.Title)
+  "inLanguage" site.Language.Locale
+  "isPartOf" (dict "@id" (printf "%s#website" site.Home.Permalink))
+-}}
+{{- with partial "func/real.html" (.Description | default "") }}{{ $p = merge $p (dict "description" .) }}{{ end -}}
+{{- if .IsHome }}{{ $p = merge $p (dict "about" (dict "@id" (printf "%s#organization" site.Home.Permalink))) }}{{ end -}}
+{{- with partial "func/og-image.html" . }}{{ $p = merge $p (dict "primaryImageOfPage" (dict "@type" "ImageObject" "url" .Permalink "width" .Width "height" .Height)) }}{{ end -}}
+{{- if not .Lastmod.IsZero }}{{ $p = merge $p (dict "dateModified" (.Lastmod.Format "2006-01-02")) }}{{ end -}}
+{{- return $p -}}

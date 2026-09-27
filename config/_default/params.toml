@@ -61,3 +61,23 @@ description = "[À RÉDIGER — Description du site en 150 caractères : cabinet
   [cta.secondary]
     label = "Découvrir nos formations"
     url = "/formations/"
+
+# llms.txt et llms-full.txt (lisibilité par les agents IA) : rubriques, dans l'ordre.
+[[llms.sections]]
+  title = "Offre"
+  path = "/offre"
+[[llms.sections]]
+  title = "Solutions"
+  types = ["solution"]
+[[llms.sections]]
+  title = "Formations"
+  types = ["training"]
+[[llms.sections]]
+  title = "Cas clients"
+  types = ["case-study"]
+[[llms.sections]]
+  title = "Ressources"
+  types = ["article", "event"]
+[[llms.sections]]
+  title = "Entreprise"
+  types = ["page", "job", "contact"]

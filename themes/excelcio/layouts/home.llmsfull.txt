@@ -1,0 +1,16 @@
+{{- /* /llms-full.txt: full text of the published pages (placeholder pages excluded in production), by group. */ -}}
+# {{ site.Params.organization.name | default site.Title }}
+{{ with partial "func/real.html" (site.Params.description | default "") }}
+> {{ . }}
+{{ end }}
+{{ T "llmsFullIntro" }}
+{{- range partial "func/llms-groups.html" (dict "strict" true) }}
+
+---
+
+## {{ .title }}
+{{- range .pages }}
+
+{{ partial "markdown/page.md" . | replaceRE `(?m)^(#{1,5}) ` "#$1 " }}
+{{- end }}
+{{- end }}

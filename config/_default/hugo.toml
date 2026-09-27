@@ -1,12 +1,21 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://www.excelcio.com/"
 title = "Excelcio"
 defaultContentLanguage = "fr"
 defaultContentLanguageInSubdir = false
-enableRobotsTXT = false
+enableRobotsTXT = true
 disableKinds = ["rss"]
 
 [[module.imports]]
   path = "excelcio"
+
+# Sorties pour les moteurs et les agents IA : version Markdown de chaque page (index.md),
+# llms.txt, llms-full.txt, redirections (_redirects, redirects.htaccess). Formats définis par le thème.
+[outputs]
+  home = ["html", "markdown", "llms", "llmsfull", "redirects", "htaccess"]
+  section = ["html", "markdown"]
+  page = ["html", "markdown"]
+  taxonomy = ["html", "markdown"]
+  term = ["html", "markdown"]
 
 [taxonomies]
   secteur = "secteurs"

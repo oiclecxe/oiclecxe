@@ -1,0 +1,9 @@
+{{- /*
+  Returns the value when it is real content, "" when it is a placeholder
+  ("[À RÉDIGER — …]", "[XX]", "[Ville]"…: any text containing a bracketed part).
+  Used wherever content leaves the page for machines (JSON-LD, llms.txt, meta).
+  Context: any value (non-strings are returned unchanged).
+*/ -}}
+{{- $v := . -}}
+{{- if and (eq (printf "%T" .) "string") (findRE `\[[^\]]+\]` .) }}{{ $v = "" }}{{ end -}}
+{{- return $v -}}

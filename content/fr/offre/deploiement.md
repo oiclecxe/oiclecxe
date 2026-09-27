@@ -14,6 +14,7 @@ sections:
           - { title: "[Étape 2].", accent: "[Complément].", text: "[À RÉDIGER — 35 mots max.]", url: "/contact/" }
           - { title: "[Étape 3].", accent: "[Complément].", text: "[À RÉDIGER — 35 mots max.]", url: "/contact/" }
           - { title: "[Étape 4].", accent: "[Complément].", text: "[À RÉDIGER — 35 mots max.]", url: "/contact/" }
+schema: { service: true }   # données structurées : service
 ---
 
 [À RÉDIGER — Présentation de l'offre « Déploiement » : 2 à 3 paragraphes.]

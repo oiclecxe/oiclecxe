@@ -1,0 +1,35 @@
+{{- /*
+  Page groups of llms.txt / llms-full.txt, from site.Params.llms.sections
+  ({title, path} or {title, types}); by default one group per top-level section.
+  Keeps regular pages that are searchable (`search` ≠ false) with a real title;
+  a page listed in an earlier group is not repeated.
+  Context: dict "strict" (bool: also apply func/public-page.html, used by
+  llms-full.txt). Returns: slice of {title, pages}.
+*/ -}}
+{{- $defs := site.Params.llms.sections | default slice -}}
+{{- if not $defs }}
+  {{- range site.Home.Sections }}{{ $defs = $defs | append (dict "title" .Title "path" .Path) }}{{ end }}
+{{- end -}}
+{{- $seen := slice -}}
+{{- $groups := slice -}}
+{{- range $defs }}
+  {{- $def := . }}
+  {{- $candidates := first 0 site.RegularPages }}
+  {{- if .path }}
+    {{- with site.GetPage .path }}{{ $candidates = .RegularPagesRecursive }}{{ end }}
+  {{- else }}
+    {{- $candidates = where site.RegularPages "Type" "in" (.types | default slice) }}
+  {{- end }}
+  {{- $pages := slice }}
+  {{- range $candidates.ByWeight }}
+    {{- if in $seen .Permalink }}{{ continue }}{{ end }}
+    {{- if eq .Params.search false }}{{ continue }}{{ end }}
+    {{- if not (partial "func/real.html" .Title) }}{{ continue }}{{ end }}
+    {{- if and (eq .Type "job") (ne .Params.active true) }}{{ continue }}{{ end }}
+    {{- if and $.strict (not (partial "func/public-page.html" .)) }}{{ continue }}{{ end }}
+    {{- $pages = $pages | append . }}
+    {{- $seen = $seen | append .Permalink }}
+  {{- end }}
+  {{- with $pages }}{{ $groups = $groups | append (dict "title" $def.title "pages" .) }}{{ end }}
+{{- end -}}
+{{- return $groups -}}

@@ -1,0 +1,17 @@
+{{- /*
+  FAQPage node from the page's FAQ (`faq` front matter, or `sections` of type
+  faq), real questions only. Context: page. Returns: dict, or false.
+*/ -}}
+{{- $items := .Params.faq | default slice -}}
+{{- range .Params.sections }}{{ if eq .type "faq" }}{{ $items = $items | append (.items | default slice) }}{{ end }}{{ end -}}
+{{- $questions := slice -}}
+{{- range $items }}
+  {{- $q := partial "func/real.html" (.q | default "") }}
+  {{- $a := partial "func/real.html" (.a | default "") }}
+  {{- if and $q $a }}
+    {{- $questions = $questions | append (dict "@type" "Question" "name" $q "acceptedAnswer" (dict "@type" "Answer" "text" ($a | markdownify | plainify))) }}
+  {{- end }}
+{{- end -}}
+{{- $faq := false -}}
+{{- with $questions }}{{ $faq = dict "@type" "FAQPage" "@id" (printf "%s#faq" $.Permalink) "mainEntity" . }}{{ end -}}
+{{- return $faq -}}

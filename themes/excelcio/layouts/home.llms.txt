@@ -1,0 +1,24 @@
+{{- /* /llms.txt (llmstxt.org): title, summary, key facts, then one section per group with links to the Markdown versions. */ -}}
+{{- $org := site.Params.organization -}}
+# {{ $org.name | default site.Title }}
+{{ with partial "func/real.html" (site.Params.description | default "") }}
+> {{ . }}
+{{ end }}
+{{- with hugo.Data.offices }}
+- {{ T "llmsOffices" }} : {{ delimit (apply . "index" "." "city") ", " }}
+{{- end }}
+{{- with (where site.RegularPages "Type" "solution").ByWeight }}
+  {{- $names := slice }}{{ range . }}{{ $names = $names | append (.Params.partnerName | default .Title) }}{{ end }}
+- {{ T "llmsSolutions" }} : {{ delimit $names ", " }}
+{{- end }}
+{{- with $org.email }}
+- {{ T "llmsContact" }} : {{ . }}
+{{- end }}
+- {{ T "llmsMarkdown" }}
+{{- range partial "func/llms-groups.html" (dict "strict" false) }}
+
+## {{ .title }}
+{{ range .pages }}
+- [{{ .Title }}]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ .Permalink }}{{ end }}){{ with or (partial "func/real.html" (.Params.summary | default "")) (partial "func/real.html" (.Description | default "")) }}: {{ . | plainify }}{{ end }}
+{{- end }}
+{{- end }}

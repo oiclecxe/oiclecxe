@@ -1,0 +1,85 @@
+{{- /*
+  Main entity of a regular page, by content type: Course, Event, BlogPosting,
+  JobPosting (without date: job offers show no date), Service.
+  Context: page. Returns: dict, or nil when not applicable.
+*/ -}}
+{{- $org := dict "@id" (printf "%s#organization" site.Home.Permalink) -}}
+{{- $page := dict "@id" (printf "%s#webpage" .Permalink) -}}
+{{- $real := partial "func/real.html" .Title -}}
+{{- $name := $real | default .Title -}}
+{{- $desc := or (partial "func/real.html" (.Params.summary | default "")) (partial "func/real.html" (.Description | default "")) -}}
+{{- $country := site.Params.seo.country | default "FR" -}}
+{{- $place := dict -}}
+{{- $e := dict -}}
+
+{{- if eq .Type "training" }}
+  {{- $about := slice }}
+  {{- range partial "func/as-list.html" .Params.solutions }}{{ $about = $about | append (partial "func/solution-name.html" (urlize .)) }}{{ end }}
+  {{- /* Required description: the summary, or a factual sentence built from real data. */}}
+  {{- $fallback := T "courseDescription" (dict "Name" $name "Solutions" (delimit $about ", ") "Org" (site.Params.organization.name | default site.Title)) }}
+  {{- $e = dict "@type" "Course" "@id" (printf "%s#course" .Permalink) "name" $name "url" .Permalink "provider" $org "inLanguage" site.Language.Locale "mainEntityOfPage" $page "description" ($desc | default $fallback) }}
+  {{- with partial "func/real.html" (.Params.code | default "") }}{{ $e = merge $e (dict "courseCode" .) }}{{ end }}
+  {{- with $about }}{{ $e = merge $e (dict "about" .) }}{{ end }}
+  {{- $instances := slice }}
+  {{- range partial "func/upcoming-sessions.html" (dict "pages" (slice .)) }}
+    {{- $ci := dict "@type" "CourseInstance" "startDate" (.start.Format "2006-01-02") }}
+    {{- with .end }}{{ $ci = merge $ci (dict "endDate" ((time .).Format "2006-01-02")) }}{{ end }}
+    {{- $fmt := lower (partial "func/real.html" (.format | default "")) }}
+    {{- if findRE `distanc|ligne|online|remote` $fmt }}{{ $ci = merge $ci (dict "courseMode" "Online") }}
+    {{- else if findRE `mixte|hybrid|blended` $fmt }}{{ $ci = merge $ci (dict "courseMode" "Blended") }}
+    {{- else if findRE `présentiel|presentiel|onsite` $fmt }}{{ $ci = merge $ci (dict "courseMode" "Onsite") }}{{ end }}
+    {{- with partial "func/real.html" (.city | default "") }}
+      {{- $ci = merge $ci (dict "location" (dict "@type" "Place" "name" . "address" (dict "@type" "PostalAddress" "addressLocality" . "addressCountry" $country))) }}
+    {{- end }}
+    {{- $instances = $instances | append $ci }}
+  {{- end }}
+  {{- with $instances }}{{ $e = merge $e (dict "hasCourseInstance" .) }}{{ end }}
+
+{{- else if eq .Type "event" }}
+  {{- with .Params.start }}
+    {{- $online := $.Params.online | default false }}
+    {{- $e = dict "@type" "Event" "@id" (printf "%s#event" $.Permalink) "name" $name "url" $.Permalink "startDate" ((time .).Format "2006-01-02T15:04:05Z07:00") "eventStatus" "https://schema.org/EventScheduled" "organizer" $org "mainEntityOfPage" $page }}
+    {{- with $.Params.end }}{{ $e = merge $e (dict "endDate" ((time .).Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}
+    {{- with $desc }}{{ $e = merge $e (dict "description" .) }}{{ end }}
+    {{- if $online }}
+      {{- $e = merge $e (dict "eventAttendanceMode" "https://schema.org/OnlineEventAttendanceMode" "location" (dict "@type" "VirtualLocation" "url" $.Permalink)) }}
+    {{- else }}
+      {{- $e = merge $e (dict "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode") }}
+      {{- $city := partial "func/real.html" ($.Params.city | default "") }}
+      {{- $venue := partial "func/real.html" ($.Params.venue | default "") }}
+      {{- if $city }}
+        {{- $e = merge $e (dict "location" (dict "@type" "Place" "name" ($venue | default $city) "address" (dict "@type" "PostalAddress" "addressLocality" $city "addressCountry" $country))) }}
+      {{- else }}
+        {{- $e = dict }}{{/* no known place yet: no Event node */}}
+      {{- end }}
+    {{- end }}
+    {{- if $e }}{{ with partial "func/og-image.html" $ }}{{ $e = merge $e (dict "image" (slice .Permalink)) }}{{ end }}{{ end }}
+  {{- end }}
+
+{{- else if eq .Type "article" }}
+  {{- $authors := slice }}
+  {{- range .Params.authors }}{{ with partial "func/real.html" . }}{{ $authors = $authors | append (dict "@type" "Person" "name" .) }}{{ end }}{{ end }}
+  {{- $e = dict "@type" "BlogPosting" "@id" (printf "%s#article" .Permalink) "headline" $name "url" .Permalink "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "author" ($authors | default (slice $org)) "publisher" $org "mainEntityOfPage" $page "inLanguage" site.Language.Locale }}
+  {{- with $desc }}{{ $e = merge $e (dict "description" .) }}{{ end }}
+  {{- with partial "func/og-image.html" . }}{{ $e = merge $e (dict "image" (slice .Permalink)) }}{{ end }}
+  {{- with partial "func/real.html" (delimit (.Params.tags | default slice) ", ") }}{{ $e = merge $e (dict "keywords" .) }}{{ end }}
+
+{{- else if and (eq .Type "job") (eq .Params.active true) }}
+  {{- $text := partial "func/real.html" (.Plain | strings.TrimSpace) }}
+  {{- $e = dict "@type" "JobPosting" "@id" (printf "%s#job" .Permalink) "title" $name "url" .Permalink "hiringOrganization" $org "description" ($text | default ($desc | default $name)) "directApply" false }}
+  {{- with partial "func/real.html" (.Params.validThrough | default "") }}{{ $e = merge $e (dict "validThrough" ((time .).Format "2006-01-02")) }}{{ end }}
+  {{- $contract := lower (partial "func/real.html" (.Params.contract | default "")) }}
+  {{- $types := dict "cdi" "FULL_TIME" "cdd" "TEMPORARY" "stage" "INTERN" "alternance" "OTHER" "freelance" "CONTRACTOR" "temps partiel" "PART_TIME" }}
+  {{- with index $types $contract }}{{ $e = merge $e (dict "employmentType" .) }}{{ end }}
+  {{- with partial "func/real.html" (.Params.location | default "") }}
+    {{- $e = merge $e (dict "jobLocation" (dict "@type" "Place" "address" (dict "@type" "PostalAddress" "addressLocality" . "addressCountry" $country))) }}
+  {{- end }}
+
+{{- else if or (eq .Type "solution") (eq .Type "expertise") .Params.schema.service }}
+  {{- $e = dict "@type" "Service" "@id" (printf "%s#service" .Permalink) "name" $name "url" .Permalink "provider" $org "areaServed" (dict "@type" "Country" "name" $country) "mainEntityOfPage" $page }}
+  {{- with $desc }}{{ $e = merge $e (dict "description" .) }}{{ end }}
+  {{- if eq .Type "solution" }}{{ $e = merge $e (dict "brand" (dict "@type" "Brand" "name" (.Params.partnerName | default .Title))) }}{{ end }}
+{{- end -}}
+
+{{- if not $e }}{{ $e = false }}{{ end -}}
+{{- return $e -}}

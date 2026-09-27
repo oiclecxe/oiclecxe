@@ -1,0 +1,28 @@
+{{- /*
+  Example Apache rules (shared hosting), generated from data/redirects.yaml:
+  copy into the site's .htaccess once the host is chosen. Entries ending with
+  "*" redirect a whole path; ":splat" in the target reuses the matched part;
+  an entry starting with "http" redirects a whole host.
+*/ -}}
+# Exemple pour Apache, généré par Hugo depuis data/redirects.yaml.
+# À recopier dans le .htaccess du site une fois l'hébergeur choisi.
+RewriteEngine On
+{{- range hugo.Data.redirects }}
+  {{- if eq .from .to }}{{ continue }}{{ end }}
+  {{- $flag := printf "[R=%d,L]" (.status | default 301) }}
+  {{- if hasPrefix .from "http" }}
+    {{- $u := urls.Parse (strings.TrimSuffix "*" .from) }}
+RewriteCond %{HTTP_HOST} ^{{ replace $u.Host "." `\.` }}$ [NC]
+RewriteRule ^(.*)$ {{ replace .to ":splat" "$1" }} {{ $flag }}
+  {{- end }}
+{{- end }}
+{{- range hugo.Data.redirects }}
+  {{- if or (eq .from .to) (hasPrefix .from "http") }}{{ continue }}{{ end }}
+  {{- $flag := printf "[R=%d,L]" (.status | default 301) }}
+  {{- $path := replace (strings.TrimPrefix "/" .from) "." `\.` }}
+  {{- if hasSuffix $path "*" }}
+RewriteRule ^{{ strings.TrimSuffix "*" $path }}(.*)$ {{ replace .to ":splat" "$1" }} {{ $flag }}
+  {{- else }}
+RewriteRule ^{{ strings.TrimSuffix "/" $path }}/?$ {{ .to }} {{ $flag }}
+  {{- end }}
+{{- end }}

@@ -6,6 +6,43 @@
   [module.hugoVersion]
     min = "0.166.0"
 
+# Output formats for search engines and AI agents (Lot 5): see README, "SEO et agents IA".
+[mediaTypes]
+  [mediaTypes."text/netlify"]
+    delimiter = ""
+  [mediaTypes."text/x-htaccess"]
+    suffixes = ["htaccess"]
+
+[outputFormats]
+  # /llms.txt and /llms-full.txt (llmstxt.org)
+  [outputFormats.llms]
+    baseName = "llms"
+    mediaType = "text/plain"
+    isPlainText = true
+    notAlternative = true
+    root = true
+  [outputFormats.llmsfull]
+    baseName = "llms-full"
+    mediaType = "text/plain"
+    isPlainText = true
+    notAlternative = true
+    root = true
+  # Redirections read from data/redirects.yaml: Netlify / Cloudflare Pages, and an Apache example.
+  [outputFormats.redirects]
+    baseName = "_redirects"
+    mediaType = "text/netlify"
+    isPlainText = true
+    notAlternative = true
+    root = true
+  [outputFormats.htaccess]
+    baseName = "redirects"
+    mediaType = "text/x-htaccess"
+    isPlainText = true
+    notAlternative = true
+    root = true
+# Hugo does not merge `outputs` from a theme: the site enables these formats in its own
+# configuration (see README, "SEO et agents IA").
+
 [params]
   description = ""
 
@@ -65,6 +102,21 @@
   [params.search]
     bundlePath = "/pagefind/"
     shortcut = true        # Ctrl/⌘ + K opens the search dialog
+
+  # SEO and structured data.
+  [params.seo]
+    country = "FR"         # ISO 3166 code used in postal addresses (JSON-LD)
+
+  # AI crawlers in robots.txt (SPEC § 14): allowed by default.
+  [params.aiCrawlers]
+    allow = true
+    agents = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "CCBot", "meta-externalagent"]
+
+  # llms.txt / llms-full.txt: sections listed in this order. Each entry:
+  # { title, path } (all pages under a section) or { title, types } (content types).
+  # Empty = one section per top-level section of the site.
+  [params.llms]
+    sections = []
 
   # Syntax highlighting style of code blocks (Chroma style name, light theme).
   [params.code]
