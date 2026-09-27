@@ -174,3 +174,13 @@ Format : date — décision — raison. Les décisions en attente sont marquées
   - Redirections : `data/redirects.yaml` prérempli à partir du **sitemap complet** du site WordPress actuel (lecture seule), chaque ancienne adresse associée à la nouvelle page la plus proche ; correspondances incertaines marquées « à vérifier ».
   - Validation en ligne du JSON-LD (validator.schema.org, test des résultats enrichis de Google) **reportée** : contrôle local par script pendant le lot, validation en ligne à autoriser plus tard.
   - Hébergeur non choisi : `_redirects` (Netlify, Cloudflare Pages) et exemple `redirects.htaccess` (Apache), comme prévu par la SPEC.
+
+- **2026-09-27 — Lot 5 : choix de réalisation.**
+  - `outputs` déclaré dans la configuration du site : Hugo ne reprend pas ce réglage depuis un thème (vérifié avec `hugo config`). Le thème définit les formats et documente la configuration à reprendre.
+  - Police Geist en TrueType (`assets/fonts/Geist-Medium.ttf`, 125 Ko, dépôt officiel vercel/geist-font) téléchargée avec l'accord de l'utilisateur : `images.Text` n'accepte pas le WOFF2. Utilisée au build seulement, jamais servie.
+  - Images de partage : aplat `style.brand` obtenu en agrandissant un pixel (`images.Padding`) ; texte écrit sur un canevas de 1112 px puis marge droite ajoutée, pour des marges symétriques.
+  - Aucune valeur provisoire dans le JSON-LD, `llms.txt` et `llms-full.txt` (`func/real.html`). Conséquences : une page au titre provisoire ne publie ni entité ni `BreadcrumbList` ; un événement sans lieu réel ne publie pas d'`Event` (lieu exigé par Google) ; une formation au résumé provisoire reçoit une description factuelle (« Formation NPrinting (Qlik) proposée par Excelcio. »).
+  - Offres d'emploi : **aucune date affichée**, ni dans la page ni dans les données structurées (demande de l'utilisateur). `datePosted` étant exigé par Google pour les offres d'emploi, les offres ne seront pas éligibles aux résultats enrichis « emploi ».
+  - Le `FAQPage` que la section FAQ du Lot 2 émettait seule (avec les questions provisoires) est remplacé par celui du graphe de la page, limité aux vraies questions.
+  - Redirections : règles par préfixe (`/tag/*`, `/category/*`, `/20XX/*`, `/clients/*`) plutôt qu'une ligne par ancienne adresse : les 121 articles ne sont pas repris, et les anciennes pages clients portent des noms de clients réels, qui ne doivent pas apparaître dans les fichiers publiés. L'ancien site est servi sans « www » : première règle `excelcio.com` → `www.excelcio.com`.
+  - Pages de taxonomie (`/secteurs/`, `/tags/`) : version Markdown aussi, pour que chaque page ait son `index.md`.

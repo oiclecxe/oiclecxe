@@ -7,8 +7,8 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 ## État d'avancement
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
-- Périmètre : V1 (lots 0 à 2) validée ; lots 3 et 4 réalisés et validés (27/09/2026). Lot 5 en préparation (questions préalables).
-- Lot en cours : **Lot 5 — SEO et agents IA** : questions préalables traitées, en attente du lancement
+- Périmètre : V1 (lots 0 à 2) validée ; lots 3 et 4 réalisés et validés (27/09/2026). Lot 5 réalisé (27/09/2026). S'arrêter après le Lot 5.
+- Lot en cours : **Lot 5 — SEO et agents IA** : terminé, en attente de validation
 - Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026), Lot 4 (27/09/2026)
 - Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
