@@ -111,7 +111,7 @@ Les gabarits sont choisis par **type** (champ `type`, en général posé par `ca
 |---|---|---|
 | `solution` | `solution/section.html`, `solution/page.html` | `solution.md` |
 | `expertise` | `expertise/section.html`, `expertise/page.html` | `expertise.md` |
-| `training` | `training/section.html` (catalogue filtrable, prochaines sessions), `training/page.html` | `training.md` |
+| `training` | `training/section.html` (catalogue filtrable par étiquettes de solution, prochaines sessions), `training/page.html` | `training.md` |
 | `case-study` | `case-study/section.html` (filtrable), `case-study/page.html` | `case-study.md` |
 | `article` | `article/section.html` (à la une, pagination), `article/page.html` (sommaire) | `article.md` |
 | `event` | `event/section.html` (à venir / passés), `event/page.html` | `event.md` |

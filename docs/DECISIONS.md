@@ -138,3 +138,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Moteur Markdown : Goldmark (intégré), pas Pandoc.** Décision de l'utilisateur. Pandoc, bien qu'installé, désactiverait les *render hooks* du thème (images AVIF/WebP, texte alternatif obligatoire, vérification des liens), ralentirait le build et imposerait Pandoc chez l'hébergeur. Extensions activées dans `config/_default/markup.toml` : texte supprimé `~~…~~` (remplace l'extension « barré », incompatible avec l'indice), inséré `++…++`, surligné `==…==`, indice `H~2~O`, exposant `1^er^` ; guillemets français automatiques avec espace fine insécable.
 
+
+- **2026-09-27 — Catalogue : filtre par solution en étiquettes cliquables** (demande de l'utilisateur), au lieu d'une liste déroulante. Groupe de boutons radio habillés en étiquettes (« Tous » + une étiquette par solution, avec le nombre de formations), utilisable au clavier (flèches) et synchronisé avec l'URL. Le composant `filters.html` accepte `style: tags` par filtre ; les autres filtres (cas clients, niveau et format) restent en listes déroulantes. Entrée de menu « Formations par solution » retirée.
+

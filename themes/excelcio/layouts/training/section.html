@@ -11,7 +11,7 @@
 
   {{- /* Filter values actually present in the trainings. */}}
   {{- $solutionValues := slice }}
-  {{- range $slugs }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .)) }}{{ end }}
+  {{- range $slugs }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .) "count" (len (where $trainings "Params.solutions" "intersect" (slice .)))) }}{{ end }}
   {{- $levels := slice }}{{ $formats := slice }}
   {{- range $trainings }}
     {{- with .Params.level }}{{ if not (in $levels .) }}{{ $levels = $levels | append . }}{{ end }}{{ end }}
@@ -26,7 +26,7 @@
         <h2 id="catalogue-title">{{ T "catalogueTitle" (dict "Count" (len $trainings)) }}</h2>
       </div>
       {{- partial "components/filters.html" (dict "id" "trainings" "filters" (slice
-          (dict "name" "solution" "label" (T "filterSolution") "values" $solutionValues)
+          (dict "name" "solution" "label" (T "filterSolution") "values" $solutionValues "style" "tags")
           (dict "name" "level" "label" (T "filterLevel") "values" $levelValues)
           (dict "name" "format" "label" (T "filterFormat") "values" $formatValues))) }}
 

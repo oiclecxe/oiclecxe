@@ -80,7 +80,7 @@ Les formations, cas clients et actualités de la solution s'affichent **automati
 |---|---|
 | `code` | Code catalogue |
 | `solutions` | Solution(s) concernée(s), ex. `[qlik]` : range la formation dans le catalogue et sur la page solution |
-| `level`, `format` | Niveau et format (texte libre). Les filtres du catalogue apparaissent dès que **deux valeurs différentes** existent |
+| `level`, `format` | Niveau et format (texte libre). Les filtres du catalogue apparaissent dès que **deux valeurs différentes** existent. Le filtre par solution s'affiche en étiquettes cliquables, avec le nombre de formations de chaque solution |
 | `durationDays` | Durée en jours (`0` = « [Durée] ») |
 | `price` | Tarif affiché ; vide = « Sur demande » |
 | `objectives`, `audience`, `prerequisites` | Listes de puces |

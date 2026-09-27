@@ -2,22 +2,44 @@
   Client-side filter bar (enhanced by filters.js; hidden without JS).
   Options are built from the values actually present in the items, so a
   filter with fewer than two values is not shown.
-  Context: dict "id" (string), "filters" (slice of {name, label, values: slice of {value, label}}).
+  Context: dict "id" (string), "filters" (slice of
+    {name, label, style: "select" (default) | "tags", values: slice of {value, label, count}}).
+  "tags" renders a radio group styled as clickable tags (keyboard: arrow keys), with an “All” tag.
 */ -}}
 {{- $shown := slice -}}
 {{- range .filters }}{{ if ge (len .values) 2 }}{{ $shown = $shown | append . }}{{ end }}{{ end -}}
+{{- $hasSelect := false -}}
+{{- range $shown }}{{ if ne .style "tags" }}{{ $hasSelect = true }}{{ end }}{{ end -}}
 {{- with $shown }}
 <form class="filters" data-filters="{{ $.id }}" aria-label="{{ T "filtersLabel" }}" data-label-one="{{ T "resultCount" 1 }}" data-label-other="{{ T "resultCount" 999999 }}">
-  {{- range . }}
+  {{- range $f := . }}
+    {{- if eq $f.style "tags" }}
+  <fieldset class="filters__tags">
+    <legend class="filters__label">{{ $f.label }}</legend>
+    <label class="filter-tag">
+      <input class="filter-tag__input" type="radio" name="{{ $f.name }}" value="" checked>
+      <span class="filter-tag__text">{{ T "filterAll" }}</span>
+    </label>
+    {{- range $f.values }}
+    <label class="filter-tag">
+      <input class="filter-tag__input" type="radio" name="{{ $f.name }}" value="{{ .value }}">
+      <span class="filter-tag__text">{{ .label }}{{ with .count }}<span class="filter-tag__count">{{ . }}</span>{{ end }}</span>
+    </label>
+    {{- end }}
+  </fieldset>
+    {{- else }}
   <label class="filters__field">
-    <span class="filters__label">{{ .label }}</span>
-    <select class="filters__select" name="{{ .name }}">
+    <span class="filters__label">{{ $f.label }}</span>
+    <select class="filters__select" name="{{ $f.name }}">
       <option value="">{{ T "filterAll" }}</option>
-      {{- range .values }}<option value="{{ .value }}">{{ .label }}</option>{{ end }}
+      {{- range $f.values }}<option value="{{ .value }}">{{ .label }}</option>{{ end }}
     </select>
   </label>
+    {{- end }}
   {{- end }}
   <p class="filters__count" aria-live="polite" data-filters-count></p>
+  {{- if $hasSelect }}
   <button class="btn btn--secondary btn--sm" type="reset">{{ T "filterReset" }}</button>
+  {{- end }}
 </form>
 {{- end -}}

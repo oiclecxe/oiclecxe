@@ -70,13 +70,6 @@
     group = "Se former"
 [[main]]
   parent = "formations"
-  name = "Formations par solution"
-  url = "/formations/#par-solution"
-  weight = 12
-  [main.params]
-    group = "Se former"
-[[main]]
-  parent = "formations"
   name = "Prochaines sessions"
   url = "/formations/#sessions"
   weight = 13
