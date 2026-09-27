@@ -12,7 +12,7 @@
 {{- end -}}
 {{- if eq .Type "training" }}
   {{- with .Params.code }}{{ $facts = $facts | append (printf "%s : %s" (T "factCode") .) }}{{ end }}
-  {{- with .Params.durationDays }}{{ $facts = $facts | append (printf "%s : %s" (T "factDuration") (T "days" .)) }}{{ end }}
+  {{- with .Params.durationDays }}{{ $facts = $facts | append (printf "%s : %s" (T "factDuration") (T "days" (int .))) }}{{ end }}
   {{- with .Params.level }}{{ $facts = $facts | append (printf "%s : %s" (T "factLevel") .) }}{{ end }}
   {{- with .Params.format }}{{ $facts = $facts | append (printf "%s : %s" (T "factFormat") .) }}{{ end }}
   {{- $facts = $facts | append (printf "%s : %s" (T "factPrice") (.Params.price | default (T "priceOnRequest"))) }}

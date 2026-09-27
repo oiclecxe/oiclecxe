@@ -2,7 +2,7 @@
 <ul class="rows" role="list">
   {{- range . }}
   <li class="rows__item">
-    <p class="rows__key mono">{{ with .Params.code }}{{ . }} · {{ end }}{{ with .Params.durationDays }}{{ T "days" . }}{{ else }}{{ T "durationTBC" }}{{ end }}</p>
+    <p class="rows__key mono">{{ with .Params.code }}{{ . }} · {{ end }}{{ with .Params.durationDays }}{{ T "days" (int .) }}{{ else }}{{ T "durationTBC" }}{{ end }}</p>
     <h3 class="rows__title"><a class="rows__link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     <div class="rows__body">
       {{- with or .Params.summary .Description }}<p>{{ . }}</p>{{ end }}

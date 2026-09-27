@@ -715,3 +715,36 @@
     opacity: 1;
   }
 }
+
+@layer components {
+  /* Testimonial (trainees' reviews, collaborators' words). */
+  .testimonial {
+    display: grid;
+    align-content: space-between;
+    gap: var(--sp-6);
+    height: 100%;
+    margin: 0;
+    padding: var(--sp-7);
+    background: var(--surface);
+  }
+
+  .testimonial__text {
+    margin: 0;
+    color: var(--fg);
+    font-size: var(--fs-lead);
+    line-height: var(--lh-relaxed);
+  }
+
+  .testimonial__author {
+    display: grid;
+    gap: var(--sp-1);
+    color: var(--fg);
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-medium);
+  }
+
+  .testimonial__context {
+    color: var(--fg-body);
+    font-weight: var(--fw-regular);
+  }
+}

@@ -1,0 +1,54 @@
+# Informations communes à toutes les formations (textes repris de excelcio.com, relevés le 27/09/2026).
+# info : blocs « Informations complémentaires » de chaque fiche formation.
+# testimonials : avis de stagiaires, affichés sur les fiches des solutions citées.
+info:
+  - title: "Évaluation de la formation"
+    items:
+      - "Entretien informel."
+      - "Contrôle des connaissances par échange de questions et réponses."
+      - "Questionnaire d’évaluation."
+      - "Questionnaire de satisfaction sur la formation suivie."
+  - title: "Formalités administratives"
+    items:
+      - "Feuille de présence ou capture d’écran des participants, pour valider leur présence."
+      - "Remise d’un certificat de réalisation en fin de stage."
+  - title: "Délai d’accès aux formations"
+    items:
+      - "2 semaines, à confirmer lors de la contractualisation, selon la disponibilité des stagiaires et des formateurs."
+  - title: "Accessibilité aux personnes en situation de handicap"
+    items:
+      - "Contactez votre interlocuteur commercial ou écrivez à [formation@excelcio.com](mailto:formation@excelcio.com), ou appelez le 01 71 19 45 00."
+
+testimonials:
+  - text: "Que c’est agréable de suivre la formation d’un formateur aussi passionné qui prend plaisir à transmettre son savoir. Le déroulé était d’ailleurs très bien construit et présentait une belle logique pédagogique. Merci !"
+    author: "Alizée F."
+    context: "Formation Qlik Sense"
+    solutions: [qlik]
+  - text: "Bonne formation complète, avec un déroulé logique qui nous aide à la compréhension du logiciel."
+    author: "Adrien L."
+    context: "Formation Qlik Sense"
+    solutions: [qlik]
+  - text: "Très bonne formation avec un formateur très à l’écoute et pédagogue. Bonnes explications, tout bon comme d’habitude !"
+    author: "Jimmy S."
+    context: "Formation Qlik Sense"
+    solutions: [qlik]
+  - text: "Ces 3 jours de formation étaient très enrichissants. Jedox correspond à ce que j’avais perçu de l’outil, donc je suis satisfaite. Son utilisation est assez intuitive. La formatrice a été très pédagogue, et a su s’adapter à notre rythme. Merci pour ces 3 jours."
+    author: "Lucie G."
+    context: "Formation Jedox"
+    solutions: [jedox]
+  - text: "Encore un grand merci pour ces 2 jours de formation. Très clair et instructif, à nous maintenant de mettre en application."
+    author: "Pascal H."
+    context: "Formation Qlik Sense"
+    solutions: [qlik]
+  - text: "Formateur au top, pédagogue, calme et posé. Répond bien à toutes nos questions. Contenu conforme à l’attendu et contextualisé. Merci, c’était vraiment super !"
+    author: "Sarah C."
+    context: "Formation Power BI"
+    solutions: [power-bi]
+  - text: "Formation qualitative, bien équilibrée, où chaque participant (niveau hétérogène) a pu s’enrichir sur diverses thématiques."
+    author: "Raphaël A."
+    context: "Formation Qlik Sense"
+    solutions: [qlik]
+  - text: "Excelcio est un véritable partenaire sur lequel je peux compter au quotidien. Le haut niveau d’exigence et de compétences d’Excelcio nous a permis de développer, d’optimiser et de pérenniser notre Business Intelligence. #KeepGoingOn"
+    author: "Florian W."
+    context: "Formation Qlik"
+    solutions: [qlik]

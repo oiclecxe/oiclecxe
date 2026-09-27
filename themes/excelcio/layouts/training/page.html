@@ -7,10 +7,12 @@
     <div class="container with-aside">
       <div class="with-aside__main">
         <dl class="facts">
-          <div class="facts__item"><dt>{{ T "factCode" }}</dt><dd class="mono">{{ .Params.code | default "[XX]" }}</dd></div>
-          <div class="facts__item"><dt>{{ T "factDuration" }}</dt><dd>{{ with .Params.durationDays }}{{ T "days" . }}{{ else }}{{ T "durationTBC" }}{{ end }}</dd></div>
-          <div class="facts__item"><dt>{{ T "factLevel" }}</dt><dd>{{ .Params.level | default "[Niveau]" }}</dd></div>
-          <div class="facts__item"><dt>{{ T "factFormat" }}</dt><dd>{{ .Params.format | default "[Format]" }}</dd></div>
+          {{- /* Empty facts are shown as placeholders while the page is a draft, hidden once it is written. */}}
+          {{- $draft := .Params.placeholder }}
+          {{- if or .Params.code $draft }}<div class="facts__item"><dt>{{ T "factCode" }}</dt><dd class="mono">{{ .Params.code | default "[XX]" }}</dd></div>{{ end }}
+          <div class="facts__item"><dt>{{ T "factDuration" }}</dt><dd>{{ with .Params.durationDays }}{{ T "days" (int .) }}{{ else }}{{ T "durationTBC" }}{{ end }}</dd></div>
+          {{- if or .Params.level $draft }}<div class="facts__item"><dt>{{ T "factLevel" }}</dt><dd>{{ .Params.level | default "[Niveau]" }}</dd></div>{{ end }}
+          {{- if or .Params.format $draft }}<div class="facts__item"><dt>{{ T "factFormat" }}</dt><dd>{{ .Params.format | default "[Format]" }}</dd></div>{{ end }}
           <div class="facts__item"><dt>{{ T "factPrice" }}</dt><dd>{{ with .Params.price }}{{ . }}{{ else }}{{ T "priceOnRequest" }}{{ end }}</dd></div>
         </dl>
 
@@ -38,6 +40,21 @@
         {{- end }}
 
         {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+
+        {{- /* Information common to every training (data/training.yaml: info). */}}
+        {{- with hugo.Data.training.info }}
+        <section class="block" aria-labelledby="info-title">
+          <h2 class="block__title" id="info-title">{{ T "trainingInfo" }}</h2>
+          <div class="accordion">
+            {{- range . }}
+            <details class="accordion__item">
+              <summary class="accordion__summary"><h3 class="accordion__question">{{ .title }}</h3>{{ partialCached "icon.html" (dict "name" "plus" "class" "accordion__icon") "plus" "accordion__icon" }}</summary>
+              <div class="accordion__body"><ul class="check-list" role="list">{{ range .items }}<li>{{ . | markdownify }}</li>{{ end }}</ul></div>
+            </details>
+            {{- end }}
+          </div>
+        </section>
+        {{- end }}
       </div>
 
       <aside class="with-aside__aside" id="inscription" aria-labelledby="register-title">
@@ -72,6 +89,30 @@
       </aside>
     </div>
   </section>
+
+  {{- /* Trainees' reviews on this training's solutions (data/training.yaml: testimonials). */}}
+  {{- $mine := partial "func/solution-names.html" .Params.solutions }}
+  {{- $reviews := slice }}
+  {{- range hugo.Data.training.testimonials }}
+    {{- if intersect (partial "func/solution-names.html" .solutions) $mine }}{{ $reviews = $reviews | append . }}{{ end }}
+  {{- end }}
+  {{- with first 3 $reviews }}
+  <section class="section tone-light" aria-labelledby="reviews-title" data-pagefind-ignore>
+    <div class="container">
+      <h2 class="section__head--tight" id="reviews-title">{{ T "reviewsTitle" }}</h2>
+      <ul class="grid grid--3" role="list">
+        {{- range . }}
+        <li>
+          <figure class="testimonial">
+            <blockquote class="testimonial__text"><p>{{ .text }}</p></blockquote>
+            <figcaption class="testimonial__author">{{ .author }}{{ with .context }}<span class="testimonial__context">{{ . }}</span>{{ end }}</figcaption>
+          </figure>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- end }}
 
   {{- $related := slice }}
   {{- with partial "func/as-list.html" .Params.solutions }}

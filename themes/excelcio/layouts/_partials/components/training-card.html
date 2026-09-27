@@ -10,7 +10,7 @@
   {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "card__corner") "arrow-up-right" "card__corner" }}
   <p class="card__facts">
     {{- with $p.Params.level }}<span class="tag">{{ . }}</span>{{ end }}
-    {{- with $p.Params.durationDays }}<span class="tag">{{ T "days" . }}</span>{{ end }}
+    {{- with $p.Params.durationDays }}<span class="tag">{{ T "days" (int .) }}</span>{{ end }}
     {{- with $p.Params.format }}<span class="tag">{{ . }}</span>{{ end }}
     {{- if not (or $p.Params.level $p.Params.durationDays $p.Params.format) }}<span class="tag tag--tbc">{{ T "detailsTBC" }}</span>{{ end }}
   </p>
