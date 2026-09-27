@@ -44,8 +44,7 @@
         <div class="register-box">
           <h2 class="register-box__title" id="register-title">{{ T "registerTitle" }}</h2>
           {{- $sessions := partial "func/upcoming-sessions.html" (dict "pages" (slice $p)) }}
-          {{- $reg := .Params.registration | default dict }}
-          {{- $external := and (eq $reg.type "external") $reg.url }}
+          {{- $external := partial "func/external-registration.html" . }}
           {{- $form := partial "func/url-of-type.html" "registration" }}
           {{- $slug := .File.ContentBaseName }}
           {{- with $sessions }}
@@ -64,7 +63,7 @@
           {{- end }}
           {{- /* External registration: one button. Otherwise a session request (other dates, in-company). */}}
           {{- if $external }}
-          <a class="btn btn--primary" href="{{ $reg.url }}" rel="noopener">{{ T "register" }}</a>
+          <a class="btn btn--primary" href="{{ $external }}" rel="noopener">{{ T "register" }}</a>
           {{- else if $form }}
           <a class="btn {{ cond (gt (len $sessions) 0) "btn--secondary" "btn--primary" }}" href="{{ $form }}?formation={{ $slug }}">{{ T "registerRequest" }}</a>
           {{- end }}

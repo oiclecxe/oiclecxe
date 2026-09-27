@@ -3,7 +3,7 @@
 {{- range slice "subjectConsulting" "subjectDeployment" "subjectTraining" "subjectPartnership" "subjectOther" }}
   {{- $subjects = $subjects | append (dict "value" (T .) "label" (T .)) }}
 {{- end -}}
-{{- $name := site.Params.organization.name | default site.Title -}}
+{{- $name := partial "func/org-name.html" . -}}
 {{- partial "forms/form.html" (dict
   "name" "contact"
   "id" "contact"

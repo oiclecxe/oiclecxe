@@ -1,0 +1,7 @@
+{{- /*
+  Whether an event is over: its end (`end`, else `start`) is in the past. An event
+  without any date counts as past. Context: page. Returns: bool.
+*/ -}}
+{{- $past := true -}}
+{{- with .Params.end | default .Params.start }}{{ $past = lt (time .).Unix now.Unix }}{{ end -}}
+{{- return $past -}}

@@ -141,6 +141,6 @@
 
 ## {{ T "mdPages" }}
 {{ range .Pages }}
-- [{{ .LinkTitle }}]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ .Permalink }}{{ end }}){{ with partial "func/real.html" (.Description | default "") }} : {{ . }}{{ end }}
+- [{{ .LinkTitle }}]({{ partial "func/markdown-url.html" . }}){{ with partial "func/real.html" (.Description | default "") }} : {{ . }}{{ end }}
 {{- end }}
 {{- end }}

@@ -3,7 +3,7 @@
 {{- $o := dict
   "@type" "Organization"
   "@id" (printf "%s#organization" site.Home.Permalink)
-  "name" ($org.name | default site.Title)
+  "name" (partial "func/org-name.html" .)
   "url" site.Home.Permalink
 -}}
 {{- with partial "func/real.html" ($org.legalName | default "") }}{{ $o = merge $o (dict "legalName" .) }}{{ end -}}

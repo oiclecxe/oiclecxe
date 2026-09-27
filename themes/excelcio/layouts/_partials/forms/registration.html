@@ -14,8 +14,7 @@
 {{- $sessionGroups := slice -}}
 {{- range sort (where site.RegularPages "Type" "training") "Title" }}
   {{- $t := . }}
-  {{- $reg := .Params.registration | default dict }}
-  {{- if not (and (eq $reg.type "external") $reg.url) }}
+  {{- if not (partial "func/external-registration.html" .) }}
     {{- $key := printf "formation:%s" .File.ContentBaseName }}
     {{- $trainingOptions = $trainingOptions | append (dict "value" (printf "%s : %s" (T "typeTraining") .Title) "label" .Title "key" $key) }}
     {{- $sessions := slice }}
@@ -28,9 +27,7 @@
 {{- end -}}
 {{- $eventOptions := slice -}}
 {{- range sort (where site.RegularPages "Type" "event") "Params.start" }}
-  {{- $reg := .Params.registration | default dict }}
-  {{- $past := lt (time (.Params.end | default .Params.start)).Unix now.Unix }}
-  {{- if and (not $past) (not (and (eq $reg.type "external") $reg.url)) }}
+  {{- if not (or (partial "func/event-past.html" .) (partial "func/external-registration.html" .)) }}
     {{- $eventOptions = $eventOptions | append (dict "value" (printf "%s : %s" (T "typeEvent") .Title) "label" .Title "key" (printf "evenement:%s" .File.ContentBaseName)) }}
   {{- end }}
 {{- end -}}
@@ -42,7 +39,7 @@
   (dict "value" (T "sessionIntra") "label" (T "sessionIntra") "key" "intra")
 -}}
 {{- $sessionOptions = $sessionOptions | append $sessionGroups -}}
-{{- $name := site.Params.organization.name | default site.Title -}}
+{{- $name := partial "func/org-name.html" . -}}
 {{- partial "forms/form.html" (dict
   "name" "registration"
   "id" "registration"

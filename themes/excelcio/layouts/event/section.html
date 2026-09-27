@@ -1,10 +1,8 @@
 {{- define "main" }}
   {{- partial "components/page-hero.html" . }}
-  {{- $today := now.Unix }}
   {{- $upcoming := slice }}{{ $past := slice }}
   {{- range .Pages.ByParam "start" }}
-    {{- $end := .Params.end | default .Params.start }}
-    {{- if and $end (ge (time $end).Unix $today) }}{{ $upcoming = $upcoming | append . }}{{ else }}{{ $past = $past | append . }}{{ end }}
+    {{- if partial "func/event-past.html" . }}{{ $past = $past | append . }}{{ else }}{{ $upcoming = $upcoming | append . }}{{ end }}
   {{- end }}
   {{- range $block := slice (dict "id" "upcoming" "title" (T "eventsUpcoming") "items" $upcoming "tone" "tone-light" "empty" (T "noEventsUpcoming"))
                           (dict "id" "past" "title" (T "eventsPast") "items" ($past | collections.Reverse) "tone" "tone-light-alt" "empty" "") }}

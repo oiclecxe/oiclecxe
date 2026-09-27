@@ -15,7 +15,7 @@
 {{- if eq .Type "training" }}
   {{- $about := partial "func/solution-names.html" .Params.solutions }}
   {{- /* Required description: the summary, or a factual sentence built from real data. */}}
-  {{- $fallback := T "courseDescription" (dict "Name" $name "Solutions" (delimit $about ", ") "Org" (site.Params.organization.name | default site.Title)) }}
+  {{- $fallback := T "courseDescription" (dict "Name" $name "Solutions" (delimit $about ", ") "Org" (partial "func/org-name.html" .)) }}
   {{- $e = dict "@type" "Course" "@id" (printf "%s#course" .Permalink) "name" $name "url" .Permalink "provider" $org "inLanguage" site.Language.Locale "mainEntityOfPage" $page "description" ($desc | default $fallback) }}
   {{- with partial "func/real.html" (.Params.code | default "") }}{{ $e = merge $e (dict "courseCode" .) }}{{ end }}
   {{- with $about }}{{ $e = merge $e (dict "about" .) }}{{ end }}

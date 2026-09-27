@@ -1,6 +1,6 @@
 {{- define "main" }}
   {{- $p := . }}
-  {{- $past := lt (time (.Params.end | default .Params.start)).Unix now.Unix }}
+  {{- $past := partial "func/event-past.html" . }}
   {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (cond $past (T "eventPast") (T "eventEyebrow"))) }}
   <section class="section tone-light">
     <div class="container with-aside">
@@ -30,9 +30,8 @@
       <aside class="with-aside__aside" id="inscription" aria-labelledby="register-title">
         <div class="register-box">
           <h2 class="register-box__title" id="register-title">{{ T "registerTitle" }}</h2>
-          {{- $reg := .Params.registration }}
-          {{- if and $reg (eq $reg.type "external") $reg.url }}
-          <a class="btn btn--primary" href="{{ $reg.url }}" rel="noopener">{{ T "register" }}</a>
+          {{- with partial "func/external-registration.html" . }}
+          <a class="btn btn--primary" href="{{ . }}" rel="noopener">{{ T "register" }}</a>
           {{- else }}
             {{- with partial "func/url-of-type.html" "registration" }}
           <a class="btn btn--primary" href="{{ . }}?evenement={{ $p.File.ContentBaseName }}">{{ T "register" }}</a>

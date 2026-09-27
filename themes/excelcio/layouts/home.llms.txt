@@ -1,6 +1,6 @@
 {{- /* /llms.txt (llmstxt.org): title, summary, key facts, then one section per group with links to the Markdown versions. */ -}}
 {{- $org := site.Params.organization -}}
-# {{ $org.name | default site.Title }}
+# {{ partial "func/org-name.html" . }}
 {{ with partial "func/real.html" (site.Params.description | default "") }}
 > {{ . }}
 {{ end }}
@@ -19,6 +19,6 @@
 
 ## {{ .title }}
 {{ range .pages }}
-- [{{ .Title }}]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ .Permalink }}{{ end }}){{ with or (partial "func/real.html" (.Params.summary | default "")) (partial "func/real.html" (.Description | default "")) }}: {{ . | plainify }}{{ end }}
+- [{{ .Title }}]({{ partial "func/markdown-url.html" . }}){{ with or (partial "func/real.html" (.Params.summary | default "")) (partial "func/real.html" (.Description | default "")) }}: {{ . | plainify }}{{ end }}
 {{- end }}
 {{- end }}

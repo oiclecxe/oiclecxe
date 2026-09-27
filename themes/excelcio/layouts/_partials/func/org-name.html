@@ -1,0 +1,3 @@
+{{- /* Name of the organization (params.organization.name), else the site title. Returns: string. */ -}}
+{{- $name := site.Params.organization.name | default site.Title -}}
+{{- return $name -}}

@@ -14,7 +14,7 @@
   {{- $n := dict
     "@type" "ProfessionalService"
     "@id" (printf "%s#office-%s" site.Home.Permalink (urlize .city))
-    "name" (printf "%s %s" ($org.name | default site.Title) .city)
+    "name" (printf "%s %s" (partial "func/org-name.html" .) .city)
     "url" site.Home.Permalink
     "parentOrganization" (dict "@id" (printf "%s#organization" site.Home.Permalink))
     "address" $address

@@ -4,7 +4,7 @@
   Context: dict "id" (unique on the page), "compact" (bool).
 */ -}}
 {{- $s := partial "forms/settings.html" "newsletter" -}}
-{{- $name := site.Params.organization.name | default site.Title -}}
+{{- $name := partial "func/org-name.html" . -}}
 {{- partial "forms/form.html" (dict
   "name" "newsletter"
   "id" (.id | default "newsletter")

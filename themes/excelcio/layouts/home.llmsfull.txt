@@ -1,5 +1,5 @@
 {{- /* /llms-full.txt: full text of the published pages (placeholder pages excluded in production), by group. */ -}}
-# {{ site.Params.organization.name | default site.Title }}
+# {{ partial "func/org-name.html" . }}
 {{ with partial "func/real.html" (site.Params.description | default "") }}
 > {{ . }}
 {{ end }}

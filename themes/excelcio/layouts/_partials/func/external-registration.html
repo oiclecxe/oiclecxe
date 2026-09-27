@@ -1,0 +1,8 @@
+{{- /*
+  URL of an external registration tool (`registration: { type: external, url: … }`),
+  used instead of the site's registration form. Context: page. Returns: URL or "".
+*/ -}}
+{{- $reg := .Params.registration | default dict -}}
+{{- $url := "" -}}
+{{- if and (eq $reg.type "external") $reg.url }}{{ $url = $reg.url }}{{ end -}}
+{{- return $url -}}

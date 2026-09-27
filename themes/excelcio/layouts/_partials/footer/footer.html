@@ -68,7 +68,7 @@
     {{- end }}
 
     <div class="site-footer__legal">
-      <p class="mono">© {{ now.Year }} {{ $org.name | default site.Title }}.{{ with $org.legalName }} {{ . }}.{{ end }}</p>
+      <p class="mono">© {{ now.Year }} {{ partial "func/org-name.html" . }}.{{ with $org.legalName }} {{ . }}.{{ end }}</p>
       {{- with $org.registration }}<p>{{ . }}</p>{{ end }}
       {{- with $org.email }}<p><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
     </div>

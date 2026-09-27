@@ -1,0 +1,4 @@
+{{- /* URL of the Markdown version of a page (index.md), else of the page itself. Context: page. Returns: absolute URL. */ -}}
+{{- $url := .Permalink -}}
+{{- with .OutputFormats.Get "markdown" }}{{ $url = .Permalink }}{{ end -}}
+{{- return $url -}}
