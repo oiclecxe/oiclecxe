@@ -3,33 +3,14 @@
   {{- $trainings := .Pages }}
 
   {{- /*
-    Solutions come from the trainings themselves (single source of truth): every
-    value cited in a `solutions` field (one value or a list) gets a tag and a
-    group, even without a solution page. Solutions having a page come first, in
-    page order; the others follow alphabetically. Trainings citing no solution go
-    to an “other” group.
+    Filters read from the trainings themselves (single source of truth): every value
+    cited in `solutions` (one value or a list) gets a tag and a group, even without
+    a solution page; trainings citing no solution go to an “other” group.
   */}}
-  {{- $facet := partial "func/facet.html" (dict "pages" $trainings "key" "solutions") }}
-  {{- $counts := dict }}{{ range $facet.values }}{{ $counts = merge $counts (dict .value .count) }}{{ end }}
-  {{- $slugs := slice }}
-  {{- range (where site.RegularPages "Type" "solution").ByWeight }}
-    {{- $s := urlize .File.ContentBaseName }}
-    {{- if isset $counts $s }}{{ $slugs = $slugs | append $s }}{{ end }}
-  {{- end }}
-  {{- $cited := slice }}{{ range $facet.values }}{{ $cited = $cited | append .value }}{{ end }}
-  {{- range sort (complement $slugs $cited) }}{{ $slugs = $slugs | append . }}{{ end }}
-  {{- $orphans := $facet.orphans }}
-
-  {{- /* Filter values actually present in the trainings. */}}
-  {{- $solutionValues := slice }}
-  {{- range $slugs }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .) "count" (index $counts .)) }}{{ end }}
-  {{- $levels := slice }}{{ $formats := slice }}
-  {{- range $trainings }}
-    {{- with .Params.level }}{{ if not (in $levels .) }}{{ $levels = $levels | append . }}{{ end }}{{ end }}
-    {{- with .Params.format }}{{ if not (in $formats .) }}{{ $formats = $formats | append . }}{{ end }}{{ end }}
-  {{- end }}
-  {{- $levelValues := slice }}{{ range $levels }}{{ $levelValues = $levelValues | append (dict "value" (urlize .) "label" .) }}{{ end }}
-  {{- $formatValues := slice }}{{ range $formats }}{{ $formatValues = $formatValues | append (dict "value" (urlize .) "label" .) }}{{ end }}
+  {{- $defs := slice (dict "name" "solution" "key" "solutions") (dict "name" "level" "key" "level") (dict "name" "format" "key" "format") }}
+  {{- $solutions := partial "func/filter-values.html" (dict "pages" $trainings "key" "solutions" "names" "solution") }}
+  {{- $levels := partial "func/filter-values.html" (dict "pages" $trainings "key" "level") }}
+  {{- $formats := partial "func/filter-values.html" (dict "pages" $trainings "key" "format") }}
 
   <section class="section tone-light" id="par-solution" aria-labelledby="catalogue-title">
     <div class="container">
@@ -37,32 +18,31 @@
         <h2 id="catalogue-title">{{ T "catalogueTitle" (dict "Count" (len $trainings)) }}</h2>
       </div>
       {{- partial "components/filters.html" (dict "id" "trainings" "filters" (slice
-          (dict "name" "solution" "label" (T "filterSolution") "values" $solutionValues "style" "tags")
-          (dict "name" "level" "label" (T "filterLevel") "values" $levelValues)
-          (dict "name" "format" "label" (T "filterFormat") "values" $formatValues))) }}
+          (dict "name" "solution" "label" (T "filterSolution") "values" $solutions.values "style" "tags")
+          (dict "name" "level" "label" (T "filterLevel") "values" $levels.values)
+          (dict "name" "format" "label" (T "filterFormat") "values" $formats.values))) }}
 
       <div data-filter-scope="trainings">
-        {{- range $slugs }}
-          {{- $slug := . }}
-          {{- $group := slice }}{{ range $facet.items }}{{ if in .values $slug }}{{ $group = $group | append . }}{{ end }}{{ end }}
+        {{- range $solutions.values }}
+          {{- $slug := .value }}
+          {{- $group := slice }}{{ range $solutions.items }}{{ if in .values $slug }}{{ $group = $group | append .page }}{{ end }}{{ end }}
         <section class="catalogue-group" data-filter-group aria-labelledby="group-{{ $slug }}">
-          <h3 class="catalogue-group__title" id="group-{{ $slug }}">{{ partial "func/solution-name.html" $slug }} <span class="catalogue-group__count">{{ len $group }}</span></h3>
+          <h3 class="catalogue-group__title" id="group-{{ $slug }}">{{ .label }} <span class="catalogue-group__count">{{ len $group }}</span></h3>
           <ul class="grid grid--3" role="list">
             {{- range $group }}
-              {{- $t := .page }}
-            <li data-filter-item data-solution="{{ delimit .values " " }}" data-level="{{ with $t.Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with $t.Params.format }}{{ urlize . }}{{ end }}">
-              {{- partial "components/training-card.html" (dict "page" $t "level" 4) }}
+            <li data-filter-item {{ partial "func/filter-attrs.html" (dict "page" . "filters" $defs) | safeHTMLAttr }}>
+              {{- partial "components/training-card.html" (dict "page" . "level" 4) }}
             </li>
             {{- end }}
           </ul>
         </section>
         {{- end }}
-        {{- with $orphans }}
+        {{- with $solutions.orphans }}
         <section class="catalogue-group" data-filter-group aria-labelledby="group-other">
           <h3 class="catalogue-group__title" id="group-other">{{ T "otherTrainings" }} <span class="catalogue-group__count">{{ len . }}</span></h3>
           <ul class="grid grid--3" role="list">
             {{- range . }}
-            <li data-filter-item data-solution="" data-level="{{ with .Params.level }}{{ urlize . }}{{ end }}" data-format="{{ with .Params.format }}{{ urlize . }}{{ end }}">
+            <li data-filter-item {{ partial "func/filter-attrs.html" (dict "page" . "filters" $defs) | safeHTMLAttr }}>
               {{- partial "components/training-card.html" (dict "page" . "level" 4) }}
             </li>
             {{- end }}

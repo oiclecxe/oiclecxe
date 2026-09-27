@@ -1,0 +1,35 @@
+{{- /*
+  Values of a client-side filter (components/filters.html), read from a front
+  matter field of the listed pages (func/facet.html: one value or a list per page).
+  Context: dict
+    "pages"  pages to filter,
+    "key"    front matter field (e.g. "solutions", "sector", "level"),
+    "names"  how values are displayed: "solution" (solution page name, solutions
+             having a page first in page order, then the others alphabetically),
+             "sector" (func/term-name.html, alphabetical), default: as entered,
+             in order of first appearance.
+  Returns: dict
+    "values"  slice of {value (URL form), label, count},
+    "items"   slice of {page, values} (values of each page, URL form),
+    "orphans" pages without any value.
+*/ -}}
+{{- $facet := partial "func/facet.html" (dict "pages" .pages "key" .key) -}}
+{{- $values := slice -}}
+{{- range $facet.values }}
+  {{- $label := .raw }}
+  {{- if eq $.names "solution" }}{{ $label = partial "func/solution-name.html" .value }}
+  {{- else if eq $.names "sector" }}{{ $label = partial "func/term-name.html" .raw }}{{ end }}
+  {{- $values = $values | append (dict "value" .value "label" $label "count" .count) }}
+{{- end -}}
+{{- if eq .names "sector" }}
+  {{- $values = sort $values "label" }}
+{{- else if eq .names "solution" }}
+  {{- $ordered := slice }}{{ $placed := slice }}
+  {{- range (where site.RegularPages "Type" "solution").ByWeight }}
+    {{- $slug := urlize .File.ContentBaseName }}
+    {{- range where $values "value" $slug }}{{ $ordered = $ordered | append . }}{{ $placed = $placed | append $slug }}{{ end }}
+  {{- end }}
+  {{- range sort $values "value" }}{{ if not (in $placed .value) }}{{ $ordered = $ordered | append . }}{{ end }}{{ end }}
+  {{- $values = $ordered }}
+{{- end -}}
+{{- return dict "values" $values "items" $facet.items "orphans" $facet.orphans -}}

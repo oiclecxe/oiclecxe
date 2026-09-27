@@ -1,0 +1,17 @@
+{{- /*
+  data-<name> attributes of a filterable item, read by filters.js: for each filter,
+  the URL forms of the page's values, space-separated.
+  Context: dict "page", "filters" (slice of {name, key}: filter name and front matter field).
+  Returns: attributes string (output with safeHTMLAttr).
+*/ -}}
+{{- $attrs := slice -}}
+{{- range .filters }}
+  {{- $values := slice }}
+  {{- range partial "func/as-list.html" (index $.page.Params .key) }}
+    {{- $v := urlize . }}
+    {{- if not (in $values $v) }}{{ $values = $values | append $v }}{{ end }}
+  {{- end }}
+  {{- $attrs = $attrs | append (printf `data-%s="%s"` .name (delimit $values " ")) }}
+{{- end -}}
+{{- $out := delimit $attrs " " -}}
+{{- return $out -}}
