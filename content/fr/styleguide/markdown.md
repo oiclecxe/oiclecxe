@@ -9,7 +9,7 @@ seo:
 
 Cette page de test présente tous les formats Markdown reconnus par le site (moteur **Goldmark**, intégré à Hugo), avec pour chacun la syntaxe à écrire et le rendu obtenu. Elle n'existe qu'en développement (`hugo server`) et n'est jamais publiée.
 
-Les éléments propres au site (encadrés, vidéos, chiffres clés…) sont des *shortcodes*, décrits dans `docs/CONTENU.md`, § 4.
+Les éléments propres au site (encadrés, vidéos, chiffres clés…) sont des *shortcodes*, décrits dans `docs/CONTENU.md`, § 5.
 
 ## Paragraphes et retours à la ligne
 
