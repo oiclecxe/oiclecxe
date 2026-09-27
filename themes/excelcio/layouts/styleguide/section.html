@@ -23,6 +23,7 @@
       <a href="#couleurs">Couleurs</a><a href="#ambiances">Ambiances</a><a href="#typographie">Typographie</a><a href="#boutons">Boutons</a>
       <a href="#badges">Badges et libellés</a><a href="#cartes">Cartes</a><a href="#accordeon">Accordéon</a><a href="#carres">Champ de carrés</a>
       <a href="#icones">Icônes</a><a href="#espacements">Espacements</a><a href="#mouvement">Mouvement</a>
+      {{- range .Pages }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }} →</a>{{ end }}
     </nav>
   </div>
 </section>

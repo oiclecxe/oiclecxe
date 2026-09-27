@@ -1,0 +1,18 @@
+{{- /*
+  Documentation helper: shows a Markdown snippet and its rendering side by side,
+  from a single source. Usage:
+  {{< md-example >}}
+  **gras** et *italique*
+  {{< /md-example >}}
+*/ -}}
+{{- $src := trim .Inner "\n" -}}
+<div class="md-example">
+  <div class="md-example__source">
+    <p class="md-example__label">{{ T "mdSource" }}</p>
+    <pre><code>{{ $src }}</code></pre>
+  </div>
+  <div class="md-example__result">
+    <p class="md-example__label">{{ T "mdResult" }}</p>
+    <div class="prose">{{ $src | .Page.RenderString (dict "display" "block") }}</div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  <section class="section tone-light">
+    <div class="container">
+      <nav aria-label="{{ .Title }}">
+        <ul class="sitemap" role="list">
+          <li><a href="{{ site.Home.RelPermalink }}">{{ T "home" }}</a></li>
+          {{- range site.Home.Sections }}
+            {{- partial "components/sitemap-branch.html" . }}
+          {{- end }}
+          {{- range where site.Home.RegularPages "Params.sitemapHide" "ne" true }}
+          <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+          {{- end }}
+        </ul>
+      </nav>
+    </div>
+  </section>
+{{- end }}

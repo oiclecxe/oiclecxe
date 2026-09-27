@@ -1,4 +1,6 @@
 # Menu principal (mega-menu).
+# Les solutions et les expertises métier déclarent elles-mêmes leur entrée
+# (champ `menus:` de leur page) : leur titre et leur adresse ne sont saisis qu'une fois.
 # Enfants : params.group = titre de colonne ; params.featured = true pour la rangée basse ;
 # params.description = sous-titre facultatif.
 
@@ -31,34 +33,6 @@
     group = "Nos métiers"
 [[main]]
   parent = "offre"
-  name = "Pilotage de direction"
-  url = "/offre/expertise/pilotage-direction/"
-  weight = 21
-  [main.params]
-    group = "Expertises métier"
-[[main]]
-  parent = "offre"
-  name = "Commercial"
-  url = "/offre/expertise/commercial/"
-  weight = 22
-  [main.params]
-    group = "Expertises métier"
-[[main]]
-  parent = "offre"
-  name = "Supply chain"
-  url = "/offre/expertise/supply-chain/"
-  weight = 23
-  [main.params]
-    group = "Expertises métier"
-[[main]]
-  parent = "offre"
-  name = "Finance"
-  url = "/offre/expertise/finance/"
-  weight = 24
-  [main.params]
-    group = "Expertises métier"
-[[main]]
-  parent = "offre"
   name = "Toute l'offre"
   url = "/offre/"
   weight = 90
@@ -72,55 +46,6 @@
   name = "Solutions"
   url = "/solutions/"
   weight = 20
-[[main]]
-  parent = "solutions"
-  name = "Qlik"
-  url = "/solutions/qlik/"
-  weight = 11
-  [main.params]
-    group = "Analyse et visualisation"
-[[main]]
-  parent = "solutions"
-  name = "Vizlib"
-  url = "/solutions/vizlib/"
-  weight = 12
-  [main.params]
-    group = "Analyse et visualisation"
-[[main]]
-  parent = "solutions"
-  name = "Tableau"
-  url = "/solutions/tableau/"
-  weight = 13
-  [main.params]
-    group = "Analyse et visualisation"
-[[main]]
-  parent = "solutions"
-  name = "Power BI"
-  url = "/solutions/power-bi/"
-  weight = 14
-  [main.params]
-    group = "Analyse et visualisation"
-[[main]]
-  parent = "solutions"
-  name = "ThoughtSpot"
-  url = "/solutions/thoughtspot/"
-  weight = 15
-  [main.params]
-    group = "Analyse et visualisation"
-[[main]]
-  parent = "solutions"
-  name = "Jedox"
-  url = "/solutions/jedox/"
-  weight = 21
-  [main.params]
-    group = "Planification et reporting"
-[[main]]
-  parent = "solutions"
-  name = "IBM Cognos"
-  url = "/solutions/ibm-cognos/"
-  weight = 22
-  [main.params]
-    group = "Planification et reporting"
 [[main]]
   parent = "solutions"
   name = "Toutes les solutions"
@@ -141,13 +66,6 @@
   name = "Catalogue des formations"
   url = "/formations/"
   weight = 11
-  [main.params]
-    group = "Se former"
-[[main]]
-  parent = "formations"
-  name = "Formations par solution"
-  url = "/formations/#par-solution"
-  weight = 12
   [main.params]
     group = "Se former"
 [[main]]
@@ -268,42 +186,6 @@
   identifier = "f-solutions"
   name = "Solutions"
   weight = 20
-[[footer]]
-  parent = "f-solutions"
-  name = "Qlik"
-  url = "/solutions/qlik/"
-  weight = 1
-[[footer]]
-  parent = "f-solutions"
-  name = "Vizlib"
-  url = "/solutions/vizlib/"
-  weight = 2
-[[footer]]
-  parent = "f-solutions"
-  name = "Tableau"
-  url = "/solutions/tableau/"
-  weight = 3
-[[footer]]
-  parent = "f-solutions"
-  name = "Power BI"
-  url = "/solutions/power-bi/"
-  weight = 4
-[[footer]]
-  parent = "f-solutions"
-  name = "ThoughtSpot"
-  url = "/solutions/thoughtspot/"
-  weight = 5
-[[footer]]
-  parent = "f-solutions"
-  name = "Jedox"
-  url = "/solutions/jedox/"
-  weight = 6
-[[footer]]
-  parent = "f-solutions"
-  name = "IBM Cognos"
-  url = "/solutions/ibm-cognos/"
-  weight = 7
-
 [[footer]]
   identifier = "f-formations"
   name = "Formations"

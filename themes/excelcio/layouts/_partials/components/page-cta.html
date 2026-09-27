@@ -1,0 +1,12 @@
+{{- /*
+  Closing call to action of inner pages: the `cta` section fed by the page's
+  `cta` front matter, or site.Params.cta by default. `cta: false` removes it.
+  Context: page.
+*/ -}}
+{{- $cta := .Params.cta -}}
+{{- if ne $cta false }}
+  {{- $data := $cta | default site.Params.cta }}
+  {{- with $data }}
+    {{- partial "sections/cta.html" (dict "page" $ "data" . "index" 99) }}
+  {{- end }}
+{{- end -}}

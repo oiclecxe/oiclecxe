@@ -1,0 +1,18 @@
+{{- /*
+  Single source of truth for home/listing sections: returns the pages of a type,
+  either those listed explicitly (paths, in the given order) or all of them by
+  weight, optionally limited.
+  Context: dict "type" (content type), "paths" (optional slice of page paths), "limit" (optional int).
+  Returns: slice of pages.
+*/ -}}
+{{- $out := slice -}}
+{{- with .paths }}
+  {{- range . }}
+    {{- with site.GetPage (strings.TrimSuffix "/" .) }}{{ $out = $out | append . }}
+    {{- else }}{{ warnf "section d'accueil : page introuvable %q" . }}{{ end }}
+  {{- end }}
+{{- else }}
+  {{- range (where site.RegularPages "Type" .type).ByWeight }}{{ $out = $out | append . }}{{ end }}
+{{- end -}}
+{{- with .limit }}{{ $out = first . $out }}{{ end -}}
+{{- return $out -}}

@@ -50,23 +50,18 @@ sections:
     title:
       lead: "[À RÉDIGER — Ce que nous faisons pour chaque direction.]"
       rest: "[À RÉDIGER — Complément, 10 mots max.]"
-    items:
-      - { title: "Pilotage de direction", badges: ["Qlik", "Power BI"], text: "[À RÉDIGER — Bénéfice pour la direction générale, 25 mots max.]", url: "/offre/expertise/pilotage-direction/", link: "Découvrir l'expertise" }
-      - { title: "Commercial", badges: ["Qlik", "Tableau"], text: "[À RÉDIGER — Bénéfice pour la direction commerciale, 25 mots max.]", url: "/offre/expertise/commercial/", link: "Découvrir l'expertise" }
-      - { title: "Supply chain", badges: ["Qlik", "ThoughtSpot"], text: "[À RÉDIGER — Bénéfice pour la supply chain, 25 mots max.]", url: "/offre/expertise/supply-chain/", link: "Découvrir l'expertise" }
-      - { title: "Finance", badges: ["Jedox", "IBM Cognos"], text: "[À RÉDIGER — Bénéfice pour la direction financière, 25 mots max.]", url: "/offre/expertise/finance/", link: "Découvrir l'expertise" }
+    linkLabel: "Découvrir l'expertise"
+    # Les expertises sont lues dans content/fr/offre/expertise/ (titre, résumé, badges).
+    # Pour en choisir ou en réordonner : items: ["/offre/expertise/finance", …]
 
   - type: statement
     text: "[À RÉDIGER — Phrase manifeste d'Excelcio, 30 à 40 mots, affichée en grand et centrée.]"
 
   - type: case-studies
-    eyebrow: "Cas clients"
     title: "[À RÉDIGER — Titre de la section, 3 mots]"
-    items:
-      - { title: "[À RÉDIGER — Résultat du cas 1, 6 mots]", client: "Client 1", sector: "[Secteur]", url: "/cas-clients/" }
-      - { title: "[À RÉDIGER — Résultat du cas 2, 6 mots]", client: "Client 2", sector: "[Secteur]", url: "/cas-clients/" }
-      - { title: "[À RÉDIGER — Résultat du cas 3, 6 mots]", client: "Client 3", sector: "[Secteur]", url: "/cas-clients/" }
-      - { title: "[À RÉDIGER — Résultat du cas 4, 6 mots]", client: "Client 4", sector: "[Secteur]", url: "/cas-clients/" }
+    limit: 4
+    # Les cartes sont lues dans content/fr/cas-clients/ (résultat, client, secteur, image), par ordre de « weight ».
+    # Pour choisir ou réordonner : items: ["/cas-clients/client-1", …]
 
   - type: faq
     title: { lead: "Vos questions,", rest: "nos réponses" }
@@ -82,25 +77,15 @@ sections:
     title:
       lead: "[À RÉDIGER — Titre : les solutions que nous maîtrisons.]"
       rest: "Sept éditeurs partenaires, une seule équipe."
-    items:
-      - { name: "Qlik", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/qlik/", visual: "bars" }
-      - { name: "Vizlib", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/vizlib/", visual: "grid" }
-      - { name: "Tableau", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/tableau/", visual: "line" }
-      - { name: "Power BI", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/power-bi/", visual: "kpi" }
-      - { name: "ThoughtSpot", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/thoughtspot/", visual: "search" }
-      - { name: "Jedox", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/jedox/", visual: "table" }
-      - { name: "IBM Cognos", text: "[À RÉDIGER — Une phrase, 15 mots max.]", url: "/solutions/ibm-cognos/", visual: "report" }
+    # Les solutions sont lues dans content/fr/solutions/ (nom, accroche « tagline », visuel « visual »).
 
   - type: trainings
     title:
       lead: "Prochaines sessions de formation."
       rest: "[À RÉDIGER — Complément, 10 mots max.]"
     cta: { label: "Voir tout le catalogue", url: "/formations/" }
-    # Placeholders : au Lot 3, les sessions seront lues dans les fiches formations.
-    items:
-      - { date: "[JJ/MM]", city: "Paris", title: "[Intitulé de la formation 1]", text: "[À RÉDIGER — Objectif en une phrase.]", url: "/formations/" }
-      - { date: "[JJ/MM]", city: "Rennes", title: "[Intitulé de la formation 2]", text: "[À RÉDIGER — Objectif en une phrase.]", url: "/formations/" }
-      - { date: "[JJ/MM]", city: "Distanciel", title: "[Intitulé de la formation 3]", text: "[À RÉDIGER — Objectif en une phrase.]", url: "/formations/" }
+    limit: 3
+    # Les sessions sont lues dans les fiches formations (champ « sessions ») ; seules les sessions futures s'affichent.
 
   - type: proof
     title:

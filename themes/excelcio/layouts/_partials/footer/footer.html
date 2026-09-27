@@ -14,7 +14,8 @@
     </div>
     {{- end }}
 
-    {{- with site.Params.footer.aiURL }}
+    {{- /* Shown only once the site publishes llms.txt (output format "llms" on the home page, Lot 5). */}}
+    {{- with and site.Params.footer.aiURL (site.Home.OutputFormats.Get "llms") site.Params.footer.aiURL }}
     <div class="site-footer__ai">
       <span class="eyebrow eyebrow--mono">{{ site.Params.footer.aiLabel | default (T "exploreWithAI") }}</span>
       <a href="{{ . | relLangURL }}">{{ partialCached "icon.html" (dict "name" "sparkle") "sparkle" }}{{ T "aiSummary" }}</a>

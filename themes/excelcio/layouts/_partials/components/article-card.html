@@ -1,0 +1,24 @@
+{{- /*
+  Article card (reference blog grid): visual (page image, or brand block with
+  breathing squares), categories · date, title, “read more”.
+  Context: dict "page" "index" "large" (bool, featured layout).
+*/ -}}
+{{- $p := .page -}}
+{{- $i := .index | default 0 -}}
+<article class="article-card{{ if .large }} article-card--large{{ end }}">
+  <a class="article-card__link" href="{{ $p.RelPermalink }}">
+    <div class="article-card__visual article-card__visual--{{ add (mod $i 3) 1 }}">
+      {{- with $p.Params.image }}
+        {{- partial "image.html" (dict "page" $p "src" . "alt" $p.Params.imageAlt "sizes" (cond $.large "(min-width: 62em) 60vw, 100vw" "(min-width: 62em) 30vw, 100vw") "widths" (slice 480 800 1200)) }}
+      {{- else }}
+        {{- partial "components/squares.html" (dict "seed" (printf "article-%s" $p.File.ContentBaseName) "cols" 6 "rows" 4 "density" 50) }}
+        <span class="article-card__mark" aria-hidden="true">{{ partialCached "icon.html" (dict "name" "logo-mark") "logo-mark" }}</span>
+      {{- end }}
+    </div>
+    <p class="article-card__meta">
+      {{- with $p.Params.categories }}<span class="article-card__cat">{{ delimit . " · " }}</span> · {{ end }}
+      {{- partial "components/date.html" (dict "page" $p) }}</p>
+    <h3 class="article-card__title">{{ $p.Title }}</h3>
+    <span class="link-arrow article-card__more">{{ T "readMore" }}{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</span>
+  </a>
+</article>

@@ -6,10 +6,14 @@
   {{- partial "head/meta.html" . }}
   {{- partialCached "head/fonts.html" . }}
   {{- partialCached "head/css.html" . }}
+  {{- partial "head/code-css.html" . }}
   {{- block "head" . }}{{ end }}
   {{- partial "hooks/head-end.html" . }}
 </head>
-<body data-header="{{ or .Params.header `overlay` }}">
+{{- /* Header overlays the first section on the home page and brand-coloured pages (404);
+       inner pages start on a light section, so the bar is solid from the top. */}}
+{{- $header := .Params.header | default (cond (or .IsHome (eq .Kind "404")) "overlay" "solid") }}
+<body data-header="{{ $header }}">
   <a class="skip-link" href="#main">{{ T "skipToContent" }}</a>
   <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
   {{- /* Cached per section: the header only depends on the current section. */}}

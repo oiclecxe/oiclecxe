@@ -1,0 +1,45 @@
+{{- define "main" }}
+  {{- $p := . }}
+  {{- $past := lt (time (.Params.end | default .Params.start)).Unix now.Unix }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (cond $past (T "eventPast") (T "eventEyebrow"))) }}
+  <section class="section tone-light">
+    <div class="container with-aside">
+      <div class="with-aside__main">
+        <dl class="facts">
+          <div class="facts__item"><dt>{{ T "factDate" }}</dt><dd>{{ partial "components/date.html" (dict "page" . "date" (time .Params.start)) }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factPlace" }}</dt><dd>{{ if .Params.online }}{{ T "online" }}{{ else }}{{ .Params.venue | default "[Lieu]" }}{{ with .Params.city }}, {{ . }}{{ end }}{{ end }}</dd></div>
+          <div class="facts__item"><dt>{{ T "factFormat" }}</dt><dd>{{ .Params.format | default "[Format]" }}</dd></div>
+        </dl>
+        {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+        {{- with .Params.program }}
+        <section class="block" aria-labelledby="program-title">
+          <h2 class="block__title" id="program-title">{{ T "eventProgram" }}</h2>
+          <ul class="rows" role="list">
+            {{- range . }}<li class="rows__item"><p class="rows__key mono">{{ .time }}</p><h3 class="rows__title">{{ .title }}</h3><div class="rows__body">{{ with .text }}<p>{{ . }}</p>{{ end }}</div></li>{{ end }}
+          </ul>
+        </section>
+        {{- end }}
+        {{- with .Params.speakers }}
+        <section class="block" aria-labelledby="speakers-title">
+          <h2 class="block__title" id="speakers-title">{{ T "eventSpeakers" }}</h2>
+          <ul class="grid grid--3" role="list">{{ range . }}<li class="card card--static"><h3 class="card__title">{{ .name }}</h3><p class="card__text">{{ .role }}</p></li>{{ end }}</ul>
+        </section>
+        {{- end }}
+      </div>
+      {{- if not $past }}
+      <aside class="with-aside__aside" id="inscription" aria-labelledby="register-title">
+        <div class="register-box">
+          <h2 class="register-box__title" id="register-title">{{ T "registerTitle" }}</h2>
+          {{- $reg := .Params.registration }}
+          {{- if and $reg (eq $reg.type "external") $reg.url }}
+          <a class="btn btn--primary" href="{{ $reg.url }}" rel="noopener">{{ T "register" }}</a>
+          {{- else }}
+          <a class="btn btn--primary" href="{{ "/contact/" | relLangURL }}?evenement={{ .File.ContentBaseName }}">{{ T "registerRequest" }}</a>
+          {{- end }}
+        </div>
+      </aside>
+      {{- end }}
+    </div>
+  </section>
+  {{- partial "components/page-cta.html" . }}
+{{- end }}

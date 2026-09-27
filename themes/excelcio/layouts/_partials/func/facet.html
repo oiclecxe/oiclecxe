@@ -1,0 +1,25 @@
+{{- /*
+  Values of a classification field across pages (e.g. `solutions` of the
+  trainings, `sector` of the case studies). Each field accepts one value or a
+  list; values are compared on their URL form ("Industrie" = "industrie").
+  Context: dict "pages" "key".
+  Returns: dict
+    "values": slice of {value, raw, count} in order of first appearance,
+    "items": slice of {page, values} (values of each page, URL form),
+    "orphans": pages without any value.
+*/ -}}
+{{- $values := slice -}}{{- $seen := dict -}}{{- $items := slice -}}{{- $orphans := slice -}}
+{{- range .pages -}}
+  {{- $own := slice -}}
+  {{- range partial "func/as-list.html" (index .Params $.key) -}}
+    {{- $v := urlize . -}}
+    {{- if not (in $own $v) }}{{ $own = $own | append $v }}{{ end -}}
+    {{- if not (isset $seen $v) }}{{ $values = $values | append (dict "value" $v "raw" .) }}{{ $seen = merge $seen (dict $v 0) }}{{ end -}}
+    {{- $seen = merge $seen (dict $v (add (index $seen $v) 1)) -}}
+  {{- end -}}
+  {{- $items = $items | append (dict "page" . "values" $own) -}}
+  {{- if not $own }}{{ $orphans = $orphans | append . }}{{ end -}}
+{{- end -}}
+{{- $out := slice -}}
+{{- range $values }}{{ $out = $out | append (merge . (dict "count" (index $seen .value))) }}{{ end -}}
+{{- return dict "values" $out "items" $items "orphans" $orphans -}}

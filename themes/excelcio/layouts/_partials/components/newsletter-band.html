@@ -1,0 +1,12 @@
+{{- /*
+  Newsletter band (reference blog). The subscription form arrives with the forms
+  layer (Lot 4); until then the band links to the newsletter page.
+  Context: page, or dict "tone" "section" (bool: render as a full section).
+*/ -}}
+{{- $o := dict -}}{{- if reflect.IsMap . }}{{ $o = . }}{{ end -}}
+{{- $inner := printf `<div class="newsletter-band"><div><p class="newsletter-band__title">%s</p><p class="newsletter-band__text">%s</p></div><a class="btn btn--primary" href="%s">%s</a></div>` (T "newsletterTitle") (T "newsletterText") ("/newsletter/" | relLangURL) (T "newsletterCta") -}}
+{{- if $o.section }}
+<section class="section {{ $o.tone | default "tone-light" }}"><div class="container">{{ $inner | safeHTML }}</div></section>
+{{- else }}
+{{ $inner | safeHTML }}
+{{- end -}}

@@ -1,0 +1,15 @@
+{{- /*
+  Key figures. Usage (one figure per line, "value | label"):
+  {{< stats >}}
+  690+ | sessions de formation depuis 2018
+  [XX] | autre indicateur
+  {{< /stats >}}
+*/ -}}
+<dl class="stats stats--inline">
+  {{- range split (trim .Inner "\n ") "\n" }}
+    {{- $parts := split . "|" }}
+    {{- if ge (len $parts) 2 }}
+  <div class="stats__item"><dt class="stats__label">{{ trim (index $parts 1) " " }}</dt><dd class="stats__value">{{ trim (index $parts 0) " " }}</dd></div>
+    {{- end }}
+  {{- end }}
+</dl>

@@ -1,0 +1,8 @@
+{{- /* Inline call to action. Usage: {{< cta title="…" url="/contact/" label="Nous contacter" >}}Texte{{< /cta >}} */ -}}
+<aside class="inline-cta">
+  <div>
+    {{- with .Get "title" }}<p class="inline-cta__title">{{ . }}</p>{{ end }}
+    {{- with .Inner }}<div class="inline-cta__text">{{ . | $.Page.RenderString (dict "display" "block") }}</div>{{ end }}
+  </div>
+  {{- with .Get "url" }}<a class="btn btn--primary" href="{{ . | relLangURL }}">{{ $.Get "label" | default (T "ctaContact") }}</a>{{ end }}
+</aside>

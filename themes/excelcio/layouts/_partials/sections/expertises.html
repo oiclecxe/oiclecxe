@@ -1,27 +1,32 @@
 {{- /*
   Expertise list: sticky two-part title on the left, items on the right (reference “use cases”).
-  Context: dict "page" "data" "index". data: title, items [{title, badges, text, url, link}]
+  Context: dict "page" "data" "index".
+  data: title, linkLabel (optional),
+        items: optional list of expertise page paths (order kept); default: all by weight
+        limit: optional maximum
+  Each item reads its title, summary and solution badges from the expertise page.
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
+{{- $pages := partial "func/pages-of-type.html" (dict "type" "expertise" "paths" $d.items "limit" $d.limit) -}}
+{{- with $pages }}
 <section class="section tone-light-alt" aria-labelledby="{{ $id }}">
   <div class="container split split--half">
     <div class="split__aside--sticky">
       {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
     </div>
     <ul class="item-list" role="list">
-      {{- range $d.items }}
+      {{- range . }}
       <li class="item-list__item reveal-block" data-reveal>
         <h3 class="item-list__title">
-          {{- .title }}
-          {{- range .badges }} <span class="badge">{{ . }}</span>{{ end -}}
+          {{- .LinkTitle }}
+          {{- range partial "func/as-list.html" .Params.solutions }} <span class="badge">{{ partial "func/solution-name.html" . }}</span>{{ end -}}
         </h3>
-        <p class="item-list__text">{{ .text }}</p>
-        {{- if .url }}
-        <a class="link-arrow item-list__link" href="{{ .url | relLangURL }}">{{ .link | default (T "readMore") }}<span class="visually-hidden"> : {{ .title }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
-        {{- end }}
+        {{- with or .Params.summary .Description }}<p class="item-list__text">{{ . }}</p>{{ end }}
+        <a class="link-arrow item-list__link" href="{{ .RelPermalink }}">{{ $d.linkLabel | default (T "discoverExpertise") }}<span class="visually-hidden"> : {{ .LinkTitle }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
       </li>
       {{- end }}
     </ul>
   </div>
 </section>
+{{- end }}

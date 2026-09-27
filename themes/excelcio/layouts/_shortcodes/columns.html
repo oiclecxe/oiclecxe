@@ -1,0 +1,8 @@
+{{- /*
+  Two or three columns. Separate columns with a line containing only "---col---".
+  Usage: {{< columns >}}Colonne 1 ---col--- Colonne 2{{< /columns >}}
+*/ -}}
+{{- $cols := split .Inner "---col---" -}}
+<div class="columns columns--{{ len $cols }}">
+  {{- range $cols }}<div class="columns__col">{{ . | $.Page.RenderString (dict "display" "block") }}</div>{{ end }}
+</div>

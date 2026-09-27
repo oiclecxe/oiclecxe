@@ -1,0 +1,125 @@
+@layer components {
+  /* Styles of the editor shortcodes (callout, figure, video, cta, stats, columns). */
+  .callout {
+    padding: var(--sp-5) var(--sp-6);
+    border-left: 3px solid var(--brand);
+    background: var(--surface);
+  }
+
+  .callout--warning {
+    border-left-color: var(--accent);
+  }
+
+  .callout__title {
+    margin-bottom: var(--sp-2);
+    color: var(--fg);
+    font-weight: var(--fw-medium);
+  }
+
+  .figure picture,
+  .figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .figure__caption {
+    margin-top: var(--sp-3);
+    color: var(--fg-muted);
+    font-size: var(--fs-ui);
+  }
+
+  .video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .video picture,
+  .video img,
+  .video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+
+  .video__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
+    color: var(--white);
+    font-size: var(--fs-body);
+    text-decoration: none;
+    background: var(--video-veil);
+  }
+
+  .video__play .icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: var(--sp-4);
+    border-radius: var(--radius-pill);
+    background: var(--brand);
+    transition: transform var(--dur-fast) var(--ease-standard);
+  }
+
+  .video__play:hover .icon {
+    transform: scale(1.06);
+  }
+
+  .inline-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-5);
+    padding: var(--sp-7);
+    background: var(--brand);
+    color: var(--white);
+  }
+
+  .inline-cta__title {
+    color: var(--white);
+    font-size: var(--fs-h4);
+  }
+
+  .inline-cta .btn--primary {
+    --btn-bg: var(--white);
+    --btn-fg: var(--brand);
+    --btn-bg-hover: var(--white-86);
+  }
+
+  .stats--inline {
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    margin-top: 0;
+  }
+
+  .stats--inline .stats__value {
+    font-size: var(--fs-h2);
+  }
+
+  .columns {
+    display: grid;
+    gap: var(--sp-8);
+  }
+
+  @media (min-width: 48em) {
+    .columns--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .columns--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .columns__col > * + * {
+    margin-top: var(--sp-4);
+  }
+}

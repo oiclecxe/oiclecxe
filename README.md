@@ -29,7 +29,7 @@ hugo --environment production --gc --minify
 hugo --templateMetrics --templateMetricsHints
 
 # Nouveau contenu à partir d'un archetype
-hugo new content fr/actualites/mon-article/index.md
+hugo new content --kind article actualites/mon-article/index.md
 ```
 
 En production, Hugo liste en avertissement chaque page encore marquée `placeholder: true`.

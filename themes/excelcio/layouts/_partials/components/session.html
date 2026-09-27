@@ -1,0 +1,23 @@
+{{- /*
+  One training session: date (or date range) · place · format.
+  Session dates are always shown as entered, even on a page still marked
+  `placeholder: true` (a session date typed by an editor is a real date).
+  Context: dict "start" (time), "end" (optional time or string), "city", "format",
+           "style" ("short" for lists, default "long").
+*/ -}}
+{{- $start := time .start -}}
+{{- $end := "" -}}{{- with .end }}{{ $end = time . }}{{ end -}}
+{{- $fmt := cond (eq .style "short") ":date_medium" ":date_long" -}}
+{{- $label := time.Format $fmt $start -}}
+{{- if and $end (gt $end.Unix $start.Unix) }}
+  {{- if and (eq $end.Year $start.Year) (eq $end.Month $start.Month) }}
+    {{- $label = printf "%d – %s" $start.Day (time.Format $fmt $end) }}
+  {{- else }}
+    {{- $label = printf "%s – %s" (time.Format $fmt $start) (time.Format $fmt $end) }}
+  {{- end }}
+{{- end -}}
+{{- $parts := slice -}}
+{{- with .city }}{{ $parts = $parts | append . }}{{ end -}}
+{{- with .format }}{{ $parts = $parts | append . }}{{ end -}}
+<time datetime="{{ time.Format "2006-01-02" $start }}">{{ $label }}</time>{{ with $parts }} · {{ delimit . " · " }}{{ end }}
+{{- /* chomp */ -}}

@@ -7,12 +7,12 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 ## État d'avancement
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
-- Périmètre : V1 (lots 0 à 2) validée ; **étendu au Lot 3** (27/09/2026). S'arrêter après le Lot 3.
-- Lot en cours : **Lot 3 — Gabarits des rubriques et contenu placeholder** : à démarrer
-- Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026)
+- Périmètre : V1 (lots 0 à 2) validée ; Lot 3 réalisé et validé (27/09/2026). Lot 4 non encore lancé : attendre l’accord de l’utilisateur.
+- Lot en cours : aucun (Lot 4 — Fonctions dynamiques : présenté, en attente de lancement)
+- Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026)
 - Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
-- En suspens : score Lighthouse officiel (téléchargement de Lighthouse via `npx` à autoriser ; Node 16 installé, ≥ 18 requis pour la version récente)
+- En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser). Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
 - Logo Excelcio fourni : `assets/images/logo.svg`
 
 ## Méthode de travail
@@ -60,7 +60,7 @@ hugo server --buildDrafts --disableFastRender          # développement (http://
 hugo --environment production --gc --minify            # build de production dans public/
 npx pagefind --site public                             # index de recherche (après le build)
 hugo --templateMetrics --templateMetricsHints          # performance des gabarits
-hugo new content fr/formations/mon-slug/index.md       # nouveau contenu via archetype
+hugo new content --kind training formations/mon-slug/index.md   # chemin relatif à content/fr ; --kind = type
 ```
 
 Pour tester la recherche : build de production, puis Pagefind, puis servir `public/` avec un serveur statique (voir README).

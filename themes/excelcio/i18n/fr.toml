@@ -1,3 +1,4 @@
+# --- Navigation and shell
 skipToContent = "Aller au contenu"
 mainNav = "Navigation principale"
 footerNav = "Plan du site"
@@ -18,9 +19,137 @@ notFoundTitle = "Cette page n'existe pas (ou plus)."
 notFoundText = "Le lien est peut-être erroné, ou la page a été déplacée."
 previous = "Précédent"
 next = "Suivant"
-
+pagination = "Pagination"
 clientsLabel = "Ils nous font confiance"
+noItems = "Aucun contenu pour le moment."
+dateTBC = "[Date à confirmer]"
+ctaContact = "Nous contacter"
+faqTitle = "Questions fréquentes"
+videoPlay = "Lire la vidéo"
+mdSource = "Markdown"
+mdResult = "Rendu"
+by = "Par"
+
+# --- Filters
+filtersLabel = "Filtrer"
+filterAll = "Tous"
+filterReset = "Réinitialiser"
+filterSolution = "Solution"
+filterLevel = "Niveau"
+filterFormat = "Format"
+filterSector = "Secteur d’activité"
+noResults = "Aucun résultat pour ces critères."
+otherTrainings = "Autres formations"
+
+# --- Solutions
+solutionEyebrow = "Solution partenaire"
+seeTrainings = "Voir les formations"
+featuresTitle = "Ce que permet {{ .Name }}"
+whatWeBring = "Ce que {{ .Name }} apporte"
+trainingsFor = "Formations {{ .Name }}"
+seeCatalogue = "Tout le catalogue"
+noTrainings = "Aucune formation publiée pour cette solution pour le moment."
+relatedCases = "Cas clients"
+relatedArticles = "À lire aussi"
+
+# --- Trainings
+trainingEyebrow = "Formation"
+durationTBC = "[Durée]"
+detailsTBC = "[Détails à compléter]"
+upcomingSessions = "Prochaines sessions"
+noSessions = "Aucune session inter-entreprises n'est encore programmée. Contactez-nous pour organiser une session dans vos locaux."
+noSessionsTraining = "Aucune session programmée pour le moment."
+register = "S'inscrire"
+registerTitle = "Inscription"
+registerRequest = "Demander une session"
+intraNote = "Formation également disponible en intra-entreprise."
+relatedTrainings = "Formations associées"
+factCode = "Code"
+factDuration = "Durée"
+factLevel = "Niveau"
+factFormat = "Format"
+factPrice = "Tarif"
+priceOnRequest = "Sur demande"
+training_objectives = "Objectifs"
+training_audience = "Public"
+training_prerequisites = "Prérequis"
+training_program = "Programme"
+
+# --- Case studies
+case_context = "Contexte"
+case_challenge = "Enjeu"
+case_solution = "Solution"
+case_results = "Résultats"
+otherCases = "Autres cas clients"
+
+# --- Expertise
+expertiseEyebrow = "Domaine d'expertise"
+discoverExpertise = "Découvrir l'expertise"
+benefitsTitle = "Ce que vous y gagnez"
+ourApproach = "Notre approche"
+kpisTitle = "Indicateurs suivis"
+
+# --- Articles
+tocTitle = "Sommaire"
+newsletterTitle = "Recevoir nos actualités"
+newsletterText = "Nouveautés des solutions, retours d'expérience et dates de formation."
+newsletterCta = "S'abonner"
+
+# --- Events
+eventEyebrow = "Événement"
+eventPast = "Événement passé"
+eventsUpcoming = "À venir"
+eventsPast = "Événements passés"
+noEventsUpcoming = "Aucun événement programmé pour le moment."
+eventProgram = "Programme"
+eventSpeakers = "Intervenants"
+online = "En ligne"
+factDate = "Date"
+factPlace = "Lieu"
+
+# --- Jobs
+jobEyebrow = "Offre d'emploi"
+jobsTitle = "Offres en cours"
+noJobs = "Aucun poste n'est ouvert pour l'instant. Vous pouvez néanmoins nous adresser une candidature spontanée."
+jobClosedEyebrow = "Offre pourvue ou clôturée"
+jobClosed = "Ce poste n'est plus ouvert."
+jobSeeOpen = "Voir les offres en cours"
+spontaneous = "Candidature spontanée :"
+factContract = "Contrat"
+factRemote = "Télétravail"
+job_missions = "Missions"
+job_profile = "Profil recherché"
+applyTitle = "Postuler"
+applyCta = "Envoyer ma candidature"
+applySubject = "Candidature"
+
+# --- Contact, search
+formSoon = "Formulaire de contact"
+formSoonText = "Le formulaire arrive prochainement. En attendant, écrivez-nous :"
+contactDirect = "Nous écrire"
+contactGeneral = "Contact"
+contactJobs = "Recrutement"
+officesTitle = "Nos bureaux"
+seeMap = "Voir le plan"
+searchSoon = "Recherche"
+searchSoonText = "La recherche dans le site arrive prochainement. En attendant, consultez le plan du site."
 
 [itemCount]
 one = "{{ .Count }} contenu"
 other = "{{ .Count }} contenus"
+
+[days]
+one = "{{ .Count }} jour"
+other = "{{ .Count }} jours"
+
+[catalogueTitle]
+one = "{{ .Count }} formation"
+other = "{{ .Count }} formations"
+
+[readingTime]
+one = "{{ .Count }} min de lecture"
+other = "{{ .Count }} min de lecture"
+
+[resultCount]
+one = "{{ .Count }} résultat"
+other = "{{ .Count }} résultats"

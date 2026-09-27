@@ -80,16 +80,18 @@ Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-al
 | `hero` | brand | `title`, `primary` et `secondary` `{label, url}`, `logos` (liste de noms) |
 | `architecture` | light | `title` (`lines`, `rest`), `top` et `bottom` `{label, detail}`, `band1` et `band2` `{label, items}` |
 | `features` | light | `title`, `tabs: [{label, cards: [{title, accent, text, url}]}]` |
-| `expertises` | light-alt | `title`, `items: [{title, badges, text, url, link}]` |
+| `expertises` | light-alt | `title`, `linkLabel` ; lit les pages `expertise` (toutes par `weight`, ou `items` : liste de chemins, `limit`) |
 | `statement` | light | `text` |
-| `case-studies` | dark-alt | `title`, `items: [{title, client, sector, url}]` ; image reprise automatiquement de la page liée (`image`, `imageAlt`), sinon aplat + champ de carrés |
+| `case-studies` | dark-alt | `title`, `tone` ; lit les pages `case-study` (`result`, `client`, `sector`, `image`) : toutes par `weight`, ou `items` (liste de chemins), `limit` |
 | `faq` | dark | `title`, `items: [{q, a}]` (émet le JSON-LD `FAQPage`) |
-| `platform` | dark-alt | `title`, `items: [{name, text, url, visual}]` |
-| `trainings` | dark-alt | `title`, `cta {label, url}`, `items: [{date, city, title, text, url}]` |
+| `platform` | dark-alt | `title` ; lit les pages `solution` (`partnerName`, `tagline`, `visual`) : toutes par `weight`, ou `items`, `limit` |
+| `trainings` | dark-alt | `title`, `cta {label, url}`, `limit` ; lit les sessions futures des pages `training` (`sessions`) ; **bloc masqué s'il n'y en a aucune** |
 | `proof` | dark-alt | `title`, `stats: [{value, suffix, label}]`, `quote {before, highlight, after, author, role}` |
 | `cta` | brand | `title`, `primary`, `secondary`, `badges` |
 
 Chaque bloc accepte `hidden: true`.
+
+**Source unique** : les sections qui présentent des contenus (expertises, cas clients, solutions, formations) les **lisent dans leurs pages** ; rien n'est recopié dans le front matter de l'accueil. De même, les pages solutions et expertises déclarent leur entrée de menu (`menus:`) plutôt que d'être recopiées dans `menus.fr.toml`.
 
 **Espacement automatique** : deux blocs voisins de même ambiance forment une seule bande ; le second perd sa marge haute, pour que l'écart reste d'une marge de section. Deux blocs d'ambiances différentes gardent leurs marges complètes. La règle est calculée par le CSS d'après les voisins réellement affichés : retirer, masquer ou réordonner des blocs ne demande aucun réglage. Le filet au-dessus de `proof` n'apparaît que lorsqu'il prolonge un bloc de même ambiance.
 
@@ -100,6 +102,34 @@ Barre de progression de lecture : présente sur toutes les pages (`baseof.html`)
 Animations : `data-reveal` + `.reveal` (mots d'un titre) ou `.reveal-block` (bloc) déclenchent l'apparition au défilement ; `--delay` décale un bloc. Tout reste visible sans JS et en mouvement réduit.
 
 La page `/styleguide/` (développement uniquement) présente tous les tokens et composants, avec les contrastes calculés en direct.
+
+## Types de contenu et gabarits
+
+Les gabarits sont choisis par **type** (champ `type`, en général posé par `cascade` dans le `_index.md` de la rubrique), ce qui rend le thème indépendant des adresses du site.
+
+| Type | Gabarits | Archetype (`hugo new content --kind …`) |
+|---|---|---|
+| `solution` | `solution/section.html`, `solution/page.html` | `solution.md` |
+| `expertise` | `expertise/section.html`, `expertise/page.html` | `expertise.md` |
+| `training` | `training/section.html` (catalogue filtrable par étiquettes de solution, prochaines sessions), `training/page.html` | `training.md` |
+| `case-study` | `case-study/section.html` (filtrable), `case-study/page.html` | `case-study.md` |
+| `article` | `article/section.html` (à la une, pagination), `article/page.html` (sommaire) | `article.md` |
+| `event` | `event/section.html` (à venir / passés), `event/page.html` | `event.md` |
+| `job` | `job/section.html` (offres `active: true` seulement ; message si aucune), `job/page.html` (offre fermée : mention, pas de candidature, `noindex`) | `job.md` |
+| `contact`, `search`, `site-map` | `contact/page.html`, `search/page.html`, `site-map/page.html` | — |
+| autre | `page.html`, `section.html` (pages claires ; `sections:` accepté) | `default.md` |
+
+Relations automatiques : les contenus citent des solutions (`solutions: [qlik]`) et des expertises (`expertises: [finance]`) par le nom de dossier de la page cible ; `_partials/func/related.html` les retrouve.
+
+Pages intérieures : ambiances claires, header plein dès le haut (`header: solid` implicite hors accueil et 404), appel à l'action final `params.cta` (remplaçable par `cta:` ou supprimable par `cta: false`).
+
+### Shortcodes
+
+`callout`, `figure`, `video` (façade YouTube, rien n'est chargé avant le clic), `button`, `cta`, `stats`, `columns`. Syntaxe : `docs/CONTENU.md` du site.
+
+### Points d'accroche pour le Lot 4
+
+`contact/page.html` utilise `_partials/forms/contact.html` s'il existe ; `search/page.html` utilise `_partials/search/page.html` s'il existe. Le lien « Explorer avec l'IA » du footer n'apparaît que si la page d'accueil publie le format de sortie `llms` (Lot 5).
 
 ## Surcharges
 

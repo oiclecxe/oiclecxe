@@ -1,0 +1,19 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  <section class="section tone-light">
+    <div class="container">
+      {{- /* Search UI arrives with Pagefind (Lot 4): hook left here. */}}
+      {{- if templates.Exists "_partials/search/page.html" }}
+        {{- partial "search/page.html" . }}
+      {{- else }}
+      <div class="form-placeholder" role="note">
+        <p class="eyebrow">{{ T "searchSoon" }}</p>
+        <p>{{ T "searchSoonText" }}</p>
+      </div>
+      {{- end }}
+      {{- with site.GetPage "/plan-du-site" }}
+      <p class="block"><a class="link-arrow" href="{{ .RelPermalink }}">{{ .LinkTitle }}{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a></p>
+      {{- end }}
+    </div>
+  </section>
+{{- end }}

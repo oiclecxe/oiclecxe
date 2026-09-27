@@ -19,3 +19,8 @@ disableKinds = ["rss"]
 [security]
   [security.funcs]
     getenv = ["^HUGO_", "^CI$"]
+
+[pagination]
+  pagerSize = 9
+  path = "page"
+

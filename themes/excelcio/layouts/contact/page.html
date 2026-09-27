@@ -1,0 +1,45 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- $org := site.Params.organization }}
+  <section class="section tone-light">
+    <div class="container with-aside">
+      <div class="with-aside__main">
+        {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+        {{- /* The contact form arrives with the forms layer (Lot 4): hook left here. */}}
+        {{- if templates.Exists "_partials/forms/contact.html" }}
+          {{- partial "forms/contact.html" . }}
+        {{- else }}
+        <div class="form-placeholder" role="note">
+          <p class="eyebrow">{{ T "formSoon" }}</p>
+          <p>{{ T "formSoonText" }} {{ with $org.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}</p>
+        </div>
+        {{- end }}
+      </div>
+      <aside class="with-aside__aside" aria-labelledby="contact-direct-title">
+        <div class="register-box">
+          <h2 class="register-box__title" id="contact-direct-title">{{ T "contactDirect" }}</h2>
+          <dl class="contact-list">
+            {{- with $org.email }}<dt>{{ T "contactGeneral" }}</dt><dd><a href="mailto:{{ . }}">{{ . }}</a></dd>{{ end }}
+            {{- with $org.jobsEmail }}<dt>{{ T "contactJobs" }}</dt><dd><a href="mailto:{{ . }}">{{ . }}</a></dd>{{ end }}
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+  {{- with hugo.Data.offices }}
+  <section class="section tone-light-alt" aria-labelledby="offices-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="offices-title">{{ T "officesTitle" }}</h2>
+      <ul class="grid grid--3" role="list">
+        {{- range . }}
+        <li class="card card--static office">
+          <h3 class="card__title">{{ .city }}</h3>
+          <address class="card__text">{{ .address }}<br>{{ .postalCode }} {{ .city }}</address>
+          <a class="link-arrow" href="https://www.openstreetmap.org/search?query={{ printf "%s %s %s" .address .postalCode .city | urlquery }}" rel="noopener">{{ T "seeMap" }}<span class="visually-hidden"> : {{ .city }}</span>{{ partialCached "icon.html" (dict "name" "arrow-up-right") "arrow-up-right" }}</a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- end }}
+{{- end }}

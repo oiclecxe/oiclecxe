@@ -1,15 +1,19 @@
 {{- /*
   Case studies carousel (reference “Proven in production”): square cards bleeding
   off the right edge, previous/next buttons. Scrollable without JS.
-  Context: dict "page" "data" "index". data: title, items [{title, client, sector, url}]
-
-  Card image: taken automatically from the linked case study page (its `image`
-  and `imageAlt` front matter, page resource or global asset). Without an image,
-  the card keeps the brand block with breathing squares.
+  Context: dict "page" "data" "index".
+  data: title, tone (default "tone-dark-alt"),
+        items: optional list of case study page paths (order kept); default: all by weight
+        limit: optional maximum number of cards
+        pages: slice of pages (used by templates instead of items)
+  Every card reads its title (`result`, else title), client, sector and image
+  from the case study page itself: nothing is duplicated here.
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
-<section class="section tone-dark-alt carousel-section" aria-labelledby="{{ $id }}" data-carousel>
+{{- $pages := $d.pages | default (partial "func/pages-of-type.html" (dict "type" "case-study" "paths" $d.items "limit" $d.limit)) -}}
+{{- with $pages }}
+<section class="section {{ $d.tone | default "tone-dark-alt" }} carousel-section" aria-labelledby="{{ $id }}" data-carousel>
   <div class="container carousel__head">
     {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
     <div class="carousel__controls">
@@ -19,29 +23,10 @@
   </div>
   <div class="carousel__viewport" tabindex="0" role="region" aria-labelledby="{{ $id }}" data-carousel-viewport>
     <ul class="carousel__track" role="list">
-      {{- range $i, $item := $d.items }}
-        {{- $target := site.GetPage (strings.TrimSuffix "/" $item.url) }}
-        {{- $href := $item.url | relLangURL }}
-        {{- $image := "" }}
-        {{- with $target }}
-          {{- $href = .RelPermalink }}
-          {{- with .Params.image }}{{ $image = . }}{{ end }}
-        {{- end }}
-      <li class="carousel__slide">
-        <a class="story{{ if $image }} story--photo{{ else }} story--{{ add (mod $i 3) 1 }}{{ end }}" href="{{ $href }}">
-          {{- if $image }}
-          <div class="story__media">
-            {{- partial "image.html" (dict "page" $target "src" $image "alt" $target.Params.imageAlt "sizes" "(min-width: 62em) 476px, 80vw" "widths" (slice 480 800 1000)) }}
-          </div>
-          {{- else }}
-            {{- partial "components/squares.html" (dict "seed" (printf "story-%d" $i) "cols" 5 "rows" 5 "density" 45) }}
-          {{- end }}
-          <h3 class="story__title">{{ $item.title }}</h3>
-          {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "story__corner") "arrow-up-right" "story__corner" }}
-          <p class="story__meta"><span class="story__client">{{ partialCached "icon.html" (dict "name" "logo-mark") "logo-mark" }}{{ $item.client }}</span><span class="story__sector">{{ $item.sector }}</span></p>
-        </a>
-      </li>
+      {{- range $i, $p := . }}
+      <li class="carousel__slide">{{ partial "components/story-card.html" (dict "title" ($p.Params.result | default $p.Title) "client" ($p.Params.client | default $p.Title) "sector" $p.Params.sector "target" $p "url" $p.RelPermalink "index" $i) }}</li>
       {{- end }}
     </ul>
   </div>
 </section>
+{{- end }}

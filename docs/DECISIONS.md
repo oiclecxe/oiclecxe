@@ -105,3 +105,47 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-27 — Niveaux de partenariat** (fournis par l'utilisateur) : Qlik = « Partenaire Elite », Jedox = « Partenaire certifié ». Les autres solutions (Vizlib, Tableau, Power BI, ThoughtSpot, IBM Cognos) n'ont **aucun badge**, ni réel ni placeholder.
 
 - **2026-09-27 — Header des pages intérieures** : apparence inchangée (barre sombre, logo et texte blancs), confirmée par l'utilisateur. Seule différence avec l'accueil : la barre est sombre dès le haut de la page (pas de transparence au-dessus d'une section claire) ; masquage au défilement vers le bas et réapparition vers le haut conservés.
+
+## Lot 3 — Pages intérieures
+
+- **2026-09-27 — Gabarits choisis par type** (`solution`, `expertise`, `training`, `case-study`, `article`, `event`, `job`, `contact`, `search`, `site-map`), posés par `cascade` dans les `_index.md` des rubriques. Le thème reste indépendant des adresses françaises du site ; les archetypes portent les mêmes noms (`hugo new content --kind training formations/…`). Les chemins de `hugo new content` sont relatifs à `content/fr` (commande corrigée dans le README et `CLAUDE.md`).
+
+- **2026-09-27 — Catalogue : 28 formations** aux intitulés et identifiants d'URL du site actuel (relevés le 27/09/2026 sur excelcio.com/formations/), réparties en Qlik (18, QlikView inclus), Vizlib (1), Jedox (2), Power BI (2), Tableau (3). Le CDC prévoyait 8 formations fictives ; l'utilisateur a demandé le catalogue réel. Codes, niveaux, durées, formats, prix, programmes et sessions restent en placeholders.
+
+- **2026-09-27 — Filtres construits d'après les valeurs présentes** (catalogue, cas clients) : un filtre n'apparaît qu'avec au moins deux valeurs différentes, pour ne pas inventer de niveaux ou de formats. Aujourd'hui, seul le filtre « Solution » est visible. État conservé dans l'URL (`?solution=qlik`) ; sans JavaScript, catalogue complet groupé par solution.
+
+- **2026-09-27 — Dates des contenus provisoires** affichées « [Date à confirmer] » : les dates du front matter ne servent qu'au tri. Pour les événements, `date` est la date de publication (jamais future, sinon la page n'est pas publiée) et `start` la date de l'événement.
+
+- **2026-09-27 — Formulaires, recherche et llms.txt différés** : la page contact affiche les e-mails et un emplacement pour le formulaire, la page recherche renvoie au plan du site, le lien « Explorer avec l'IA » du footer est masqué tant que `llms.txt` n'existe pas. Des points d'accroche sont prévus pour les Lots 4 et 5.
+
+- **2026-09-27 — Inscription aux formations et événements** : sans URL externe, le bouton mène à `/contact/?formation=<slug>` (ou `?evenement=`), que le formulaire du Lot 4 pourra pré-remplir.
+
+- **2026-09-27 — Appel à l'action final des pages intérieures** : `params.cta` du site (placeholder), remplaçable ou supprimable page par page.
+
+- **2026-09-27 — Source unique pour les contenus** (signalé par l'utilisateur : passer « Client 1 » à « Client A » dans la fiche ne se répercutait pas sur l'accueil). Les sections d'accueil `case-studies`, `expertises`, `platform` et `trainings` **lisent les pages** au lieu de recopier leurs données. Par défaut, toutes les fiches sont affichées par `weight` ; `items` (liste de chemins) et `limit` permettent de choisir. Les sessions de l'accueil et du catalogue sont lues dans les fiches formations (`func/upcoming-sessions.html`). Les pages solutions et expertises déclarent leur entrée de menu (`menus:` dans leur front matter) : 18 entrées recopiées ont été retirées de `menus.fr.toml`. Restent volontairement indépendants : les libellés du schéma d'architecture (étiquettes de dessin) et le bandeau de logos clients (tous les clients n'ont pas de fiche).
+
+- **2026-09-27 — Bloc « Prochaines sessions » de l'accueil masqué sans session à venir** (demande de l'utilisateur). Le catalogue des formations garde son message d'attente.
+
+
+- **2026-09-27 — Affichage des sessions de formation** (composant `components/session.html`, commun à la fiche, au catalogue et à l'accueil) : période « 1 – 2 octobre 2026 », lieu et format. Les dates de session s'affichent toujours, même sur une fiche encore marquée `placeholder: true` : une date de session saisie est réelle. Une session reste listée jusqu'à la fin de son dernier jour (`end`, sinon `start`). Sur la fiche, le bouton devient « S'inscrire » dès qu'une session est programmée (« Demander une session » sinon).
+
+
+- **2026-09-27 — Offres d'emploi : champ `active`** (demande de l'utilisateur). Seules les offres `active: true` sont listées et figurent dans le plan du site. Une offre fermée (`false` ou champ absent : publication explicite) garde sa page (liens existants) avec la mention « Ce poste n'est plus ouvert », sans bouton de candidature, en `noindex`. Sans offre active, la page Recrutement affiche « Aucun poste n'est ouvert pour l'instant » et la candidature spontanée. À reprendre au Lot 5 : pas de `JobPosting` ni d'entrée `sitemap.xml` pour une offre fermée.
+
+
+- **2026-09-27 — Page de test Markdown** `/styleguide/markdown/` (développement uniquement, comme le guide de style) : chaque format Goldmark avec sa syntaxe et son rendu, via le shortcode de documentation `md-example`. Styles du texte courant complétés (tableaux, notes, listes de définitions et de tâches, code). Coloration syntaxique : feuille générée par `css.ChromaStyles` (style `github`, paramètre `params.code.style`), chargée seulement sur les pages contenant du code.
+
+
+- **2026-09-27 — Moteur Markdown : Goldmark (intégré), pas Pandoc.** Décision de l'utilisateur. Pandoc, bien qu'installé, désactiverait les *render hooks* du thème (images AVIF/WebP, texte alternatif obligatoire, vérification des liens), ralentirait le build et imposerait Pandoc chez l'hébergeur. Extensions activées dans `config/_default/markup.toml` : texte supprimé `~~…~~` (remplace l'extension « barré », incompatible avec l'indice), inséré `++…++`, surligné `==…==`, indice `H~2~O`, exposant `1^er^` ; guillemets français automatiques avec espace fine insécable.
+
+
+- **2026-09-27 — Catalogue : filtre par solution en étiquettes cliquables** (demande de l'utilisateur), au lieu d'une liste déroulante. Groupe de boutons radio habillés en étiquettes (« Tous » + une étiquette par solution, avec le nombre de formations), utilisable au clavier (flèches) et synchronisé avec l'URL. Le composant `filters.html` accepte `style: tags` par filtre ; les autres filtres (cas clients, niveau et format) restent en listes déroulantes. Entrée de menu « Formations par solution » retirée.
+
+
+- **2026-09-27 — Catalogue : les fiches formations font foi pour les solutions** (signalé par l'utilisateur : une solution citée dans une nouvelle fiche n'apparaissait pas). Les étiquettes et les groupes du catalogue sont construits à partir des valeurs du champ `solutions` des formations : d'abord les solutions qui ont une page, dans l'ordre de leur `weight`, puis les autres par ordre alphabétique, avec un nom déduit du nom de dossier (`google-looker` → « Google Looker ») tant qu'aucune page n'existe. Les formations sans `solutions` sont rangées dans un groupe « Autres formations », pour qu'aucune ne disparaisse.
+
+- **2026-09-27 — Cas clients : même mécanisme que le catalogue, par secteur d'activité** (demande de l'utilisateur). La page Cas clients est groupée et filtrée par **secteur d'activité** (étiquettes cliquables avec nombre de cas), construits à partir du champ `sector` des fiches, par ordre alphabétique. Les fiches sans secteur sont rangées dans « Autres cas clients ». Le filtre par solution est retiré de cette page (les cas d'une solution restent listés sur la page de la solution). La carte `story-card` accepte un niveau de titre (`level`) pour garder une hiérarchie de titres correcte dans les groupes.
+
+- **2026-09-27 — Cas clients : filtre seul, sans groupes** (demande de l'utilisateur). La page Cas clients revient à une grille unique (ordre des `weight`) ; les secteurs d'activité ne servent qu'aux étiquettes de filtre. Remplace la partie « groupes » de la décision précédente.
+
+- **2026-09-27 — Champs de classement généralisés** (demande de l'utilisateur : `sector: ["industrie", "distribution"]` refusé alors que `solutions` accepte une liste). `solutions`, `expertises` et `sector` acceptent indifféremment une valeur ou une liste, partout (listes, fiches, cartes, pages liées). Deux fonctions communes au thème : `func/as-list.html` (normalise en liste) et `func/facet.html` (valeurs présentes dans un ensemble de pages, avec leur nombre, comparées sous forme d'URL : « Industrie » = « industrie »). Le catalogue et la page Cas clients reposent tous deux sur `facet.html` ; `func/related.html` accepte aussi une valeur seule. Nom affiché d'un secteur : `func/term-name.html` (majuscule initiale, tirets remplacés par des espaces).

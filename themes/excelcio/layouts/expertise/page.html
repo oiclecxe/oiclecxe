@@ -1,0 +1,48 @@
+{{- define "main" }}
+  {{- $p := . }}
+  {{- $slug := .File.ContentBaseName }}
+  {{- $badges := slice }}{{ range partial "func/as-list.html" .Params.solutions }}{{ $badges = $badges | append (partial "func/solution-name.html" .) }}{{ end }}
+  {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (T "expertiseEyebrow") "badges" $badges "lead" (.Params.summary | default .Description)
+      "actions" (slice (dict "label" (T "ctaContact") "url" "/contact/"))) }}
+
+  {{- with .Params.benefits }}
+  <section class="section tone-light" aria-labelledby="benefits-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="benefits-title">{{ T "benefitsTitle" }}</h2>
+      <ul class="grid grid--3" role="list">
+        {{- range . }}
+        <li class="reveal-block" data-reveal><div class="card card--static"><h3 class="card__title">{{ .title }}</h3><p class="card__text">{{ .text }}</p></div></li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with .Content }}
+  <section class="section tone-light">
+    <div class="container split">
+      <h2 class="split__aside--sticky">{{ T "ourApproach" }}</h2>
+      <div class="prose">{{ . }}</div>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with .Params.kpis }}
+  <section class="section tone-light-alt" aria-labelledby="kpis-title">
+    <div class="container">
+      <h2 class="section__head--tight" id="kpis-title">{{ T "kpisTitle" }}</h2>
+      <ul class="tag-cloud" role="list">{{ range . }}<li class="tag tag--lg">{{ . }}</li>{{ end }}</ul>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with partial "func/related.html" (dict "type" "case-study" "key" "expertises" "slug" $slug) }}
+    {{- partial "sections/case-studies.html" (dict "page" $p "index" 50 "data" (dict "title" (T "relatedCases") "pages" . "tone" "tone-light-alt")) }}
+  {{- end }}
+
+  {{- with .Params.faq }}
+    {{- partial "sections/faq.html" (dict "page" $p "index" 60 "data" (dict "title" (T "faqTitle") "items" . "tone" "tone-light")) }}
+  {{- end }}
+
+  {{- partial "components/page-cta.html" . }}
+{{- end }}
