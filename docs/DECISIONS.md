@@ -132,3 +132,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Offres d'emploi : champ `active`** (demande de l'utilisateur). Seules les offres `active: true` sont listées et figurent dans le plan du site. Une offre fermée (`false` ou champ absent : publication explicite) garde sa page (liens existants) avec la mention « Ce poste n'est plus ouvert », sans bouton de candidature, en `noindex`. Sans offre active, la page Recrutement affiche « Aucun poste n'est ouvert pour l'instant » et la candidature spontanée. À reprendre au Lot 5 : pas de `JobPosting` ni d'entrée `sitemap.xml` pour une offre fermée.
 
+
+- **2026-09-27 — Page de test Markdown** `/styleguide/markdown/` (développement uniquement, comme le guide de style) : chaque format Goldmark avec sa syntaxe et son rendu, via le shortcode de documentation `md-example`. Styles du texte courant complétés (tableaux, notes, listes de définitions et de tâches, code). Coloration syntaxique : feuille générée par `css.ChromaStyles` (style `github`, paramètre `params.code.style`), chargée seulement sur les pages contenant du code.
+

@@ -33,6 +33,10 @@
     aiLabel = ""
     aiURL = ""
 
+  # Syntax highlighting style of code blocks (Chroma style name, light theme).
+  [params.code]
+    style = "github"
+
   [params.dev]
     showPlaceholders = false
 

@@ -26,6 +26,8 @@ dateTBC = "[Date à confirmer]"
 ctaContact = "Nous contacter"
 faqTitle = "Questions fréquentes"
 videoPlay = "Lire la vidéo"
+mdSource = "Markdown"
+mdResult = "Rendu"
 by = "Par"
 
 # --- Filters
