@@ -10,7 +10,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - Périmètre : V1 (lots 0 à 2) validée ; lots 3, 4 et 5 réalisés et validés (27/09/2026). Lot 6 non lancé : attendre l'accord de l'utilisateur.
 - Lot en cours : aucun (Lot 6 — Recette et remise : à lancer sur accord)
 - Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026), Lot 4 (27/09/2026), Lot 5 (27/09/2026)
-- Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
+- Contenu : reprise des textes du site excelcio.com en cours (branche `contenu-reprise`, point de restauration : étiquette `avant-reprise-contenu`). Actualités : articles des 12 derniers mois seulement.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
 - En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser) ; validation en ligne du JSON-LD (validator.schema.org, résultats enrichis Google) reportée par l'utilisateur, à autoriser plus tard. Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
 - Logo Excelcio fourni : `assets/images/logo.svg`
@@ -28,7 +28,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 ## Règles non négociables
 
 - **Pas de copie de la référence** : reproduire le langage visuel (mise en page, typographie, effets, animations), jamais son code, ses images, logos, icônes ni ses textes.
-- **Pas de contenu inventé** : textes en placeholders `[À RÉDIGER — consigne…]`, chiffres en `[XX]`, `placeholder: true` dans le front matter. Jamais de *lorem ipsum*, de faux clients, de faux témoignages ni de faux chiffres. Faits réels autorisés : SPEC § 7.4. **Aucun nom ni logo de client réel** (« Client 1 », « Client 2 »…), même ceux du site actuel. Le logo Excelcio est fourni par l'utilisateur, ne pas le récupérer en ligne.
+- **Pas de contenu inventé** : les textes viennent du **site actuel excelcio.com** (repris et adaptés librement, sans ajouter de fait : avenant du 27/09/2026) ou de l'utilisateur ; à défaut, placeholders `[À RÉDIGER — consigne…]`, chiffres en `[XX]`, `placeholder: true` dans le front matter. Jamais de *lorem ipsum*, de faux clients, de faux témoignages ni de faux chiffres. **Noms de clients réels autorisés** tels qu'ils figurent sur le site actuel (avenant du 27/09/2026) ; pas de logo de client sans fourniture par l'utilisateur. Le logo Excelcio est fourni par l'utilisateur, ne pas le récupérer en ligne. Images : ne pas reprendre celles du site actuel (texte seulement).
 - **Zéro tiers au chargement** : pas de CDN, pas de Google Fonts distant, pas de framework JS. Polices auto-hébergées.
 - **Amélioration progressive** : chaque page est lisible et navigable sans JavaScript.
 - `#A82234` (`--brand`) n'est **jamais** une couleur de texte sur fond sombre (contraste 2,5:1). Utiliser `--accent-on-dark` (ou le rôle `--fg-accent` d'une ambiance sombre).

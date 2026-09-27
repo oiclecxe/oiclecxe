@@ -71,7 +71,8 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 | Première version (V1) | **Lots 0 à 2** : étude de la référence, socle et design system, page d'accueil complète. Les lots 3 à 6 ne sont lancés qu'après validation de la V1 |
 | Arborescence et menu | Proposition du § 6 **validée** : Offre · Solutions · Formations · Cas clients · Ressources · Entreprise + « Nous contacter » |
 | Logo | **Fourni par l'utilisateur** (§ 5.5) ; ne pas le récupérer sur le site actuel |
-| Clients | **Aucun nom ni logo de client réel** : tout en placeholder (« Client 1 », « Client 2 »…) jusqu'à la liste des clients citables |
+| Clients | ~~Aucun nom ni logo de client réel~~ → **Avenant du 27/09/2026** : clients cités nommément, tels qu'ils figurent sur le site actuel ; logos non repris |
+| Contenu | **Avenant du 27/09/2026** : textes repris du site actuel excelcio.com et adaptés librement aux emplacements (sans ajout de fait) : pages, 28 fiches formations, cas clients, pages légales, actualités des 12 derniers mois. Texte seulement, pas d'images |
 | Langue du code | **Anglais** pour le code (identifiants, classes CSS, clés i18n, clés de front matter, noms de partials, commentaires) ; **français** pour le contenu, les URLs, le README et `docs/` |
 | Navigateurs | Chrome, Edge, Firefox et Safari (y compris iOS) des **24 derniers mois** |
 
@@ -191,7 +192,7 @@ Exigences :
 - Visuels « produit » : maquettes stylisées de dashboards (SVG ou images générées localement), jamais de captures de la référence.
 - **Logo Excelcio : fourni par l'utilisateur.** Il est attendu dans `assets/images/logo.svg` à la racine du site (paramètre `params.logo`, avec variante claire si fournie). Au début du Lot 1, s'il est absent, le demander à l'utilisateur ; en attendant, afficher « Excelcio » en texte dans la police des titres, sans bloquer le lot. Ne jamais le récupérer sur le site actuel.
 - Logos partenaires : **placeholders neutres** en SVG (rectangle + nom du partenaire en texte) tant qu'Excelcio n'a pas fourni les fichiers officiels.
-- Clients : **placeholders anonymes** (« Client 1 », « Client 2 »… et secteur fictif), jamais de nom ni de logo de client réel, même ceux visibles sur le site actuel.
+- Clients : ~~placeholders anonymes~~ → **Avenant du 27/09/2026** : les cas clients du site actuel, avec les noms réels.
 
 ### 5.6 Guide de style
 Page `/styleguide/` générée **uniquement en environnement `development`** (`build.render: never` en production, via `cascade` ou condition sur `hugo.Environment`), présentant : palette avec ratios de contraste, échelle typographique, espacements, tous les composants dans tous leurs états, animations.
