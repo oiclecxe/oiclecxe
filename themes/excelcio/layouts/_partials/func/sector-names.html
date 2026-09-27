@@ -1,0 +1,8 @@
+{{- /*
+  Display names of the sectors cited in a field (one value or a list), e.g.
+  `sector: [industrie, grande-distribution]` → ["Industrie", "Grande distribution"].
+  Context: field value. Returns: slice of strings.
+*/ -}}
+{{- $names := slice -}}
+{{- range partial "func/as-list.html" . }}{{ $names = $names | append (partial "func/term-name.html" .) }}{{ end -}}
+{{- return $names -}}

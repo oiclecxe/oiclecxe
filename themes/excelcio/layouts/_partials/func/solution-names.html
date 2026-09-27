@@ -1,0 +1,8 @@
+{{- /*
+  Display names of the solutions cited in a field (one value or a list), e.g.
+  `solutions: [qlik, power-bi]` → ["Qlik", "Power BI"]. Values are matched on
+  their URL form. Context: field value. Returns: slice of strings.
+*/ -}}
+{{- $names := slice -}}
+{{- range partial "func/as-list.html" . }}{{ $names = $names | append (partial "func/solution-name.html" (urlize .)) }}{{ end -}}
+{{- return $names -}}

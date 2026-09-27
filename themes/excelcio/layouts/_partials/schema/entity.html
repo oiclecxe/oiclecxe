@@ -13,8 +13,7 @@
 {{- $e := dict -}}
 
 {{- if eq .Type "training" }}
-  {{- $about := slice }}
-  {{- range partial "func/as-list.html" .Params.solutions }}{{ $about = $about | append (partial "func/solution-name.html" (urlize .)) }}{{ end }}
+  {{- $about := partial "func/solution-names.html" .Params.solutions }}
   {{- /* Required description: the summary, or a factual sentence built from real data. */}}
   {{- $fallback := T "courseDescription" (dict "Name" $name "Solutions" (delimit $about ", ") "Org" (site.Params.organization.name | default site.Title)) }}
   {{- $e = dict "@type" "Course" "@id" (printf "%s#course" .Permalink) "name" $name "url" .Permalink "provider" $org "inLanguage" site.Language.Locale "mainEntityOfPage" $page "description" ($desc | default $fallback) }}

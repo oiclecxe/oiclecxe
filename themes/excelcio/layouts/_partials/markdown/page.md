@@ -7,9 +7,8 @@
 {{- $p := . -}}
 {{- $facts := slice -}}
 {{- $fact := dict -}}
-{{- with partial "func/as-list.html" .Params.solutions }}
-  {{- $names := slice }}{{ range . }}{{ $names = $names | append (partial "func/solution-name.html" (urlize .)) }}{{ end }}
-  {{- $facts = $facts | append (printf "%s : %s" (T "factSolutions") (delimit $names ", ")) }}
+{{- with partial "func/solution-names.html" .Params.solutions }}
+  {{- $facts = $facts | append (printf "%s : %s" (T "factSolutions") (delimit . ", ")) }}
 {{- end -}}
 {{- if eq .Type "training" }}
   {{- with .Params.code }}{{ $facts = $facts | append (printf "%s : %s" (T "factCode") .) }}{{ end }}
@@ -23,9 +22,8 @@
   {{- with .Params.format }}{{ $facts = $facts | append (printf "%s : %s" (T "factFormat") .) }}{{ end }}
 {{- else if eq .Type "case-study" }}
   {{- with .Params.client }}{{ $facts = $facts | append (printf "%s : %s" (T "factClient") .) }}{{ end }}
-  {{- with partial "func/as-list.html" .Params.sector }}
-    {{- $s := slice }}{{ range . }}{{ $s = $s | append (partial "func/term-name.html" .) }}{{ end }}
-    {{- $facts = $facts | append (printf "%s : %s" (T "filterSector") (delimit $s ", ")) }}
+  {{- with partial "func/sector-names.html" .Params.sector }}
+    {{- $facts = $facts | append (printf "%s : %s" (T "filterSector") (delimit . ", ")) }}
   {{- end }}
 {{- else if eq .Type "job" }}
   {{- with .Params.location }}{{ $facts = $facts | append (printf "%s : %s" (T "factPlace") .) }}{{ end }}

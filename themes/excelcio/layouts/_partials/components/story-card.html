@@ -13,8 +13,7 @@
 {{- end -}}
 {{- $i := .index | default 0 -}}
 {{- $h := .level | default 3 -}}
-{{- $sectors := slice -}}
-{{- range partial "func/as-list.html" .sector }}{{ $sectors = $sectors | append (partial "func/term-name.html" .) }}{{ end -}}
+{{- $sectors := partial "func/sector-names.html" .sector -}}
 <a class="story{{ if $image }} story--photo{{ else }} story--{{ add (mod $i 3) 1 }}{{ end }}" href="{{ $href }}">
   {{- if $image }}
   <div class="story__media">
