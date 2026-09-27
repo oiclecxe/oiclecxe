@@ -743,35 +743,4 @@
   .tile-mask[data-state="covered"] .tile-mask__cell {
     opacity: 1;
   }
-
-  /*
-   * While a filter is active, the available cards carry a few very light
-   * breathing squares (same keyframes as the home squares field), in the
-   * card's text colour.
-   */
-  .tile-breath {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-columns: repeat(var(--cols), 1fr);
-    grid-template-rows: repeat(var(--rows), 1fr);
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .tile-breath__cell {
-    grid-column: var(--c);
-    grid-row: var(--r);
-    background: currentColor;
-    opacity: 0;
-    animation: squares-breathe var(--dur) ease-in-out var(--delay) infinite backwards;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .tile-breath__cell {
-      animation: none;
-      opacity: calc(var(--peak) * 0.6);
-    }
-  }
 }

@@ -4,11 +4,8 @@
 // Clicking the active tag again deselects it (back to "All").
 // Transition inspired by the breathing squares: leaving cards are covered square by
 // square, entering cards uncovered square by square (none with reduced motion).
-// While a filter is active, the available cards carry a few very light breathing squares.
 
 const MAX_DELAY_STEPS = 4; // square delays: 0 … 3 × --tile-stagger
-const BREATH_DENSITY = 0.3; // share of the card's squares that breathe
-const random = (min, max) => min + Math.random() * (max - min);
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -51,30 +48,6 @@ function addMask(item, state) {
   }
   item.append(mask);
   return mask;
-}
-
-// Very light breathing squares on an available card (same ranges as the home
-// squares field, lighter). Cards that already have their own squares field keep it.
-function addBreath(item) {
-  const card = item.firstElementChild;
-  if (!card || card.querySelector('.squares, .tile-breath')) return;
-  const size = grid(card);
-  if (!size) return;
-  const field = document.createElement('span');
-  field.className = 'tile-breath';
-  field.setAttribute('aria-hidden', 'true');
-  field.style.setProperty('--cols', size.cols);
-  field.style.setProperty('--rows', size.rows);
-  for (let r = 1; r <= size.rows; r += 1) {
-    for (let c = 1; c <= size.cols; c += 1) {
-      if (Math.random() > BREATH_DENSITY) continue;
-      const square = document.createElement('span');
-      square.className = 'tile-breath__cell';
-      square.style.cssText = `--c:${c};--r:${r};--dur:${random(5.5, 10.4).toFixed(1)}s;--delay:${random(0, 1.2).toFixed(1)}s;--peak:${random(0.04, 0.07).toFixed(3)}`;
-      field.append(square);
-    }
-  }
-  card.append(field);
 }
 
 // Moves every mask to `state` and resolves when the squares are done.
@@ -138,7 +111,7 @@ export function initFilters() {
 
     const apply = async (updateUrl = true, animate = true) => {
       const current = ++run;
-      scope.querySelectorAll('.tile-mask, .tile-breath').forEach((m) => m.remove()); // a previous transition is cut short
+      scope.querySelectorAll('.tile-mask').forEach((m) => m.remove()); // a previous transition is cut short
       const active = names.map((name) => [name, valueOf(name)]).filter(([, v]) => v);
       names.forEach((name) => { selected[name] = valueOf(name); });
       if (updateUrl) {
@@ -149,19 +122,14 @@ export function initFilters() {
 
       const leaving = items.filter((item) => !item.hidden && !matches(item, active));
       const entering = items.filter((item) => item.hidden && matches(item, active));
-      const breathe = () => {
-        if (active.length) items.filter((item) => !item.hidden).forEach(addBreath);
-      };
       if (!animate || reducedMotion()) {
         layout(active);
-        breathe();
         return;
       }
       await play(leaving.map((item) => addMask(item, 'clear')), 'covered');
       if (current !== run) return;
       leaving.forEach((item) => item.querySelector('.tile-mask')?.remove());
       layout(active);
-      breathe();
       const masks = entering.map((item) => addMask(item, 'covered'));
       await play(masks, 'clear');
       if (current !== run) return;
