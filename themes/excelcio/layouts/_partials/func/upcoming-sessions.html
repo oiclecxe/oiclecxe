@@ -1,15 +1,20 @@
 {{- /*
   Upcoming training sessions read from the `sessions` of training pages,
-  sorted by start date. Context: dict "pages" (optional, default: all trainings), "limit" (optional).
-  Returns: slice of dict {start (time), city, format, page}.
+  sorted by start date. A session stays listed until the end of its last day
+  (`end`, else `start`). Context: dict "pages" (optional, default: all trainings),
+  "limit" (optional). Returns: slice of dict {start (time), end, city, format, page}.
 */ -}}
 {{- $pages := .pages | default (where site.RegularPages "Type" "training") -}}
+{{- $today := time.Format "2006-01-02" now -}}
 {{- $sessions := slice -}}
 {{- range $pages }}
   {{- $t := . }}
   {{- range .Params.sessions }}
-    {{- if and .start (ge (time .start).Unix now.Unix) }}
-      {{- $sessions = $sessions | append (dict "start" (time .start) "city" .city "format" .format "page" $t) }}
+    {{- if .start }}
+      {{- $last := time (.end | default .start) }}
+      {{- if ge (time.Format "2006-01-02" $last) $today }}
+        {{- $sessions = $sessions | append (dict "start" (time .start) "end" .end "city" .city "format" .format "page" $t) }}
+      {{- end }}
     {{- end }}
   {{- end }}
 {{- end -}}

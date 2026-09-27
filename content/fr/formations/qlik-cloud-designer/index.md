@@ -16,5 +16,5 @@ prerequisites: ["[À RÉDIGER — Prérequis]"]
 program:
   - { title: "[Module 1]", items: ["[À RÉDIGER — Point 1]", "[À RÉDIGER — Point 2]"] }
   - { title: "[Module 2]", items: ["[À RÉDIGER — Point 1]", "[À RÉDIGER — Point 2]"] }
-sessions: []
+sessions: [{ start: 2026-10-01, end: 2026-10-02, city: "Paris", format: "Présentiel" }]
 ---

@@ -59,7 +59,7 @@
       <ul class="rows" role="list">
         {{- range . }}
         <li class="rows__item">
-          <p class="rows__key mono">{{ partial "components/date.html" (dict "page" .page "date" .start "format" ":date_medium") }} · {{ .city | default .format }}</p>
+          <p class="rows__key mono">{{ partial "components/session.html" (dict "start" .start "end" .end "city" .city "format" .format "style" "short") }}</p>
           <h3 class="rows__title"><a class="rows__link" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a></h3>
           <div class="rows__body"><a class="link-arrow" href="{{ .page.RelPermalink }}#inscription">{{ T "register" }}{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a></div>
         </li>

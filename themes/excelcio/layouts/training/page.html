@@ -43,22 +43,23 @@
       <aside class="with-aside__aside" id="inscription" aria-labelledby="register-title">
         <div class="register-box">
           <h2 class="register-box__title" id="register-title">{{ T "registerTitle" }}</h2>
-          {{- $sessions := slice }}
-          {{- range .Params.sessions }}{{ if and .start (ge (time .start).Unix now.Unix) }}{{ $sessions = $sessions | append . }}{{ end }}{{ end }}
+          {{- $sessions := partial "func/upcoming-sessions.html" (dict "pages" (slice $p)) }}
           {{- with $sessions }}
           <ul class="register-box__sessions" role="list">
-            {{- range sort . "start" }}
-            <li>{{ partial "components/date.html" (dict "page" $p "date" (time .start) "format" ":date_medium") }} · {{ .city | default .format }}</li>
+            {{- range . }}
+            <li>{{ partial "components/session.html" (dict "start" .start "end" .end "city" .city "format" .format) }}</li>
             {{- end }}
           </ul>
           {{- else }}
           <p class="register-box__text">{{ T "noSessionsTraining" }}</p>
           {{- end }}
+          {{- /* With scheduled sessions the button offers to register; otherwise to request a session. */}}
+          {{- $label := cond (gt (len $sessions) 0) (T "register") (T "registerRequest") }}
           {{- $reg := .Params.registration }}
           {{- if and $reg (eq $reg.type "external") $reg.url }}
           <a class="btn btn--primary" href="{{ $reg.url }}" rel="noopener">{{ T "register" }}</a>
           {{- else }}
-          <a class="btn btn--primary" href="{{ "/contact/" | relLangURL }}?formation={{ .File.ContentBaseName }}">{{ T "registerRequest" }}</a>
+          <a class="btn btn--primary" href="{{ "/contact/" | relLangURL }}?formation={{ .File.ContentBaseName }}">{{ $label }}</a>
           {{- end }}
           <p class="register-box__note">{{ T "intraNote" }}</p>
         </div>

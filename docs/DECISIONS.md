@@ -126,3 +126,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Bloc « Prochaines sessions » de l'accueil masqué sans session à venir** (demande de l'utilisateur). Le catalogue des formations garde son message d'attente.
 
+
+- **2026-09-27 — Affichage des sessions de formation** (composant `components/session.html`, commun à la fiche, au catalogue et à l'accueil) : période « 1 – 2 octobre 2026 », lieu et format. Les dates de session s'affichent toujours, même sur une fiche encore marquée `placeholder: true` : une date de session saisie est réelle. Une session reste listée jusqu'à la fin de son dernier jour (`end`, sinon `start`). Sur la fiche, le bouton devient « S'inscrire » dès qu'une session est programmée (« Demander une session » sinon).
+

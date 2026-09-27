@@ -18,7 +18,7 @@
     <ul class="rows" role="list">
       {{- range . }}
       <li class="rows__item reveal-block" data-reveal>
-        <p class="rows__key mono">{{ partial "components/date.html" (dict "page" .page "date" .start "format" ":date_medium") }} · {{ .city | default .format }}</p>
+        <p class="rows__key mono">{{ partial "components/session.html" (dict "start" .start "end" .end "city" .city "format" .format "style" "short") }}</p>
         <h3 class="rows__title"><a class="rows__link" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a></h3>
         <div class="rows__body">
           {{- with or .page.Params.summary .page.Description }}<p>{{ . }}</p>{{ end }}
