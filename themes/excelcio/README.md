@@ -85,7 +85,7 @@ Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-al
 | `case-studies` | dark-alt | `title`, `tone` ; lit les pages `case-study` (`result`, `client`, `sector`, `image`) : toutes par `weight`, ou `items` (liste de chemins), `limit` |
 | `faq` | dark | `title`, `items: [{q, a}]` (émet le JSON-LD `FAQPage`) |
 | `platform` | dark-alt | `title` ; lit les pages `solution` (`partnerName`, `tagline`, `visual`) : toutes par `weight`, ou `items`, `limit` |
-| `trainings` | dark-alt | `title`, `cta {label, url}`, `limit` ; lit les sessions futures des pages `training` (`sessions`) |
+| `trainings` | dark-alt | `title`, `cta {label, url}`, `limit` ; lit les sessions futures des pages `training` (`sessions`) ; **bloc masqué s'il n'y en a aucune** |
 | `proof` | dark-alt | `title`, `stats: [{value, suffix, label}]`, `quote {before, highlight, after, author, role}` |
 | `cta` | brand | `title`, `primary`, `secondary`, `badges` |
 

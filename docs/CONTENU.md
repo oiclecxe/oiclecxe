@@ -85,7 +85,7 @@ Les formations, cas clients et actualités de la solution s'affichent **automati
 | `price` | Tarif affiché ; vide = « Sur demande » |
 | `objectives`, `audience`, `prerequisites` | Listes de puces |
 | `program` | Liste `{ title, items: [...] }` : un module par ligne d'accordéon |
-| `sessions` | Liste `{ start: 2026-11-16, end: 2026-11-17, city: "Paris", format: "Présentiel" }` ; seules les sessions futures s'affichent, sur la fiche et dans « Prochaines sessions » |
+| `sessions` | Liste `{ start: 2026-11-16, end: 2026-11-17, city: "Paris", format: "Présentiel" }` ; seules les sessions futures s'affichent, sur la fiche et dans « Prochaines sessions ». Sur l'accueil, le bloc « Prochaines sessions » n'apparaît que s'il existe au moins une session à venir |
 | `registration` | `{ type: external, url: "https://…" }` pour un outil d'inscription externe ; sinon, demande via la page contact |
 
 Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses reprennent les identifiants d'origine.

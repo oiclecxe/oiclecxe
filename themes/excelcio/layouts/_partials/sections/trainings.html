@@ -2,19 +2,19 @@
   Upcoming training sessions, as a feature list (reference /cloud rows):
   mono key (date · city), training title, summary + link.
   Sessions are read from the training pages (`sessions` front matter): nothing is typed here.
+  The whole block is omitted when no session is upcoming.
   Context: dict "page" "data" "index".
   data: title, cta {label, url}, limit (default 3)
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
-{{- $sessions := partial "func/upcoming-sessions.html" (dict "limit" ($d.limit | default 3)) -}}
+{{- with partial "func/upcoming-sessions.html" (dict "limit" ($d.limit | default 3)) }}
 <section class="section tone-dark-alt" aria-labelledby="{{ $id }}" id="sessions">
   <div class="container">
     <div class="rows-head">
       {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "title--section") }}
       {{- with $d.cta }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
     </div>
-    {{- with $sessions }}
     <ul class="rows" role="list">
       {{- range . }}
       <li class="rows__item reveal-block" data-reveal>
@@ -27,8 +27,6 @@
       </li>
       {{- end }}
     </ul>
-    {{- else }}
-    <p class="lead rows-empty">{{ T "noSessions" }}</p>
-    {{- end }}
   </div>
 </section>
+{{- end }}
