@@ -1,7 +1,7 @@
 # Paramètres propres au site Excelcio.
 # Les valeurs par défaut et la documentation de chaque paramètre sont dans themes/excelcio/hugo.toml.
 
-description = "[À RÉDIGER — Description du site en 150 caractères : cabinet de conseil et de formation en Business Intelligence, partenaire des principaux éditeurs.]"
+description = "Distributeur et intégrateur à forte valeur ajoutée, Excelcio vous accompagne en pilotage de la performance, autour des meilleures solutions de BI du marché."
 
 [logo]
   default = "images/logo.svg"
@@ -11,8 +11,8 @@ description = "[À RÉDIGER — Description du site en 150 caractères : cabinet
 
 [organization]
   name = "Excelcio"
-  legalName = "[À RÉDIGER — Raison sociale]"
-  registration = "[À RÉDIGER — Forme juridique, capital, RCS, SIREN]"
+  legalName = "Excelcio SAS"
+  registration = "Société par actions simplifiée au capital de 40 000 € · RCS Paris B 502 851 512 · 113 rue Saint-Maur, 75011 Paris"
   email = "contact@excelcio.com"
   jobsEmail = "rh@excelcio.com"
 
@@ -24,16 +24,16 @@ description = "[À RÉDIGER — Description du site en 150 caractères : cabinet
 # Les trois piliers, affichés sous le titre du hero et rappelés dans le footer.
 [[pillars]]
   title = "Conseil."
-  text = "[À RÉDIGER — Une phrase sur le conseil en acquisition de solutions BI, 15 mots max.]"
+  text = "Le choix et l’acquisition de vos licences, sans biais : ni éditeur, ni ESN."
 [[pillars]]
   title = "Déploiement."
-  text = "[À RÉDIGER — Une phrase sur le déploiement et l'expertise métier, 15 mots max.]"
+  text = "Des pôles de compétences pour une réponse experte, adaptée à vos contraintes."
 [[pillars]]
   title = "Formation."
-  text = "[À RÉDIGER — Une phrase sur l'offre de formation, 15 mots max.]"
+  text = "Organisme certifié Qualiopi : en intra ou inter-entreprises, sur site ou à distance."
 
 [footer]
-  headline = "[À RÉDIGER — Signature de marque en une ligne, 8 mots max.]"
+  headline = "Transformez votre expérience de la prise de décision."
   aiLabel = "Explorer avec l'IA"
   aiURL = "/llms.txt"
   newsletter = true
@@ -53,8 +53,8 @@ description = "[À RÉDIGER — Description du site en 150 caractères : cabinet
 # Appel à l'action en bas des pages intérieures (une page peut le remplacer par `cta:` ou le retirer par `cta: false`).
 [cta]
   [cta.title]
-    lead = "[À RÉDIGER — Appel à l'action des pages intérieures, 8 mots.]"
-    rest = "[À RÉDIGER — Complément, 15 mots max.]"
+    lead = "Vous avez déjà un projet ?"
+    rest = "Parlons de vos enjeux et de notre offre."
   [cta.primary]
     label = "Nous contacter"
     url = "/contact/"

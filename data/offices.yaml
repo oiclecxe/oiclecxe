@@ -1,10 +1,15 @@
-# Bureaux Excelcio. Adresses à fournir par Excelcio (SPEC § 19).
+# Bureaux Excelcio (adresses et accès relevés sur excelcio.com/contact le 27/09/2026).
+# Nantes est cité sur l'accueil du site actuel, sans adresse : à compléter par Excelcio.
 - city: Paris
-  address: "[À RÉDIGER — Adresse]"
-  postalCode: "[XXXXX]"
+  address: "113 rue Saint-Maur"
+  postalCode: "75011"
+  phone: "+33 1 71 19 45 00"
+  access: "Métro ligne 3, station Parmentier · Vélib’ n° 11018, 87 rue Saint-Maur"
 - city: Rennes
-  address: "[À RÉDIGER — Adresse]"
-  postalCode: "[XXXXX]"
+  address: "1 rue Saint-Georges"
+  postalCode: "35000"
+  phone: "+33 2 56 01 11 40"
+  access: "Métro, station Saint-Germain"
 - city: Nantes
   address: "[À RÉDIGER — Adresse]"
   postalCode: "[XXXXX]"

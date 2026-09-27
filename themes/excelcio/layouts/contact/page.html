@@ -26,8 +26,13 @@
         {{- range . }}
         <li class="card card--static office">
           <h3 class="card__title">{{ .city }}</h3>
-          <address class="card__text">{{ .address }}<br>{{ .postalCode }} {{ .city }}</address>
+          <address class="card__text">{{ .address }}<br>{{ .postalCode }} {{ .city }}
+            {{- with .phone }}<br><a href="tel:{{ replace . " " "" }}">{{ . }}</a>{{ end }}</address>
+          {{- with .access }}<p class="office__access">{{ . }}</p>{{ end }}
+          {{- /* Map link only for a real address (not a placeholder). */}}
+          {{- if partial "func/real.html" (.address | default "") }}
           <a class="link-arrow" href="https://www.openstreetmap.org/search?query={{ printf "%s %s %s" .address .postalCode .city | urlquery }}" rel="noopener">{{ T "seeMap" }}<span class="visually-hidden"> : {{ .city }}</span>{{ partialCached "icon.html" (dict "name" "arrow-up-right") "arrow-up-right" }}</a>
+          {{- end }}
         </li>
         {{- end }}
       </ul>

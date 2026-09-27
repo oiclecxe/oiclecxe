@@ -642,6 +642,15 @@
     font-style: normal;
   }
 
+  .office address a {
+    color: inherit;
+  }
+
+  .office__access {
+    color: var(--fg-body);
+    font-size: var(--fs-ui);
+  }
+
   .item-list--wide .item-list__text {
     max-width: 48rem;
   }
