@@ -3,8 +3,7 @@
   label shown in results) and, for dated content, the date.
   Context: page.
 */ -}}
-{{- $types := dict "solution" "typeSolution" "expertise" "typeExpertise" "training" "typeTraining" "case-study" "typeCaseStudy" "article" "typeArticle" "event" "typeEvent" "job" "typeJob" -}}
-{{- $label := T (index $types .Type | default "typePage") -}}
+{{- $label := partial "func/type-label.html" .Type | default (T "typePage") -}}
 <span hidden data-pagefind-filter="type:{{ $label }}"></span>
 <span hidden data-pagefind-meta="type:{{ $label }}"></span>
 {{- $date := "" -}}

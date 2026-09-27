@@ -12,9 +12,8 @@
   {{- $style := site.Params.style }}
   {{- $font := resources.Get "fonts/Geist-Medium.ttf" }}
   {{- with resources.Get "images/og-base.png" }}
-    {{- $types := dict "solution" "typeSolution" "expertise" "typeExpertise" "training" "typeTraining" "case-study" "typeCaseStudy" "article" "typeArticle" "event" "typeEvent" "job" "typeJob" }}
     {{- $eyebrow := "" }}
-    {{- with index $types $.Type }}{{ if $.IsPage }}{{ $eyebrow = upper (T .) }}{{ end }}{{ end }}
+    {{- if $.IsPage }}{{ with partial "func/type-label.html" $.Type }}{{ $eyebrow = upper . }}{{ end }}{{ end }}
     {{- $title := partial "func/real.html" $.Title | default site.Title }}
     {{- if $.IsHome }}{{ $title = partial "func/real.html" (site.Params.footer.headline | default "") | default site.Title }}{{ end }}
     {{- $bg := $style.brand }}

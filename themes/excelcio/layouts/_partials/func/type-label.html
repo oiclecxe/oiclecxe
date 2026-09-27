@@ -1,0 +1,9 @@
+{{- /*
+  Display label of a content type ("Formation", "Solution"…), used by the search
+  filter and the generated social images. Context: type string.
+  Returns: label, or "" for a type without a label.
+*/ -}}
+{{- $keys := dict "solution" "typeSolution" "expertise" "typeExpertise" "training" "typeTraining" "case-study" "typeCaseStudy" "article" "typeArticle" "event" "typeEvent" "job" "typeJob" -}}
+{{- $label := "" -}}
+{{- with index $keys . }}{{ $label = T . }}{{ end -}}
+{{- return $label -}}
