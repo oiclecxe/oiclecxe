@@ -1,3 +1,15 @@
-{{- /* Markdown images go through the shared image partial (processing, srcset, dimensions, alt check). */ -}}
-{{- partial "image.html" (dict "page" .PageInner "src" .Destination "alt" .PlainText "title" .Title) -}}
-{{- /* chomp trailing newline */ -}}
+{{- /*
+  Markdown images go through the shared image partial (processing, srcset,
+  dimensions, alt check). A standalone image (`.IsBlock`, see markup.toml:
+  wrapStandAloneImageWithinParagraph = false) becomes a figure, captioned by the
+  image title: ![Alt text](photo.jpg "Caption").
+*/ -}}
+{{- $img := partial "image.html" (dict "page" .PageInner "src" .Destination "alt" .PlainText "sizes" "(min-width: 62em) 42rem, 100vw") -}}
+{{- if .IsBlock }}
+<figure class="figure">
+  {{- $img }}
+  {{- with .Title }}<figcaption class="figure__caption">{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
+{{- else }}
+  {{- $img }}
+{{- end -}}

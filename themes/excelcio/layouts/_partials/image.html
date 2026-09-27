@@ -26,12 +26,16 @@
 <picture>
     {{- range slice "avif" "webp" }}
       {{- $fmt := . }}
+      {{- /* Requested widths up to the original one, never upscaled; the original width
+             (capped at the largest requested one) is always offered. */}}
+      {{- $top := math.Min $img.Width (index (sort $widths) (sub (len $widths) 1)) | int }}
+      {{- $candidates := slice }}
+      {{- range $widths }}{{ if lt . $top }}{{ $candidates = $candidates | append . }}{{ end }}{{ end }}
+      {{- $candidates = $candidates | append $top }}
       {{- $set := slice }}
-      {{- range $widths }}
-        {{- if le . $img.Width }}
-          {{- $r := $img.Resize (printf "%dx %s" . $fmt) }}
-          {{- $set = $set | append (printf "%s %dw" $r.RelPermalink $r.Width) }}
-        {{- end }}
+      {{- range $candidates }}
+        {{- $r := $img.Resize (printf "%dx %s" . $fmt) }}
+        {{- $set = $set | append (printf "%s %dw" $r.RelPermalink $r.Width) }}
       {{- end }}
   <source type="image/{{ $fmt }}" srcset="{{ delimit $set ", " }}" sizes="{{ $sizes }}">
     {{- end }}

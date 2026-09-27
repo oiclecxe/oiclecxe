@@ -2,6 +2,8 @@
   [goldmark.renderer]
     unsafe = false
   [goldmark.parser]
+    # A standalone image is rendered as a block (figure with caption when it has a title).
+    wrapStandAloneImageWithinParagraph = false
     [goldmark.parser.attribute]
       block = true
       title = true

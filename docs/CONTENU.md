@@ -26,7 +26,7 @@ Ce guide explique comment remplir et modifier le contenu du site. Aucune connais
 | `summary` | Accroche affichée sur les cartes (facultative) |
 | `date` | Date de publication, jamais dans le futur (sinon la page n'est pas publiée) |
 | `weight` | Ordre d'affichage dans les listes (plus petit = en premier) |
-| `image`, `imageAlt` | Image principale : nom d'un fichier placé **dans le dossier de la page** (ex. `cover.jpg`) et son texte alternatif, **obligatoire** (le build s'arrête sinon). Le site produit automatiquement les formats AVIF et WebP |
+| `image`, `imageAlt` | Image principale : nom d'un fichier placé **dans le dossier de la page** (ex. `cover.jpg`) et son texte alternatif, **obligatoire** (le build s'arrête sinon). Le site produit automatiquement les formats AVIF et WebP. Fournir une image d'**au moins 1600 px de large** : elle s'affiche sur toute la largeur de la page et n'est jamais agrandie (une image plus petite paraîtrait floue) |
 | `placeholder` | `true` tant que le contenu est provisoire |
 | `seo.title`, `seo.noindex` | Titre différent pour les moteurs de recherche ; `noindex: true` pour exclure la page |
 | `schema` | Données structurées particulières : `{ service: true }` (page décrivant un service), `{ about: true, offices: true }` (page « À propos » et bureaux). Les autres types sont reconnus automatiquement |
@@ -125,7 +125,7 @@ Tous les formats reconnus, avec leur syntaxe et leur rendu, sont présentés sur
 | surligné, inséré | `==surligné==`, `++inséré++` |
 | exposant, indice | `1^er^`, `m^2^` ; `H~2~O` (un seul tilde) |
 | lien | `[texte](/formations/)` |
-| image | `![texte alternatif obligatoire](photo.jpg)` |
+| image | `![texte alternatif obligatoire](photo.jpg)` ; seule sur sa ligne et avec un titre, elle reçoit une légende : `![texte alternatif](photo.jpg "Légende")` |
 
 Les guillemets droits `"…"` deviennent automatiquement des guillemets français « … ». Le HTML écrit dans le texte est supprimé (sécurité) : utiliser le Markdown ou les shortcodes ci-dessous.
 
