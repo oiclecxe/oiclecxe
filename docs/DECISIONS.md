@@ -149,3 +149,9 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 - **2026-09-27 — Cas clients : filtre seul, sans groupes** (demande de l'utilisateur). La page Cas clients revient à une grille unique (ordre des `weight`) ; les secteurs d'activité ne servent qu'aux étiquettes de filtre. Remplace la partie « groupes » de la décision précédente.
 
 - **2026-09-27 — Champs de classement généralisés** (demande de l'utilisateur : `sector: ["industrie", "distribution"]` refusé alors que `solutions` accepte une liste). `solutions`, `expertises` et `sector` acceptent indifféremment une valeur ou une liste, partout (listes, fiches, cartes, pages liées). Deux fonctions communes au thème : `func/as-list.html` (normalise en liste) et `func/facet.html` (valeurs présentes dans un ensemble de pages, avec leur nombre, comparées sous forme d'URL : « Industrie » = « industrie »). Le catalogue et la page Cas clients reposent tous deux sur `facet.html` ; `func/related.html` accepte aussi une valeur seule. Nom affiché d'un secteur : `func/term-name.html` (majuscule initiale, tirets remplacés par des espaces).
+
+- **2026-09-27 — Lot 4 : choix préalables** (réponses de l'utilisateur).
+  - Inscription formation / événement : **page dédiée** `/inscription/`, préremplie par l'URL (`?formation=…&session=…` ou `?evenement=…`) ; la fiche garde la liste des sessions avec un bouton par session.
+  - Formation sans session programmée : le même formulaire propose « Session à définir » et « Intra-entreprise » à la place des dates (plus de renvoi vers `/contact/`).
+  - E-mail du formulaire de contact : **tous les domaines acceptés**, seul le format est vérifié.
+  - Pagefind : téléchargement via `npx` autorisé (paquet npm officiel, version 1.x épinglée, aucun `package.json`). Node.js 22 LTS installé.
