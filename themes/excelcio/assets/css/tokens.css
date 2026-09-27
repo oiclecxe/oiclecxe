@@ -87,6 +87,7 @@
     --ease-fade: cubic-bezier(0.44, 0, 0.56, 1);
     --stagger: 55ms;
     --tile-cell: 3.5rem;                                  /* square of the filter transition (rem) */
+    --tile-stagger: 30ms;                                 /* delay step between squares of the filter transition */
 
     /* Layers */
     --z-base: 1;

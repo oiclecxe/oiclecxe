@@ -4,8 +4,11 @@
 // Clicking the active tag again deselects it (back to "All").
 // Transition inspired by the breathing squares: leaving cards are covered square by
 // square, entering cards uncovered square by square (none with reduced motion).
+// While a filter is active, the available cards carry a few very light breathing squares.
 
-const MAX_DELAY_STEPS = 5; // square delays: 0 … 4 × --stagger
+const MAX_DELAY_STEPS = 4; // square delays: 0 … 3 × --tile-stagger
+const BREATH_DENSITY = 0.3; // share of the card's squares that breathe
+const random = (min, max) => min + Math.random() * (max - min);
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -20,16 +23,22 @@ function maskDuration(mask) {
   return longest;
 }
 
-// Square mask over an item, sized from the --tile-cell token.
-function addMask(item, state, out) {
+// Grid of squares fitting an element, from the --tile-cell token (null if the token is missing).
+function grid(element) {
   const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
   const cell = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tile-cell')) * rootSize;
-  if (!cell) return null; // token missing: no transition
-  const { width, height } = item.getBoundingClientRect();
-  const cols = Math.max(1, Math.round(width / cell));
-  const rows = Math.max(1, Math.round(height / cell));
+  if (!cell) return null;
+  const { width, height } = element.getBoundingClientRect();
+  return { cols: Math.max(1, Math.round(width / cell)), rows: Math.max(1, Math.round(height / cell)) };
+}
+
+// Square mask over an item.
+function addMask(item, state) {
+  const size = grid(item);
+  if (!size) return null;
+  const { cols, rows } = size;
   const mask = document.createElement('span');
-  mask.className = out ? 'tile-mask tile-mask--out' : 'tile-mask';
+  mask.className = 'tile-mask';
   mask.setAttribute('aria-hidden', 'true');
   mask.dataset.state = state;
   mask.style.setProperty('--cols', cols);
@@ -42,6 +51,30 @@ function addMask(item, state, out) {
   }
   item.append(mask);
   return mask;
+}
+
+// Very light breathing squares on an available card (same ranges as the home
+// squares field, lighter). Cards that already have their own squares field keep it.
+function addBreath(item) {
+  const card = item.firstElementChild;
+  if (!card || card.querySelector('.squares, .tile-breath')) return;
+  const size = grid(card);
+  if (!size) return;
+  const field = document.createElement('span');
+  field.className = 'tile-breath';
+  field.setAttribute('aria-hidden', 'true');
+  field.style.setProperty('--cols', size.cols);
+  field.style.setProperty('--rows', size.rows);
+  for (let r = 1; r <= size.rows; r += 1) {
+    for (let c = 1; c <= size.cols; c += 1) {
+      if (Math.random() > BREATH_DENSITY) continue;
+      const square = document.createElement('span');
+      square.className = 'tile-breath__cell';
+      square.style.cssText = `--c:${c};--r:${r};--dur:${random(5.5, 10.4).toFixed(1)}s;--delay:${random(0, 1.2).toFixed(1)}s;--peak:${random(0.04, 0.07).toFixed(3)}`;
+      field.append(square);
+    }
+  }
+  card.append(field);
 }
 
 // Moves every mask to `state` and resolves when the squares are done.
@@ -105,7 +138,7 @@ export function initFilters() {
 
     const apply = async (updateUrl = true, animate = true) => {
       const current = ++run;
-      scope.querySelectorAll('.tile-mask').forEach((m) => m.remove()); // a previous transition is cut short
+      scope.querySelectorAll('.tile-mask, .tile-breath').forEach((m) => m.remove()); // a previous transition is cut short
       const active = names.map((name) => [name, valueOf(name)]).filter(([, v]) => v);
       names.forEach((name) => { selected[name] = valueOf(name); });
       if (updateUrl) {
@@ -116,15 +149,20 @@ export function initFilters() {
 
       const leaving = items.filter((item) => !item.hidden && !matches(item, active));
       const entering = items.filter((item) => item.hidden && matches(item, active));
+      const breathe = () => {
+        if (active.length) items.filter((item) => !item.hidden).forEach(addBreath);
+      };
       if (!animate || reducedMotion()) {
         layout(active);
+        breathe();
         return;
       }
-      await play(leaving.map((item) => addMask(item, 'clear', true)), 'covered');
+      await play(leaving.map((item) => addMask(item, 'clear')), 'covered');
       if (current !== run) return;
       leaving.forEach((item) => item.querySelector('.tile-mask')?.remove());
       layout(active);
-      const masks = entering.map((item) => addMask(item, 'covered', false));
+      breathe();
+      const masks = entering.map((item) => addMask(item, 'covered'));
       await play(masks, 'clear');
       if (current !== run) return;
       masks.forEach((m) => m?.remove());
