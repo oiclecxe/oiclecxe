@@ -168,3 +168,9 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Recherche dans le serveur de développement** (signalé par l'utilisateur : « La recherche n'est pas disponible » en `hugo server`). L'index Pagefind de développement est rangé dans `.pagefind/` (non versionné) et monté sur `static/pagefind` par `config/development/hugo.toml` (montage `static` par défaut redéclaré, comme l'exige Hugo). Commande : build de production puis `npx pagefind@1.5.2 --site public --output-path .pagefind`. En développement, le message d'indisponibilité indique la marche à suivre.
 - **2026-09-27 — `public/` : serveur en mémoire et build sur dossier vide.** Constat : `hugo server` écrit par défaut ses pages de développement dans `public/` (guide de style, brouillons), et ni `--gc` ni `--cleanDestinationDir` ne les efface ; Pagefind les indexait donc. Commandes documentées : `hugo server … --renderToMemory` et suppression de `public/` avant le build de production.
+
+- **2026-09-27 — Lot 5 : choix préalables** (réponses de l'utilisateur).
+  - Adresse du site en ligne : **https://www.excelcio.com/** (adresses canoniques, sitemap, images de partage, JSON-LD, llms.txt).
+  - Redirections : `data/redirects.yaml` prérempli à partir du **sitemap complet** du site WordPress actuel (lecture seule), chaque ancienne adresse associée à la nouvelle page la plus proche ; correspondances incertaines marquées « à vérifier ».
+  - Validation en ligne du JSON-LD (validator.schema.org, test des résultats enrichis de Google) **reportée** : contrôle local par script pendant le lot, validation en ligne à autoriser plus tard.
+  - Hébergeur non choisi : `_redirects` (Netlify, Cloudflare Pages) et exemple `redirects.htaccess` (Apache), comme prévu par la SPEC.
