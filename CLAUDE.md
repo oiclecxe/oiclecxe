@@ -7,9 +7,9 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 ## État d'avancement
 
 <!-- À mettre à jour par Claude Code à la fin de chaque lot validé. -->
-- Périmètre : V1 (lots 0 à 2) validée ; lots 3 et 4 réalisés et validés (27/09/2026). Lot 5 réalisé (27/09/2026). S'arrêter après le Lot 5.
-- Lot en cours : **Lot 5 — SEO et agents IA** : terminé, en attente de validation
-- Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026), Lot 4 (27/09/2026)
+- Périmètre : V1 (lots 0 à 2) validée ; lots 3, 4 et 5 réalisés et validés (27/09/2026). Lot 6 non lancé : attendre l'accord de l'utilisateur.
+- Lot en cours : aucun (Lot 6 — Recette et remise : à lancer sur accord)
+- Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026), Lot 4 (27/09/2026), Lot 5 (27/09/2026)
 - Catalogue de formations : reprendre les **intitulés publics du site actuel** ; le reste en placeholders.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
 - En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser) ; validation en ligne du JSON-LD (validator.schema.org, résultats enrichis Google) reportée par l'utilisateur, à autoriser plus tard. Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
