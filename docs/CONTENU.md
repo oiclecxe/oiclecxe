@@ -8,7 +8,7 @@ Ce guide explique comment remplir et modifier le contenu du site. Aucune connais
 - Chaque fichier commence par un **en-tête** (le *front matter*), entre deux lignes `---`, qui contient les champs de la page (titre, description, listes…). Le texte libre de la page vient **après** le second `---`.
 - Les textes provisoires sont des **consignes** entre crochets : `[À RÉDIGER — …]`. Les chiffres inconnus sont notés `[XX]`. Remplacez la consigne entière, crochets compris.
 - Quand une page est terminée, **supprimez la ligne `placeholder: true`**. Le badge jaune « Contenu provisoire » disparaît, ainsi que l'avertissement au build de production. Tant que la ligne est présente, les dates s'affichent « [Date à confirmer] ».
-- Pour voir le résultat : `hugo server`, puis http://localhost:1313/. La page se met à jour à chaque enregistrement ; en cas d'erreur, le terminal indique le fichier et la ligne.
+- Pour voir le résultat : `hugo server --renderToMemory`, puis http://localhost:1313/. La page se met à jour à chaque enregistrement ; en cas d'erreur, le terminal indique le fichier et la ligne.
 
 ### Règles de syntaxe (YAML)
 

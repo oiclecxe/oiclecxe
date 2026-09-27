@@ -56,14 +56,14 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 ```powershell
 hugo version                                           # version de référence du projet
 hugo --logLevel info                                   # doit sortir sans aucun avertissement de dépréciation
-hugo server --buildDrafts --disableFastRender          # développement (http://localhost:1313)
-hugo --environment production --gc --minify            # build de production dans public/
+hugo server --buildDrafts --disableFastRender --renderToMemory   # développement (http://localhost:1313), n'écrit pas dans public/
+hugo --environment production --gc --minify            # build de production dans public/ (vider public/ avant : Hugo n'efface pas les fichiers périmés)
 npx pagefind@1.5.2 --site public --serve               # index de recherche + serveur http://localhost:1414 (après le build)
 hugo --templateMetrics --templateMetricsHints          # performance des gabarits
 hugo new content --kind training formations/mon-slug/index.md   # chemin relatif à content/fr ; --kind = type
 ```
 
-Pour tester la recherche : build de production, puis Pagefind avec `--serve` (voir README, « Recherche interne »). En `hugo server`, l'index n'existe pas. Formulaires : mode simulé par défaut (`[forms]` dans `params.toml`), e-mail contenant `+error` = échec simulé.
+Pour tester la recherche : `public/` vidé, build de production, puis `npx pagefind@1.5.2 --site public --output-path .pagefind` ; `hugo server` sert alors cet index (montage de développement, redémarrer le serveur la première fois). Voir README, « Recherche interne ». Formulaires : mode simulé par défaut (`[forms]` dans `params.toml`), e-mail contenant `+error` = échec simulé.
 
 ## Budgets et cibles (détail : SPEC § 12 à 15)
 

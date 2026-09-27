@@ -20,9 +20,12 @@ winget install Hugo.Hugo.Extended
 
 ```powershell
 # Serveur de développement : http://localhost:1313 (guide de style : /styleguide/)
-hugo server
+# --renderToMemory : rien n'est écrit dans public/ (sans cette option, hugo server y dépose
+# ses pages de développement : brouillons, guide de style…)
+hugo server --buildDrafts --disableFastRender --renderToMemory
 
-# Build de production dans public/
+# Build de production dans public/, vidé au préalable (Hugo n'efface pas les fichiers périmés)
+if (Test-Path public) { Remove-Item public -Recurse -Force }
 hugo --environment production --gc --minify
 
 # Performance des gabarits
@@ -36,16 +39,27 @@ En production, Hugo liste en avertissement chaque page encore marquée `placehol
 
 ## Recherche interne (Pagefind)
 
-L'index de recherche est construit **après** le build de production, par [Pagefind](https://pagefind.app/) (version épinglée : 1.5.2). Il n'existe pas en `hugo server` : la recherche y affiche « La recherche n'est pas disponible pour le moment ».
+L'index de recherche est construit **après** le build de production, par [Pagefind](https://pagefind.app/) (version épinglée : 1.5.2).
 
-Pour tester la recherche en local :
+**Mise en ligne** : l'index est produit dans `public/pagefind/` et publié avec le site.
 
 ```powershell
+if (Test-Path public) { Remove-Item public -Recurse -Force }
 hugo --environment production --gc --minify
-npx pagefind@1.5.2 --site public --serve
+npx pagefind@1.5.2 --site public
 ```
 
-Le site indexé est alors servi sur http://localhost:1414 (fenêtre de recherche : icône loupe ou `Ctrl + K`, page : `/recherche/`). Sans le serveur intégré, `npx pagefind@1.5.2 --site public` produit seulement l'index dans `public/pagefind/`, à publier avec le site.
+**Dans le serveur de développement** : `hugo server` sert l'index rangé dans `.pagefind/` à la racine (dossier non versionné, monté par `config/development/hugo.toml`). Pour le créer ou le mettre à jour après des changements de contenu :
+
+```powershell
+if (Test-Path public) { Remove-Item public -Recurse -Force }
+hugo --environment production --gc --minify
+npx pagefind@1.5.2 --site public --output-path .pagefind
+```
+
+Puis **redémarrer** `hugo server` la première fois (le dossier doit exister à son démarrage). Tant que cet index n'existe pas, la recherche du serveur de développement affiche la marche à suivre. L'index reflète le contenu publiable au moment de sa création (sans brouillons ni guide de style).
+
+**Aperçu exact du site en ligne** : `npx pagefind@1.5.2 --site public --serve` indexe `public/` et le sert sur http://localhost:1414.
 
 Autre option sans Node.js : télécharger le binaire autonome `pagefind` (ou `pagefind_extended`) de la même version depuis la page des versions de Pagefind sur GitHub, puis `.\pagefind.exe --site public`.
 
