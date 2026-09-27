@@ -60,6 +60,24 @@
     font-family: var(--font-mono);
   }
 
+  /* Small monospace capitals: labels, keys and metadata (one shared rule). */
+  .form__mock,
+  .facts dt,
+  .card__key,
+  .filters__label,
+  .contact-list dt,
+  .search-result__meta,
+  .search-dialog__hint,
+  .arch__band-label,
+  .rows__key,
+  .md-example__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-mono-caps);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
   /* Rich text from Markdown. */
   .prose {
     max-width: var(--measure-text);
@@ -267,11 +285,6 @@
 
   .md-example__label {
     margin-bottom: var(--sp-2);
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
   }
 
   .md-example__source pre {

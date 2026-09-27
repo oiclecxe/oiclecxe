@@ -91,13 +91,6 @@
     outline-offset: -2px;
   }
 
-  .search-result__meta {
-    color: var(--fg-muted);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-  }
-
   .search-result__title {
     color: var(--fg);
     font-size: var(--fs-h4);
@@ -159,13 +152,6 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-4);
-  }
-
-  .search-dialog__hint {
-    color: var(--fg-muted);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
   }
 
   html:has(.search-dialog[open]) {

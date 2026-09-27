@@ -178,13 +178,6 @@
     font-weight: var(--fw-medium);
   }
 
-  .form__mock {
-    color: var(--fg-muted);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-  }
-
   /* Honeypot: out of sight and out of the tab order. */
   .form__hp {
     position: absolute;

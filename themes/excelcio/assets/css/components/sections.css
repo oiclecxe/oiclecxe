@@ -148,10 +148,6 @@
   .arch__band-label {
     display: block;
     margin-bottom: var(--sp-2);
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
     color: var(--fg-body);
     background: var(--bg);
     width: fit-content;
@@ -409,10 +405,6 @@
   }
 
   .rows__key {
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
     padding-top: 0.35em;
   }
 

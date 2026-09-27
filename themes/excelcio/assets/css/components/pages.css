@@ -67,14 +67,6 @@
     padding: var(--sp-5) var(--sp-4) var(--sp-5) 0;
   }
 
-  .facts dt {
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
-  }
-
   .facts dd {
     margin: var(--sp-1) 0 0;
     color: var(--fg);
@@ -169,13 +161,6 @@
     }
   }
 
-  .card__key {
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
-  }
-
   .card--training .card__title {
     font-size: var(--fs-h4);
   }
@@ -242,14 +227,6 @@
   .filters__field {
     display: grid;
     gap: var(--sp-1);
-  }
-
-  .filters__label {
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
   }
 
   .filters__select {
@@ -646,11 +623,6 @@
 
   .contact-list dt {
     margin-top: var(--sp-3);
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
-    letter-spacing: var(--ls-mono-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
   }
 
   .contact-list dt:first-child {
@@ -669,7 +641,6 @@
   .office address {
     font-style: normal;
   }
-
 
   .item-list--wide .item-list__text {
     max-width: 48rem;
