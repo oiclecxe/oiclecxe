@@ -9,7 +9,7 @@
 {{- $bundle := site.Params.search.bundlePath | default "/pagefind/" | relURL -}}
 <div class="search search--{{ .mode }}" data-search="{{ .mode }}" data-bundle="{{ $bundle }}"
   data-label-one="{{ T "resultCount" 1 }}" data-label-other="{{ T "resultCount" 999999 }}"
-  data-msg-empty="{{ T "searchNoResults" }}" data-msg-unavailable="{{ T "searchUnavailable" }}"
+  data-msg-empty="{{ T "searchNoResults" }}" data-msg-unavailable="{{ cond hugo.IsDevelopment (T "searchUnavailableDev") (T "searchUnavailable") }}"
   data-msg-all="{{ T "searchFilterAll" }}" data-msg-more="{{ T "searchMore" }}">
   <form class="search__form" role="search" action="{{ $url }}" method="get">
     <label class="visually-hidden" for="{{ $id }}-input">{{ T "searchLabel" }}</label>

@@ -1,0 +1,9 @@
+# Recherche en développement : `hugo server` sert l'index Pagefind construit dans .pagefind/
+# (dossier non versionné, voir README « Recherche interne »). Le montage static par défaut
+# est redéclaré, car définir un montage static remplace celui par défaut.
+[[module.mounts]]
+  source = "static"
+  target = "static"
+[[module.mounts]]
+  source = ".pagefind"
+  target = "static/pagefind"

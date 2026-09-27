@@ -9,3 +9,6 @@ docs/reference/*.jpg
 
 # Images de test déposées par l'utilisateur (non versionnées)
 /photo_*.jpg
+
+# Index de recherche Pagefind pour le serveur de développement (généré)
+/.pagefind/
