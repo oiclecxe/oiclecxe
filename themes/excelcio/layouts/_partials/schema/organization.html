@@ -2,7 +2,7 @@
 {{- $org := site.Params.organization -}}
 {{- $o := dict
   "@type" "Organization"
-  "@id" (printf "%s#organization" site.Home.Permalink)
+  "@id" (partial "schema/id.html" "organization")
   "name" (partial "func/org-name.html" .)
   "url" site.Home.Permalink
 -}}

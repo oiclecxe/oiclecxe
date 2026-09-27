@@ -13,10 +13,10 @@
   {{- with partial "func/real.html" (.postalCode | default "") }}{{ $address = merge $address (dict "postalCode" (string .)) }}{{ end }}
   {{- $n := dict
     "@type" "ProfessionalService"
-    "@id" (printf "%s#office-%s" site.Home.Permalink (urlize .city))
+    "@id" (partial "schema/id.html" (printf "office-%s" (urlize .city)))
     "name" (printf "%s %s" (partial "func/org-name.html" .) .city)
     "url" site.Home.Permalink
-    "parentOrganization" (dict "@id" (printf "%s#organization" site.Home.Permalink))
+    "parentOrganization" (dict "@id" (partial "schema/id.html" "organization"))
     "address" $address
   }}
   {{- with $org.email }}{{ $n = merge $n (dict "email" .) }}{{ end }}

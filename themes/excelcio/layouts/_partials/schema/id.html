@@ -1,0 +1,6 @@
+{{- /*
+  Site-level JSON-LD node identifier, e.g. "organization" → https://www.excelcio.com/#organization.
+  Context: node name. Returns: string.
+*/ -}}
+{{- $id := printf "%s#%s" site.Home.Permalink . -}}
+{{- return $id -}}

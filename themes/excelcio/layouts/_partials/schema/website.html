@@ -1,11 +1,11 @@
 {{- /* WebSite node, with a SearchAction when the site has a search page. Context: page. Returns: dict. */ -}}
 {{- $w := dict
   "@type" "WebSite"
-  "@id" (printf "%s#website" site.Home.Permalink)
+  "@id" (partial "schema/id.html" "website")
   "url" site.Home.Permalink
   "name" site.Title
   "inLanguage" site.Language.Locale
-  "publisher" (dict "@id" (printf "%s#organization" site.Home.Permalink))
+  "publisher" (dict "@id" (partial "schema/id.html" "organization"))
 -}}
 {{- with site.Params.header.searchURL }}
   {{- $w = merge $w (dict "potentialAction" (dict

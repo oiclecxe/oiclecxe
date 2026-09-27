@@ -3,7 +3,7 @@
   JobPosting (without date: job offers show no date), Service.
   Context: page. Returns: dict, or nil when not applicable.
 */ -}}
-{{- $org := dict "@id" (printf "%s#organization" site.Home.Permalink) -}}
+{{- $org := dict "@id" (partial "schema/id.html" "organization") -}}
 {{- $page := dict "@id" (printf "%s#webpage" .Permalink) -}}
 {{- $real := partial "func/real.html" .Title -}}
 {{- $name := $real | default .Title -}}

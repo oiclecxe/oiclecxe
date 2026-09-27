@@ -10,10 +10,10 @@
   "url" .Permalink
   "name" (partial "func/real.html" .Title | default site.Title)
   "inLanguage" site.Language.Locale
-  "isPartOf" (dict "@id" (printf "%s#website" site.Home.Permalink))
+  "isPartOf" (dict "@id" (partial "schema/id.html" "website"))
 -}}
 {{- with partial "func/real.html" (.Description | default "") }}{{ $p = merge $p (dict "description" .) }}{{ end -}}
-{{- if .IsHome }}{{ $p = merge $p (dict "about" (dict "@id" (printf "%s#organization" site.Home.Permalink))) }}{{ end -}}
+{{- if .IsHome }}{{ $p = merge $p (dict "about" (dict "@id" (partial "schema/id.html" "organization"))) }}{{ end -}}
 {{- with partial "func/og-image.html" . }}{{ $p = merge $p (dict "primaryImageOfPage" (dict "@type" "ImageObject" "url" .Permalink "width" .Width "height" .Height)) }}{{ end -}}
 {{- if not .Lastmod.IsZero }}{{ $p = merge $p (dict "dateModified" (.Lastmod.Format "2006-01-02")) }}{{ end -}}
 {{- return $p -}}
