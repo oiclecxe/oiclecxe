@@ -197,7 +197,7 @@ Texte <span style="color: red">en rouge</span> ?
 
 ## Extensions non activées
 
-Ces syntaxes existent dans Goldmark mais sont désactivées par défaut : elles s'affichent telles quelles.
+Ces syntaxes existent dans Goldmark mais sont désactivées par défaut : elles s'affichent telles quelles. Attention à l'indice : `~2~` est interprété comme du texte **barré** (extension « barré », active), d'où « H2O » avec un 2 barré.
 
 {{< md-example >}}
 ==surligné==, H~2~O, x^2^, ++inséré++
