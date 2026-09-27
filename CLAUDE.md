@@ -10,7 +10,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - Périmètre : V1 (lots 0 à 2) validée ; lots 3, 4 et 5 réalisés et validés (27/09/2026). Lot 6 non lancé : attendre l'accord de l'utilisateur.
 - Lot en cours : aucun (Lot 6 — Recette et remise : à lancer sur accord)
 - Lots validés : Lot 0, Lot 1 (26/09/2026), Lot 2 (27/09/2026), Lot 3 (27/09/2026), Lot 4 (27/09/2026), Lot 5 (27/09/2026)
-- Contenu : reprise des textes du site excelcio.com en cours (branche `contenu-reprise`, point de restauration : étiquette `avant-reprise-contenu`). Actualités : articles des 12 derniers mois seulement.
+- Contenu : textes du site excelcio.com repris (branche `contenu-reprise`, point de restauration : étiquette `avant-reprise-contenu`), en attente de validation. Actualités : 12 derniers mois. Restent en placeholder : Accessibilité, Newsletter, adresse de Nantes.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
 - En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser) ; validation en ligne du JSON-LD (validator.schema.org, résultats enrichis Google) reportée par l'utilisateur, à autoriser plus tard. Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
 - Logo Excelcio fourni : `assets/images/logo.svg`
