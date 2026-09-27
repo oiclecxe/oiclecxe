@@ -9,10 +9,6 @@
     color: var(--fg-muted);
   }
 
-  .title__rest--inline {
-    display: inline;
-  }
-
   .title__accent {
     color: var(--fg-accent);
   }

@@ -18,7 +18,6 @@ disableKinds = ["rss"]
   term = ["html", "markdown"]
 
 [taxonomies]
-  secteur = "secteurs"
   tag = "tags"
 
 [build]

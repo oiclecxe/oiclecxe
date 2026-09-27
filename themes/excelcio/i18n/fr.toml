@@ -93,7 +93,6 @@ kpisTitle = "Indicateurs suivis"
 tocTitle = "Sommaire"
 newsletterTitle = "Recevoir nos actualités"
 newsletterText = "Nouveautés des solutions, retours d'expérience et dates de formation."
-newsletterCta = "S'abonner"
 
 # --- Events
 eventEyebrow = "Événement"

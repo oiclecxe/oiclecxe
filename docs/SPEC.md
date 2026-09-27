@@ -255,7 +255,7 @@ Règles d'URL : minuscules, sans accents, mots séparés par des tirets, slash f
 |---|---|---|
 | `solutions` | `/solutions/…` → **utiliser une section, pas une taxonomie** ; relier les contenus via le paramètre `solutions: [qlik, …]` et les résoudre avec `site.GetPage` | Formations, cas clients, articles, événements |
 | `expertises` | paramètre `expertises: [finance, …]` | Cas clients, articles |
-| `secteurs` | taxonomie Hugo `/secteurs/<secteur>/` | Cas clients |
+| ~~`secteurs`~~ | ~~taxonomie Hugo `/secteurs/<secteur>/`~~ → **Avenant du 27/09/2026** : paramètre `sector` (une valeur ou une liste), filtre de la page Cas clients ; pas de taxonomie ni de page `/secteurs/` | Cas clients |
 | `tags` | taxonomie Hugo `/tags/<tag>/` | Articles |
 
 Chaque page de solution affiche automatiquement ses formations, cas clients et articles liés.
