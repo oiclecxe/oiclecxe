@@ -1,18 +1,15 @@
 ---
 title: "IBM Cognos"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "IBM Cognos Business Intelligence, suite d’applications décisionnelles intégrées : Excelcio vous accompagne pour mieux comprendre les données de votre société."
+placeholder: false
 weight: 7
 partnerName: "IBM Cognos"
 partnerLevel: ""
-tagline: "[À RÉDIGER — Promesse de IBM Cognos, 10 mots max.]"
+tagline: "Une suite décisionnelle intégrée"
 features:
-  - { title: "[Fonctionnalité 1]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Fonctionnalité 2]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Fonctionnalité 3]", text: "[À RÉDIGER — 25 mots max.]" }
-faq:
-  - { q: "[À RÉDIGER — Question sur IBM Cognos ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
-  - { q: "[À RÉDIGER — Autre question sur IBM Cognos ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+  - { title: "Des rapports professionnels", text: "Chaque collaborateur peut afficher ou créer des rapports professionnels." }
+  - { title: "L’analyse des données", text: "Analysez vos données pour mieux comprendre l’activité de votre société." }
+  - { title: "Le suivi des indicateurs", text: "Suivez les événements et les indicateurs afin de prendre des décisions pertinentes." }
 visual: "report"   # visuel de la section Solutions de l'accueil
 menus:
   main:
@@ -25,4 +22,4 @@ menus:
     weight: 22
 ---
 
-[À RÉDIGER — Ce qu'Excelcio apporte sur IBM Cognos : 2 à 3 paragraphes.]
+IBM® Cognos Business Intelligence est une suite d’applications intégrées d’informations décisionnelles qui offre une large gamme de fonctionnalités pour mieux comprendre les données de votre société.

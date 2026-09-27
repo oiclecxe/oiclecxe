@@ -1,10 +1,10 @@
 ---
 title: "Solutions"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Qlik, Vizlib, Tableau, Power BI, ThoughtSpot, Jedox et IBM Cognos : les solutions de Business Intelligence distribuées et déployées par Excelcio."
+placeholder: false
 weight: 20
 cascade:
   type: solution
 ---
 
-[À RÉDIGER — Introduction : Excelcio accompagne sept éditeurs de Business Intelligence, 40 mots max.]
+Nous avons en portefeuille les meilleurs outils du marché, sélectionnés pour leurs performances, leur rapidité d’implantation, leur « échelonnabilité » et l’agilité qu’ils permettent.

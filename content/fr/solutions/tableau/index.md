@@ -1,18 +1,15 @@
 ---
 title: "Tableau"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Tableau transforme vos données en informations exploitables : Excelcio vous accompagne dans son déploiement et vous forme à Tableau Creator, Prep Builder et Avancé."
+placeholder: false
 weight: 3
 partnerName: "Tableau"
 partnerLevel: ""
-tagline: "[À RÉDIGER — Promesse de Tableau, 10 mots max.]"
+tagline: "Transformez vos données en informations exploitables"
 features:
-  - { title: "[Fonctionnalité 1]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Fonctionnalité 2]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Fonctionnalité 3]", text: "[À RÉDIGER — 25 mots max.]" }
-faq:
-  - { q: "[À RÉDIGER — Question sur Tableau ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
-  - { q: "[À RÉDIGER — Autre question sur Tableau ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+  - { title: "Une analyse visuelle illimitée", text: "Créez des tableaux de bord et effectuez des analyses ad hoc en seulement quelques clics." }
+  - { title: "Des analyses partagées", text: "Partagez vos documents de travail avec les personnes de votre choix et marquez les esprits dans votre entreprise." }
+  - { title: "Pour toutes les entreprises", text: "Des grandes multinationales aux startups en passant par les TPE, chacun utilise Tableau pour voir et comprendre ses données." }
 visual: "line"   # visuel de la section Solutions de l'accueil
 menus:
   main:
@@ -25,4 +22,6 @@ menus:
     weight: 13
 ---
 
-[À RÉDIGER — Ce qu'Excelcio apporte sur Tableau : 2 à 3 paragraphes.]
+Tableau vous aide à transformer vos données en informations exploitables et ouvre des possibilités d’analyse visuelle illimitées.
+
+Pour vous former à la solution, découvrez nos formations [Tableau Creator](/formations/tableau-creator/), [Tableau Prep Builder](/formations/tableau-prep-builder/) et [Tableau Avancé](/formations/tableau-avance/).

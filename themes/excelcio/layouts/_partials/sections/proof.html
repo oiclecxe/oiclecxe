@@ -15,7 +15,8 @@
           <dt class="stats__label">{{ .label }}</dt>
           <dd class="stats__value">
             {{- if findRE `^\d+$` (string .value) }}
-            <span class="visually-hidden">{{ .value }}{{ .suffix }}</span><span aria-hidden="true"><span data-count-to="{{ .value }}">{{ .value }}</span>{{ .suffix }}</span>
+            {{- $shown := lang.FormatNumber 0 .value }}
+            <span class="visually-hidden">{{ $shown }}{{ .suffix }}</span><span aria-hidden="true"><span data-count-to="{{ .value }}">{{ $shown }}</span>{{ .suffix }}</span>
             {{- else }}{{ .value }}{{ .suffix }}{{ end -}}
           </dd>
         </div>

@@ -1,18 +1,15 @@
 ---
 title: "Power BI"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Power BI, une solution de bout en bout pour des décisions éclairées : Excelcio vous accompagne et vous forme à Power BI Designer et Developer."
+placeholder: false
 weight: 4
 partnerName: "Power BI"
 partnerLevel: ""
-tagline: "[À RÉDIGER — Promesse de Power BI, 10 mots max.]"
+tagline: "Des décisions éclairées, fondées sur l’analyse de vos données"
 features:
-  - { title: "[Fonctionnalité 1]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Fonctionnalité 2]", text: "[À RÉDIGER — 25 mots max.]" }
-  - { title: "[Fonctionnalité 3]", text: "[À RÉDIGER — 25 mots max.]" }
-faq:
-  - { q: "[À RÉDIGER — Question sur Power BI ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
-  - { q: "[À RÉDIGER — Autre question sur Power BI ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+  - { title: "De bout en bout", text: "Une solution complète pour vous aider à prendre des décisions éclairées en vous appuyant sur l’analyse de vos données." }
+  - { title: "Un leader reconnu", text: "Microsoft est désigné comme leader dans le Gartner® Magic Quadrant™ for Analytics and Business Intelligence Platforms de mars 2023." }
+  - { title: "Des formations adaptées", text: "Des formations intra-entreprise ou inter-entreprises, sur site ou à distance, adaptées à vos besoins." }
 visual: "kpi"   # visuel de la section Solutions de l'accueil
 menus:
   main:
@@ -25,4 +22,6 @@ menus:
     weight: 14
 ---
 
-[À RÉDIGER — Ce qu'Excelcio apporte sur Power BI : 2 à 3 paragraphes.]
+Power BI est une solution de bout en bout pour vous aider à prendre des décisions éclairées en vous appuyant sur l’analyse de vos données.
+
+Pour vous former à la solution, découvrez nos formations [Power BI Designer](/formations/power-bi-designer/) et [Power BI Developer](/formations/power-bi-developer/).
