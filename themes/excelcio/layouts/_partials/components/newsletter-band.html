@@ -1,12 +1,19 @@
 {{- /*
-  Newsletter band (reference blog). The subscription form arrives with the forms
-  layer (Lot 4); until then the band links to the newsletter page.
-  Context: page, or dict "tone" "section" (bool: render as a full section).
+  Newsletter band (reference blog): title and text, subscription form on the right.
+  Context: page, or dict "tone" "section" (bool: render as a full section) "id" (form id).
 */ -}}
 {{- $o := dict -}}{{- if reflect.IsMap . }}{{ $o = . }}{{ end -}}
-{{- $inner := printf `<div class="newsletter-band"><div><p class="newsletter-band__title">%s</p><p class="newsletter-band__text">%s</p></div><a class="btn btn--primary" href="%s">%s</a></div>` (T "newsletterTitle") (T "newsletterText") ("/newsletter/" | relLangURL) (T "newsletterCta") -}}
+{{- $id := $o.id | default "newsletter-band" -}}
 {{- if $o.section }}
-<section class="section {{ $o.tone | default "tone-light" }}"><div class="container">{{ $inner | safeHTML }}</div></section>
-{{- else }}
-{{ $inner | safeHTML }}
+<section class="section {{ $o.tone | default "tone-light" }}" aria-labelledby="{{ $id }}-title"><div class="container">
+{{- end }}
+<div class="newsletter-band" data-pagefind-ignore{{ if not $o.section }} role="region" aria-labelledby="{{ $id }}-title"{{ end }}>
+  <div class="newsletter-band__intro">
+    <p class="newsletter-band__title" id="{{ $id }}-title">{{ T "newsletterTitle" }}</p>
+    <p class="newsletter-band__text">{{ T "newsletterText" }}</p>
+  </div>
+  {{- partial "forms/newsletter.html" (dict "id" $id "compact" true) }}
+</div>
+{{- if $o.section }}
+</div></section>
 {{- end -}}

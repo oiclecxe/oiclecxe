@@ -25,6 +25,17 @@
     margin-top: var(--sp-9);
   }
 
+  .site-footer__newsletter {
+    display: grid;
+    gap: var(--sp-4);
+    max-width: var(--measure-text);
+    margin-top: var(--sp-10);
+  }
+
+  .site-footer__newsletter .eyebrow {
+    color: var(--fg-muted);
+  }
+
   .site-footer__ai {
     margin-top: var(--sp-11);
   }

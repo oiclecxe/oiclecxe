@@ -4,7 +4,7 @@
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
-<section class="section tone-brand squares-host cta" aria-labelledby="{{ $id }}">
+<section class="section tone-brand squares-host cta" aria-labelledby="{{ $id }}" data-pagefind-ignore>
   {{- partial "components/squares.html" (dict "seed" "cta" "anchor" "bottom" "cols" 9 "rows" 7 "density" 75) }}
   <div class="container">
     {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "cta__title") }}

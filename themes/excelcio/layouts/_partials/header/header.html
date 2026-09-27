@@ -11,7 +11,7 @@
 
       <div class="site-header__actions">
         {{- with site.Params.header.searchURL }}
-        <a class="site-header__search" href="{{ . | relLangURL }}" aria-label="{{ T "search" }}">
+        <a class="site-header__search" href="{{ . | relLangURL }}" aria-label="{{ T "search" }}"{{ if site.Params.search.shortcut }} aria-keyshortcuts="Control+K Meta+K"{{ end }} data-search-open>
           {{- partialCached "icon.html" (dict "name" "search") "search" -}}
         </a>
         {{- end }}

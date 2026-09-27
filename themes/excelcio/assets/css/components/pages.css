@@ -126,6 +126,22 @@
     color: var(--fg);
   }
 
+  .register-box__sessions {
+    width: 100%;
+    gap: 0;
+  }
+
+  .register-box__session {
+    display: grid;
+    gap: var(--sp-1);
+    padding: var(--sp-3) 0;
+    border-bottom: var(--border) solid var(--line);
+  }
+
+  .register-box__session:first-child {
+    border-top: var(--border) solid var(--line);
+  }
+
   .register-box__text,
   .register-box__note {
     color: var(--fg-body);
@@ -512,10 +528,7 @@
 
   /* Newsletter band (reference blog) */
   .newsletter-band {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
     gap: var(--sp-6);
     margin-bottom: var(--sp-11);
     padding: var(--sp-7) var(--sp-8);
@@ -524,6 +537,14 @@
 
   .section > .container > .newsletter-band:only-child {
     margin-bottom: 0;
+  }
+
+  @media (min-width: 62em) {
+    .newsletter-band {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      align-items: start;
+      gap: var(--sp-10);
+    }
   }
 
   .newsletter-band__title {
@@ -649,17 +670,6 @@
     font-style: normal;
   }
 
-  .form-placeholder {
-    display: grid;
-    gap: var(--sp-3);
-    padding: var(--sp-8);
-    border: var(--border) dashed var(--line);
-    color: var(--fg-body);
-  }
-
-  .form-placeholder a {
-    color: var(--fg);
-  }
 
   .item-list--wide .item-list__text {
     max-width: 48rem;

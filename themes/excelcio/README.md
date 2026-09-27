@@ -27,10 +27,19 @@ Il construit un site vide sans erreur : tous les paramètres ont une valeur par 
 | `logo.default` / `logo.onDark` / `logo.compactOnDark` / `logo.alt` | Chemins dans `assets/` : logo sur fond clair, sur fond sombre, version compacte du header. Vide = nom du site en texte |
 | `organization.name` / `legalName` / `registration` / `email` / `jobsEmail` | Informations légales affichées dans le footer |
 | `header.ctaLabel` / `header.ctaURL` | Bouton d'action du header |
-| `header.searchURL` | Lien de l'icône de recherche |
+| `header.searchURL` | Page de recherche ; l'icône du header ouvre la fenêtre de recherche (lien simple sans JS). Vide = pas de recherche |
 | `pillars` | Liste de `{title, text}` : 3 piliers affichés sous le titre du hero et dans le footer |
 | `footer.headline` | Signature affichée en grand dans le footer |
 | `footer.aiLabel` / `footer.aiURL` | Lien « Explorer avec l'IA » (vers `llms.txt`) |
+| `footer.newsletter` | `true` : formulaire d'abonnement à la newsletter dans le footer (défaut `false`) |
+| `forms.mode` | `mock` (simulé, défaut) ou `live` ; un formulaire `live` sans `endpoint` reste simulé |
+| `forms.contact` / `forms.registration` / `forms.newsletter` | `endpoint`, `method` (`POST`), `encoding` (`json` ou `form`) ; `newsletter.doubleOptIn` ne change que le message de succès |
+| `forms.minDelay` | Délai minimal (s) avant qu'un envoi soit accepté (anti-spam, défaut 3) |
+| `forms.redirectField` | Champ de redirection du prestataire pour les envois sans JS (vers la page de type `thanks`) |
+| `forms.privacyURL` | Politique de confidentialité, liée sous chaque formulaire |
+| `forms.captcha.provider` / `siteKey` | Emplacement de captcha, vide = désactivé (voir « Formulaires ») |
+| `search.bundlePath` | Dossier de l'index Pagefind (défaut `/pagefind/`) |
+| `search.shortcut` | `Ctrl/⌘ + K` ouvre la recherche (défaut `true`) |
 | `style.*` | Couleurs de marque : chaque clé devient `--clé` en CSS (`brand`, `ink`, `accent`, `dark-0…3`, `light-1…2`, `*-on-light`, `*-on-dark`) |
 | `fontFallback.sizeAdjust` / `ascent` / `descent` | Métriques de la police de secours (limite le décalage de mise en page) |
 | `dev.showPlaceholders` | Affiche le repère « Contenu provisoire » en développement |
@@ -116,7 +125,8 @@ Les gabarits sont choisis par **type** (champ `type`, en général posé par `ca
 | `article` | `article/section.html` (à la une, pagination), `article/page.html` (sommaire) | `article.md` |
 | `event` | `event/section.html` (à venir / passés), `event/page.html` | `event.md` |
 | `job` | `job/section.html` (offres `active: true` seulement ; message si aucune), `job/page.html` (offre fermée : mention, pas de candidature, `noindex`) | `job.md` |
-| `contact`, `search`, `site-map` | `contact/page.html`, `search/page.html`, `site-map/page.html` | — |
+| `contact`, `search`, `site-map` | `contact/page.html` (formulaire de contact), `search/page.html` (recherche), `site-map/page.html` | — |
+| `registration`, `thanks`, `newsletter` | `registration/page.html` (formulaire d'inscription), `thanks/page.html` (confirmation après un envoi sans JS), `newsletter/page.html` | — |
 | autre | `page.html`, `section.html` (pages claires ; `sections:` accepté) | `default.md` |
 
 Relations automatiques : les contenus citent des solutions (`solutions: [qlik]`) et des expertises (`expertises: [finance]`) par le nom de dossier de la page cible ; `_partials/func/related.html` les retrouve.
@@ -127,9 +137,24 @@ Pages intérieures : ambiances claires, header plein dès le haut (`header: soli
 
 `callout`, `figure`, `video` (façade YouTube, rien n'est chargé avant le clic), `button`, `cta`, `stats`, `columns`. Syntaxe : `docs/CONTENU.md` du site.
 
-### Points d'accroche pour le Lot 4
+Le lien « Explorer avec l'IA » du footer n'apparaît que si la page d'accueil publie le format de sortie `llms` (Lot 5).
 
-`contact/page.html` utilise `_partials/forms/contact.html` s'il existe ; `search/page.html` utilise `_partials/search/page.html` s'il existe. Le lien « Explorer avec l'IA » du footer n'apparaît que si la page d'accueil publie le format de sortie `llms` (Lot 5).
+### Formulaires
+
+Un seul module JS, `assets/js/forms.js`, pour tout `form[data-form]`. Partials : `forms/form.html` (squelette commun : mention des champs obligatoires, champs, champ piège, emplacement de captcha, mention RGPD, bouton, zone d'état annoncée, panneau de succès), `forms/field.html` (libellé, aide, contrôle, erreur), `forms/contact.html`, `forms/registration.html`, `forms/newsletter.html` (contexte : `id` unique, `compact`), `forms/settings.html` (réglages effectifs), `forms/check.html` (avertissement de build en production pour les formulaires présents qui n'envoient rien).
+
+- Validation par les contraintes HTML natives ; messages sous les champs (textes dans `i18n`, passés au JS par des attributs `data-msg-*`), focus sur le premier champ en erreur, résumé annoncé par `role="status"`.
+- Sans JS : envoi natif vers l'`endpoint` (mode `live`) ou vers la page de type `thanks` (mode simulé).
+- Inscription : le premier choix liste les formations et les événements à venir (hors inscriptions externes) ; les sessions sont groupées par formation. `?formation=<dossier>&session=<clé>` ou `?evenement=<dossier>` préremplit le formulaire ; la clé de session (`2026-10-01-paris`) vient de `func/upcoming-sessions.html`. Les pages trouvent le formulaire par son type (`func/url-of-type.html`), jamais par une adresse écrite dans le thème.
+- Captcha : `_partials/hooks/form-captcha.html` est vide ; pour activer un captcha, créer ce fichier dans le site, y placer le widget du prestataire et le consigner dans `docs/DECISIONS.md` (le script du prestataire est une requête tierce).
+
+### Recherche
+
+Interface sur l'API JavaScript de Pagefind, chargée au premier usage seulement : `search/ui.html` (champ, étiquettes de type, résultats, commune à la fenêtre et à la page), `search/dialog.html` (`<dialog>` natif, ouvert par tout élément `[data-search-open]` et par `Ctrl/⌘ + K`), `search/indexed.html` et `search/markers.html` (indexation). Module : `assets/js/search.js`.
+
+- Indexées : pages simples (`.IsPage`) sauf `search: false` et offres d'emploi fermées (`data-pagefind-body` sur `<main>`). Filtre et métadonnée `type` (Solution, Formation…) et `date` pour les articles et les événements.
+- Exclus de l'index (`data-pagefind-ignore`) : surtitre et boutons du hero, appels à l'action, bandeau newsletter, blocs de contenus liés. Formulaires, `nav` et `footer` sont ignorés par Pagefind.
+- Clavier : flèches haut et bas entre le champ et les résultats ; Échap ferme la fenêtre et rend le focus.
 
 ## Surcharges
 

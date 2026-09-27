@@ -1,0 +1,8 @@
+{{- /*
+  URL of the first page of a given content type (e.g. "registration", "thanks"),
+  so that the theme never hard-codes a French URL. Context: type string.
+  Returns: relative permalink, or "" when the site has no such page.
+*/ -}}
+{{- $url := "" -}}
+{{- with index (where site.Pages "Type" .) 0 }}{{ $url = .RelPermalink }}{{ end -}}
+{{- return $url -}}

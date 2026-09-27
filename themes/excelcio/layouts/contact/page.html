@@ -5,15 +5,7 @@
     <div class="container with-aside">
       <div class="with-aside__main">
         {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
-        {{- /* The contact form arrives with the forms layer (Lot 4): hook left here. */}}
-        {{- if templates.Exists "_partials/forms/contact.html" }}
-          {{- partial "forms/contact.html" . }}
-        {{- else }}
-        <div class="form-placeholder" role="note">
-          <p class="eyebrow">{{ T "formSoon" }}</p>
-          <p>{{ T "formSoonText" }} {{ with $org.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}</p>
-        </div>
-        {{- end }}
+        {{- partial "forms/contact.html" . }}
       </div>
       <aside class="with-aside__aside" aria-labelledby="contact-direct-title">
         <div class="register-box">

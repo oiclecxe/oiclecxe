@@ -1,0 +1,33 @@
+{{- /*
+  Search interface shared by the dialog and the search page, driven by search.js
+  (Pagefind JS API, loaded on first use). Without JS the form sends ?q= to the
+  search page, which then explains that search needs JavaScript.
+  Context: dict "id" (unique on the page), "mode" ("dialog" | "page").
+*/ -}}
+{{- $id := .id -}}
+{{- $url := site.Params.header.searchURL | default "" | relLangURL -}}
+{{- $bundle := site.Params.search.bundlePath | default "/pagefind/" | relURL -}}
+<div class="search search--{{ .mode }}" data-search="{{ .mode }}" data-bundle="{{ $bundle }}"
+  data-label-one="{{ T "resultCount" 1 }}" data-label-other="{{ T "resultCount" 999999 }}"
+  data-msg-empty="{{ T "searchNoResults" }}" data-msg-unavailable="{{ T "searchUnavailable" }}"
+  data-msg-all="{{ T "searchFilterAll" }}" data-msg-more="{{ T "searchMore" }}">
+  <form class="search__form" role="search" action="{{ $url }}" method="get">
+    <label class="visually-hidden" for="{{ $id }}-input">{{ T "searchLabel" }}</label>
+    {{- partialCached "icon.html" (dict "name" "search" "class" "search__icon") "search" "search__icon" }}
+    <input class="search__input" id="{{ $id }}-input" type="search" name="q" placeholder="{{ T "searchPlaceholder" }}" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-controls="{{ $id }}-results" data-search-input>
+    <button class="search__submit" type="submit">{{ T "searchSubmit" }}</button>
+  </form>
+  <fieldset class="filters__tags search__filters" data-search-filters hidden>
+    <legend class="filters__label">{{ T "searchFilterLabel" }}</legend>
+  </fieldset>
+  <p class="search__status" role="status" data-search-status></p>
+  <ol class="search__results" id="{{ $id }}-results" role="list" data-search-results></ol>
+  <div class="search__foot" data-search-foot hidden>
+    {{- if eq .mode "dialog" }}
+    <a class="link-arrow" href="{{ $url }}" data-search-all>{{ T "searchSeeAll" }}{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+    {{- else }}
+    <button class="btn btn--secondary" type="button" data-search-more>{{ T "searchMore" }}</button>
+    {{- end }}
+  </div>
+</div>
+{{- /* chomp */ -}}

@@ -1,0 +1,11 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  <section class="section tone-light">
+    <div class="container">
+      <div class="form-narrow">
+        {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+        {{- partial "forms/newsletter.html" (dict "id" "newsletter-page") }}
+      </div>
+    </div>
+  </section>
+{{- end }}

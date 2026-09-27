@@ -6,4 +6,5 @@ weight: 73
 type: search
 seo:
   noindex: true
+search: false
 ---

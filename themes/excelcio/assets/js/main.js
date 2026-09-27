@@ -9,6 +9,8 @@ import { initCounters } from './counters.js';
 import { initProgress } from './progress.js';
 import { initFilters } from './filters.js';
 import { initVideos } from './video.js';
+import { initForms } from './forms.js';
+import { initSearchUI } from './search.js';
 
 window.__themeReady = true;
 
@@ -19,6 +21,8 @@ initMobileNav();
 initTabs();
 initFilters();
 initVideos();
+initForms();
+initSearchUI();
 initCarousels();
 initCounters();
 initReveal();

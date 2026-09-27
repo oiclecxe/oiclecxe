@@ -2,7 +2,8 @@
   Upcoming training sessions read from the `sessions` of training pages,
   sorted by start date. A session stays listed until the end of its last day
   (`end`, else `start`). Context: dict "pages" (optional, default: all trainings),
-  "limit" (optional). Returns: slice of dict {start (time), end, city, format, page}.
+  "limit" (optional). Returns: slice of dict {start (time), end, city, format, page, key}; `key`
+  ("2026-10-01-paris") identifies the session in registration links.
 */ -}}
 {{- $pages := .pages | default (where site.RegularPages "Type" "training") -}}
 {{- $today := time.Format "2006-01-02" now -}}
@@ -13,7 +14,9 @@
     {{- if .start }}
       {{- $last := time (.end | default .start) }}
       {{- if ge (time.Format "2006-01-02" $last) $today }}
-        {{- $sessions = $sessions | append (dict "start" (time .start) "end" .end "city" .city "format" .format "page" $t) }}
+        {{- $start := time .start }}
+        {{- $key := strings.TrimSuffix "-" (printf "%s-%s" (time.Format "2006-01-02" $start) (urlize (.city | default ""))) }}
+        {{- $sessions = $sessions | append (dict "start" $start "end" .end "city" .city "format" .format "page" $t "key" $key) }}
       {{- end }}
     {{- end }}
   {{- end }}

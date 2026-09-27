@@ -1,0 +1,47 @@
+{{- /*
+  One form field: label, optional hint, control and error slot (filled by forms.js).
+  Native constraints (required, type, min/max) keep the form usable without JS.
+  Context: dict
+    "id" (required), "name" (required), "label" (required),
+    "type": text (default) | email | tel | number | textarea | select | checkbox,
+    "required" (bool), "autocomplete", "hint", "value", "wide" (bool: full row),
+    "min", "max", "rows", "maxlength",
+    "options" (select): slice of {value, label, key, for} or {group, options: slice of the same},
+    "placeholder" (select: label of an empty first option).
+*/ -}}
+{{- $type := .type | default "text" -}}
+{{- $id := .id -}}
+{{- $describedBy := slice -}}
+{{- with .hint }}{{ $describedBy = $describedBy | append (printf "%s-hint" $id) }}{{ end -}}
+{{- $describedBy = $describedBy | append (printf "%s-error" $id) -}}
+{{- $req := cond (.required | default false) `<span class="field__req" aria-hidden="true">*</span>` "" -}}
+<div class="field field--{{ $type }}{{ if .wide }} field--wide{{ end }}" data-field>
+  {{- if eq $type "checkbox" }}
+  <div class="field__check">
+    <input class="field__checkbox" type="checkbox" id="{{ $id }}" name="{{ .name }}" value="{{ .value | default "yes" }}"{{ if .required }} required{{ end }} aria-describedby="{{ delimit $describedBy " " }}">
+    <label class="field__check-label" for="{{ $id }}">{{ .label }}{{ $req | safeHTML }}</label>
+  </div>
+  {{- else }}
+  <label class="field__label" for="{{ $id }}">{{ .label }}{{ $req | safeHTML }}</label>
+  {{- with .hint }}<p class="field__hint" id="{{ $id }}-hint">{{ . }}</p>{{ end }}
+    {{- $common := printf `id="%s" name="%s" aria-describedby="%s"` $id .name (delimit $describedBy " ") }}
+    {{- if eq $type "textarea" }}
+  <textarea class="field__control field__control--area" {{ $common | safeHTMLAttr }} rows="{{ .rows | default 6 }}"{{ with .maxlength }} maxlength="{{ . }}"{{ end }}{{ if .required }} required{{ end }}>{{ .value }}</textarea>
+    {{- else if eq $type "select" }}
+  <select class="field__control field__control--select" {{ $common | safeHTMLAttr }}{{ if .required }} required{{ end }}>
+    {{- with .placeholder }}<option value="">{{ . }}</option>{{ end }}
+    {{- range .options }}
+      {{- if .group }}
+    <optgroup label="{{ .group }}">
+      {{- range .options }}{{ partial "forms/option.html" . }}{{ end }}
+    </optgroup>
+      {{- else }}{{ partial "forms/option.html" . }}{{ end }}
+    {{- end }}
+  </select>
+    {{- else }}
+  <input class="field__control" type="{{ $type }}" {{ $common | safeHTMLAttr }}{{ with .autocomplete }} autocomplete="{{ . }}"{{ end }}{{ with .value }} value="{{ . }}"{{ end }}{{ with .min }} min="{{ . }}"{{ end }}{{ with .max }} max="{{ . }}"{{ end }}{{ with .maxlength }} maxlength="{{ . }}"{{ end }}{{ if eq $type "number" }} inputmode="numeric" step="1"{{ end }}{{ if .required }} required{{ end }}>
+    {{- end }}
+  {{- end }}
+  <p class="field__error" id="{{ $id }}-error" data-field-error hidden></p>
+</div>
+{{- /* chomp */ -}}

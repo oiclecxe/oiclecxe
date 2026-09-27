@@ -1,5 +1,5 @@
 {{- /* Short list of articles (3 cards). Context: dict "pages" "title" "tone". */ -}}
-<section class="section {{ .tone | default "tone-light" }}" aria-labelledby="articles-strip-title">
+<section class="section {{ .tone | default "tone-light" }}" aria-labelledby="articles-strip-title" data-pagefind-ignore>
   <div class="container">
     <h2 class="section__head--tight" id="articles-strip-title">{{ .title }}</h2>
     <ul class="grid grid--3" role="list">

@@ -33,7 +33,7 @@
   {{- end }}
 
   {{- $trainings := partial "func/related.html" (dict "type" "training" "key" "solutions" "slug" $slug) }}
-  <section class="section tone-light-alt" id="formations" aria-labelledby="trainings-title">
+  <section class="section tone-light-alt" id="formations" aria-labelledby="trainings-title" data-pagefind-ignore>
     <div class="container">
       <div class="rows-head">
         <h2 id="trainings-title">{{ T "trainingsFor" (dict "Name" $name) }}</h2>

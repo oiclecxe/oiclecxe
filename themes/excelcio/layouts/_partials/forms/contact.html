@@ -1,0 +1,24 @@
+{{- /* Contact form (SPEC § 10.2). Context: page. */ -}}
+{{- $subjects := slice -}}
+{{- range slice "subjectConsulting" "subjectDeployment" "subjectTraining" "subjectPartnership" "subjectOther" }}
+  {{- $subjects = $subjects | append (dict "value" (T .) "label" (T .)) }}
+{{- end -}}
+{{- $name := site.Params.organization.name | default site.Title -}}
+{{- partial "forms/form.html" (dict
+  "name" "contact"
+  "id" "contact"
+  "submit" (T "submitContact")
+  "purpose" (T "purposeContact")
+  "successTitle" (T "successContactTitle")
+  "successText" (T "successContactText")
+  "fields" (slice
+    (dict "name" "lastName" "label" (T "fieldLastName") "required" true "autocomplete" "family-name")
+    (dict "name" "firstName" "label" (T "fieldFirstName") "required" true "autocomplete" "given-name")
+    (dict "name" "email" "label" (T "fieldEmailPro") "type" "email" "required" true "autocomplete" "email")
+    (dict "name" "company" "label" (T "fieldCompany") "required" true "autocomplete" "organization")
+    (dict "name" "phone" "label" (T "fieldPhone") "type" "tel" "autocomplete" "tel")
+    (dict "name" "subject" "label" (T "fieldSubject") "type" "select" "required" true "placeholder" (T "fieldChoose") "options" $subjects)
+    (dict "name" "message" "label" (T "fieldMessage") "type" "textarea" "required" true "wide" true "maxlength" 5000)
+    (dict "name" "consent" "label" (T "consentContact" (dict "Name" $name)) "type" "checkbox" "required" true "wide" true)
+  )
+) -}}

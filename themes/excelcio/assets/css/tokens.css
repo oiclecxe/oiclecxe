@@ -137,6 +137,7 @@
     --surface-hover: var(--dark-3);
     --line: rgb(160 150 155 / 0.28);
     --focus: var(--accent-on-dark);
+    --fg-error: var(--accent-on-dark);
     --badge-bg: var(--accent);
     --badge-fg: var(--white);
   }
@@ -161,6 +162,7 @@
     --surface-hover: var(--brand-strong);
     --line: rgb(255 255 255 / 0.28);
     --focus: var(--white);
+    --fg-error: var(--white);
     --badge-bg: var(--white);
     --badge-fg: var(--brand);
     color-scheme: dark;
@@ -177,6 +179,7 @@
     --surface-hover: #F2EDEC;
     --line: rgb(26 23 27 / 0.12);
     --focus: var(--brand);
+    --fg-error: var(--brand);
     --badge-bg: var(--accent);
     --badge-fg: var(--white);
     color-scheme: light;
@@ -200,6 +203,7 @@
     --surface-hover: var(--dark-3);
     --line: rgb(160 150 155 / 0.28);
     --focus: var(--accent-on-dark);
+    --fg-error: var(--accent-on-dark);
     --badge-bg: var(--accent);
     --badge-fg: var(--white);
     color-scheme: dark;

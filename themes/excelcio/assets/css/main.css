@@ -24,5 +24,7 @@
 @import "./components/sections.css";
 @import "./components/progress.css";
 @import "./components/pages.css";
+@import "./components/forms.css";
+@import "./components/search.css";
 @import "./components/shortcodes.css";
 @import "./utilities.css";
