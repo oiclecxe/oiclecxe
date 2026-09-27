@@ -1,9 +1,9 @@
 ---
 title: "Contact"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Contactez Excelcio : une question sur nos formations, sur les solutions de Business Intelligence ou sur notre équipe ? Bureaux à Paris et à Rennes."
+placeholder: false
 weight: 71
 type: contact
 ---
 
-[À RÉDIGER — Introduction : pour quelles demandes nous contacter, 30 mots max.]
+Une question sur nos formations, sur les solutions ou sur notre équipe ? **Contactez-nous !**

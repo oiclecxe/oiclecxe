@@ -1,24 +1,21 @@
 ---
 title: "Mentions légales"
-description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
-placeholder: true
+description: "Mentions légales du site excelcio.com : éditeur, responsable de la rédaction et hébergeur."
+placeholder: false
 weight: 75
-
 search: false
 ---
 
-## Éditeur du site
+## Éditeur
 
-[À RÉDIGER — Raison sociale, forme juridique, capital, siège social, RCS, SIREN, numéro de TVA.]
+Excelcio, société par actions simplifiée (SAS) représentée par Monsieur Édouard Cahen et Monsieur Jean-Dominique Filippi, inscrite au Registre du commerce et des sociétés de Paris sous le n° B 502 851 512, au capital de 40 000 euros.
 
-## Directeur de la publication
+Siège social : 113 rue Saint-Maur, 75011 Paris. Téléphone : 01 71 19 45 00.
 
-[À RÉDIGER — Prénom Nom, fonction.]
+## Responsable de la rédaction
+
+Monsieur Édouard Cahen.
 
 ## Hébergement
 
-[À RÉDIGER — Nom, adresse et contact de l'hébergeur.]
-
-## Propriété intellectuelle
-
-[À RÉDIGER — Mentions relatives aux contenus, marques et logos.]
+Le prestataire assurant l’hébergement du site est la société OVH, 2 rue Kellermann, 59100 Roubaix, France.
