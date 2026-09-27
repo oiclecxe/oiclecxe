@@ -1,0 +1,8 @@
+{{- /*
+  Whether a page goes into the search index (Pagefind): regular pages, except
+  those with `search: false` (legal pages, utilities) and closed job offers.
+  Context: page. Returns: bool.
+*/ -}}
+{{- $indexed := and .IsPage (ne .Params.search false) -}}
+{{- if and (eq .Type "job") (ne .Params.active true) }}{{ $indexed = false }}{{ end -}}
+{{- return $indexed -}}

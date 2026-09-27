@@ -18,10 +18,14 @@
   <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
   {{- /* Cached per section: the header only depends on the current section. */}}
   {{- partialCached "header/header.html" . site.Language.Lang .Section }}
-  <main id="main" class="site-main" tabindex="-1">
+  {{- $indexed := partial "search/indexed.html" . }}
+  <main id="main" class="site-main" tabindex="-1"{{ if $indexed }} data-pagefind-body{{ end }}>
+    {{- if $indexed }}{{ partial "search/markers.html" . }}{{ end }}
     {{- block "main" . }}{{ end }}
   </main>
   {{- partialCached "footer/footer.html" . site.Language.Lang }}
+  {{- partialCached "search/dialog.html" . site.Language.Lang }}
+  {{- partialCached "forms/check.html" . "forms-check" }}
   {{- partial "placeholder-flag.html" . }}
   {{- partialCached "head/js.html" . }}
   {{- block "scripts" . }}{{ end }}

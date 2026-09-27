@@ -1,0 +1,19 @@
+{{- /*
+  Build-time check of the forms configuration, run once per build (partialCached
+  from baseof). In production, lists the forms present on the site that will not really
+  send anything: simulated mode, or live mode without endpoint. Context: none used.
+*/ -}}
+{{- if hugo.IsProduction }}
+  {{- /* Forms actually present on the site. */}}
+  {{- $used := slice }}
+  {{- if where site.Pages "Type" "contact" }}{{ $used = $used | append "contact" }}{{ end }}
+  {{- if where site.Pages "Type" "registration" }}{{ $used = $used | append "registration" }}{{ end }}
+  {{- if or site.Params.footer.newsletter (where site.Pages "Type" "newsletter") (where site.Pages "Type" "article") }}{{ $used = $used | append "newsletter" }}{{ end }}
+  {{- $simulated := slice }}
+  {{- range $used }}
+    {{- if not (partial "forms/settings.html" .).live }}{{ $simulated = $simulated | append . }}{{ end }}
+  {{- end }}
+  {{- with $simulated }}
+    {{- warnf "Formulaires en mode simulé (rien n'est envoyé) : %s. Renseigner forms.mode = \"live\" et les endpoints (README, « Formulaires »)." (delimit . ", ") }}
+  {{- end }}
+{{- end -}}

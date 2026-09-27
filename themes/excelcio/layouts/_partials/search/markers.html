@@ -1,0 +1,15 @@
+{{- /*
+  Pagefind filter and metadata of an indexed page: content type (filter and
+  label shown in results) and, for dated content, the date.
+  Context: page.
+*/ -}}
+{{- $types := dict "solution" "typeSolution" "expertise" "typeExpertise" "training" "typeTraining" "case-study" "typeCaseStudy" "article" "typeArticle" "event" "typeEvent" "job" "typeJob" -}}
+{{- $label := T (index $types .Type | default "typePage") -}}
+<span hidden data-pagefind-filter="type:{{ $label }}"></span>
+<span hidden data-pagefind-meta="type:{{ $label }}"></span>
+{{- $date := "" -}}
+{{- if eq .Type "event" }}{{ with .Params.start }}{{ $date = time . }}{{ end }}
+{{- else if eq .Type "article" }}{{ $date = .Date }}{{ end -}}
+{{- with $date }}
+<span hidden data-pagefind-meta="date:{{ partial "components/date.html" (dict "page" $ "date" .) | plainify | htmlUnescape }}"></span>
+{{- end -}}

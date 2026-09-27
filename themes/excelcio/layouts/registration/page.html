@@ -1,0 +1,18 @@
+{{- define "main" }}
+  {{- partial "components/page-hero.html" . }}
+  {{- $org := site.Params.organization }}
+  <section class="section tone-light">
+    <div class="container with-aside">
+      <div class="with-aside__main">
+        {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+        {{- partial "forms/registration.html" . }}
+      </div>
+      <aside class="with-aside__aside" aria-labelledby="registration-help-title">
+        <div class="register-box">
+          <h2 class="register-box__title" id="registration-help-title">{{ T "contactDirect" }}</h2>
+          <p class="register-box__text">{{ T "registrationAside" }}{{ with $org.email }} <a href="mailto:{{ . }}">{{ . }}</a>{{ end }}</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+{{- end }}

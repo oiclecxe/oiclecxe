@@ -32,6 +32,39 @@
     headline = ""
     aiLabel = ""
     aiURL = ""
+    newsletter = false     # newsletter subscription form in the footer
+
+  # Forms (contact, registration, newsletter): see README, "Formulaires".
+  # mode "mock": nothing is sent, the whole flow is simulated (an e-mail containing
+  # "+error" simulates a failure). mode "live": sent to `endpoint`; a form without
+  # endpoint stays simulated (warning at build time).
+  [params.forms]
+    mode = "mock"
+    minDelay = 3           # seconds before a submission is accepted (anti-spam)
+    redirectField = ""     # provider field for the no-JS redirection to /merci/ (e.g. "_next")
+    privacyURL = ""        # privacy policy, linked under each form (e.g. "/confidentialite/")
+    [params.forms.contact]
+      endpoint = ""
+      method = "POST"
+      encoding = "json"    # "json" | "form"
+    [params.forms.registration]
+      endpoint = ""
+      method = "POST"
+      encoding = "json"
+    [params.forms.newsletter]
+      endpoint = ""
+      method = "POST"
+      encoding = "json"
+      doubleOptIn = true   # handled by the provider; only changes the success message
+    # Privacy-friendly captcha slot (Turnstile, Friendly Captcha…), disabled when empty.
+    [params.forms.captcha]
+      provider = ""
+      siteKey = ""
+
+  # Internal search (Pagefind, indexed after the build), enabled when header.searchURL is set.
+  [params.search]
+    bundlePath = "/pagefind/"
+    shortcut = true        # Ctrl/⌘ + K opens the search dialog
 
   # Syntax highlighting style of code blocks (Chroma style name, light theme).
   [params.code]

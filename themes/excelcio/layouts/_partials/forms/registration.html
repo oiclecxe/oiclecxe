@@ -1,0 +1,65 @@
+{{- /*
+  Training / event registration (SPEC § 10.2, dedicated page).
+  The "for" select lists the trainings and the upcoming events handled by the
+  site (external registrations excluded); the "session" select lists the
+  upcoming sessions grouped by training, plus "to be scheduled" and "in-company".
+  forms.js prefills both from the URL (?formation=slug&session=key or
+  ?evenement=slug) and keeps only the sessions of the chosen training.
+  Without JS, both lists stay complete and usable.
+  Option values are readable labels (what the recipient reads); `data-key`
+  carries the URL key.
+  Context: page.
+*/ -}}
+{{- $trainingOptions := slice -}}
+{{- $sessionGroups := slice -}}
+{{- range sort (where site.RegularPages "Type" "training") "Title" }}
+  {{- $t := . }}
+  {{- $reg := .Params.registration | default dict }}
+  {{- if not (and (eq $reg.type "external") $reg.url) }}
+    {{- $key := printf "formation:%s" .File.ContentBaseName }}
+    {{- $trainingOptions = $trainingOptions | append (dict "value" (printf "%s : %s" (T "typeTraining") .Title) "label" .Title "key" $key) }}
+    {{- $sessions := slice }}
+    {{- range partial "func/upcoming-sessions.html" (dict "pages" (slice .)) }}
+      {{- $label := partial "components/session.html" (dict "start" .start "end" .end "city" .city "format" .format) | plainify | htmlUnescape }}
+      {{- $sessions = $sessions | append (dict "value" $label "label" $label "key" .key "for" $key) }}
+    {{- end }}
+    {{- with $sessions }}{{ $sessionGroups = $sessionGroups | append (dict "group" $t.Title "options" .) }}{{ end }}
+  {{- end }}
+{{- end -}}
+{{- $eventOptions := slice -}}
+{{- range sort (where site.RegularPages "Type" "event") "Params.start" }}
+  {{- $reg := .Params.registration | default dict }}
+  {{- $past := lt (time (.Params.end | default .Params.start)).Unix now.Unix }}
+  {{- if and (not $past) (not (and (eq $reg.type "external") $reg.url)) }}
+    {{- $eventOptions = $eventOptions | append (dict "value" (printf "%s : %s" (T "typeEvent") .Title) "label" .Title "key" (printf "evenement:%s" .File.ContentBaseName)) }}
+  {{- end }}
+{{- end -}}
+{{- $forOptions := slice -}}
+{{- with $trainingOptions }}{{ $forOptions = $forOptions | append (dict "group" (T "groupTrainings") "options" .) }}{{ end -}}
+{{- with $eventOptions }}{{ $forOptions = $forOptions | append (dict "group" (T "groupEvents") "options" .) }}{{ end -}}
+{{- $sessionOptions := slice
+  (dict "value" (T "sessionTbd") "label" (T "sessionTbd") "key" "tbd")
+  (dict "value" (T "sessionIntra") "label" (T "sessionIntra") "key" "intra")
+-}}
+{{- $sessionOptions = $sessionOptions | append $sessionGroups -}}
+{{- $name := site.Params.organization.name | default site.Title -}}
+{{- partial "forms/form.html" (dict
+  "name" "registration"
+  "id" "registration"
+  "submit" (T "submitRegistration")
+  "purpose" (T "purposeRegistration")
+  "successTitle" (T "successRegistrationTitle")
+  "successText" (T "successRegistrationText")
+  "fields" (slice
+    (dict "name" "registrationFor" "label" (T "fieldRegistrationFor") "type" "select" "required" true "wide" true "placeholder" (T "fieldChoose") "options" $forOptions)
+    (dict "name" "session" "label" (T "fieldSession") "type" "select" "wide" true "hint" (T "sessionHint") "options" $sessionOptions)
+    (dict "name" "lastName" "label" (T "fieldLastName") "required" true "autocomplete" "family-name")
+    (dict "name" "firstName" "label" (T "fieldFirstName") "required" true "autocomplete" "given-name")
+    (dict "name" "email" "label" (T "fieldEmail") "type" "email" "required" true "autocomplete" "email")
+    (dict "name" "company" "label" (T "fieldCompany") "required" true "autocomplete" "organization")
+    (dict "name" "jobTitle" "label" (T "fieldJobTitle") "autocomplete" "organization-title")
+    (dict "name" "participants" "label" (T "fieldParticipants") "type" "number" "min" 1 "max" 50 "value" 1)
+    (dict "name" "message" "label" (T "fieldMessage") "type" "textarea" "wide" true "rows" 4 "maxlength" 5000)
+    (dict "name" "consent" "label" (T "consentRegistration" (dict "Name" $name)) "type" "checkbox" "required" true "wide" true)
+  )
+) -}}

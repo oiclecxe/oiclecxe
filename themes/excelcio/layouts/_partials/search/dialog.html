@@ -1,0 +1,19 @@
+{{- /*
+  Search dialog (native <dialog>), opened by the header search link and by
+  Ctrl/⌘ + K (search.js). Rendered only when the site has a search page.
+  Cached per language: must not depend on the current page.
+*/ -}}
+{{- if site.Params.header.searchURL }}
+<dialog class="search-dialog tone-light" aria-labelledby="search-dialog-title" data-search-dialog>
+  <div class="search-dialog__panel">
+    <div class="search-dialog__head">
+      <h2 class="visually-hidden" id="search-dialog-title">{{ T "searchLabel" }}</h2>
+      <p class="search-dialog__hint mono" aria-hidden="true">{{ T "searchEscHint" }}</p>
+      <button class="icon-btn search-dialog__close" type="button" data-search-close aria-label="{{ T "searchClose" }}">
+        {{- partialCached "icon.html" (dict "name" "close") "close" -}}
+      </button>
+    </div>
+    {{- partial "search/ui.html" (dict "id" "search-dialog" "mode" "dialog") }}
+  </div>
+</dialog>
+{{- end -}}

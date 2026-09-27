@@ -4,6 +4,7 @@ description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
 placeholder: true
 weight: 77
 
+search: false
 ---
 
 [À RÉDIGER — Engagement d'accessibilité d'Excelcio.]

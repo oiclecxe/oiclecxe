@@ -1,0 +1,35 @@
+{{- /*
+  Effective settings of a form, from site.Params.forms.
+  A form is "live" only when forms.mode = "live" AND it has an endpoint; otherwise
+  it is simulated ("mock"). Without JS, a live form posts to its endpoint and a
+  simulated one to the thanks page.
+  Context: form name ("contact", "registration", "newsletter").
+  Returns: dict name, live (bool), mode, endpoint, method, encoding, action,
+           thanks (relative URL), thanksAbs (absolute URL), redirectField,
+           minDelay, doubleOptIn, privacyURL.
+*/ -}}
+{{- $all := site.Params.forms | default dict -}}
+{{- $f := index $all . | default dict -}}
+{{- $endpoint := $f.endpoint | default "" -}}
+{{- $live := false -}}
+{{- if and (eq $all.mode "live") $endpoint }}{{ $live = true }}{{ end -}}
+{{- $thanks := partial "func/url-of-type.html" "thanks" -}}
+{{- $thanksAbs := "" -}}
+{{- with index (where site.Pages "Type" "thanks") 0 }}{{ $thanksAbs = .Permalink }}{{ end -}}
+{{- $action := $thanks -}}
+{{- if $live }}{{ $action = $endpoint }}{{ end -}}
+{{- return dict
+  "name" .
+  "live" $live
+  "mode" (cond $live "live" "mock")
+  "endpoint" $endpoint
+  "method" (upper ($f.method | default "POST"))
+  "encoding" ($f.encoding | default "json")
+  "action" $action
+  "thanks" $thanks
+  "thanksAbs" $thanksAbs
+  "redirectField" ($all.redirectField | default "")
+  "minDelay" ($all.minDelay | default 0)
+  "doubleOptIn" ($f.doubleOptIn | default false)
+  "privacyURL" ($all.privacyURL | default "")
+-}}

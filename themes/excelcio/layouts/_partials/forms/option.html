@@ -1,0 +1,3 @@
+{{- /* One <option>. Context: dict "value" "label", optional "key" (URL prefill key), "for" (dependent select), "selected" (bool). */ -}}
+<option value="{{ .value }}"{{ with .key }} data-key="{{ . }}"{{ end }}{{ with .for }} data-for="{{ . }}"{{ end }}{{ if .selected }} selected{{ end }}>{{ .label }}</option>
+{{- /* chomp */ -}}

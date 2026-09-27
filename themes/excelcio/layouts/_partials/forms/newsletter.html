@@ -1,0 +1,20 @@
+{{- /*
+  Newsletter subscription (SPEC § 10.2): e-mail and explicit consent.
+  Reusable block (end of article, news list, footer, dedicated page).
+  Context: dict "id" (unique on the page), "compact" (bool).
+*/ -}}
+{{- $s := partial "forms/settings.html" "newsletter" -}}
+{{- $name := site.Params.organization.name | default site.Title -}}
+{{- partial "forms/form.html" (dict
+  "name" "newsletter"
+  "id" (.id | default "newsletter")
+  "compact" (.compact | default false)
+  "submit" (T "submitNewsletter")
+  "purpose" (T "purposeNewsletter")
+  "successTitle" (T "successNewsletterTitle")
+  "successText" (cond $s.doubleOptIn (T "successNewsletterConfirm") (T "successNewsletterText"))
+  "fields" (slice
+    (dict "name" "email" "label" (T "fieldEmail") "type" "email" "required" true "autocomplete" "email")
+    (dict "name" "consent" "label" (T "consentNewsletter" (dict "Name" $name)) "type" "checkbox" "required" true "wide" true)
+  )
+) -}}

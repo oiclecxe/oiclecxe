@@ -34,7 +34,9 @@
           {{- if and $reg (eq $reg.type "external") $reg.url }}
           <a class="btn btn--primary" href="{{ $reg.url }}" rel="noopener">{{ T "register" }}</a>
           {{- else }}
-          <a class="btn btn--primary" href="{{ "/contact/" | relLangURL }}?evenement={{ .File.ContentBaseName }}">{{ T "registerRequest" }}</a>
+            {{- with partial "func/url-of-type.html" "registration" }}
+          <a class="btn btn--primary" href="{{ . }}?evenement={{ $p.File.ContentBaseName }}">{{ T "register" }}</a>
+            {{- end }}
           {{- end }}
         </div>
       </aside>

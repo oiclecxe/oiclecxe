@@ -10,7 +10,7 @@
 <section class="section {{ $o.tone | default "tone-light" }} page-hero">
   <div class="container">
     {{- partial "components/breadcrumb.html" $p }}
-    {{- with $o.eyebrow }}<p class="eyebrow page-hero__eyebrow">{{ . }}</p>{{ end }}
+    {{- with $o.eyebrow }}<p class="eyebrow page-hero__eyebrow" data-pagefind-ignore>{{ . }}</p>{{ end }}
     {{- partial "components/title.html" (dict "title" ($p.Params.heroTitle | default $p.Title) "tag" "h1" "class" "page-hero__title") }}
     {{- with $o.badges }}
     <p class="page-hero__badges">{{ range . }}<span class="badge">{{ . }}</span>{{ end }}</p>
@@ -19,7 +19,7 @@
     <p class="lead page-hero__lead">{{ . }}</p>
     {{- end }}
     {{- with $o.actions }}
-    <div class="btn-row btn-row--stack">
+    <div class="btn-row btn-row--stack" data-pagefind-ignore>
       {{- range . }}<a class="btn btn--{{ .style | default "primary" }}" href="{{ if hasPrefix .url "#" }}{{ .url }}{{ else }}{{ .url | relLangURL }}{{ end }}">{{ .label }}</a>{{ end }}
     </div>
     {{- end }}

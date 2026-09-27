@@ -4,7 +4,7 @@
     "sourceMap" (cond hugo.IsDevelopment "inline" "")
     "target" "es2022"
     "format" "esm"
-    "params" (dict "desktopQuery" "(min-width: 62em)")
+    "params" (dict "desktopQuery" "(min-width: 62em)" "searchShortcut" (site.Params.search.shortcut | default false))
   }}
   {{- with . | js.Build $opts }}
     {{- if hugo.IsDevelopment }}

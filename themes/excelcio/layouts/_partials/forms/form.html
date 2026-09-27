@@ -1,0 +1,67 @@
+{{- /*
+  Shared form shell, enhanced by forms.js: required-fields note, fields, hidden
+  fields, honeypot, captcha slot, privacy note, submit button, status region and
+  success panel. Without JS the form posts natively (endpoint when live, thanks
+  page when simulated).
+  Context: dict
+    "name" (contact | registration | newsletter), "id" (unique on the page),
+    "fields" (slice of field dicts, see forms/field.html), "submit" (label),
+    "purpose" (privacy note), "successTitle", "successText",
+    "compact" (bool: single-line layout, no required-fields note), "class".
+*/ -}}
+{{- $s := partial "forms/settings.html" .name -}}
+{{- $id := .id | default .name -}}
+{{- $org := site.Params.organization -}}
+{{- $msgs := dict
+  "required" (T "formErrorRequired")
+  "email" (T "formErrorEmail")
+  "consent" (T "formErrorConsent")
+  "number" (T "formErrorNumber")
+  "invalid" (T "formErrorInvalid")
+  "summary" (T "formErrorSummary")
+  "delay" (T "formErrorTooFast")
+  "send" (T "formErrorSend" (dict "Email" ($org.email | default "")))
+  "sending" (T "formSending")
+-}}
+<div class="form-block{{ if .compact }} form-block--compact{{ end }}{{ with .class }} {{ . }}{{ end }}" data-form-block>
+  <form class="form" id="{{ $id }}" action="{{ $s.action }}" method="{{ lower $s.method }}" data-form="{{ .name }}" data-mode="{{ $s.mode }}" data-min-delay="{{ $s.minDelay }}"
+    {{- if $s.live }} data-endpoint="{{ $s.endpoint }}" data-method="{{ $s.method }}" data-encoding="{{ $s.encoding }}"{{ end }}
+    {{- range $k, $v := $msgs }} data-msg-{{ $k }}="{{ $v }}"{{ end }}>
+    {{- if not .compact }}
+    <p class="form__note">{{ T "formRequiredNote" }}</p>
+    {{- end }}
+    <div class="form__grid">
+      {{- range .fields }}
+      {{ partial "forms/field.html" (merge . (dict "id" (printf "%s-%s" $id .name))) }}
+      {{- end }}
+    </div>
+    <input type="hidden" name="form" value="{{ .name }}">
+    {{- with and $s.live $s.redirectField }}
+    <input type="hidden" name="{{ . }}" value="{{ $s.thanksAbs }}">
+    {{- end }}
+    {{- /* Honeypot: invisible to people, filled in by some bots (submission then silently ignored). */}}
+    <div class="form__hp" data-honeypot aria-hidden="true">
+      <label for="{{ $id }}-website">{{ T "fieldWebsite" }}</label>
+      <input type="text" id="{{ $id }}-website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+    {{- partial "hooks/form-captcha.html" (dict "form" .name "id" $id "settings" $s) }}
+    <div class="form__footer">
+      {{- with $s.privacyURL }}
+      <p class="form__privacy">{{ T "privacyNote" (dict "Name" $org.name "Purpose" $.purpose "URL" (. | relLangURL)) | safeHTML }}</p>
+      {{- end }}
+      <div class="form__actions">
+        <button class="btn btn--primary" type="submit">{{ .submit }}</button>
+        <p class="form__status" role="status" data-form-status></p>
+      </div>
+      {{- if not $s.live }}
+      <p class="form__mock mono">{{ T "formMockNote" }}</p>
+      {{- end }}
+    </div>
+  </form>
+  <div class="form-success" tabindex="-1" data-form-success hidden>
+    {{- partialCached "icon.html" (dict "name" "check" "class" "form-success__icon") "check" "form-success__icon" }}
+    <p class="form-success__title">{{ .successTitle }}</p>
+    <p class="form-success__text">{{ .successText }}</p>
+  </div>
+</div>
+{{- /* chomp */ -}}

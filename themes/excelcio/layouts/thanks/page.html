@@ -1,0 +1,14 @@
+{{- /* Confirmation page reached after a form sent without JavaScript. */}}
+{{- define "main" }}
+  <section class="section tone-light page-hero">
+    <div class="container">
+      {{- partialCached "icon.html" (dict "name" "check" "class" "thanks__icon") "check" "thanks__icon" }}
+      <h1 class="page-hero__title">{{ .Title | default (T "thanksTitle") }}</h1>
+      <p class="lead page-hero__lead">{{ .Params.lead | default (T "thanksText") }}</p>
+      {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
+      <div class="btn-row">
+        <a class="btn btn--primary" href="{{ "/" | relLangURL }}">{{ T "backHome" }}</a>
+      </div>
+    </div>
+  </section>
+{{- end }}

@@ -1,0 +1,275 @@
+@layer components {
+  /* ---------------------------------------------------------------- Forms */
+  .form-block {
+    container-type: inline-size;
+  }
+
+  .form-narrow {
+    max-width: var(--measure-text);
+  }
+
+  .form {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .form__note {
+    color: var(--fg-body);
+    font-size: var(--fs-ui);
+  }
+
+  .form__grid {
+    display: grid;
+    gap: var(--sp-5) var(--sp-4);
+  }
+
+  @container (min-width: 34rem) {
+    .form__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field--wide,
+    .field--textarea,
+    .field--checkbox {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Field: label, hint, control, error. */
+  .field {
+    display: grid;
+    align-content: start;
+    gap: var(--sp-2);
+    min-width: 0;
+  }
+
+  .field[hidden] {
+    display: none;
+  }
+
+  .field__label {
+    color: var(--fg);
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-medium);
+  }
+
+  .field__req {
+    margin-left: 0.2em;
+    color: var(--fg-error);
+  }
+
+  .field__hint {
+    color: var(--fg-body);
+    font-size: var(--fs-xs);
+  }
+
+  .field__control {
+    width: 100%;
+    min-height: 3rem;
+    padding: var(--sp-3) var(--sp-4);
+    border: var(--border) solid var(--line);
+    border-radius: var(--radius-0);
+    background: var(--surface);
+    color: var(--fg);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    transition: border-color var(--dur-fast) var(--ease-standard);
+  }
+
+  .field__control:hover {
+    border-color: var(--fg-muted);
+  }
+
+  .field__control:focus-visible {
+    outline-offset: 0;
+    border-color: var(--focus);
+  }
+
+  .field__control--area {
+    min-height: 9rem;
+    resize: vertical;
+  }
+
+  .field__control--select {
+    cursor: pointer;
+  }
+
+  .field__control[aria-invalid="true"],
+  .field__checkbox[aria-invalid="true"] {
+    border-color: var(--fg-error);
+    box-shadow: inset 0 0 0 1px var(--fg-error);
+  }
+
+  .field__check {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: var(--sp-3);
+  }
+
+  .field__checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.1em;
+    accent-color: var(--focus);
+    cursor: pointer;
+  }
+
+  .field__check-label {
+    color: var(--fg-body);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+  }
+
+  .field__error {
+    color: var(--fg-error);
+    font-size: var(--fs-ui);
+    font-weight: var(--fw-medium);
+  }
+
+  .field__error::before {
+    content: "! ";
+    font-family: var(--font-mono);
+  }
+
+  .field--checkbox .field__error {
+    padding-left: calc(1.25rem + var(--sp-3));
+  }
+
+  /* Footer: privacy note, actions, status. */
+  .form__footer {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .form__privacy {
+    color: var(--fg-body);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-relaxed);
+  }
+
+  .form__privacy a {
+    color: var(--fg);
+  }
+
+  .form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+
+  .form[aria-busy="true"] [type="submit"] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .form__status {
+    color: var(--fg-body);
+    font-size: var(--fs-ui);
+  }
+
+  .form__status:empty {
+    display: none;
+  }
+
+  .form__status[data-state="error"] {
+    color: var(--fg-error);
+    font-weight: var(--fw-medium);
+  }
+
+  .form__mock {
+    color: var(--fg-muted);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-mono-caps);
+    text-transform: uppercase;
+  }
+
+  /* Honeypot: out of sight and out of the tab order. */
+  .form__hp {
+    position: absolute;
+    left: -100vw;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* Success panel, shown in place of the form. */
+  .form-success {
+    display: grid;
+    gap: var(--sp-3);
+    padding: var(--sp-7);
+    background: var(--surface);
+  }
+
+  .form-success[hidden] {
+    display: none;
+  }
+
+  .form-success:focus {
+    outline: none;
+  }
+
+  .form-success__icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--fg-accent);
+  }
+
+  .form-success__title {
+    color: var(--fg);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+  }
+
+  .form-success__text {
+    color: var(--fg-body);
+  }
+
+  /* Compact layout (newsletter): e-mail and button on one line. */
+  .form-block--compact .form__grid,
+  .form-block--compact .form__footer {
+    display: contents;
+  }
+
+  .form-block--compact .form {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "email"
+      "actions"
+      "consent"
+      "privacy"
+      "mock";
+    gap: var(--sp-3);
+  }
+
+  @container (min-width: 28rem) {
+    .form-block--compact .form {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "email actions"
+        "consent consent"
+        "privacy privacy"
+        "mock mock";
+      align-items: end;
+    }
+  }
+
+  .form-block--compact .field--email { grid-area: email; }
+  .form-block--compact .field--checkbox { grid-area: consent; }
+  .form-block--compact .form__privacy { grid-area: privacy; }
+  .form-block--compact .form__actions { grid-area: actions; align-self: end; }
+  .form-block--compact .form__mock { grid-area: mock; }
+
+  .form-block--compact .field--email .field__control {
+    min-height: var(--btn-h, 3rem);
+  }
+
+  /* Thanks page */
+  .thanks__icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: var(--sp-6);
+    color: var(--fg-accent);
+  }
+}

@@ -8,7 +8,7 @@ Ce guide explique comment remplir et modifier le contenu du site. Aucune connais
 - Chaque fichier commence par un **en-tête** (le *front matter*), entre deux lignes `---`, qui contient les champs de la page (titre, description, listes…). Le texte libre de la page vient **après** le second `---`.
 - Les textes provisoires sont des **consignes** entre crochets : `[À RÉDIGER — …]`. Les chiffres inconnus sont notés `[XX]`. Remplacez la consigne entière, crochets compris.
 - Quand une page est terminée, **supprimez la ligne `placeholder: true`**. Le badge jaune « Contenu provisoire » disparaît, ainsi que l'avertissement au build de production. Tant que la ligne est présente, les dates s'affichent « [Date à confirmer] ».
-- Pour voir le résultat : `hugo server`, puis http://localhost:1313/. La page se met à jour à chaque enregistrement ; en cas d'erreur, le terminal indique le fichier et la ligne.
+- Pour voir le résultat : `hugo server --renderToMemory`, puis http://localhost:1313/. La page se met à jour à chaque enregistrement ; en cas d'erreur, le terminal indique le fichier et la ligne.
 
 ### Règles de syntaxe (YAML)
 
@@ -29,6 +29,7 @@ Ce guide explique comment remplir et modifier le contenu du site. Aucune connais
 | `image`, `imageAlt` | Image principale : nom d'un fichier placé **dans le dossier de la page** (ex. `cover.jpg`) et son texte alternatif, **obligatoire** (le build s'arrête sinon). Le site produit automatiquement les formats AVIF et WebP |
 | `placeholder` | `true` tant que le contenu est provisoire |
 | `seo.title`, `seo.noindex` | Titre différent pour les moteurs de recherche ; `noindex: true` pour exclure la page |
+| `search` | `false` pour exclure la page de la recherche interne (pages légales, plan du site…). Par défaut, toutes les pages de contenu sont indexées |
 | `cta` | Appel à l'action en bas de page : `false` pour le retirer, ou un bloc `title`/`primary`/`secondary` pour le remplacer. Par défaut : celui de `config/_default/params.toml` |
 
 ## 2. Créer une page
@@ -88,7 +89,7 @@ Les formations, cas clients et actualités de la solution s'affichent **automati
 | `objectives`, `audience`, `prerequisites` | Listes de puces |
 | `program` | Liste `{ title, items: [...] }` : un module par ligne d'accordéon |
 | `sessions` | Liste `{ start: 2026-10-01, end: 2026-10-02, city: "Paris", format: "Présentiel" }` (dates au format AAAA-MM-JJ, sans guillemets ; `end` facultatif ; heure possible : `2026-10-01T09:00:00+02:00`). Affichage : « 1 – 2 octobre 2026 · Paris · Présentiel ». Les dates de session s'affichent toujours, même si la fiche est encore `placeholder: true`. Une session reste visible jusqu'à la fin de son dernier jour ; seules les sessions futures s'affichent, sur la fiche et dans « Prochaines sessions ». Sur l'accueil, le bloc « Prochaines sessions » n'apparaît que s'il existe au moins une session à venir |
-| `registration` | `{ type: external, url: "https://…" }` pour un outil d'inscription externe ; sinon, demande via la page contact |
+| `registration` | `{ type: external, url: "https://…" }` pour un outil d'inscription externe. Sinon, chaque session à venir a un lien « S'inscrire » vers la page Inscription, préremplie avec la formation et la session ; le bouton « Demander une session » y mène avec « Session à définir » ou « Intra-entreprise » |
 
 Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses reprennent les identifiants d'origine.
 
@@ -102,7 +103,7 @@ Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses 
 
 ### Événements — `content/fr/evenements/<evenement>/index.md`
 
-`start` (date et heure de l'événement), `end` (facultative), `online` (`true`/`false`), `city`, `venue`, `format`, `program` (liste `{ time, title, text }`), `speakers` (liste `{ name, role }`), `registration`. **`date` est la date de publication**, pas celle de l'événement. Un événement passe automatiquement dans « Événements passés » après sa date.
+`start` (date et heure de l'événement), `end` (facultative), `online` (`true`/`false`), `city`, `venue`, `format`, `program` (liste `{ time, title, text }`), `speakers` (liste `{ name, role }`), `registration` (`{ type: external, url: "https://…" }` pour un outil externe ; sinon le bouton « S'inscrire » mène à la page Inscription, préremplie avec l'événement). **`date` est la date de publication**, pas celle de l'événement. Un événement passe automatiquement dans « Événements passés » après sa date.
 
 ### Recrutement — `content/fr/recrutement/`
 
@@ -110,7 +111,7 @@ Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses 
 
 ### Pages institutionnelles
 
-`a-propos.md`, `contact.md`, `newsletter.md`, `mentions-legales.md`, `confidentialite.md`, `accessibilite.md` : texte libre en Markdown. Les adresses des bureaux sont dans `data/offices.yaml`, les réseaux sociaux dans `data/social.yaml`.
+`a-propos.md`, `contact.md`, `newsletter.md`, `mentions-legales.md`, `confidentialite.md`, `accessibilite.md` : texte libre en Markdown. Les formulaires (contact, newsletter) s'ajoutent automatiquement sous le texte. `inscription.md` (formulaire d'inscription) et `merci.md` (confirmation après un envoi sans JavaScript) n'ont pas de texte à rédiger ; ne pas les supprimer. Les adresses des bureaux sont dans `data/offices.yaml`, les réseaux sociaux dans `data/social.yaml`.
 
 ## 4. Mise en forme du texte (Markdown)
 

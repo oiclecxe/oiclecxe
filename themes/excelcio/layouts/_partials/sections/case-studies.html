@@ -13,7 +13,7 @@
 {{- $id := printf "s%d-title" .index -}}
 {{- $pages := $d.pages | default (partial "func/pages-of-type.html" (dict "type" "case-study" "paths" $d.items "limit" $d.limit)) -}}
 {{- with $pages }}
-<section class="section {{ $d.tone | default "tone-dark-alt" }} carousel-section" aria-labelledby="{{ $id }}" data-carousel>
+<section class="section {{ $d.tone | default "tone-dark-alt" }} carousel-section" aria-labelledby="{{ $id }}" data-carousel data-pagefind-ignore>
   <div class="container carousel__head">
     {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
     <div class="carousel__controls">
