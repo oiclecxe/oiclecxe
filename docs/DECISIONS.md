@@ -135,3 +135,6 @@ Format : date — décision — raison. Les décisions en attente sont marquées
 
 - **2026-09-27 — Page de test Markdown** `/styleguide/markdown/` (développement uniquement, comme le guide de style) : chaque format Goldmark avec sa syntaxe et son rendu, via le shortcode de documentation `md-example`. Styles du texte courant complétés (tableaux, notes, listes de définitions et de tâches, code). Coloration syntaxique : feuille générée par `css.ChromaStyles` (style `github`, paramètre `params.code.style`), chargée seulement sur les pages contenant du code.
 
+
+- **2026-09-27 — Moteur Markdown : Goldmark (intégré), pas Pandoc.** Décision de l'utilisateur. Pandoc, bien qu'installé, désactiverait les *render hooks* du thème (images AVIF/WebP, texte alternatif obligatoire, vérification des liens), ralentirait le build et imposerait Pandoc chez l'hébergeur. Extensions activées dans `config/_default/markup.toml` : texte supprimé `~~…~~` (remplace l'extension « barré », incompatible avec l'indice), inséré `++…++`, surligné `==…==`, indice `H~2~O`, exposant `1^er^` ; guillemets français automatiques avec espace fine insécable.
+

@@ -130,6 +130,12 @@
     color: var(--fg-muted);
   }
 
+  .prose ins {
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+    text-underline-offset: 0.2em;
+  }
+
   .prose mark {
     padding: 0 0.15em;
     background: var(--tint-2-e);

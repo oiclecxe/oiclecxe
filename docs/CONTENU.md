@@ -110,7 +110,22 @@ Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses 
 
 `a-propos.md`, `contact.md`, `newsletter.md`, `mentions-legales.md`, `confidentialite.md`, `accessibilite.md` : texte libre en Markdown. Les adresses des bureaux sont dans `data/offices.yaml`, les réseaux sociaux dans `data/social.yaml`.
 
-## 4. Mise en forme dans le texte (shortcodes)
+## 4. Mise en forme du texte (Markdown)
+
+Tous les formats reconnus, avec leur syntaxe et leur rendu, sont présentés sur la page de test **http://localhost:1313/styleguide/markdown/** (développement uniquement). Rappel des syntaxes courantes :
+
+| Rendu | Syntaxe |
+|---|---|
+| *italique*, **gras** | `*italique*`, `**gras**` |
+| barré | `~~barré~~` |
+| surligné, inséré | `==surligné==`, `++inséré++` |
+| exposant, indice | `1^er^`, `m^2^` ; `H~2~O` (un seul tilde) |
+| lien | `[texte](/formations/)` |
+| image | `![texte alternatif obligatoire](photo.jpg)` |
+
+Les guillemets droits `"…"` deviennent automatiquement des guillemets français « … ». Le HTML écrit dans le texte est supprimé (sécurité) : utiliser le Markdown ou les shortcodes ci-dessous.
+
+## 5. Mise en forme dans le texte (shortcodes)
 
 ````markdown
 {{< callout title="À retenir" >}}
@@ -138,6 +153,6 @@ Deuxième colonne
 
 La vidéo YouTube ne charge rien depuis YouTube tant que le visiteur n'a pas cliqué (respect de la vie privée).
 
-## 5. Menus et pied de page
+## 6. Menus et pied de page
 
 `config/_default/menus.fr.toml` : menu principal (mega-menu) et colonnes du footer. Voir les commentaires en tête du fichier.

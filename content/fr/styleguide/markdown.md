@@ -168,7 +168,7 @@ Le site remplace automatiquement certains caractères : guillemets droits, tiret
 une incise --- comme celle-ci --- et des points de suspension...
 {{< /md-example >}}
 
-Les guillemets droits deviennent aujourd'hui des guillemets anglais (“ ”). Pour des guillemets français, saisir directement « et », ou demander leur conversion automatique (voir la fin de page).
+Les guillemets droits deviennent des guillemets français, avec une espace fine insécable. On peut aussi saisir directement « et ».
 
 ## Classes sur un bloc
 
@@ -195,10 +195,12 @@ Par sécurité, le HTML écrit dans le texte est supprimé : dans l'exemple ci-d
 Texte <span style="color: red">en rouge</span> ?
 ```
 
-## Extensions non activées
+## Surligné, inséré, indice, exposant
 
-Ces syntaxes existent dans Goldmark mais sont désactivées par défaut : elles s'affichent telles quelles. Attention à l'indice : `~2~` est interprété comme du texte **barré** (extension « barré », active), d'où « H2O » avec un 2 barré.
+Extensions activées pour le site. Le barré garde la syntaxe `~~…~~` ; un **tilde simple** produit un indice.
 
 {{< md-example >}}
-==surligné==, H~2~O, x^2^, ++inséré++
+Texte ==surligné==, texte ++inséré++, texte ~~supprimé~~.
+
+Indice : H~2~O, CO~2~. Exposant : m^2^, 1^er^ janvier, 10^6^.
 {{< /md-example >}}

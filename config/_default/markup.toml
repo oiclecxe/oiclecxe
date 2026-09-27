@@ -6,6 +6,28 @@
       block = true
       title = true
 
+  [goldmark.extensions]
+    # Replaced by the "delete" extra below (same ~~syntax~~): required to enable subscripts.
+    strikethrough = false
+
+    # French quotation marks for straight double quotes, with a narrow no-break space.
+    [goldmark.extensions.typographer]
+      leftDoubleQuote = "&laquo;&#8239;"
+      rightDoubleQuote = "&#8239;&raquo;"
+
+    # ~~deleted~~, ++inserted++, ==marked==, H~2~O, x^2^
+    [goldmark.extensions.extras]
+      [goldmark.extensions.extras.delete]
+        enable = true
+      [goldmark.extensions.extras.insert]
+        enable = true
+      [goldmark.extensions.extras.mark]
+        enable = true
+      [goldmark.extensions.extras.subscript]
+        enable = true
+      [goldmark.extensions.extras.superscript]
+        enable = true
+
 [highlight]
   noClasses = false
   lineNos = false
