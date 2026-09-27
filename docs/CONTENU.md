@@ -84,7 +84,7 @@ Les formations, cas clients et actualités de la solution s'affichent **automati
 |---|---|
 | `code` | Code catalogue |
 | `solutions` | Solution(s) concernée(s), ex. `[qlik]` : range la formation dans le catalogue (étiquette de filtre et groupe) et sur la page solution. Une solution sans page apparaît quand même au catalogue, avec un nom déduit du nom de dossier (`google-looker` → « Google Looker ») ; sans `solutions`, la formation est rangée dans « Autres formations » |
-| `level`, `format` | Niveau et format (texte libre). Les filtres du catalogue apparaissent dès que **deux valeurs différentes** existent. Le filtre par solution s'affiche en étiquettes cliquables, avec le nombre de formations de chaque solution |
+| `level`, `format` | Niveau et format (texte libre). Les filtres du catalogue apparaissent dès que **deux valeurs différentes** existent. Le filtre par solution s'affiche en étiquettes cliquables, avec le nombre de formations de chaque solution ; un second clic sur l'étiquette active la désélectionne |
 | `durationDays` | Durée en jours (`0` = « [Durée] ») |
 | `price` | Tarif affiché ; vide = « Sur demande » |
 | `objectives`, `audience`, `prerequisites` | Listes de puces |

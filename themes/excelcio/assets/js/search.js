@@ -144,6 +144,13 @@ function initSearch(root) {
     type = event.target.value;
     search();
   });
+  // A click on the active type tag deselects it (no change event in that case).
+  filters.addEventListener('click', (event) => {
+    const radio = event.target;
+    if (!(radio instanceof HTMLInputElement) || !radio.value || radio.value !== type) return;
+    type = '';
+    search();
+  });
   more?.addEventListener('click', () => showMore(run));
 
   // Keyboard: arrow keys move between the field and the results.

@@ -711,3 +711,40 @@
     color: var(--fg-body);
   }
 }
+
+@layer components {
+  /*
+   * Filter transition inspired by the breathing squares: a mask of squares in
+   * the section background colour covers a card square by square (leaving) or
+   * uncovers it (entering), each square with its own delay. Added by filters.js;
+   * never used with reduced motion.
+   */
+  [data-filter-item] {
+    position: relative;
+  }
+
+  .tile-mask {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .tile-mask__cell {
+    background: var(--bg);
+    opacity: 0;
+    transition: opacity var(--tile-dur, var(--dur-base)) var(--ease-fade);
+    transition-delay: calc(var(--i) * var(--stagger));
+  }
+
+  .tile-mask[data-state="covered"] .tile-mask__cell {
+    opacity: 1;
+  }
+
+  .tile-mask--out {
+    --tile-dur: var(--dur-fast);
+  }
+}
