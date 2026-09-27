@@ -1,26 +1,54 @@
 {{- define "main" }}
   {{- partial "components/page-hero.html" . }}
   {{- $cases := .Pages }}
-  {{- $sectors := slice }}{{ $solutions := slice }}
-  {{- range $cases }}
-    {{- with .Params.sector }}{{ if not (in $sectors .) }}{{ $sectors = $sectors | append . }}{{ end }}{{ end }}
-    {{- range .Params.solutions }}{{ if not (in $solutions .) }}{{ $solutions = $solutions | append . }}{{ end }}{{ end }}
-  {{- end }}
-  {{- $sectorValues := slice }}{{ range $sectors }}{{ $sectorValues = $sectorValues | append (dict "value" (urlize .) "label" .) }}{{ end }}
-  {{- $solutionValues := slice }}{{ range $solutions }}{{ $solutionValues = $solutionValues | append (dict "value" . "label" (partial "func/solution-name.html" .)) }}{{ end }}
+
+  {{- /*
+    Sectors come from the case studies themselves (single source of truth): every
+    `sector` value gets a tag and a group, in alphabetical order. Case studies
+    without a sector go to an “other” group, so that none disappears.
+  */}}
+  {{- $sectors := slice }}
+  {{- range $cases }}{{ with .Params.sector }}{{ if not (in $sectors .) }}{{ $sectors = $sectors | append . }}{{ end }}{{ end }}{{ end }}
+  {{- $sectors = sort $sectors }}
+  {{- $orphans := slice }}
+  {{- range $cases }}{{ if not .Params.sector }}{{ $orphans = $orphans | append . }}{{ end }}{{ end }}
+  {{- $sectorValues := slice }}
+  {{- range $sectors }}{{ $sectorValues = $sectorValues | append (dict "value" (urlize .) "label" . "count" (len (where $cases "Params.sector" .))) }}{{ end }}
+
   <section class="section tone-light" aria-labelledby="cases-title">
     <div class="container">
       <h2 class="visually-hidden" id="cases-title">{{ .Title }}</h2>
       {{- partial "components/filters.html" (dict "id" "cases" "filters" (slice
-          (dict "name" "sector" "label" (T "filterSector") "values" $sectorValues)
-          (dict "name" "solution" "label" (T "filterSolution") "values" $solutionValues))) }}
-      <ul class="grid grid--3" role="list" data-filter-scope="cases">
-        {{- range $i, $c := $cases }}
-        <li data-filter-item data-sector="{{ with $c.Params.sector }}{{ urlize . }}{{ end }}" data-solution="{{ delimit ($c.Params.solutions | default slice) " " }}">
-          {{- partial "components/story-card.html" (dict "title" ($c.Params.result | default $c.Title) "client" $c.Params.client "sector" $c.Params.sector "target" $c "url" $c.RelPermalink "index" $i) }}
-        </li>
+          (dict "name" "sector" "label" (T "filterSector") "values" $sectorValues "style" "tags"))) }}
+
+      <div data-filter-scope="cases">
+        {{- range $sectors }}
+          {{- $slug := urlize . }}
+          {{- $group := where $cases "Params.sector" . }}
+        <section class="catalogue-group" data-filter-group aria-labelledby="group-{{ $slug }}">
+          <h3 class="catalogue-group__title" id="group-{{ $slug }}">{{ . }} <span class="catalogue-group__count">{{ len $group }}</span></h3>
+          <ul class="grid grid--3" role="list">
+            {{- range $i, $c := $group }}
+            <li data-filter-item data-sector="{{ $slug }}">
+              {{- partial "components/story-card.html" (dict "title" ($c.Params.result | default $c.Title) "client" $c.Params.client "sector" $c.Params.sector "target" $c "url" $c.RelPermalink "index" $i "level" 4) }}
+            </li>
+            {{- end }}
+          </ul>
+        </section>
         {{- end }}
-      </ul>
+        {{- with $orphans }}
+        <section class="catalogue-group" data-filter-group aria-labelledby="group-other">
+          <h3 class="catalogue-group__title" id="group-other">{{ T "otherCases" }} <span class="catalogue-group__count">{{ len . }}</span></h3>
+          <ul class="grid grid--3" role="list">
+            {{- range $i, $c := . }}
+            <li data-filter-item data-sector="">
+              {{- partial "components/story-card.html" (dict "title" ($c.Params.result | default $c.Title) "client" $c.Params.client "target" $c "url" $c.RelPermalink "index" $i "level" 4) }}
+            </li>
+            {{- end }}
+          </ul>
+        </section>
+        {{- end }}
+      </div>
       <p class="lead filters__empty" data-filters-empty hidden>{{ T "noResults" }}</p>
     </div>
   </section>

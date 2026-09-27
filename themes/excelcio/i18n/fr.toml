@@ -37,7 +37,7 @@ filterReset = "Réinitialiser"
 filterSolution = "Solution"
 filterLevel = "Niveau"
 filterFormat = "Format"
-filterSector = "Secteur"
+filterSector = "Secteur d’activité"
 noResults = "Aucun résultat pour ces critères."
 otherTrainings = "Autres formations"
 

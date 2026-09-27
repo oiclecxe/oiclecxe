@@ -1,7 +1,8 @@
 {{- /*
   Square case-study card. Image taken from the linked page (`image`, `imageAlt`);
   otherwise a brand block with breathing squares.
-  Context: dict "title" "client" "sector" "url" "index", and optional "target" (page).
+  Context: dict "title" "client" "sector" "url" "index", and optional "target" (page)
+  and "level" (heading level of the title, default 3).
 */ -}}
 {{- $target := .target | default (site.GetPage (strings.TrimSuffix "/" (.url | default ""))) -}}
 {{- $href := .url | default "" | relLangURL -}}
@@ -11,6 +12,7 @@
   {{- with .Params.image }}{{ $image = . }}{{ end }}
 {{- end -}}
 {{- $i := .index | default 0 -}}
+{{- $h := .level | default 3 -}}
 <a class="story{{ if $image }} story--photo{{ else }} story--{{ add (mod $i 3) 1 }}{{ end }}" href="{{ $href }}">
   {{- if $image }}
   <div class="story__media">
@@ -19,7 +21,7 @@
   {{- else }}
     {{- partial "components/squares.html" (dict "seed" (printf "story-%d" $i) "cols" 5 "rows" 5 "density" 45) }}
   {{- end }}
-  <h3 class="story__title">{{ .title }}</h3>
+  {{- printf `<h%d class="story__title">%s</h%d>` $h (htmlEscape .title) $h | safeHTML }}
   {{- partialCached "icon.html" (dict "name" "arrow-up-right" "class" "story__corner") "arrow-up-right" "story__corner" }}
   <p class="story__meta"><span class="story__client">{{ partialCached "icon.html" (dict "name" "logo-mark") "logo-mark" }}{{ .client }}</span><span class="story__sector">{{ .sector }}</span></p>
 </a>

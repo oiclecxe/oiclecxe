@@ -92,7 +92,7 @@ Les 28 intitulés proviennent du catalogue public du site actuel ; les adresses 
 
 ### Cas clients — `content/fr/cas-clients/<cas>/index.md`
 
-`client` (**aucun nom réel sans accord écrit du client**), `sector`, `result` (titre de la carte), `solutions`, `expertises`, `context`, `challenge`, `solution` (Markdown accepté), `results` (liste `{ value, label }`), `quote` (`{ text, author, role }`), `image` et `imageAlt`. L'image de la fiche est **reprise automatiquement** sur les cartes de l'accueil et des listes ; sans image, la carte garde l'aplat de couleur.
+`client` (**aucun nom réel sans accord écrit du client**), `sector` (secteur d'activité en clair, ex. `"Industrie"` : il crée l'étiquette de filtre et le groupe de la page Cas clients ; écrivez-le à l'identique d'une fiche à l'autre ; sans secteur, le cas est rangé dans « Autres cas clients »), `result` (titre de la carte), `solutions`, `expertises`, `context`, `challenge`, `solution` (Markdown accepté), `results` (liste `{ value, label }`), `quote` (`{ text, author, role }`), `image` et `imageAlt`. L'image de la fiche est **reprise automatiquement** sur les cartes de l'accueil et des listes ; sans image, la carte garde l'aplat de couleur.
 
 ### Actualités — `content/fr/actualites/<article>/index.md`
 

@@ -37,7 +37,7 @@ filterReset = "Reset"
 filterSolution = "Solution"
 filterLevel = "Level"
 filterFormat = "Format"
-filterSector = "Sector"
+filterSector = "Industry"
 noResults = "No results for these criteria."
 otherTrainings = "Other trainings"
 
