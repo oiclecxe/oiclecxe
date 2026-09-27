@@ -4,5 +4,5 @@
   Context: page. Returns: bool.
 */ -}}
 {{- $indexed := and .IsPage (ne .Params.search false) -}}
-{{- if and (eq .Type "job") (ne .Params.active true) }}{{ $indexed = false }}{{ end -}}
+{{- if partial "func/job-closed.html" . }}{{ $indexed = false }}{{ end -}}
 {{- return $indexed -}}

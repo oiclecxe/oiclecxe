@@ -2,7 +2,7 @@
   {{- $p := . }}
   {{- /* An offer is open only when explicitly marked `active: true`. A closed offer stays
          reachable (old links) but shows a notice, no apply button, and is not indexed. */}}
-  {{- $open := eq .Params.active true }}
+  {{- $open := not (partial "func/job-closed.html" .) }}
   {{- partial "components/page-hero.html" (dict "page" . "eyebrow" (cond $open (T "jobEyebrow") (T "jobClosedEyebrow"))) }}
   <section class="section tone-light">
     <div class="container with-aside">

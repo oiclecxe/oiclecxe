@@ -1,0 +1,6 @@
+{{- /*
+  Whether a page is a closed job offer (`active` not true): hidden from the job
+  list, the site maps, search and llms.txt, marked noindex, no JobPosting data.
+  Context: page. Returns: bool.
+*/ -}}
+{{- return and (eq .Type "job") .IsPage (ne .Params.active true) -}}

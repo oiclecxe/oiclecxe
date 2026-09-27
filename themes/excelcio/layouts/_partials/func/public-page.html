@@ -5,6 +5,6 @@
   Context: page. Returns: bool.
 */ -}}
 {{- $ok := not (or .Params.seo.noindex .Sitemap.Disable) -}}
-{{- if and (eq .Type "job") .IsPage (ne .Params.active true) }}{{ $ok = false }}{{ end -}}
+{{- if partial "func/job-closed.html" . }}{{ $ok = false }}{{ end -}}
 {{- if and hugo.IsProduction .Params.placeholder }}{{ $ok = false }}{{ end -}}
 {{- return $ok -}}

@@ -64,7 +64,7 @@
   {{- with partial "func/og-image.html" . }}{{ $e = merge $e (dict "image" (slice .Permalink)) }}{{ end }}
   {{- with partial "func/real.html" (delimit (.Params.tags | default slice) ", ") }}{{ $e = merge $e (dict "keywords" .) }}{{ end }}
 
-{{- else if and (eq .Type "job") (eq .Params.active true) }}
+{{- else if and (eq .Type "job") (not (partial "func/job-closed.html" .)) }}
   {{- $text := partial "func/real.html" (.Plain | strings.TrimSpace) }}
   {{- $e = dict "@type" "JobPosting" "@id" (printf "%s#job" .Permalink) "title" $name "url" .Permalink "hiringOrganization" $org "description" ($text | default ($desc | default $name)) "directApply" false }}
   {{- with partial "func/real.html" (.Params.validThrough | default "") }}{{ $e = merge $e (dict "validThrough" ((time .).Format "2006-01-02")) }}{{ end }}
