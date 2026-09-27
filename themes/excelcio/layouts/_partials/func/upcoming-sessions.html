@@ -1,0 +1,18 @@
+{{- /*
+  Upcoming training sessions read from the `sessions` of training pages,
+  sorted by start date. Context: dict "pages" (optional, default: all trainings), "limit" (optional).
+  Returns: slice of dict {start (time), city, format, page}.
+*/ -}}
+{{- $pages := .pages | default (where site.RegularPages "Type" "training") -}}
+{{- $sessions := slice -}}
+{{- range $pages }}
+  {{- $t := . }}
+  {{- range .Params.sessions }}
+    {{- if and .start (ge (time .start).Unix now.Unix) }}
+      {{- $sessions = $sessions | append (dict "start" (time .start) "city" .city "format" .format "page" $t) }}
+    {{- end }}
+  {{- end }}
+{{- end -}}
+{{- $sessions = sort $sessions "start" -}}
+{{- with .limit }}{{ $sessions = first . $sessions }}{{ end -}}
+{{- return $sessions -}}

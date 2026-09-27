@@ -51,7 +51,9 @@ Le chemin est relatif à `content/fr/`. Le nom du dossier (`mon-slug`) devient l
 
 ### Page d'accueil — `content/fr/_index.md`
 
-Liste ordonnée `sections:` ; chaque bloc a un `type`. Réordonner, supprimer ou masquer (`hidden: true`) un bloc ne demande aucun autre réglage, les espacements s'ajustent seuls. Champs de chaque type : `themes/excelcio/README.md`, tableau « Sections ». Les trois piliers sous le titre et la signature du footer sont dans `config/_default/params.toml`.
+Liste ordonnée `sections:` ; chaque bloc a un `type`. Réordonner, supprimer ou masquer (`hidden: true`) un bloc ne demande aucun autre réglage, les espacements s'ajustent seuls.
+
+**Chaque information n'est saisie qu'une fois.** Les blocs « Expertises », « Cas clients », « Solutions » et « Prochaines formations » **lisent les fiches** : pour changer un nom, un résultat ou une accroche, modifiez la fiche, l'accueil suit. Dans ces blocs, on choisit seulement quoi afficher : rien (toutes les fiches, par ordre de `weight`), `items: ["/cas-clients/client-1", …]` (fiches choisies, dans cet ordre) et `limit` (nombre maximum). Champs de chaque type : `themes/excelcio/README.md`, tableau « Sections ». Les trois piliers sous le titre et la signature du footer sont dans `config/_default/params.toml`.
 
 ### Solutions — `content/fr/solutions/<solution>/index.md`
 
@@ -63,6 +65,8 @@ Liste ordonnée `sections:` ; chaque bloc a un `type`. Réordonner, supprimer ou
 | `features` | Liste `{ title, text }` : ce que permet la solution |
 | `faq` | Liste `{ q, a }` |
 | Texte libre | Bloc « Ce qu'Excelcio apporte » |
+
+Le champ `visual` choisit l'illustration de la solution sur l'accueil (`bars`, `grid`, `line`, `kpi`, `search`, `table`, `report`). Le champ `menus` place la page dans le mega-menu et le footer : le libellé est le titre de la page, rien à recopier dans `menus.fr.toml`.
 
 Les formations, cas clients et actualités de la solution s'affichent **automatiquement** : il suffit que ces pages citent le nom du dossier de la solution dans leur champ `solutions` (ex. `solutions: [qlik]`).
 

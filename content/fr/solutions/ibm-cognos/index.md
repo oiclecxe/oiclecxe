@@ -13,6 +13,16 @@ features:
 faq:
   - { q: "[À RÉDIGER — Question sur IBM Cognos ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
   - { q: "[À RÉDIGER — Autre question sur IBM Cognos ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+visual: "report"   # visuel de la section Solutions de l'accueil
+menus:
+  main:
+    parent: solutions
+    weight: 22
+    params:
+      group: "Planification et reporting"
+  footer:
+    parent: f-solutions
+    weight: 22
 ---
 
 [À RÉDIGER — Ce qu'Excelcio apporte sur IBM Cognos : 2 à 3 paragraphes.]

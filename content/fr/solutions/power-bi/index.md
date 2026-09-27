@@ -13,6 +13,16 @@ features:
 faq:
   - { q: "[À RÉDIGER — Question sur Power BI ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
   - { q: "[À RÉDIGER — Autre question sur Power BI ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+visual: "kpi"   # visuel de la section Solutions de l'accueil
+menus:
+  main:
+    parent: solutions
+    weight: 14
+    params:
+      group: "Analyse et visualisation"
+  footer:
+    parent: f-solutions
+    weight: 14
 ---
 
 [À RÉDIGER — Ce qu'Excelcio apporte sur Power BI : 2 à 3 paragraphes.]

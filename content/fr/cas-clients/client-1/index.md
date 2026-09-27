@@ -1,11 +1,11 @@
 ---
-title: "Client 1"
+title: "Client A"
 description: "[À RÉDIGER — Meta description de 120 à 160 caractères.]"
 summary: "[À RÉDIGER — Résumé du cas client 1, 25 mots max.]"
 placeholder: true
 date: 2026-01-01
 weight: 1
-client: "Client 1"
+client: "Client A"
 sector: "[Secteur]"
 result: "[À RÉDIGER — Résultat du cas 1, 6 mots]"
 solutions: [qlik]

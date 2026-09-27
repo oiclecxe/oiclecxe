@@ -1,22 +1,31 @@
 {{- /*
   Partner solutions (reference “The platform”): two-part title, columns with
   name, sentence, stylised visual and link. Context: dict "page" "data" "index".
-  data: title, items [{name, text, url, visual}]
+  data: title,
+        items: optional list of solution page paths (order kept); default: all by weight
+        limit: optional maximum
+  Each column reads its name (`partnerName`, else title), sentence (`tagline`)
+  and visual (`visual`: bars | grid | line | kpi | search | table | report) from the solution page.
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
+{{- $pages := partial "func/pages-of-type.html" (dict "type" "solution" "paths" $d.items "limit" $d.limit) -}}
+{{- $visuals := slice "bars" "grid" "line" "kpi" "search" "table" "report" -}}
+{{- with $pages }}
 <section class="section tone-dark-alt" aria-labelledby="{{ $id }}">
   <div class="container">
     {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "section__head title--section") }}
     <ul class="platform" role="list">
-      {{- range $i, $item := $d.items }}
+      {{- range $i, $p := . }}
+        {{- $name := $p.Params.partnerName | default $p.Title }}
       <li class="platform__item reveal-block" data-reveal style="--delay: {{ mul (mod $i 4) 0.06 }}s">
-        <h3 class="platform__name">{{ $item.name }}</h3>
-        <p class="platform__text">{{ $item.text }}</p>
-        <div class="platform__visual">{{ partial "components/mini-visual.html" (dict "type" $item.visual "seed" $item.name) }}</div>
-        <a class="link-arrow" href="{{ $item.url | relLangURL }}">{{ T "readMore" }}<span class="visually-hidden"> : {{ $item.name }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+        <h3 class="platform__name">{{ $name }}</h3>
+        {{- with $p.Params.tagline | default $p.Description }}<p class="platform__text">{{ . }}</p>{{ end }}
+        <div class="platform__visual">{{ partial "components/mini-visual.html" (dict "type" ($p.Params.visual | default (index $visuals (mod $i (len $visuals)))) "seed" $name) }}</div>
+        <a class="link-arrow" href="{{ $p.RelPermalink }}">{{ T "readMore" }}<span class="visually-hidden"> : {{ $name }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
       </li>
       {{- end }}
     </ul>
   </div>
 </section>
+{{- end }}

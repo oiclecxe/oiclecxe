@@ -1,27 +1,34 @@
 {{- /*
   Upcoming training sessions, as a feature list (reference /cloud rows):
-  mono key (date · city), title, text + link. Context: dict "page" "data" "index".
-  data: title, cta {label, url}, items [{date, city, title, text, url}]
+  mono key (date · city), training title, summary + link.
+  Sessions are read from the training pages (`sessions` front matter): nothing is typed here.
+  Context: dict "page" "data" "index".
+  data: title, cta {label, url}, limit (default 3)
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
+{{- $sessions := partial "func/upcoming-sessions.html" (dict "limit" ($d.limit | default 3)) -}}
 <section class="section tone-dark-alt" aria-labelledby="{{ $id }}" id="sessions">
   <div class="container">
     <div class="rows-head">
       {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "title--section") }}
       {{- with $d.cta }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
     </div>
+    {{- with $sessions }}
     <ul class="rows" role="list">
-      {{- range $d.items }}
+      {{- range . }}
       <li class="rows__item reveal-block" data-reveal>
-        <p class="rows__key mono">{{ .date }} · {{ .city }}</p>
-        <h3 class="rows__title">{{ .title }}</h3>
+        <p class="rows__key mono">{{ partial "components/date.html" (dict "page" .page "date" .start "format" ":date_medium") }} · {{ .city | default .format }}</p>
+        <h3 class="rows__title"><a class="rows__link" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a></h3>
         <div class="rows__body">
-          <p>{{ .text }}</p>
-          <a class="link-arrow" href="{{ .url | relLangURL }}">{{ T "readMore" }}<span class="visually-hidden"> : {{ .title }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
+          {{- with or .page.Params.summary .page.Description }}<p>{{ . }}</p>{{ end }}
+          <a class="link-arrow" href="{{ .page.RelPermalink }}#inscription">{{ T "register" }}<span class="visually-hidden"> : {{ .page.Title }}</span>{{ partialCached "icon.html" (dict "name" "arrow-right") "arrow-right" }}</a>
         </div>
       </li>
       {{- end }}
     </ul>
+    {{- else }}
+    <p class="lead rows-empty">{{ T "noSessions" }}</p>
+    {{- end }}
   </div>
 </section>

@@ -13,6 +13,16 @@ features:
 faq:
   - { q: "[À RÉDIGER — Question sur ThoughtSpot ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
   - { q: "[À RÉDIGER — Autre question sur ThoughtSpot ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+visual: "search"   # visuel de la section Solutions de l'accueil
+menus:
+  main:
+    parent: solutions
+    weight: 15
+    params:
+      group: "Analyse et visualisation"
+  footer:
+    parent: f-solutions
+    weight: 15
 ---
 
 [À RÉDIGER — Ce qu'Excelcio apporte sur ThoughtSpot : 2 à 3 paragraphes.]

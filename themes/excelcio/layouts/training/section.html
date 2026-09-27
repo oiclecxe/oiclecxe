@@ -51,19 +51,13 @@
   </section>
 
   {{- /* Upcoming sessions across the catalogue. */}}
-  {{- $sessions := slice }}
-  {{- range $trainings }}
-    {{- $t := . }}
-    {{- range .Params.sessions }}
-      {{- if and .start (ge (time .start).Unix now.Unix) }}{{ $sessions = $sessions | append (dict "start" (time .start) "city" .city "format" .format "page" $t) }}{{ end }}
-    {{- end }}
-  {{- end }}
+  {{- $sessions := partial "func/upcoming-sessions.html" (dict "pages" $trainings "limit" 12) }}
   <section class="section tone-light-alt" id="sessions" aria-labelledby="sessions-title">
     <div class="container">
       <h2 class="section__head--tight" id="sessions-title">{{ T "upcomingSessions" }}</h2>
-      {{- with sort $sessions "start" }}
+      {{- with $sessions }}
       <ul class="rows" role="list">
-        {{- range first 12 . }}
+        {{- range . }}
         <li class="rows__item">
           <p class="rows__key mono">{{ partial "components/date.html" (dict "page" .page "date" .start "format" ":date_medium") }} · {{ .city | default .format }}</p>
           <h3 class="rows__title"><a class="rows__link" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a></h3>

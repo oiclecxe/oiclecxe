@@ -13,6 +13,16 @@ features:
 faq:
   - { q: "[À RÉDIGER — Question sur Tableau ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
   - { q: "[À RÉDIGER — Autre question sur Tableau ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+visual: "line"   # visuel de la section Solutions de l'accueil
+menus:
+  main:
+    parent: solutions
+    weight: 13
+    params:
+      group: "Analyse et visualisation"
+  footer:
+    parent: f-solutions
+    weight: 13
 ---
 
 [À RÉDIGER — Ce qu'Excelcio apporte sur Tableau : 2 à 3 paragraphes.]

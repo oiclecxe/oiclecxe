@@ -13,6 +13,12 @@ kpis: ["[Indicateur 1]", "[Indicateur 2]", "[Indicateur 3]", "[Indicateur 4]"]
 faq:
   - { q: "[À RÉDIGER — Question fréquente 1 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
   - { q: "[À RÉDIGER — Question fréquente 2 ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+menus:
+  main:
+    parent: offre
+    weight: 24
+    params:
+      group: "Expertises métier"
 ---
 
 [À RÉDIGER — Notre approche pour cette direction : 2 à 3 paragraphes.]

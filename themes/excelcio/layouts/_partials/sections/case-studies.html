@@ -2,16 +2,17 @@
   Case studies carousel (reference “Proven in production”): square cards bleeding
   off the right edge, previous/next buttons. Scrollable without JS.
   Context: dict "page" "data" "index".
-  data: title, tone (default "tone-dark-alt"), items [{title, client, sector, url}]
-        or pages (slice of case-study pages, used when items is empty).
-  Card image: taken automatically from the linked case study page (see story-card.html).
+  data: title, tone (default "tone-dark-alt"),
+        items: optional list of case study page paths (order kept); default: all by weight
+        limit: optional maximum number of cards
+        pages: slice of pages (used by templates instead of items)
+  Every card reads its title (`result`, else title), client, sector and image
+  from the case study page itself: nothing is duplicated here.
 */ -}}
 {{- $d := .data -}}
 {{- $id := printf "s%d-title" .index -}}
-{{- $items := slice -}}
-{{- range $d.items }}{{ $items = $items | append . }}{{ end -}}
-{{- range $d.pages }}{{ $items = $items | append (dict "title" (.Params.result | default .Title) "client" .Params.client "sector" .Params.sector "target" . "url" .RelPermalink) }}{{ end -}}
-{{- with $items }}
+{{- $pages := $d.pages | default (partial "func/pages-of-type.html" (dict "type" "case-study" "paths" $d.items "limit" $d.limit)) -}}
+{{- with $pages }}
 <section class="section {{ $d.tone | default "tone-dark-alt" }} carousel-section" aria-labelledby="{{ $id }}" data-carousel>
   <div class="container carousel__head">
     {{- partial "components/title.html" (dict "title" $d.title "id" $id) }}
@@ -22,8 +23,8 @@
   </div>
   <div class="carousel__viewport" tabindex="0" role="region" aria-labelledby="{{ $id }}" data-carousel-viewport>
     <ul class="carousel__track" role="list">
-      {{- range $i, $item := . }}
-      <li class="carousel__slide">{{ partial "components/story-card.html" (merge $item (dict "index" $i)) }}</li>
+      {{- range $i, $p := . }}
+      <li class="carousel__slide">{{ partial "components/story-card.html" (dict "title" ($p.Params.result | default $p.Title) "client" ($p.Params.client | default $p.Title) "sector" $p.Params.sector "target" $p "url" $p.RelPermalink "index" $i) }}</li>
       {{- end }}
     </ul>
   </div>

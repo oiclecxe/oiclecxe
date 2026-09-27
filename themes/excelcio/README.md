@@ -80,16 +80,18 @@ Classes à poser sur une `.section` : `tone-brand`, `tone-light`, `tone-light-al
 | `hero` | brand | `title`, `primary` et `secondary` `{label, url}`, `logos` (liste de noms) |
 | `architecture` | light | `title` (`lines`, `rest`), `top` et `bottom` `{label, detail}`, `band1` et `band2` `{label, items}` |
 | `features` | light | `title`, `tabs: [{label, cards: [{title, accent, text, url}]}]` |
-| `expertises` | light-alt | `title`, `items: [{title, badges, text, url, link}]` |
+| `expertises` | light-alt | `title`, `linkLabel` ; lit les pages `expertise` (toutes par `weight`, ou `items` : liste de chemins, `limit`) |
 | `statement` | light | `text` |
-| `case-studies` | dark-alt | `title`, `items: [{title, client, sector, url}]` ; image reprise automatiquement de la page liée (`image`, `imageAlt`), sinon aplat + champ de carrés |
+| `case-studies` | dark-alt | `title`, `tone` ; lit les pages `case-study` (`result`, `client`, `sector`, `image`) : toutes par `weight`, ou `items` (liste de chemins), `limit` |
 | `faq` | dark | `title`, `items: [{q, a}]` (émet le JSON-LD `FAQPage`) |
-| `platform` | dark-alt | `title`, `items: [{name, text, url, visual}]` |
-| `trainings` | dark-alt | `title`, `cta {label, url}`, `items: [{date, city, title, text, url}]` |
+| `platform` | dark-alt | `title` ; lit les pages `solution` (`partnerName`, `tagline`, `visual`) : toutes par `weight`, ou `items`, `limit` |
+| `trainings` | dark-alt | `title`, `cta {label, url}`, `limit` ; lit les sessions futures des pages `training` (`sessions`) |
 | `proof` | dark-alt | `title`, `stats: [{value, suffix, label}]`, `quote {before, highlight, after, author, role}` |
 | `cta` | brand | `title`, `primary`, `secondary`, `badges` |
 
 Chaque bloc accepte `hidden: true`.
+
+**Source unique** : les sections qui présentent des contenus (expertises, cas clients, solutions, formations) les **lisent dans leurs pages** ; rien n'est recopié dans le front matter de l'accueil. De même, les pages solutions et expertises déclarent leur entrée de menu (`menus:`) plutôt que d'être recopiées dans `menus.fr.toml`.
 
 **Espacement automatique** : deux blocs voisins de même ambiance forment une seule bande ; le second perd sa marge haute, pour que l'écart reste d'une marge de section. Deux blocs d'ambiances différentes gardent leurs marges complètes. La règle est calculée par le CSS d'après les voisins réellement affichés : retirer, masquer ou réordonner des blocs ne demande aucun réglage. Le filet au-dessus de `proof` n'apparaît que lorsqu'il prolonge un bloc de même ambiance.
 

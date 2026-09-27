@@ -13,6 +13,16 @@ features:
 faq:
   - { q: "[À RÉDIGER — Question sur Vizlib ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
   - { q: "[À RÉDIGER — Autre question sur Vizlib ?]", a: "[À RÉDIGER — Réponse, 60 mots max.]" }
+visual: "grid"   # visuel de la section Solutions de l'accueil
+menus:
+  main:
+    parent: solutions
+    weight: 12
+    params:
+      group: "Analyse et visualisation"
+  footer:
+    parent: f-solutions
+    weight: 12
 ---
 
 [À RÉDIGER — Ce qu'Excelcio apporte sur Vizlib : 2 à 3 paragraphes.]
