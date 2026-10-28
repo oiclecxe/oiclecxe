@@ -11,8 +11,8 @@
     {{- /* Hero entrance is a pure CSS animation that starts at first paint (no JS dependency, good LCP). */}}
     {{- partial "components/title.html" (dict "title" $d.title "tag" "h1" "id" "hero-title" "class" "hero__title title--display" "reveal" false) }}
     <div class="btn-row btn-row--stack hero__actions">
-      {{- with $d.primary }}<a class="btn btn--primary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
-      {{- with $d.secondary }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
+      {{- with $d.primary }}<a class="btn btn--primary" href="{{ .url | partial "func/rel-url.html" }}">{{ .label }}</a>{{ end }}
+      {{- with $d.secondary }}<a class="btn btn--secondary" href="{{ .url | partial "func/rel-url.html" }}">{{ .label }}</a>{{ end }}
     </div>
     {{- with site.Params.pillars }}
     <div class="hero__pillars">

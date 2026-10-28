@@ -5,7 +5,7 @@
   and "level" (heading level of the title, default 3).
 */ -}}
 {{- $target := .target | default (site.GetPage (strings.TrimSuffix "/" (.url | default ""))) -}}
-{{- $href := .url | default "" | relLangURL -}}
+{{- $href := .url | default "" | partial "func/rel-url.html" -}}
 {{- $image := "" -}}
 {{- with $target }}
   {{- $href = .RelPermalink }}

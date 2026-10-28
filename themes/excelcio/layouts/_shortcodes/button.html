@@ -1,2 +1,2 @@
 {{- /* Button link. Usage: {{< button url="/contact/" style="primary|secondary" >}}Label{{< /button >}} */ -}}
-<a class="btn btn--{{ .Get "style" | default "primary" }}" href="{{ .Get "url" | relLangURL }}">{{ .Inner | .Page.RenderString }}</a>
+<a class="btn btn--{{ .Get "style" | default "primary" }}" href="{{ .Get "url" | partial "func/rel-url.html" }}">{{ .Inner | .Page.RenderString }}</a>

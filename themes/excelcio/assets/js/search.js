@@ -8,9 +8,9 @@ const PAGE_SIZE = { dialog: 6, page: 10 };
 
 let pagefind = null;
 
-function loadPagefind(bundle) {
+function loadPagefind(bundle, baseUrl) {
   pagefind ??= import(`${bundle}pagefind.js`).then(async (pf) => {
-    await pf.options({ excerptLength: 24 });
+    await pf.options({ excerptLength: 24, baseUrl }); // baseUrl: site served from a sub-path
     await pf.init();
     await pf.filters(); // enables per-filter counts in search results
     return pf;
@@ -120,7 +120,7 @@ function initSearch(root) {
     }
     let pf;
     try {
-      pf = await loadPagefind(d.bundle);
+      pf = await loadPagefind(d.bundle, d.base || '/');
     } catch {
       status.textContent = d.msgUnavailable;
       return;
@@ -136,7 +136,7 @@ function initSearch(root) {
   };
 
   input.addEventListener('input', search);
-  input.addEventListener('focus', () => loadPagefind(d.bundle).catch(() => {}), { once: true });
+  input.addEventListener('focus', () => loadPagefind(d.bundle, d.base || '/').catch(() => {}), { once: true });
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     search();

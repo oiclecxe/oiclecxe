@@ -2,7 +2,7 @@
 {{- $org := site.Params.organization -}}
 <footer class="site-footer tone-deep" aria-labelledby="footer-title">
   <div class="container">
-    <a class="site-footer__logo" href="{{ "/" | relLangURL }}">
+    <a class="site-footer__logo" href="{{ "/" | partial "func/rel-url.html" }}">
       {{- partial "components/logo.html" (dict "variant" "onDark" "height" 44) }}
     </a>
 
@@ -26,7 +26,7 @@
     {{- with and site.Params.footer.aiURL (site.Home.OutputFormats.Get "llms") site.Params.footer.aiURL }}
     <div class="site-footer__ai">
       <span class="eyebrow eyebrow--mono">{{ site.Params.footer.aiLabel | default (T "exploreWithAI") }}</span>
-      <a href="{{ . | relLangURL }}">{{ partialCached "icon.html" (dict "name" "sparkle") "sparkle" }}{{ T "aiSummary" }}</a>
+      <a href="{{ . | partial "func/rel-url.html" }}">{{ partialCached "icon.html" (dict "name" "sparkle") "sparkle" }}{{ T "aiSummary" }}</a>
     </div>
     {{- end }}
 
@@ -37,7 +37,7 @@
         <span class="eyebrow eyebrow--mono">{{ .Name }}</span>
         <ul class="site-footer__links" role="list">
           {{- range .Children }}
-          <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+          <li><a href="{{ .URL | partial "func/rel-url.html" }}">{{ .Name }}</a></li>
           {{- end }}
         </ul>
       </div>

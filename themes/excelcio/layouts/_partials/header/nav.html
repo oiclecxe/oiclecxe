@@ -14,7 +14,7 @@
         {{- $panelID := printf "mega-%s" .Identifier }}
     <li class="nav__item" data-nav-item>
       <div class="nav__pill">
-        <a class="nav__link" href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
+        <a class="nav__link" href="{{ .URL | partial "func/rel-url.html" }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
         <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="{{ $panelID }}" data-nav-toggle>
           <span class="visually-hidden">{{ T "submenuToggle" (dict "Name" .Name) }}</span>
           {{- partialCached "icon.html" (dict "name" "chevron-down") "chevron-down" -}}
@@ -25,7 +25,7 @@
       {{- else }}
     <li class="nav__item">
       <div class="nav__pill">
-        <a class="nav__link" href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
+        <a class="nav__link" href="{{ .URL | partial "func/rel-url.html" }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
       </div>
     </li>
       {{- end }}

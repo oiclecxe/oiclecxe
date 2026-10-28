@@ -5,9 +5,9 @@
   Context: dict "id" (unique on the page), "mode" ("dialog" | "page").
 */ -}}
 {{- $id := .id -}}
-{{- $url := site.Params.header.searchURL | default "" | relLangURL -}}
-{{- $bundle := site.Params.search.bundlePath | default "/pagefind/" | relURL -}}
-<div class="search search--{{ .mode }}" data-search="{{ .mode }}" data-bundle="{{ $bundle }}"
+{{- $url := site.Params.header.searchURL | default "" | partial "func/rel-url.html" -}}
+{{- $bundle := site.Params.search.bundlePath | default "/pagefind/" | partial "func/rel-url.html" -}}
+<div class="search search--{{ .mode }}" data-search="{{ .mode }}" data-bundle="{{ $bundle }}" data-base="{{ "/" | partial "func/rel-url.html" }}"
   data-label-one="{{ T "resultCount" 1 }}" data-label-other="{{ T "resultCount" 999999 }}"
   data-msg-empty="{{ T "searchNoResults" }}" data-msg-unavailable="{{ cond hugo.IsDevelopment (T "searchUnavailableDev") (T "searchUnavailable") }}"
   data-msg-all="{{ T "searchFilterAll" }}" data-msg-more="{{ T "searchMore" }}">

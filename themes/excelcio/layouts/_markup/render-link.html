@@ -10,6 +10,8 @@
   {{- else }}
     {{- with $.PageInner.Resources.Get $u.Path }}
       {{- $href = .RelPermalink }}
+    {{- else }}
+      {{- if hasPrefix $u.Path "/" }}{{ $href = partial "func/rel-url.html" $.Destination }}{{ end }}
     {{- end }}
   {{- end }}
 {{- end -}}

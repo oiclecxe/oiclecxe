@@ -20,7 +20,7 @@
     {{- end }}
     {{- with $o.actions }}
     <div class="btn-row btn-row--stack" data-pagefind-ignore>
-      {{- range . }}<a class="btn btn--{{ .style | default "primary" }}" href="{{ if hasPrefix .url "#" }}{{ .url }}{{ else }}{{ .url | relLangURL }}{{ end }}">{{ .label }}</a>{{ end }}
+      {{- range . }}<a class="btn btn--{{ .style | default "primary" }}" href="{{ if hasPrefix .url "#" }}{{ .url }}{{ else }}{{ .url | partial "func/rel-url.html" }}{{ end }}">{{ .label }}</a>{{ end }}
     </div>
     {{- end }}
   </div>

@@ -20,23 +20,23 @@
           <details class="mobile-nav__group">
             <summary>{{ .Name }}{{ partialCached "icon.html" (dict "name" "chevron-down") "chevron-down" }}</summary>
             <ul class="mobile-nav__sub" role="list">
-              <li><a href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a></li>
+              <li><a href="{{ .URL | partial "func/rel-url.html" }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a></li>
               {{- range .Children }}
                 {{- if ne .URL $parentURL }}
-              <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+              <li><a href="{{ .URL | partial "func/rel-url.html" }}">{{ .Name }}</a></li>
                 {{- end }}
               {{- end }}
             </ul>
           </details>
           {{- else }}
-          <a class="mobile-nav__link" href="{{ .URL | relLangURL }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
+          <a class="mobile-nav__link" href="{{ .URL | partial "func/rel-url.html" }}"{{ if $current }} aria-current="true"{{ end }}>{{ .Name }}</a>
           {{- end }}
         </li>
         {{- end }}
       </ul>
     </nav>
     {{- with site.Params.header.ctaURL }}
-    <a class="btn btn--primary mobile-nav__cta" href="{{ . | relLangURL }}">{{ site.Params.header.ctaLabel }}</a>
+    <a class="btn btn--primary mobile-nav__cta" href="{{ . | partial "func/rel-url.html" }}">{{ site.Params.header.ctaLabel }}</a>
     {{- end }}
   </div>
 </details>

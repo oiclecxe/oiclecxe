@@ -4,5 +4,5 @@
     {{- with .Get "title" }}<p class="inline-cta__title">{{ . }}</p>{{ end }}
     {{- with .Inner }}<div class="inline-cta__text">{{ . | $.Page.RenderString (dict "display" "block") }}</div>{{ end }}
   </div>
-  {{- with .Get "url" }}<a class="btn btn--primary" href="{{ . | relLangURL }}">{{ $.Get "label" | default (T "ctaContact") }}</a>{{ end }}
+  {{- with .Get "url" }}<a class="btn btn--primary" href="{{ . | partial "func/rel-url.html" }}">{{ $.Get "label" | default (T "ctaContact") }}</a>{{ end }}
 </aside>

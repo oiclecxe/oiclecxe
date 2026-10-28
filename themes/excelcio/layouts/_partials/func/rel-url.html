@@ -1,0 +1,14 @@
+{{- /*
+  relLangURL that keeps the baseURL path: relLangURL treats "/x/" as relative to the host,
+  which breaks a site served from a sub-path (e.g. https://example.github.io/site/).
+  Context: a URL string ("/contact/", "https://…", ""). Returns: string.
+*/ -}}
+{{- $url := . | default "" -}}
+{{- $base := "" | relLangURL -}}{{/* "/" or "/sub-path/" */}}
+{{- if not (and (hasPrefix $url $base) (ne $base "/")) }}{{/* already prefixed (menu URLs, RelPermalink) */}}
+  {{- if and (hasPrefix $url "/") (not (hasPrefix $url "//")) }}
+    {{- $url = strings.TrimPrefix "/" $url -}}
+  {{- end -}}
+  {{- $url = $url | relLangURL -}}
+{{- end -}}
+{{- return $url -}}

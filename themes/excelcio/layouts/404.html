@@ -6,9 +6,9 @@
       <h1 class="page-hero__title">{{ T "notFoundTitle" }}</h1>
       <p class="lead page-hero__lead">{{ T "notFoundText" }}</p>
       <div class="btn-row">
-        <a class="btn btn--primary" href="{{ "/" | relLangURL }}">{{ T "backHome" }}</a>
+        <a class="btn btn--primary" href="{{ "/" | partial "func/rel-url.html" }}">{{ T "backHome" }}</a>
         {{- with site.Params.header.searchURL }}
-        <a class="btn btn--secondary" href="{{ . | relLangURL }}">{{ T "search" }}</a>
+        <a class="btn btn--secondary" href="{{ . | partial "func/rel-url.html" }}">{{ T "search" }}</a>
         {{- end }}
       </div>
     </div>

@@ -47,7 +47,7 @@
     {{- partial "hooks/form-captcha.html" (dict "form" .name "id" $id "settings" $s) }}
     <div class="form__footer">
       {{- with $s.privacyURL }}
-      <p class="form__privacy">{{ T "privacyNote" (dict "Name" (partial "func/org-name.html" .) "Purpose" $.purpose "URL" (. | relLangURL)) | safeHTML }}</p>
+      <p class="form__privacy">{{ T "privacyNote" (dict "Name" (partial "func/org-name.html" .) "Purpose" $.purpose "URL" (. | partial "func/rel-url.html")) | safeHTML }}</p>
       {{- end }}
       <div class="form__actions">
         <button class="btn btn--primary" type="submit">{{ .submit }}</button>

@@ -13,7 +13,7 @@
   <div class="container">
     <div class="rows-head">
       {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "title--section") }}
-      {{- with $d.cta }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
+      {{- with $d.cta }}<a class="btn btn--secondary" href="{{ .url | partial "func/rel-url.html" }}">{{ .label }}</a>{{ end }}
     </div>
     <ul class="rows" role="list">
       {{- range . }}

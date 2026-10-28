@@ -22,7 +22,7 @@
           {{- range $.entry.Children }}
             {{- if and (not .Params.featured) (eq (or .Params.group "") $group) }}
           <li>
-            <a class="mega__link" href="{{ .URL | relLangURL }}">
+            <a class="mega__link" href="{{ .URL | partial "func/rel-url.html" }}">
               <span class="mega__link-title">{{ .Name }}</span>
               {{- with .Params.description }}<span class="mega__link-desc">{{ . }}</span>{{ end }}
             </a>
@@ -40,7 +40,7 @@
       <ul class="mega__featured-list" role="list">
         {{- range . }}
         <li>
-          <a class="mega__link" href="{{ .URL | relLangURL }}">
+          <a class="mega__link" href="{{ .URL | partial "func/rel-url.html" }}">
             <span class="mega__link-title">{{ .Name }}</span>
             {{- with .Params.description }}<span class="mega__link-desc">{{ . }}</span>{{ end }}
           </a>

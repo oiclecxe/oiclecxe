@@ -3,7 +3,7 @@
 <header class="site-header" data-site-header>
   <div class="site-header__bar">
     <div class="container site-header__inner">
-      <a class="site-header__logo" href="{{ "/" | relLangURL }}" data-nav-logo>
+      <a class="site-header__logo" href="{{ "/" | partial "func/rel-url.html" }}" data-nav-logo>
         {{- partial "components/logo.html" (dict "variant" "compactOnDark") }}
       </a>
 
@@ -11,12 +11,12 @@
 
       <div class="site-header__actions">
         {{- with site.Params.header.searchURL }}
-        <a class="site-header__search" href="{{ . | relLangURL }}" aria-label="{{ T "search" }}"{{ if site.Params.search.shortcut }} aria-keyshortcuts="Control+K Meta+K"{{ end }} data-search-open>
+        <a class="site-header__search" href="{{ . | partial "func/rel-url.html" }}" aria-label="{{ T "search" }}"{{ if site.Params.search.shortcut }} aria-keyshortcuts="Control+K Meta+K"{{ end }} data-search-open>
           {{- partialCached "icon.html" (dict "name" "search") "search" -}}
         </a>
         {{- end }}
         {{- with site.Params.header.ctaURL }}
-        <a class="btn btn--primary btn--sm site-header__cta" href="{{ . | relLangURL }}">{{ site.Params.header.ctaLabel }}</a>
+        <a class="btn btn--primary btn--sm site-header__cta" href="{{ . | partial "func/rel-url.html" }}">{{ site.Params.header.ctaLabel }}</a>
         {{- end }}
         {{- partial "header/mobile-nav.html" (dict "section" $section) }}
       </div>

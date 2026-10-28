@@ -9,8 +9,8 @@
   <div class="container">
     {{- partial "components/title.html" (dict "title" $d.title "id" $id "class" "cta__title") }}
     <div class="btn-row btn-row--stack cta__actions">
-      {{- with $d.primary }}<a class="btn btn--primary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
-      {{- with $d.secondary }}<a class="btn btn--secondary" href="{{ .url | relLangURL }}">{{ .label }}</a>{{ end }}
+      {{- with $d.primary }}<a class="btn btn--primary" href="{{ .url | partial "func/rel-url.html" }}">{{ .label }}</a>{{ end }}
+      {{- with $d.secondary }}<a class="btn btn--secondary" href="{{ .url | partial "func/rel-url.html" }}">{{ .label }}</a>{{ end }}
     </div>
     {{- with $d.badges }}
     <ul class="cta__badges" role="list">

@@ -37,7 +37,7 @@
     {{- with .intro }}<div class="gform__intro">{{ . }}</div>{{ end }}
     <p class="gform__notice">
       {{- T "gformNotice" (dict "Name" (partial "func/org-name.html" .)) }}
-      {{- with site.Params.forms.privacyURL }} <a href="{{ . | relLangURL }}">{{ T "gformPrivacy" }}</a>.{{ end -}}
+      {{- with site.Params.forms.privacyURL }} <a href="{{ . | partial "func/rel-url.html" }}">{{ T "gformPrivacy" }}</a>.{{ end -}}
     </p>
     <a class="btn btn--primary" href="{{ $view }}" rel="noopener" data-gform-load>{{ T "gformShow" }}</a>
   </div>

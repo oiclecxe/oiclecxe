@@ -7,7 +7,7 @@
       <p class="lead page-hero__lead">{{ .Params.lead | default (T "thanksText") }}</p>
       {{- with .Content }}<div class="prose block">{{ . }}</div>{{ end }}
       <div class="btn-row">
-        <a class="btn btn--primary" href="{{ "/" | relLangURL }}">{{ T "backHome" }}</a>
+        <a class="btn btn--primary" href="{{ "/" | partial "func/rel-url.html" }}">{{ T "backHome" }}</a>
       </div>
     </div>
   </section>
