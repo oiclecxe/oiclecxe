@@ -13,6 +13,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - Contenu : textes du site excelcio.com repris (branche `contenu-reprise`, point de restauration : étiquette `avant-reprise-contenu`), en attente de validation. Actualités : 12 derniers mois. Restent en placeholder : Accessibilité, Newsletter, adresse de Nantes.
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
 - En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser) ; validation en ligne du JSON-LD (validator.schema.org, résultats enrichis Google) reportée par l'utilisateur, à autoriser plus tard. Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
+- Préproduction : GitHub Pages (`.github/workflows/hugo.yaml`), site servi sous `/oiclecxe/`, toutes les pages en noindex (`HUGO_PARAMS_SEO_BLOCKROBOTS`). Dans les gabarits, un lien interne écrit `/chemin/` passe par `partial "func/rel-url.html"` (jamais `relLangURL`, qui ignore le sous-dossier).
 - Logo Excelcio fourni : `assets/images/logo.svg`
 
 ## Méthode de travail
@@ -20,7 +21,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - Travailler **lot par lot** (SPEC § 17). Avant un lot, relire sa section et les § qu'il cite. À la fin : vérifier chaque critère d'acceptation, faire un compte rendu (fait / non fait / écarts), mettre à jour « État d'avancement », puis **s'arrêter et attendre la validation**.
 - Une branche par lot (`lot-N-nom`), petits commits atomiques en français à l'impératif (`Ajoute le mega-menu`). Ne pas pousser ni fusionner sans accord.
 - Toute décision non prévue par SPEC.md : la poser en question, puis la consigner dans `docs/DECISIONS.md` (date, décision, raison).
-- Environnement : Windows 11, **PowerShell**. Toute commande documentée doit fonctionner sous PowerShell. Dépôt Git **local uniquement** : `C:\Users\vtexier.EXCELCIO\Desktop\excelcio_com\hugo_2`, aucun dépôt distant.
+- Environnement : Windows 11, **PowerShell**. Toute commande documentée doit fonctionner sous PowerShell. Dépôt Git : `C:\Users\vtexier.EXCELCIO\Desktop\excelcio_com\hugo_2` ; dépôt distant `origin` = https://github.com/oiclecxe/oiclecxe (public) depuis le 28/10/2026 : chaque push sur `main` publie la préproduction GitHub Pages (https://oiclecxe.github.io/oiclecxe/). Ne jamais pousser sans accord de l'utilisateur.
 - Langue : **code en anglais** (identifiants, classes CSS, clés i18n et front matter, noms de partials, commentaires) ; contenu, URLs, commits, README et `docs/` en **français**.
 - Navigateurs cibles : Chrome, Edge, Firefox, Safari (y compris iOS) des 24 derniers mois ; repli obligatoire pour toute fonction plus récente.
 - Vérifier visuellement chaque composant dans le navigateur intégré (desktop 1440 px et mobile 390 px) avant de le déclarer terminé.

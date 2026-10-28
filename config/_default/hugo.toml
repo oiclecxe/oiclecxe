@@ -32,3 +32,8 @@ disableKinds = ["rss"]
   pagerSize = 9
   path = "page"
 
+
+# Cache des images traitées dans cacheDir (conservé entre deux constructions GitHub Actions).
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"

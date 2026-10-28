@@ -95,6 +95,15 @@ Trois formulaires : contact (`/contact/`), inscription à une formation ou à un
 
 Pour passer en réel : renseigner les trois `endpoint`, puis `mode = "live"` (idéalement dans `config/production/params.toml`, pour garder le mode simulé en développement). Anti-spam intégré : champ piège invisible et délai minimal de 3 secondes avant envoi. Un emplacement de captcha respectueux de la vie privée est prévu mais désactivé (voir le README du thème).
 
+## Préproduction (GitHub Pages)
+
+Dépôt : https://github.com/oiclecxe/oiclecxe. Chaque push sur `main` lance `.github/workflows/hugo.yaml` (Hugo 0.166.0 extended, build de production, index Pagefind) et publie https://oiclecxe.github.io/oiclecxe/. Réglage à faire une fois : **Settings › Pages › Source = GitHub Actions**. Suivi des constructions : onglet **Actions** du dépôt.
+
+- Copie **fermée aux moteurs** : `HUGO_PARAMS_SEO_BLOCKROBOTS=true` met toutes les pages en `noindex` et ferme `robots.txt` (paramètre `seo.blockRobots`). Le `robots.txt` d'un site de projet n'étant pas à la racine du domaine, c'est la balise `noindex` qui protège.
+- Le site est servi sous `/oiclecxe/` : dans les gabarits, un lien écrit `/chemin/` passe par `partial "func/rel-url.html"`, qui ajoute ce préfixe (`relLangURL` ne le fait pas pour un chemin commençant par `/`).
+- Sans effet sur GitHub Pages : redirections (`_redirects`, `redirects.htaccess`) et envoi des formulaires (mode simulé).
+- Tester localement : `$env:HUGO_PARAMS_SEO_BLOCKROBOTS="true"; hugo --environment production --gc --minify --baseURL "https://oiclecxe.github.io/oiclecxe/" -d "$env:TEMP\ghp\oiclecxe"`, puis servir `$env:TEMP\ghp` (`python -m http.server`) et ouvrir `http://localhost:8000/oiclecxe/`.
+
 ## Arborescence
 
 ```
