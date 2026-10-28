@@ -1,5 +1,5 @@
 @layer components {
-  /* Styles of the editor shortcodes (callout, figure, video, cta, stats, columns). */
+  /* Styles of the editor shortcodes (callout, figure, video, google-form, cta, stats, columns). */
   .callout {
     padding: var(--sp-5) var(--sp-6);
     border-left: 3px solid var(--brand);
@@ -71,6 +71,45 @@
 
   .video__play:hover .icon {
     transform: scale(1.06);
+  }
+
+  /* Google Forms facade, replaced by the iframe on click (google-form.js). */
+  .gform__facade {
+    padding: var(--sp-7);
+    border-left: 3px solid var(--brand);
+    background: var(--surface);
+  }
+
+  .gform__title {
+    color: var(--fg);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+  }
+
+  .gform__intro,
+  .gform__notice {
+    margin-top: var(--sp-3);
+  }
+
+  .gform__notice {
+    color: var(--fg-body);
+    font-size: var(--fs-ui);
+  }
+
+  .gform__facade .btn {
+    margin-top: var(--sp-5);
+  }
+
+  .gform__frame {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: var(--white);
+  }
+
+  .gform__alt {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-ui);
   }
 
   .inline-cta {

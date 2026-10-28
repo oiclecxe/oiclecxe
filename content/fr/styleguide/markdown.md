@@ -204,3 +204,17 @@ Texte ==surligné==, texte ++inséré++, texte ~~supprimé~~.
 
 Indice : H~2~O, CO~2~. Exposant : m^2^, 1^er^ janvier, 10^6^.
 {{< /md-example >}}
+
+## Formulaire Google (shortcode)
+
+Shortcode `google-form` (voir `docs/CONTENU.md`, § 5) : rien n'est chargé depuis Google avant le clic sur « Afficher le formulaire ». Formulaire de test fourni par Excelcio.
+
+```text
+{{</* google-form url="https://docs.google.com/forms/d/e/1FAIpQLSdQVG3jwob9AEu_HOGityK7ZIkifE0mlJip_fQ5DJ5AnAa1uQ/viewform" title="Formulaire de test" height="1311" */>}}
+Texte d'introduction facultatif, en **Markdown**.
+{{</* /google-form */>}}
+```
+
+{{< google-form url="https://docs.google.com/forms/d/e/1FAIpQLSdQVG3jwob9AEu_HOGityK7ZIkifE0mlJip_fQ5DJ5AnAa1uQ/viewform?embedded=true" title="Formulaire de test" height="1311" >}}
+Texte d'introduction facultatif, en **Markdown**.
+{{< /google-form >}}

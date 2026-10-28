@@ -101,11 +101,11 @@
     margin-top: var(--sp-9);
   }
 
-  .prose a {
+  .prose a:not(.btn) {
     color: var(--fg);
   }
 
-  .prose a:hover {
+  .prose a:not(.btn):hover {
     color: var(--fg-accent);
   }
 

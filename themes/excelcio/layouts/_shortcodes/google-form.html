@@ -1,0 +1,16 @@
+{{- /*
+  Google Forms embed behind a facade (see _partials/components/google-form.html).
+  Usage: {{< google-form url="https://docs.google.com/forms/d/e/…/viewform" title="…" height="1311" >}}
+         Optional Markdown introduction.
+         {{< /google-form >}}
+*/ -}}
+{{- $intro := "" -}}
+{{- with .Inner }}{{ $intro = . | $.Page.RenderString (dict "display" "block") }}{{ end -}}
+{{- partial "components/google-form.html" (dict
+  "page" .Page
+  "url" (.Get "url")
+  "title" (.Get "title")
+  "height" (.Get "height")
+  "intro" $intro
+  "position" (string .Position)
+) -}}

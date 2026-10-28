@@ -9,6 +9,7 @@ import { initCounters } from './counters.js';
 import { initProgress } from './progress.js';
 import { initFilters } from './filters.js';
 import { initVideos } from './video.js';
+import { initGoogleForms } from './google-form.js';
 import { initForms } from './forms.js';
 import { initSearchUI } from './search.js';
 
@@ -21,6 +22,7 @@ initMobileNav();
 initTabs();
 initFilters();
 initVideos();
+initGoogleForms();
 initForms();
 initSearchUI();
 initCarousels();

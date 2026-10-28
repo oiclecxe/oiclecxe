@@ -141,6 +141,12 @@ Texte en **Markdown**.
 
 {{< video id="IDENTIFIANT_YOUTUBE" title="Titre de la vidéo" >}}
 
+{{< google-form url="https://docs.google.com/forms/d/e/IDENTIFIANT/viewform" title="Demande de témoignage" height="1311" >}}
+Texte d'introduction facultatif.
+{{< /google-form >}}
+
+{{< google-form url="https://docs.google.com/forms/d/e/IDENTIFIANT/viewform" height="900" />}}
+
 {{< button url="/contact/" >}}Nous contacter{{< /button >}}
 
 {{< cta title="Un projet ?" url="/contact/" label="Nous contacter" >}}Texte court.{{< /cta >}}
@@ -157,6 +163,14 @@ Deuxième colonne
 ````
 
 La vidéo YouTube ne charge rien depuis YouTube tant que le visiteur n'a pas cliqué (respect de la vie privée).
+
+**Formulaire Google (`google-form`)** : même principe. Le visiteur voit d'abord un encadré (titre, introduction, mention « fourni par Google Forms », lien vers la politique de confidentialité) et un bouton « Afficher le formulaire » ; le formulaire Google ne se charge qu'au clic. Un lien « Ouvrir dans un nouvel onglet » est toujours proposé, et sans JavaScript le bouton ouvre le formulaire chez Google.
+
+- `url` (obligatoire) : dans Google Forms, **Envoyer** › onglet **lien** (`<>` pour le code d'intégration). Accepte le lien `…/viewform`, l'adresse `src="…"` du code d'intégration ou un **lien prérempli** (menu ⋮ › « Obtenir le lien prérempli », pratique pour indiquer d'avance le nom du client ou de la formation). Les liens courts `forms.gle/…` ne fonctionnent pas : décocher « Raccourcir l'URL ».
+- `height` : hauteur en pixels, à recopier depuis le code d'intégration (`height="…"`) ; 1000 par défaut. Google n'ajuste pas la hauteur automatiquement : si le formulaire défile à l'intérieur de l'encadré, augmenter la valeur.
+- `title` : titre de l'encadré (« Formulaire » par défaut).
+- Sans texte d'introduction, fermer directement : `{{< google-form url="…" />}}`.
+- Le formulaire doit être ouvert à tous (sans connexion Google ni envoi de fichier), sinon Google refuse de l'afficher dans la page : seul le lien « nouvel onglet » fonctionne alors.
 
 ## 6. Redirections, référencement et agents IA
 

@@ -1,0 +1,47 @@
+{{- /*
+  Privacy-friendly Google Forms embed: nothing is loaded from Google until the
+  visitor clicks "show the form" (then an iframe docs.google.com). Without JS the
+  button is a link to the form. Also usable from templates.
+  Context: dict
+    "page"     the current page (required)
+    "url"      form link: share link (…/viewform), pre-filled link or the src of
+               Google's embed code (required; forms.gle short links are refused)
+    "title"    visible title (optional, default T "gformTitle")
+    "height"   iframe height in px, copied from Google's embed code (optional)
+    "intro"    HTML shown above the notice (optional)
+    "position" for error messages (optional)
+*/ -}}
+{{- $where := .position | default .page.File.Path -}}
+{{- $u := urls.Parse (.url | default "") -}}
+{{- $id := index (index (findRESubmatch `^/forms/d/e/([A-Za-z0-9_-]+)/` $u.Path 1) 0) 1 | default "" -}}
+{{- if eq $u.Host "forms.gle" }}
+  {{- errorf "google-form : lien court forms.gle non intégrable, utiliser le lien complet docs.google.com/forms/d/e/…/viewform (%s)" $where }}
+{{- else if or (ne $u.Host "docs.google.com") (not $id) }}
+  {{- errorf "google-form : adresse de formulaire Google invalide %q, attendu https://docs.google.com/forms/d/e/…/viewform (%s)" .url $where }}
+{{- end -}}
+{{- /* Query kept for pre-filled links (usp=pp_url&entry.…), share and embed markers dropped. */ -}}
+{{- $params := slice -}}
+{{- range split $u.RawQuery "&" }}
+  {{- if and . (not (hasPrefix . "embedded=")) (or (not (hasPrefix . "usp=")) (eq . "usp=pp_url")) }}
+    {{- $params = $params | append . }}
+  {{- end }}
+{{- end -}}
+{{- $view := printf "https://docs.google.com/forms/d/e/%s/viewform" $id -}}
+{{- $embed := printf "%s?%s" $view (delimit ($params | append "embedded=true") "&") -}}
+{{- with $params }}{{ $view = printf "%s?%s" $view (delimit . "&") }}{{ end -}}
+{{- $title := .title | default (T "gformTitle") -}}
+{{- $height := int (.height | default 1000) -}}
+<div class="gform" data-gform="{{ $embed }}" data-title="{{ $title }}" data-height="{{ $height }}">
+  <div class="gform__facade">
+    <p class="gform__title">{{ $title }}</p>
+    {{- with .intro }}<div class="gform__intro">{{ . }}</div>{{ end }}
+    <p class="gform__notice">
+      {{- T "gformNotice" (dict "Name" (partial "func/org-name.html" .)) }}
+      {{- with site.Params.forms.privacyURL }} <a href="{{ . | relLangURL }}">{{ T "gformPrivacy" }}</a>.{{ end -}}
+    </p>
+    <a class="btn btn--primary" href="{{ $view }}" rel="noopener" data-gform-load>{{ T "gformShow" }}</a>
+  </div>
+  <p class="gform__alt">
+    <a class="link-arrow" href="{{ $view }}" target="_blank" rel="noopener">{{ T "gformNewTab" }}{{ partialCached "icon.html" (dict "name" "arrow-up-right") "arrow-up-right" }}</a>
+  </p>
+</div>

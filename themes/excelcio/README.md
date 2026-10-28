@@ -155,7 +155,7 @@ Pages intérieures : ambiances claires, header plein dès le haut (`header: soli
 
 ### Shortcodes
 
-`callout`, `figure`, `video` (façade YouTube, rien n'est chargé avant le clic), `button`, `cta`, `stats`, `columns`. Syntaxe : `docs/CONTENU.md` du site.
+`callout`, `figure`, `video` (façade YouTube, rien n'est chargé avant le clic), `google-form` (façade Google Forms, même principe ; aussi partial `components/google-form.html`), `button`, `cta`, `stats`, `columns`. Syntaxe : `docs/CONTENU.md` du site.
 
 Le lien « Explorer avec l'IA » du footer n'apparaît que si la page d'accueil publie le format de sortie `llms` (Lot 5).
 
