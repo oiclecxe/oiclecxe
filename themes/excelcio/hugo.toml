@@ -106,6 +106,7 @@
   # SEO and structured data.
   [params.seo]
     country = "FR"         # ISO 3166 code used in postal addresses (JSON-LD)
+    blockRobots = false    # true = whole site closed to robots (noindex + robots.txt), e.g. a preview copy
 
   # AI crawlers in robots.txt (SPEC § 14): allowed by default.
   [params.aiCrawlers]

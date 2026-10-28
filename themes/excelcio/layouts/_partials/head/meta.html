@@ -30,7 +30,7 @@
 <meta name="theme-color" content="{{ site.Params.style.ink }}">
 <meta name="color-scheme" content="dark light">
 {{- $closedJob := partial "func/job-closed.html" . }}
-{{- if or hugo.IsDevelopment .Params.seo.noindex $closedJob }}
+{{- if or hugo.IsDevelopment site.Params.seo.blockRobots .Params.seo.noindex $closedJob }}
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 {{- with site.Params.logo.default }}

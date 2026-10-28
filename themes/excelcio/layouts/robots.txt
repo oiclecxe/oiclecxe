@@ -1,11 +1,12 @@
-{{- /* robots.txt (enableRobotsTXT = true). Outside production, the whole site is closed to robots. */ -}}
+{{- /* robots.txt (enableRobotsTXT = true). Outside production, or with params.seo.blockRobots, the whole site is closed to robots. */ -}}
+{{- $open := and hugo.IsProduction (not site.Params.seo.blockRobots) -}}
 # {{ site.Title }} — généré par Hugo
 User-agent: *
-{{ if hugo.IsProduction }}Allow: /{{ else }}Disallow: /{{ end }}
+{{ if $open }}Allow: /{{ else }}Disallow: /{{ end }}
 {{- with site.Params.aiCrawlers }}{{ if .agents }}
 
-# Robots des agents et moteurs IA : {{ cond (and hugo.IsProduction .allow) "autorisés" "refusés" }} (params.aiCrawlers.allow)
-{{- $rule := cond (and hugo.IsProduction .allow) "Allow: /" "Disallow: /" }}
+# Robots des agents et moteurs IA : {{ cond (and $open .allow) "autorisés" "refusés" }} (params.aiCrawlers.allow)
+{{- $rule := cond (and $open .allow) "Allow: /" "Disallow: /" }}
 {{- range .agents }}
 User-agent: {{ . }}
 {{- end }}
