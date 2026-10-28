@@ -104,6 +104,42 @@ Dépôt : https://github.com/oiclecxe/oiclecxe. Chaque push sur `main` lance `.g
 - Sans effet sur GitHub Pages : redirections (`_redirects`, `redirects.htaccess`) et envoi des formulaires (mode simulé).
 - Tester localement : `$env:HUGO_PARAMS_SEO_BLOCKROBOTS="true"; hugo --environment production --gc --minify --baseURL "https://oiclecxe.github.io/oiclecxe/" -d "$env:TEMP\ghp\oiclecxe"`, puis servir `$env:TEMP\ghp` (`python -m http.server`) et ouvrir `http://localhost:8000/oiclecxe/`.
 
+## Édition (Sveltia CMS)
+
+Interface d'édition en ligne : **https://oiclecxe.github.io/oiclecxe/admin/** (Chrome, Edge, Firefox, Safari). Tout le contenu y est éditable : accueil (blocs), formations, cas clients, actualités, événements, offres d'emploi, solutions, domaines d'expertise, pages simples, et les données `data/offices.yaml`, `data/social.yaml`, `data/training.yaml`. Restent hors CMS : `config/` (paramètres, menus), `data/redirects.yaml` et les pages de développement.
+
+**Accès d'un rédacteur** (une fois) :
+
+1. Un compte GitHub avec l'accès en écriture au dépôt (**Settings › Collaborators › Add people** sur `oiclecxe/oiclecxe`).
+2. Sur `/admin/`, **Se connecter avec un jeton d'accès** : le lien proposé ouvre la création d'un jeton GitHub avec les bons droits. Pour un jeton « fine-grained » créé à la main : dépôt `oiclecxe/oiclecxe` seul, permission **Contents : Read and write**. Le jeton est gardé dans le navigateur ; il expire à la date choisie.
+
+**Fonctionnement** :
+
+- Chaque enregistrement est un **commit sur `main`** (« Modifie … (CMS, identifiant) »), qui reconstruit la préproduction en 1 à 2 minutes (onglet **Actions**). Il n'y a pas de brouillon : un enregistrement est publié en préproduction.
+- Avant de travailler en local après des modifications faites dans le CMS : `git pull`.
+- Images : celles d'une fiche (formation, cas client, article…) sont rangées dans son dossier ; celles des pages simples dans `assets/images/contenu/`. Au moins 1600 px de large, texte alternatif obligatoire.
+- Le texte est en Markdown, édité par défaut en mode **brut** (les shortcodes `{{< … >}}` restent intacts) ; le mode « texte enrichi » est disponible mais réécrit la mise en forme.
+- Les consignes de rédaction sont dans l'aide de chaque champ. Le CMS réécrit le front matter : les commentaires `# …` des fichiers disparaissent à l'enregistrement (sans perte d'information) et la mise en forme compacte `{ … }` devient multiligne.
+- Changer l'identifiant (slug) d'une fiche ajoute l'ancienne adresse dans `aliases` (redirection automatique).
+- Limite en préproduction : le bouton « Afficher sur le site en ligne » ouvre l'adresse sans le préfixe `/oiclecxe/` ; l'ajouter à la main. Il sera juste avec le site servi à la racine du domaine.
+- Travail en local, sans jeton : `hugo server`, puis `http://localhost:1313/admin/` dans Chrome ou Edge, **Travailler avec un dépôt local**, et choisir le dossier du projet. Le CMS écrit alors directement les fichiers, sans commit.
+
+**Mise à jour de Sveltia CMS** (version figée, hébergée dans `static/admin/` ; version actuelle dans le commentaire de `static/admin/index.html`) :
+
+```powershell
+$v = "0.253.1"                                         # nouvelle version (https://www.npmjs.com/package/@sveltia/cms)
+$t = New-Item -ItemType Directory -Force "$env:TEMP\sveltia-$v"
+npm pack "@sveltia/cms@$v" --pack-destination $t
+tar -xzf "$t\sveltia-cms-$v.tgz" -C $t
+Copy-Item "$t\package\dist\sveltia-cms.js" static\admin\
+Remove-Item -Recurse -Force static\admin\chunks
+New-Item -ItemType Directory -Force static\admin\chunks\assets | Out-Null
+Copy-Item "$t\package\dist\chunks\*.js" static\admin\chunks\
+Copy-Item "$t\package\dist\chunks\assets\*.js" static\admin\chunks\assets\
+```
+
+Puis mettre à jour le numéro de version dans `static/admin/index.html` et tester `/admin/` en local. L'interface charge encore quelques ressources depuis des CDN (traduction française, polices, coloration du Markdown, état de GitHub) : uniquement sur `/admin/`, jamais sur les pages publiques.
+
 ## Arborescence
 
 ```

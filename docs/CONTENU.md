@@ -2,6 +2,8 @@
 
 Ce guide explique comment remplir et modifier le contenu du site. Aucune connaissance technique n'est nécessaire au-delà de l'édition de fichiers texte.
 
+**Sans éditer de fichiers** : l'interface d'édition en ligne https://oiclecxe.github.io/oiclecxe/admin/ (Sveltia CMS) présente les mêmes champs sous forme de formulaires, avec ces consignes dans l'aide de chaque champ. Accès et fonctionnement : README, « Édition (Sveltia CMS) ». Les règles ci-dessous (consignes entre crochets, « Contenu provisoire », shortcodes) s'appliquent de la même façon.
+
 ## 1. Principes
 
 - **Tout le contenu est dans `content/fr/`**, en fichiers Markdown (`.md`).

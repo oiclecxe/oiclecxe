@@ -14,6 +14,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 - Photos de test `photo_001.jpg`, `photo_002.jpg` à la racine : tests uniquement, non versionnées, jamais publiées comme contenu réel.
 - En suspens : score Lighthouse officiel (Lot 6 ; téléchargement de Lighthouse via `npx` à autoriser) ; validation en ligne du JSON-LD (validator.schema.org, résultats enrichis Google) reportée par l'utilisateur, à autoriser plus tard. Node.js 22.23.2 LTS installé le 27/09/2026 (outils ponctuels uniquement : Pagefind, Lighthouse).
 - Préproduction : GitHub Pages (`.github/workflows/hugo.yaml`), site servi sous `/oiclecxe/`, toutes les pages en noindex (`HUGO_PARAMS_SEO_BLOCKROBOTS`). Dans les gabarits, un lien interne écrit `/chemin/` passe par `partial "func/rel-url.html"` (jamais `relLangURL`, qui ignore le sous-dossier).
+- Édition : Sveltia CMS sur `/admin/` (`static/admin/config.yml`, version figée hébergée dans le dépôt), jetons d'accès GitHub ; chaque enregistrement est un commit sur `main` : faire `git pull` avant de travailler en local. Tout nouveau champ de front matter doit être ajouté à `static/admin/config.yml` (avec sa consigne en `hint`).
 - Logo Excelcio fourni : `assets/images/logo.svg`
 
 ## Méthode de travail
