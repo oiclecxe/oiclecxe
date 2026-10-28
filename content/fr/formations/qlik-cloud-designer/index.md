@@ -9,7 +9,7 @@ solutions: ["qlik"]
 level: ""
 durationDays: 3
 format: "Présentiel ou à distance"
-price: "1 200 € HT par personne (900 € HT dès 2 personnes)"
+price: "1 300 € HT par personne (900 € HT dès 2 personnes)"
 objectives: ["Acquérir une vision claire de la solution et de son mode de fonctionnement", "Exploiter, concevoir et mettre en œuvre une interface d’Analyse et de Reporting Qlik Sense"]
 audience: ["Toute personne ayant la responsabilité de mettre en oeuvre, administrer et exploiter les interfaces d’analyse et de reporting Qlik Sense (consultants, chefs de projets, développeurs & utilisateurs avancés)."]
 prerequisites: ["L’accès à cette formation ne requiert pas de compétences techniques particulières."]
