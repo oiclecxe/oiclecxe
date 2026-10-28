@@ -1,0 +1,762 @@
+# Sveltia CMS : configuration de l'édition en ligne (https://oiclecxe.github.io/oiclecxe/admin/).
+# Documentation : https://sveltiacms.app/en/docs ; mode d'emploi : README, « Édition (Sveltia CMS) ».
+# Chaque enregistrement est un commit sur `main`, qui reconstruit la préproduction (1 à 2 min).
+# Les consignes de rédaction sont dans les aides des champs (`hint`) : le CMS réécrit le front matter
+# et n'y conserve pas les commentaires.
+
+backend:
+  name: github
+  repo: oiclecxe/oiclecxe
+  branch: main
+  auth_methods: [token]   # jeton d'accès personnel GitHub (README) ; OAuth possible plus tard
+  commit_messages:
+    create: "Crée {{collection}} « {{slug}} » (CMS, {{author-login}})"
+    update: "Modifie {{collection}} « {{slug}} » (CMS, {{author-login}})"
+    delete: "Supprime {{collection}} « {{slug}} » (CMS, {{author-login}})"
+    uploadMedia: "Ajoute le fichier {{path}} (CMS, {{author-login}})"
+    deleteMedia: "Supprime le fichier {{path}} (CMS, {{author-login}})"
+
+site_url: https://oiclecxe.github.io/oiclecxe/
+display_url: https://oiclecxe.github.io/oiclecxe/
+
+# Images partagées (pages sans dossier propre) ; les fiches gardent leurs images dans leur dossier.
+media_folder: assets/images/contenu
+public_folder: /images/contenu
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+output:
+  omit_empty_optional_fields: true   # n'écrit pas les champs facultatifs laissés vides
+  yaml:
+    quote: none   # guillemets seulement si nécessaire ; les dates restent des dates
+
+collections:
+
+  # ---------------------------------------------------------------- Accueil
+  - name: home
+    label: Accueil
+    icon: home
+    files:
+      - name: home
+        label: Page d'accueil
+        file: content/fr/_index.md
+        fields:
+          - &title { name: title, label: Titre, widget: string }
+          - &description
+            name: description
+            label: Description (moteurs de recherche)
+            widget: text
+            hint: "120 à 160 caractères, affichés sous le titre dans les résultats de recherche."
+          - &placeholder
+            name: placeholder
+            label: Contenu provisoire
+            widget: boolean
+            required: false
+            hint: "À cocher tant que la page contient des textes « [À RÉDIGER…] » ou des chiffres « [XX] ». En production, une page provisoire n'est ni listée ni indexée."
+          - name: sections
+            label: Blocs de la page
+            label_singular: bloc
+            widget: list
+            typeKey: type
+            collapsed: true
+            hint: "Blocs dans l'ordre d'affichage. « Masquer » retire un bloc sans le supprimer. Textes repris et adaptés du site excelcio.com (relevé du 27/09/2026)."
+            types:
+              - name: hero
+                label: Bandeau d'ouverture (hero)
+                summary: "Hero : {{title}}"
+                fields:
+                  - &hidden { name: hidden, label: Masquer ce bloc, widget: boolean, required: false }
+                  - { name: title, label: Titre, widget: string }
+                  - &primary
+                    name: primary
+                    label: Bouton principal
+                    widget: object
+                    required: false
+                    fields:
+                      - &label { name: label, label: Texte du bouton, widget: string }
+                      - &url { name: url, label: Lien, widget: string, hint: "Adresse d'une page du site (ex. /contact/) ou adresse complète https://…" }
+                  - &secondary { name: secondary, label: Bouton secondaire, widget: object, required: false, fields: [*label, *url] }
+                  - name: logos
+                    label: Bandeau des clients
+                    widget: list
+                    required: false
+                    hint: "Noms des clients cités sur le site actuel (texte seul, sans logo)."
+              - name: architecture
+                label: Schéma (sources, plateformes, usages)
+                summary: "Schéma : {{title.rest}}"
+                fields:
+                  - *hidden
+                  - name: title
+                    label: Titre
+                    widget: object
+                    hint: "Titre en trois temps : deux lignes commençant par un mot en accent, puis un complément atténué."
+                    fields:
+                      - name: lines
+                        label: Lignes
+                        widget: list
+                        fields:
+                          - { name: accent, label: Mot en accent, widget: string }
+                          - { name: text, label: Suite de la ligne, widget: string }
+                      - &rest { name: rest, label: Complément atténué, widget: string, required: false }
+                  - { name: top, label: Haut du schéma, widget: object, fields: [{ name: label, label: Libellé, widget: string }, { name: detail, label: Détail, widget: string, required: false }] }
+                  - { name: band1, label: Bande 1, widget: object, fields: [{ name: label, label: Libellé, widget: string }, { name: items, label: Éléments, widget: list }] }
+                  - { name: band2, label: Bande 2, widget: object, fields: [{ name: label, label: Libellé, widget: string }, { name: items, label: Éléments, widget: list }] }
+                  - { name: bottom, label: Bas du schéma, widget: object, fields: [{ name: label, label: Libellé, widget: string }, { name: detail, label: Détail, widget: string, required: false }] }
+              - name: features
+                label: Cartes à onglets
+                summary: "Cartes : {{title}}"
+                fields:
+                  - *hidden
+                  - &featureTitle { name: title, label: Titre, widget: string }
+                  - &tabs
+                    name: tabs
+                    label: Onglets
+                    label_singular: onglet
+                    widget: list
+                    summary: "{{label}}"
+                    fields:
+                      - { name: label, label: Nom de l'onglet, widget: string }
+                      - name: cards
+                        label: Cartes
+                        label_singular: carte
+                        widget: list
+                        summary: "{{title}}"
+                        fields:
+                          - { name: title, label: Titre, widget: string }
+                          - { name: accent, label: Complément en accent, widget: string, required: false }
+                          - { name: text, label: Texte, widget: text }
+                          - { name: url, label: Lien, widget: string, required: false, hint: "Adresse d'une page du site (ex. /contact/)." }
+              - name: expertises
+                label: Domaines d'expertise
+                summary: "Expertises : {{title.lead}}"
+                fields:
+                  - *hidden
+                  - &leadRest
+                    name: title
+                    label: Titre
+                    widget: object
+                    hint: "Titre en deux temps : une première partie, puis un complément atténué."
+                    fields:
+                      - { name: lead, label: Première partie, widget: string }
+                      - *rest
+                  - { name: linkLabel, label: Texte des liens, widget: string, required: false }
+                  - &items
+                    name: items
+                    label: Choix et ordre (facultatif)
+                    widget: list
+                    required: false
+                    hint: "Les cartes sont lues dans les pages concernées, par ordre (« Ordre »). Pour en choisir ou en réordonner, lister leurs adresses, ex. /offre/expertise/finance."
+                  - &limit { name: limit, label: Nombre maximal, widget: number, value_type: int, required: false }
+              - name: statement
+                label: Déclaration
+                summary: "Déclaration : {{text}}"
+                fields:
+                  - *hidden
+                  - { name: text, label: Texte, widget: text }
+              - name: case-studies
+                label: Cas clients
+                summary: "Cas clients : {{title}}"
+                hint: "Les cartes sont lues dans les cas clients (résultat, client, secteur, image), par ordre."
+                fields:
+                  - *hidden
+                  - { name: title, label: Titre, widget: string }
+                  - *items
+                  - *limit
+              - name: faq
+                label: Questions fréquentes
+                summary: "FAQ : {{title.lead}}"
+                fields:
+                  - *hidden
+                  - *leadRest
+                  - &faqItems
+                    name: items
+                    label: Questions
+                    label_singular: question
+                    widget: list
+                    summary: "{{q}}"
+                    fields:
+                      - { name: q, label: Question, widget: string }
+                      - { name: a, label: Réponse, widget: text, hint: "60 mots maximum." }
+              - name: platform
+                label: Solutions partenaires
+                summary: "Solutions : {{title.lead}}"
+                hint: "Les solutions sont lues dans leurs pages (nom, accroche, visuel)."
+                fields:
+                  - *hidden
+                  - *leadRest
+                  - *items
+                  - *limit
+              - name: trainings
+                label: Prochaines sessions de formation
+                summary: "Sessions : {{title.lead}}"
+                hint: "Les sessions sont lues dans les fiches formations (champ « Sessions ») ; seules les sessions futures s'affichent, et le bloc disparaît s'il n'y en a aucune."
+                fields:
+                  - *hidden
+                  - *leadRest
+                  - { name: cta, label: Bouton, widget: object, required: false, fields: [*label, *url] }
+                  - *limit
+              - name: proof
+                label: Chiffres et témoignage
+                summary: "Chiffres : {{title.lead}}"
+                fields:
+                  - *hidden
+                  - *leadRest
+                  - name: stats
+                    label: Chiffres clés
+                    label_singular: chiffre
+                    widget: list
+                    summary: "{{value}}{{suffix}} {{label}}"
+                    fields:
+                      - { name: value, label: Valeur, widget: number, value_type: int, hint: "Chiffre réel uniquement (sinon « [XX] » dans un texte)." }
+                      - { name: suffix, label: Suffixe, widget: string, required: false, hint: "Ex. « + » ou « % »." }
+                      - { name: label, label: Libellé, widget: string }
+                  - name: quote
+                    label: Témoignage
+                    widget: object
+                    required: false
+                    hint: "Témoignage réel, validé par le client."
+                    fields:
+                      - { name: before, label: Début, widget: text }
+                      - { name: highlight, label: Passage mis en valeur, widget: string }
+                      - { name: after, label: Fin, widget: text, required: false }
+                      - { name: author, label: Auteur, widget: string }
+                      - { name: role, label: Fonction, widget: string, required: false }
+              - name: cta
+                label: Appel à l'action
+                summary: "Appel à l'action : {{title.lead}}"
+                fields:
+                  - *hidden
+                  - *leadRest
+                  - *primary
+                  - *secondary
+                  - { name: badges, label: Badges, widget: list, required: false }
+
+  # ---------------------------------------------------------------- Formations
+  - name: trainings
+    label: Formations
+    label_singular: formation
+    icon: school
+    folder: content/fr/formations
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}}"
+    sortable_fields: [title, weight]
+    preview_path: "/formations/{{slug}}/"
+    index_file: &indexFile
+      label: Page de la rubrique
+      fields:
+        - *title
+        - *description
+        - &summary { name: summary, label: Accroche, widget: text, required: false, hint: "25 mots maximum, affichés sur les cartes." }
+        - *placeholder
+        - &weight { name: weight, label: Ordre, widget: number, value_type: int, required: false, hint: "Le plus petit nombre s'affiche en premier." }
+        - { name: cascade, widget: hidden }   # type de contenu des pages de la rubrique
+        - &body
+          name: body
+          label: Texte
+          widget: markdown
+          modes: [raw, rich_text]
+          required: false
+          hint: "Markdown. Encadrés, boutons, vidéos, formulaires Google… : shortcodes décrits dans docs/CONTENU.md, § 5."
+    fields:
+      - *title
+      - *description
+      - *summary
+      - *placeholder
+      - *weight
+      - &image { name: image, label: Image, widget: image, required: false, hint: "Au moins 1600 px de large." }
+      - &imageAlt { name: imageAlt, label: Texte alternatif de l'image, widget: string, required: false, hint: "Obligatoire si une image est choisie : décrire ce qu'elle montre." }
+      - { name: code, label: Code catalogue, widget: string, required: false }
+      - &solutions
+        name: solutions
+        label: Solutions
+        widget: relation
+        collection: solutions
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        multiple: true
+        required: false
+      - { name: level, label: Niveau, widget: string, required: false, hint: "Ex. Débutant, Intermédiaire, Avancé." }
+      - { name: durationDays, label: Durée (jours), widget: number, value_type: int, required: false }
+      - { name: format, label: Modalité, widget: string, required: false, hint: "Ex. « Présentiel ou à distance »." }
+      - { name: price, label: Tarif, widget: string, required: false, hint: "Ex. « 1 200 € HT par personne ». Vide = « Sur demande »." }
+      - { name: objectives, label: Objectifs, widget: list, required: false }
+      - { name: audience, label: Public, widget: list, required: false }
+      - { name: prerequisites, label: Prérequis, widget: list, required: false }
+      - name: program
+        label: Programme
+        label_singular: module
+        widget: list
+        required: false
+        summary: "{{title}}"
+        fields:
+          - { name: title, label: Module, widget: string }
+          - { name: items, label: Points abordés, widget: list }
+      - name: sessions
+        label: Sessions inter-entreprises
+        label_singular: session
+        widget: list
+        required: false
+        summary: "{{start}} · {{city}} {{format}}"
+        hint: "Dates réelles uniquement. Seules les sessions futures sont affichées."
+        fields:
+          - { name: start, label: Début, widget: datetime, type: date }
+          - { name: end, label: Fin, widget: datetime, type: date, required: false }
+          - { name: city, label: Ville, widget: string, required: false }
+          - { name: format, label: Modalité, widget: string, required: false, hint: "Ex. « À distance », « Présentiel »." }
+      - &registration
+        name: registration
+        label: Inscription externe
+        widget: object
+        required: false
+        collapsed: true
+        hint: "Facultatif : outil d'inscription externe. Sinon, le formulaire d'inscription du site."
+        fields:
+          - { name: type, label: Type, widget: select, options: [external], required: false }
+          - { name: url, label: Adresse, widget: string, required: false }
+      - *body
+
+  # ---------------------------------------------------------------- Cas clients
+  - name: cases
+    label: Cas clients
+    label_singular: cas client
+    icon: handshake
+    folder: content/fr/cas-clients
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{client}}"
+    identifier_field: client
+    summary: "{{client}} : {{result}}"
+    sortable_fields: [client, weight]
+    preview_path: "/cas-clients/{{slug}}/"
+    index_file: *indexFile
+    fields:
+      - *title
+      - *description
+      - *summary
+      - *placeholder
+      - *weight
+      - *image
+      - *imageAlt
+      - { name: client, label: Client, widget: string, hint: "Nom tel qu'il figure sur le site actuel, ou avec l'accord écrit du client." }
+      - { name: sector, label: Secteurs d'activité, widget: list, required: false }
+      - { name: result, label: Résultat marquant, widget: string, required: false, hint: "6 mots environ, affichés sur la carte." }
+      - *solutions
+      - name: expertises
+        label: Domaines d'expertise
+        widget: relation
+        collection: expertises
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        multiple: true
+        required: false
+      - { name: context, label: Contexte, widget: text, required: false, hint: "60 mots maximum." }
+      - { name: challenge, label: Enjeu, widget: text, required: false, hint: "60 mots maximum." }
+      - { name: solution, label: Solution mise en œuvre, widget: text, required: false, hint: "80 mots maximum." }
+      - { name: benefits, label: Bénéfices, widget: text, required: false, hint: "Liste à puces possible (une ligne par puce, commençant par « - »)." }
+      - name: results
+        label: Résultats chiffrés
+        label_singular: résultat
+        widget: list
+        required: false
+        summary: "{{value}} {{label}}"
+        fields:
+          - { name: value, label: Valeur, widget: string, hint: "Chiffre réel uniquement." }
+          - { name: label, label: Indicateur, widget: string }
+      - name: quote
+        label: Témoignage
+        widget: object
+        required: false
+        hint: "Témoignage réel, validé par le client."
+        fields:
+          - { name: text, label: Texte, widget: text }
+          - { name: author, label: Auteur, widget: string }
+          - { name: role, label: Fonction, widget: string, required: false }
+      - *body
+
+  # ---------------------------------------------------------------- Actualités
+  - name: articles
+    label: Actualités
+    label_singular: article
+    icon: newspaper
+    folder: content/fr/actualites
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}} ({{date | date('DD/MM/YYYY')}})"
+    sortable_fields: [title, date]
+    preview_path: "/actualites/{{slug}}/"
+    index_file: *indexFile
+    fields:
+      - *title
+      - *description
+      - *summary
+      - *placeholder
+      - &date { name: date, label: Date de publication, widget: datetime, type: date, default: "{{now}}" }
+      - *image
+      - *imageAlt
+      - { name: authors, label: Auteurs, widget: list, required: false }
+      - { name: categories, label: Catégories, widget: list, required: false, hint: "Ex. Actualité, Nouveautés Qlik, Webinaire, Formation." }
+      - { name: tags, label: Étiquettes, widget: list, required: false }
+      - *solutions
+      - *body
+
+  # ---------------------------------------------------------------- Événements
+  - name: events
+    label: Événements
+    label_singular: événement
+    icon: event
+    folder: content/fr/evenements
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}} ({{start | date('DD/MM/YYYY')}})"
+    sortable_fields: [title, start]
+    preview_path: "/evenements/{{slug}}/"
+    index_file: *indexFile
+    fields:
+      - *title
+      - *description
+      - *summary
+      - *placeholder
+      - { name: date, label: Date de publication, widget: datetime, type: date, default: "{{now}}", hint: "Date de l'annonce, jamais dans le futur. La date de l'événement est « Début »." }
+      - *image
+      - *imageAlt
+      - &eventTime { name: start, label: Début, widget: datetime, input_timezone: Europe/Paris, hint: "Date et heure de l'événement (heure de Paris)." }
+      - { name: end, label: Fin, widget: datetime, input_timezone: Europe/Paris, required: false }
+      - { name: online, label: En ligne, widget: boolean, required: false }
+      - { name: city, label: Ville, widget: string, required: false }
+      - { name: venue, label: Lieu, widget: string, required: false }
+      - { name: format, label: Format, widget: string, required: false, hint: "Ex. Conférence, Webinaire, Atelier, Présentiel." }
+      - *solutions
+      - name: program
+        label: Programme
+        label_singular: étape
+        widget: list
+        required: false
+        summary: "{{time}} {{title}}"
+        fields:
+          - { name: time, label: Heure, widget: string, hint: "Ex. 09h30." }
+          - { name: title, label: Titre, widget: string }
+          - { name: text, label: Description, widget: text, required: false }
+      - name: speakers
+        label: Intervenants
+        label_singular: intervenant
+        widget: list
+        required: false
+        summary: "{{name}}"
+        fields:
+          - { name: name, label: Nom, widget: string }
+          - { name: role, label: Fonction, widget: string, required: false }
+      - *registration
+      - *body
+
+  # ---------------------------------------------------------------- Recrutement
+  - name: jobs
+    label: Offres d'emploi
+    label_singular: offre d'emploi
+    icon: work
+    folder: content/fr/recrutement
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}}"
+    preview_path: "/recrutement/{{slug}}/"
+    index_file: *indexFile
+    fields:
+      - *title
+      - *description
+      - *summary
+      - *placeholder
+      - *date
+      - *image
+      - *imageAlt
+      - { name: active, label: Annonce ouverte, widget: boolean, default: true, hint: "Décocher quand le poste est pourvu : la page est conservée, mais n'est plus listée ni indexée." }
+      - { name: location, label: Lieu, widget: string, required: false }
+      - { name: contract, label: Contrat, widget: string, required: false, hint: "CDI, CDD, Stage, Alternance." }
+      - { name: remote, label: Télétravail, widget: string, required: false, hint: "Ex. « 2 jours par semaine »." }
+      - { name: validThrough, label: Date limite de candidature, widget: datetime, type: date, required: false }
+      - { name: missions, label: Missions, widget: list, required: false }
+      - { name: profile, label: Profil recherché, widget: list, required: false }
+      - *body
+
+  # ---------------------------------------------------------------- Solutions
+  - name: solutions
+    label: Solutions
+    label_singular: solution
+    icon: apps
+    folder: content/fr/solutions
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}}"
+    sortable_fields: [title, weight]
+    preview_path: "/solutions/{{slug}}/"
+    index_file: *indexFile
+    fields:
+      - *title
+      - *description
+      - *placeholder
+      - *weight
+      - *image
+      - *imageAlt
+      - { name: partnerName, label: Éditeur, widget: string }
+      - { name: partnerLevel, label: Niveau de partenariat, widget: string, required: false, hint: "Ex. « Partenaire Elite ». Vide = pas de badge." }
+      - { name: tagline, label: Accroche, widget: string, hint: "10 mots maximum." }
+      - name: visual
+        label: Visuel de l'accueil
+        widget: select
+        required: false
+        hint: "Illustration de la carte dans le bloc Solutions de l'accueil."
+        options:
+          - { label: Barres, value: bars }
+          - { label: Grille, value: grid }
+          - { label: Courbe, value: line }
+          - { label: Indicateurs, value: kpi }
+          - { label: Recherche, value: search }
+          - { label: Tableau, value: table }
+          - { label: Rapport, value: report }
+      - name: features
+        label: Fonctionnalités
+        label_singular: fonctionnalité
+        widget: list
+        required: false
+        summary: "{{title}}"
+        fields:
+          - { name: title, label: Titre, widget: string }
+          - { name: text, label: Texte, widget: text, hint: "25 mots maximum." }
+      - &faq
+        name: faq
+        label: Questions fréquentes
+        label_singular: question
+        widget: list
+        required: false
+        summary: "{{q}}"
+        fields:
+          - { name: q, label: Question, widget: string }
+          - { name: a, label: Réponse, widget: text, hint: "60 mots maximum." }
+      - &menus
+        name: menus
+        label: Place dans les menus
+        widget: object
+        required: false
+        collapsed: true
+        hint: "Ne modifier que pour réorganiser les menus. « parent » : identifiant de la colonne (voir config/_default/menus.fr.toml)."
+        fields:
+          - name: main
+            label: Menu principal
+            widget: object
+            required: false
+            fields:
+              - { name: parent, label: Parent, widget: string }
+              - { name: weight, label: Ordre, widget: number, value_type: int, required: false }
+              - { name: params, label: Options, widget: object, required: false, fields: [{ name: group, label: Groupe, widget: string, required: false, hint: "Colonne du mega-menu, ex. « Analyse et visualisation »." }] }
+          - name: footer
+            label: Pied de page
+            widget: object
+            required: false
+            fields:
+              - { name: parent, label: Parent, widget: string }
+              - { name: weight, label: Ordre, widget: number, value_type: int, required: false }
+      - *body
+
+  # ---------------------------------------------------------------- Domaines d'expertise
+  - name: expertises
+    label: Domaines d'expertise
+    label_singular: domaine d'expertise
+    icon: insights
+    folder: content/fr/offre/expertise
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}}"
+    sortable_fields: [title, weight]
+    preview_path: "/offre/expertise/{{slug}}/"
+    index_file: *indexFile
+    fields:
+      - *title
+      - *description
+      - *summary
+      - *placeholder
+      - *weight
+      - *image
+      - *imageAlt
+      - *solutions
+      - name: benefits
+        label: Bénéfices
+        label_singular: bénéfice
+        widget: list
+        required: false
+        summary: "{{title}}"
+        fields:
+          - { name: title, label: Titre, widget: string }
+          - { name: text, label: Texte, widget: text, hint: "25 mots maximum." }
+      - { name: kpis, label: Indicateurs suivis, widget: list, required: false }
+      - *faq
+      - *menus
+      - *body
+
+  # ---------------------------------------------------------------- Pages
+  - name: pages
+    label: Pages
+    label_singular: page
+    icon: description
+    files:
+      - name: offer
+        label: Offre (rubrique)
+        file: content/fr/offre/_index.md
+        fields: [*title, *description, *placeholder, *weight, *body]
+      - name: consulting
+        label: Offre › Conseil en acquisition
+        file: content/fr/offre/conseil-acquisition.md
+        fields: &offerPage
+          - *title
+          - *description
+          - *summary
+          - *placeholder
+          - *weight
+          - name: sections
+            label: Blocs de la page
+            label_singular: bloc
+            widget: list
+            typeKey: type
+            collapsed: true
+            required: false
+            types:
+              - name: features
+                label: Cartes à onglets
+                summary: "Cartes : {{title}}"
+                fields: [*hidden, *featureTitle, *tabs]
+          - { name: schema, widget: hidden, default: { service: true } }
+          - *body
+      - name: deployment
+        label: Offre › Déploiement
+        file: content/fr/offre/deploiement.md
+        fields: *offerPage
+      - name: about
+        label: À propos
+        file: content/fr/a-propos.md
+        fields:
+          - *title
+          - *description
+          - *placeholder
+          - *weight
+          - { name: schema, widget: hidden, default: { about: true, offices: true } }
+          - *body
+      - name: contact
+        label: Contact
+        file: content/fr/contact.md
+        fields: [*title, *description, *placeholder, *weight, { name: type, widget: hidden, default: contact }, *body]
+      - name: legal
+        label: Mentions légales
+        file: content/fr/mentions-legales.md
+        fields: &legalPage [*title, *description, *placeholder, *weight, { name: search, widget: hidden, default: false }, *body]
+      - name: privacy
+        label: Confidentialité
+        file: content/fr/confidentialite.md
+        fields: *legalPage
+      - name: accessibility
+        label: Accessibilité
+        file: content/fr/accessibilite.md
+        fields: *legalPage
+      - name: newsletter
+        label: Newsletter
+        file: content/fr/newsletter.md
+        fields: [*title, *description, *placeholder, *weight, { name: type, widget: hidden, default: newsletter }, *body]
+      - name: sitemap
+        label: Plan du site
+        file: content/fr/plan-du-site.md
+        fields: [*title, *description, *placeholder, *weight, { name: type, widget: hidden, default: site-map }, { name: search, widget: hidden, default: false }, *body]
+      - name: search
+        label: Recherche
+        file: content/fr/recherche.md
+        fields: [*title, *description, *placeholder, *weight, { name: type, widget: hidden, default: search }, { name: seo, widget: hidden, default: { noindex: true } }, { name: search, widget: hidden, default: false }, *body]
+      - name: registration
+        label: Inscription (formulaire)
+        file: content/fr/inscription.md
+        fields: [*title, *description, *weight, { name: type, widget: hidden, default: registration }, { name: search, widget: hidden, default: false }, { name: seo, widget: hidden, default: { noindex: true } }, { name: sitemap, widget: hidden, default: { disable: true } }, *body]
+      - name: thanks
+        label: Merci (après envoi d'un formulaire)
+        file: content/fr/merci.md
+        fields: [*title, *description, *weight, { name: type, widget: hidden, default: thanks }, { name: search, widget: hidden, default: false }, { name: sitemapHide, widget: hidden, default: true }, { name: seo, widget: hidden, default: { noindex: true } }, { name: sitemap, widget: hidden, default: { disable: true } }, *body]
+
+  # ---------------------------------------------------------------- Données
+  - name: data
+    label: Données du site
+    icon: database
+    files:
+      - name: offices
+        label: Bureaux
+        file: data/offices.yaml
+        fields:
+          - name: offices
+            label: Bureaux
+            label_singular: bureau
+            widget: list
+            root: true
+            summary: "{{city}}"
+            hint: "Affichés dans le pied de page, sur la page Contact et dans les données structurées. Adresse inconnue : « [À RÉDIGER — Adresse] », code postal « [XXXXX] »."
+            fields:
+              - { name: city, label: Ville, widget: string }
+              - { name: address, label: Adresse, widget: string }
+              - { name: postalCode, label: Code postal, widget: string }
+              - { name: phone, label: Téléphone, widget: string, required: false, hint: "Format international, ex. +33 1 71 19 45 00." }
+              - { name: access, label: Accès, widget: string, required: false }
+      - name: social
+        label: Réseaux sociaux
+        file: data/social.yaml
+        fields:
+          - name: social
+            label: Réseaux sociaux
+            label_singular: réseau
+            widget: list
+            root: true
+            summary: "{{name}}"
+            fields:
+              - { name: name, label: Nom, widget: string }
+              - { name: icon, label: Icône, widget: select, options: [linkedin, x, youtube] }
+              - { name: url, label: Adresse, widget: string }
+      - name: training
+        label: Formations (informations communes et avis)
+        file: data/training.yaml
+        fields:
+          - name: info
+            label: Informations complémentaires
+            label_singular: bloc
+            widget: list
+            summary: "{{title}}"
+            hint: "Blocs affichés sur chaque fiche formation."
+            fields:
+              - { name: title, label: Titre, widget: string }
+              - { name: items, label: Points, widget: list, hint: "Markdown accepté (liens)." }
+          - name: testimonials
+            label: Avis de stagiaires
+            label_singular: avis
+            widget: list
+            summary: "{{author}} · {{context}}"
+            hint: "Avis réels, affichés sur les fiches des solutions citées."
+            fields:
+              - { name: text, label: Avis, widget: text }
+              - { name: author, label: Auteur, widget: string }
+              - { name: context, label: Formation suivie, widget: string, required: false }
+              - *solutions
