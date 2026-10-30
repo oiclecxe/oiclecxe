@@ -99,129 +99,75 @@ L’outil d’amélioration des performances dispose d’un nouvel onglet « Rec
 
 - **Filtre sur les objets dans les rapports** : permet d’application un filtre à un objet spécifique d’un rapport d’application (Excel, Word, PowerPoint, HTML ou PixelPerfect).
 
+
 Pour aller plus loin, retrouvez la présentation des nouveautés des précédentes versions :
 
 Qlik Cloud 2026
 
-Qlik Cloud 2025
-
-Qlik Cloud 2024
-
-Qlik Cloud 2023
-
-Qlik Cloud 2022
-
-Qlik Cloud 2026
-
 - [Qlik Cloud Janvier 2026](/actualites/qlik-cloud-janvier-2026/)
-
 - [Qlik Cloud Février 2026](/actualites/qlik-cloud-fevrier-2026/)
-
 - [Qlik Cloud Mars 2026](/actualites/qlik-cloud-mars-2026/)
-
 - [Qlik Cloud Avril 2026](/actualites/qlik-cloud-avril-2026/)
-
 - [Qlik Cloud Mai 2026](/actualites/qlik-cloud-mai-2026/)
-
 - [Qlik Cloud Juin 2026](/actualites/qlik-cloud-juin-2026/)
 
 Qlik Cloud 2025
 
-- Qlik Cloud Janvier 2025
-
-- Qlik Cloud Février 2025
-
-- Qlik Cloud Mars 2025
-
-- Qlik Cloud Avril 2025
-
-- Qlik Cloud Mai 2025
-
-- Qlik Cloud Juin 2025
-
-- Qlik Cloud été 2025
-
+- [Qlik Cloud Janvier 2025](https://excelcio.com/2025/02/17/qlik-sense-saas-janvier-2025/)
+- [Qlik Cloud Février 2025](https://excelcio.com/2025/03/25/qlik-sense-saas-fevrier-2025/)
+- [Qlik Cloud Mars 2025](https://excelcio.com/2025/04/10/qlik-sense-saas-mars-2025/)
+- [Qlik Cloud Avril 2025](https://excelcio.com/2025/05/16/qlik-sense-saas-avril-2025/)
+- [Qlik Cloud Mai 2025](https://excelcio.com/2025/06/03/qlik-sense-saas-mai-2025/)
+- [Qlik Cloud Juin 2025](https://excelcio.com/2025/07/10/qlik-sense-saas-juin-2025/)
+- [Qlik Cloud Juillet et Août 2025](https://excelcio.com/2025/09/16/qlik-sense-saas-ete-2025/)
 - [Qlik Cloud Septembre 2025](/actualites/qlik-sense-saas-sept-2025/)
-
 - [Qlik Cloud Octobre 2025](/actualites/qlik-sense-saas-octobre-2025/)
-
 - [Qlik Cloud Novembre 2025](/actualites/qlik-sense-saas-novembre-2025/)
-
 - [Qlik Cloud Décembre 2025](/actualites/qlik-sense-saas-decembre-2025/)
 
 Qlik Cloud 2024
 
-- Qlik Cloud Janvier 2024
-
-- Qlik Cloud Février 2024
-
-- Qlik Cloud Mars 2024
-
-- Qlik Cloud Avril 2024
-
-- Qlik Cloud Mai 2024
-
-- Qlik Cloud Juin 2024
-
-- Qlik Cloud Juillet et Août 2024
-
-- Qlik Cloud Septembre 2024
-
-- Qlik Cloud Octobre 2024
-
-- Qlik Cloud Novembre 2024
-
-- Qlik Cloud Décembre 2024
+- [Qlik Cloud Janvier 2024](https://excelcio.com/2024/02/14/qlik-sense-saas-janvier-2024-le-recap/)
+- [Qlik Cloud Février 2024](https://excelcio.com/2024/03/07/qlik-sense-saas-fevrier-2024-le-recap/)
+- [Qlik Cloud Mars 2024](https://excelcio.com/2024/04/22/qlik-sense-saas-mars-2024-le-recap/)
+- [Qlik Cloud Avril 2024](https://excelcio.com/2024/06/14/qlik-sense-saas-avril-2024-le-recap/)
+- [Qlik Cloud Mai 2024](https://excelcio.com/2024/06/14/qlik-sense-saas-mai-2024-le-recap/)
+- [Qlik Cloud Juin 2024](https://excelcio.com/2024/07/22/qlik-sense-saas-juin-2024-le-recap/)
+- [Qlik Cloud Juillet et Août 2024](https://excelcio.com/2024/07/22/qlik-sense-saas-juin-2024-le-recap/)
+- [Qlik Cloud Septembre 2024](https://excelcio.com/2024/10/10/qlik-sense-saas-septembre-2024/)
+- [Qlik Cloud Octobre 2024](https://excelcio.com/2024/11/25/qlik-sense-saas-octobre-2024/)
+- [Qlik Cloud Novembre 2024](https://excelcio.com/2025/01/13/qlik-sense-saas-novembre-2024/)
+- [Qlik Cloud Décembre 2024](https://excelcio.com/2025/02/14/qlik-sense-saas-decembre-2024/)
 
 Qlik Cloud 2023
 
-- Qlik Cloud Janvier 2023
-
-- Qlik Cloud Février 2023
-
-- Qlik Cloud Mars 2023
-
-- Qlik Cloud Avril 2023
-
-- Qlik Cloud Mai 2023
-
-- Qlik Cloud Juin 2023
-
-- Qlik Cloud Eté 2023
-
-- Qlik Cloud Septembre 2023
-
-- Qlik Cloud Octobre 2023
-
-- Qlik Cloud Novembre 2023
-
-- Qlik Cloud Décembre 2023
+- [Qlik Cloud Janvier 2023](https://excelcio.com/2023/02/10/qlik-sense-saas-janvier-2023/)
+- [Qlik Cloud Février 2023](https://excelcio.com/2023/03/10/qlik-sense-saas-fevrier-2023/)
+- [Qlik Cloud Mars 2023](https://excelcio.com/2023/04/06/qlik-sense-saas-mars-2023/)
+- [Qlik Cloud Avril 2023](http://excelcio.com/2023/06/05/qlik-sense-saas-avril-2023/)
+- [Qlik Cloud Mai 2023](https://excelcio.com/2023/06/05/qlik-sense-saas-mai-2023/)
+- [Qlik Cloud Juin 2023](https://excelcio.com/2023/07/13/qlik-sense-saas-juin-2023-le-recap/)
+- [Qlik Cloud Juillet et Août 2023](https://excelcio.com/2023/09/18/qlik-sense-saas-ete-2023-le-recap/)
+- [Qlik Cloud Septembre 2023](https://excelcio.com/2023/10/20/qlik-sense-saas-septembre-2023-le-recap/)
+- [Qlik Cloud Octobre 2023](https://excelcio.com/2023/11/28/qlik-sense-saas-octobre-2023-le-recap/)
+- [Qlik Cloud Novembre 2023](https://excelcio.com/2023/12/11/qlik-sense-saas-novembre-2023-le-recap/)
+- [Qlik Cloud Décembre 2023](https://excelcio.com/2024/01/08/qlik-sense-saas-decembre-2023-le-recap/)
 
 Qlik Cloud 2022
 
-- Qlik Cloud Février 2022
+- [Qlik Cloud Février 2022](https://excelcio.com/2022/03/07/qlik-sense-saas-fevrier-2022/)
+- [Qlik Cloud Mars 2022](https://excelcio.com/2022/04/07/qlik-sense-saas-mars-2022)
+- [Qlik Cloud Avril 2022](https://excelcio.com/2022/05/12/qlik-sense-saas-avril-2022)
+- [Qlik Cloud Mai 2022](https://excelcio.com/2022/06/07/qlik-sense-saas-mai-2022)
+- [Qlik Cloud Juin 2022](https://excelcio.com/2022/07/22/qlik-sense-saas-juin-2022)
+- [Qlik Cloud Juillet 2022](https://excelcio.com/2022/08/23/qlik-sense-saas-juillet-2022)
+- [Qlik Cloud Août 2022](https://excelcio.com/2022/09/13/qlik-sense-saas-aout-2022)
+- [Qlik Cloud Septembre 2022](https://excelcio.com/2022/10/20/qlik-sense-saas-septembre-2022/)
+- [Qlik Cloud Octobre 2022](https://excelcio.com/2022/11/10/qlik-sense-saas-octobre-2022)
+- [Qlik Cloud Novembre 2022](https://excelcio.com/2022/11/30/qlik-sense-saas-novembre-2022)
+- [Qlik Cloud Décembre 2022](https://excelcio.com/2023/01/11/qlik-sense-saas-decembre-2022/)
 
-- Qlik Cloud Mars 2022
-
-- Qlik Cloud Avril 2022
-
-- Qlik Cloud Mai 2022
-
-- Qlik Cloud Juin 2022
-
-- Qlik Cloud Juillet 2022
-
-- Qlik Cloud Août 2022
-
-- Qlik Cloud Septembre 2022
-
-- Qlik Cloud Octobre 2022
-
-- Qlik Cloud Novembre 2022
-
-- Qlik Cloud Décembre 2022
-
-Pour continuer à **tirer le meilleur de Qlik Cloud,** retrouvez des vidéos vous présentants :
+Pour continuer à **[tirer le meilleur de Qlik Cloud,](https://excelcio.com/2023/05/02/qlik-sense-saas/)** retrouvez des vidéos vous présentants :
 
 - trois fonctionnalités qui vont vous permettre de surveiller vos données,
 
