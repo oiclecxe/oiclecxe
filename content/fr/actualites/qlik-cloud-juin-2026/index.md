@@ -1,37 +1,56 @@
 ---
-title: "Qlik Cloud Juin 2026"
-description: "Qlik Cloud Juin 2026, le récap’ : retrouvez l’analyse des nouveautés de Qlik Cloud sous le regard de nos experts."
-summary: "Qlik Cloud Juin 2026, le récap’ : retrouvez l’analyse des nouveautés de Qlik Cloud sous le regard de nos experts."
+title: Qlik Cloud Juin 2026
+description: 'Qlik Cloud Juin 2026, le récap’ : retrouvez l’analyse des nouveautés de Qlik Cloud sous le regard de nos experts.'
+summary: 'Qlik Cloud Juin 2026, le récap’ : retrouvez l’analyse des nouveautés de Qlik Cloud sous le regard de nos experts.'
 placeholder: false
 date: 2026-07-24
-authors: ["Cécile Cong"]
-categories: ["Nouveautés Qlik"]
-tags: []
-solutions: ["qlik"]
+image: Qlik Cloud le recap.png
+imageAlt: Qlik Cloud, le récap'
+authors:
+  - Cécile Cong
+categories:
+  - Nouveautés Qlik
+solutions:
+  - qlik
 ---
 
 Voici les nouveautés Qlik Cloud de juin 2026.
 
 ## Sous-totaux dans le tableau simple
 
-Il est désormais possible d’ajouter des sous-totaux sur les dimensions du tableau simple et d’en personnaliser le style. 
+Il est désormais possible d’ajouter des sous-totaux sur les dimensions du tableau simple et d’en personnaliser le style.
+
+![Tableau Simple](TableSimple.gif)
+
 
 ## Couleurs dans le tableau croisé dynamique
 
 Dans le tableau croisé dynamique (ancienne extension « Pivot table »), il est possible de personnaliser la couleur d’arrière-plan et de texte des en-têtes et du contenu de chaque colonne indépendamment à partir d’une expression. 
 
+![TDC](TCD.png)
+
+
 ## Store de modifications des tables d’annotation
 
 Il est désormais possible de nommer les stores de modifications et de connecter une table d’annotations à un store existant, afin de faciliter notamment les mises en production d’applications. 
+
+![Table Annotations](TableAnnotations.gif)
+
 
 ## Création automatique d’objets « Texte » ou « Image » en copiant / collant
 
 Lors de l’édition d’une feuille, le collage d’une image entraîne son ajout à la bibliothèque multimédia de l’application et la création d’un objet « Image ».
 Quant au collage d’un texte, cela entraîne la création d’un objet « Texte » reprenant la plupart des mises en forme.
 
+![Copier Coller](CopierColler.gif)
+
+
 ## Enchainement de tâches de rechargement
 
 Une tâche peut désormais être exécuté dès qu’une autre tâche est terminée, peu importe son statut. 
+
+![Tache](Tache.png)
+
 
 ## Qlik Answers
 
@@ -45,9 +64,14 @@ De **nouveaux contextes d’exécutions** sont disponibles dans Qlik Answers pou
 
 - **Qualité de données** : examiner et gérer les règles
 
+![Contextes](Contextes.png)
+
 Un**portail de vérification** centralise l’ensemble des questions posées sur le tenant. A noter que son accès nécessite la création d’un rôle personnalisé et d’avoir les droits suffisants sur le contenu sur lequel a été posé la question.
 
+![Portail](Portail.png)
+
 On notera également une **amélioration de l’interrogation de données non structurées**, qui permet désormais de lister les fichiers indexés dans une base de connaissance et d’interroger un fichier en particulier.
+
 
 ## Recommandations d’amélioration des performances
 
@@ -64,6 +88,8 @@ L’outil d’amélioration des performances dispose d’un nouvel onglet « Rec
 - Jointure pour limiter les liens entre les tables
 
 - Etc.
+
+![Recommandations](Recommandations.gif)
 
 ## Autres nouveautés :
 
@@ -197,7 +223,7 @@ Qlik Cloud 2022
 
 - Qlik Cloud Décembre 2022
 
-Pour continuer à **tirer le meilleur de Qlik Cloud,**retrouvez des vidéos vous présentants :
+Pour continuer à **tirer le meilleur de Qlik Cloud,** retrouvez des vidéos vous présentants :
 
 - trois fonctionnalités qui vont vous permettre de surveiller vos données,
 
