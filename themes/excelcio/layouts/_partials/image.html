@@ -1,5 +1,6 @@
 {{- /*
-  Responsive image: AVIF + WebP + original, srcset, explicit dimensions.
+  Responsive image: AVIF + WebP + original, srcset, explicit dimensions
+  (SVG and GIF served unchanged).
   Context: dict
     "page"      page (to resolve page resources)
     "src"       path of a page resource or a global asset
@@ -19,6 +20,11 @@
 {{- with $img }}
   {{- if eq .MediaType.SubType "svg" }}
 <img src="{{ .RelPermalink }}" alt="{{ $.alt }}"{{ with $.class }} class="{{ . }}"{{ end }} loading="{{ cond $.priority "eager" "lazy" }}">
+  {{- else if eq .MediaType.SubType "gif" }}
+    {{- /* GIFs are served as is: resizing decodes every frame of an animation
+           (memory exhaustion on long screen captures) and AVIF/WebP drop it. */}}
+<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.alt }}"{{ with $.class }} class="{{ . }}"{{ end }}
+    {{- if $.priority }} loading="eager" fetchpriority="high"{{ else }} loading="lazy" decoding="async"{{ end }}>
   {{- else }}
     {{- $widths := $.widths | default (slice 480 800 1200 1600) }}
     {{- $sizes := $.sizes | default "100vw" }}
