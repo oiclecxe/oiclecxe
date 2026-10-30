@@ -1,4 +1,6 @@
 # Le guide de style n'est jamais publié en production.
+# La préproduction GitHub Pages le publie : son workflow (.github/workflows/hugo.yaml)
+# supprime ce fichier avant la construction. N'y mettre que cette exclusion.
 [[cascade]]
   [cascade.build]
     render = "never"

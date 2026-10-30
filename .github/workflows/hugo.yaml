@@ -72,6 +72,11 @@ jobs:
           key: hugo-${{ github.run_id }}
           restore-keys: hugo-
 
+      - name: Include the style guide
+        # Préproduction seulement : config/production/hugo.toml exclut le guide de style
+        # (/styleguide/) du site de production.
+        run: rm config/production/hugo.toml
+
       - name: Build
         run: |
           hugo build \

@@ -2,6 +2,7 @@
 title: "Formats Markdown"
 description: "Page de test : tous les formats Markdown reconnus par le site, avec leur syntaxe et leur rendu. Page de développement, jamais publiée en production."
 sitemapHide: true
+search: false
 cta: false
 seo:
   noindex: true
