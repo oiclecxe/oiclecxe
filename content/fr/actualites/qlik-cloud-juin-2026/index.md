@@ -22,13 +22,11 @@ Il est désormais possible d’ajouter des sous-totaux sur les dimensions du tab
 
 ![Tableau Simple](TableSimple.gif)
 
-
 ## Couleurs dans le tableau croisé dynamique
 
 Dans le tableau croisé dynamique (ancienne extension « Pivot table »), il est possible de personnaliser la couleur d’arrière-plan et de texte des en-têtes et du contenu de chaque colonne indépendamment à partir d’une expression. 
 
 ![TDC](TCD.png)
-
 
 ## Store de modifications des tables d’annotation
 
