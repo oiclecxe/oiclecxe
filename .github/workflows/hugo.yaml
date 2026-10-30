@@ -13,6 +13,12 @@ on:
   push:
     branches:
       - main
+  # Reconstruction chaque nuit (heure UTC : 0 h 10 à Paris en hiver, 1 h 10 en été) pour
+  # tout ce qui dépend de la date du jour : ouverture et clôture des formulaires Google
+  # (opens/closes), événements et sessions passés. GitHub suspend ce déclenchement après
+  # 60 jours sans activité sur le dépôt : le réactiver dans l'onglet Actions.
+  schedule:
+    - cron: "10 23 * * *"
   workflow_dispatch:
 permissions:
   contents: read

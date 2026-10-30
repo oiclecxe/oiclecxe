@@ -87,6 +87,7 @@
   }
 
   .gform__intro,
+  .gform__status,
   .gform__notice {
     margin-top: var(--sp-3);
   }

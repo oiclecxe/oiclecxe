@@ -1,6 +1,6 @@
 {{- /*
   Google Forms embed behind a facade (see _partials/components/google-form.html).
-  Usage: {{< google-form url="https://docs.google.com/forms/d/e/…/viewform" title="…" height="1311" >}}
+  Usage: {{< google-form url="https://docs.google.com/forms/d/e/…/viewform" title="…" height="1311" opens="2026-11-15" closes="2026-12-01" >}}
          Optional Markdown introduction.
          {{< /google-form >}}
 */ -}}
@@ -11,6 +11,8 @@
   "url" (.Get "url")
   "title" (.Get "title")
   "height" (.Get "height")
+  "opens" (.Get "opens")
+  "closes" (.Get "closes")
   "intro" $intro
   "position" (string .Position)
 ) -}}

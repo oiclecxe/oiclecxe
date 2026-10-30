@@ -149,6 +149,8 @@ Texte d'introduction facultatif.
 
 {{< google-form url="https://docs.google.com/forms/d/e/IDENTIFIANT/viewform" height="900" />}}
 
+{{< google-form url="https://docs.google.com/forms/d/e/IDENTIFIANT/viewform" opens="2026-11-15" closes="2026-12-01" />}}
+
 {{< button url="/contact/" >}}Nous contacter{{< /button >}}
 
 {{< cta title="Un projet ?" url="/contact/" label="Nous contacter" >}}Texte court.{{< /cta >}}
@@ -171,6 +173,7 @@ La vidéo YouTube ne charge rien depuis YouTube tant que le visiteur n'a pas cli
 - `url` (obligatoire) : dans Google Forms, **Envoyer** › onglet **lien** (`<>` pour le code d'intégration). Accepte le lien `…/viewform`, l'adresse `src="…"` du code d'intégration ou un **lien prérempli** (menu ⋮ › « Obtenir le lien prérempli », pratique pour indiquer d'avance le nom du client ou de la formation). Les liens courts `forms.gle/…` ne fonctionnent pas : décocher « Raccourcir l'URL ».
 - `height` : hauteur en pixels, à recopier depuis le code d'intégration (`height="…"`) ; 1000 par défaut. Google n'ajuste pas la hauteur automatiquement : si le formulaire défile à l'intérieur de l'encadré, augmenter la valeur.
 - `title` : titre de l'encadré (« Formulaire » par défaut).
+- `opens` et `closes` : premier et dernier jour (inclus) où le formulaire est proposé, au format `AAAA-MM-JJ`, par exemple `opens="2026-11-15" closes="2026-12-01"` ; chacun est facultatif. Avant l'ouverture, l'encadré annonce les dates ; après la clôture, il indique que le formulaire est clos ; dans les deux cas, aucun lien vers Google n'est publié. Pendant l'ouverture, la date limite est rappelée. Le site est reconstruit chaque nuit (vers 0 h 10) : le changement d'état se fait donc au plus tard en début de journée, sans action. **Fermer aussi le formulaire dans Google Forms** (onglet **Réponses**, décocher « Accepter les réponses ») : le lien direct reste sinon utilisable par qui l'a conservé.
 - Sans texte d'introduction, fermer directement : `{{< google-form url="…" />}}`.
 - Le formulaire doit être ouvert à tous (sans connexion Google ni envoi de fichier), sinon Google refuse de l'afficher dans la page : seul le lien « nouvel onglet » fonctionne alors.
 

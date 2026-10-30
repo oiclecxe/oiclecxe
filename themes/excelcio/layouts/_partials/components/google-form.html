@@ -9,6 +9,9 @@
     "title"    visible title (optional, default T "gformTitle")
     "height"   iframe height in px, copied from Google's embed code (optional)
     "intro"    HTML shown above the notice (optional)
+    "opens"    first day the form is shown, YYYY-MM-DD (optional)
+    "closes"   last day the form is shown, YYYY-MM-DD (optional)
+               Dates are checked at build time: the site is rebuilt every night.
     "position" for error messages (optional)
 */ -}}
 {{- $where := .position | default .page.File.Path -}}
@@ -19,6 +22,20 @@
 {{- else if or (ne $u.Host "docs.google.com") (not $id) }}
   {{- errorf "google-form : adresse de formulaire Google invalide %q, attendu https://docs.google.com/forms/d/e/…/viewform (%s)" .url $where }}
 {{- end -}}
+{{- $opens := .opens | default "" -}}
+{{- $closes := .closes | default "" -}}
+{{- range $d := slice $opens $closes }}
+  {{- if and $d (not (findRE `^\d{4}-\d{2}-\d{2}$` $d)) }}
+    {{- errorf "google-form : date %q invalide, attendu AAAA-MM-JJ (%s)" $d $where }}
+  {{- end }}
+{{- end -}}
+{{- if and $opens $closes (gt $opens $closes) }}
+  {{- errorf "google-form : opens %q postérieur à closes %q (%s)" $opens $closes $where }}
+{{- end -}}
+{{- $today := time.Format "2006-01-02" now -}}
+{{- $fmt := dict -}}
+{{- with $opens }}{{ $fmt = merge $fmt (dict "Opens" (time.Format ":date_long" .)) }}{{ end -}}
+{{- with $closes }}{{ $fmt = merge $fmt (dict "Closes" (time.Format ":date_long" .)) }}{{ end -}}
 {{- /* Query kept for pre-filled links (usp=pp_url&entry.…), share and embed markers dropped. */ -}}
 {{- $params := slice -}}
 {{- range split $u.RawQuery "&" }}
@@ -31,10 +48,23 @@
 {{- with $params }}{{ $view = printf "%s?%s" $view (delimit . "&") }}{{ end -}}
 {{- $title := .title | default (T "gformTitle") -}}
 {{- $height := int (.height | default 1000) -}}
+{{- if or (and $opens (lt $today $opens)) (and $closes (gt $today $closes)) }}
+<div class="gform">
+  <div class="gform__facade">
+    <p class="gform__title">{{ $title }}</p>
+    <p class="gform__status">
+      {{- if and $closes (gt $today $closes) }}{{ T "gformClosed" $fmt }}
+      {{- else if $closes }}{{ T "gformUpcomingUntil" $fmt }}
+      {{- else }}{{ T "gformUpcoming" $fmt }}{{ end -}}
+    </p>
+  </div>
+</div>
+{{- else }}
 <div class="gform" data-gform="{{ $embed }}" data-title="{{ $title }}" data-height="{{ $height }}">
   <div class="gform__facade">
     <p class="gform__title">{{ $title }}</p>
     {{- with .intro }}<div class="gform__intro">{{ . }}</div>{{ end }}
+    {{- with $closes }}<p class="gform__status">{{ T "gformOpenUntil" $fmt }}</p>{{ end }}
     <p class="gform__notice">
       {{- T "gformNotice" (dict "Name" (partial "func/org-name.html" .)) }}
       {{- with site.Params.forms.privacyURL }} <a href="{{ . | partial "func/rel-url.html" }}">{{ T "gformPrivacy" }}</a>.{{ end -}}
@@ -45,3 +75,4 @@
     <a class="link-arrow" href="{{ $view }}" target="_blank" rel="noopener">{{ T "gformNewTab" }}{{ partialCached "icon.html" (dict "name" "arrow-up-right") "arrow-up-right" }}</a>
   </p>
 </div>
+{{- end }}
