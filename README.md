@@ -158,5 +158,4 @@ Le **thème** contient la présentation, le **site** contient ce qui est propre 
 - [`docs/SPEC.md`](docs/SPEC.md) : cahier des charges
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) : journal des décisions
 - [`docs/CONTENU.md`](docs/CONTENU.md) : guide de rédaction
-- [`relevé de la référence (Lot 0)`](relevé de la référence (Lot 0)) : relevé de la référence de design
 - [`themes/excelcio/README.md`](themes/excelcio/README.md) : paramètres, composants et sections du thème

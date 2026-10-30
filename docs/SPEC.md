@@ -8,7 +8,7 @@
 |---|---|
 | Projet | Refonte du site vitrine d'Excelcio (cabinet de conseil et de formation en Business Intelligence / Data) |
 | Site actuel | https://excelcio.com/ (WordPress) |
-| Référence de design | site de référence (non cité) |
+| Référence de design | Site « produit tech » étudié au Lot 0 (non cité) |
 | Générateur | Hugo, **version installée sur le poste** (à jour), qui sert de référence et de version minimale imposée dans la configuration du thème (§ 11.1) |
 | Environnement cible | Développement local uniquement (pas de déploiement dans ce périmètre) |
 | Langue | Français au lancement, architecture prête pour l'anglais |
@@ -39,7 +39,7 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 
 | # | Objectif | Mesure |
 |---|---|---|
-| O1 | Nouveau design premium, sombre, « produit tech », dans l'esprit de la référence, aux couleurs d'Excelcio | Validation visuelle par l'utilisateur à chaque lot |
+| O1 | Nouveau design premium, sombre, « produit tech », dans l'esprit de la référence de design, aux couleurs d'Excelcio | Validation visuelle par l'utilisateur à chaque lot |
 | O2 | Performance nettement supérieure à WordPress | Lighthouse ≥ 95 dans les 4 catégories, Core Web Vitals « bons » (§ 12) |
 | O3 | Meilleur référencement naturel | SEO technique complet, données structurées valides (§ 13) |
 | O4 | Lisibilité maximale par les agents IA (LLM, moteurs de réponse) | `llms.txt`, sortie Markdown par page, HTML sémantique, JSON-LD (§ 14) |
@@ -53,9 +53,9 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 |---|---|
 | Nature du projet | Refonte complète : nouveau design, nouvelle arborescence, contenu retravaillé |
 | Contenu | Structure complète + **placeholders**. La rédaction réelle sera faite ensuite par l'équipe Excelcio |
-| Référence la référence | **Coller au plus juste** : esthétique, typographie, organisation des pages, animations |
+| Référence de design | **Coller au plus juste** : esthétique, typographie, organisation des pages, animations |
 | Couleurs | Principale **#A82234** (rgb 168, 34, 52), fond **#1A171B** (rgb 26, 23, 27), palette dérivée |
-| Mode d'affichage | ~~Sombre uniquement~~ → **Avenant Lot 0** : ambiances de section alternées comme la référence (aplat bordeaux, clair, sombre), sans bascule clair/sombre. Voir `docs/DECISIONS.md` et `relevé de la référence (Lot 0)` |
+| Mode d'affichage | ~~Sombre uniquement~~ → **Avenant Lot 0** : ambiances de section alternées comme la référence (aplat bordeaux, clair, sombre), sans bascule clair/sombre. Voir `docs/DECISIONS.md` |
 | Effets visuels | **Avenant Lot 0** : pas de halos, dégradés, grilles de fond ni halo au pointeur (§ 5.1 et § 9 amendés) ; aplats, angles droits, champ de carrés animé |
 | Polices | **Avenant Lot 0** : Geist + JetBrains Mono (SIL OFL 1.1), auto-hébergées |
 | Pages intérieures | **Avenant du 27/09/2026** : ambiances **claires** (`light`, `light-alt`), header en barre sombre pleine ; footer sombre et CTA bordeaux inchangés |
@@ -86,7 +86,7 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 - Tous les gabarits de pages listés au § 6 et § 8, alimentés par des placeholders.
 - Fonctions dynamiques côté client avec mode simulé en local.
 - SEO technique, données structurées, sorties pour agents IA.
-- Documentation : `README.md`, `docs/CONTENU.md` (guide de rédaction), `docs/DECISIONS.md`, `relevé de la référence (Lot 0)`.
+- Documentation : `README.md`, `docs/CONTENU.md` (guide de rédaction), `docs/DECISIONS.md`.
 
 ### 3.2 Hors périmètre
 - Rédaction du contenu définitif, traductions anglaises.
@@ -97,9 +97,9 @@ Le site WordPress actuel doit être **revitalisé**. Objectifs, par ordre de pri
 
 ---
 
-## 4. Étude de la référence la référence (Lot 0)
+## 4. Étude de la référence de design (Lot 0)
 
-Avant tout développement, analyser la référence avec le navigateur intégré et produire **`relevé de la référence (Lot 0)`**. Ce document sert ensuite de référence à tous les lots.
+Avant tout développement, analyser le site de référence avec le navigateur intégré et en produire un relevé (document de travail du Lot 0, retiré du dépôt le 30/10/2026). Ce relevé sert ensuite de référence à tous les lots.
 
 ### 4.1 À relever (par mesure réelle : styles calculés, DevTools, pas par supposition)
 - **Typographie** : familles (titres, texte, code), graisses utilisées, échelle de tailles par breakpoint, interlignages, interlettrages (notamment sur les grands titres), casse (capitales des *eyebrows*).
@@ -117,7 +117,7 @@ Avant tout développement, analyser la référence avec le navigateur intégré 
 - Sinon : proposer **2 alternatives libres** au plus proche (métriques, caractère), avec un comparatif visuel sur la page de guide de style, et **demander à l'utilisateur de choisir**.
 
 ### 4.3 Transposition
-Terminer le document par un tableau « **élément la référence → équivalent Excelcio** » (ex. « Hero produit avec capture de l'interface » → « Hero avec maquette de dashboard BI stylisée »).
+Terminer le document par un tableau « **élément de la référence → équivalent Excelcio** » (ex. « Hero produit avec capture de l'interface » → « Hero avec maquette de dashboard BI stylisée »).
 
 ---
 
@@ -129,7 +129,7 @@ Couleurs imposées : `#A82234` (bordeaux Excelcio) et `#1A171B` (quasi-noir chau
 
 ⚠️ **Contrainte de contraste** : `#A82234` sur `#1A171B` a un contraste d'environ **2,5:1**. Il ne doit **jamais** servir de couleur de texte ni d'icône porteuse de sens sur fond sombre. Usages autorisés : fonds de boutons (avec texte blanc, ~7,1:1 ✅), dégradés, halos, éléments décoratifs. Pour du texte d'accent, utiliser une teinte éclaircie ≥ 4,5:1.
 
-Tokens à définir dans `themes/excelcio/assets/css/tokens.css` (les valeurs sont des **propositions de départ**, à ajuster pour respecter les contrastes et coller à l'ambiance la référence).
+Tokens à définir dans `themes/excelcio/assets/css/tokens.css` (les valeurs sont des **propositions de départ**, à ajuster pour respecter les contrastes et coller à l'ambiance de la référence).
 
 Les **couleurs de marque** (`--c-brand`, `--c-bg` et leurs dérivées) ne sont pas écrites en dur : ce sont des paramètres `params.style` du thème, injectés dans le CSS par `@import "hugo:vars"` et l'option `vars` de `css.Build` (§ 11.1). Le site peut ainsi les changer dans sa configuration sans toucher au thème. Les autres tokens (espacements, typographie, mouvement) restent dans `tokens.css`. Valeurs de départ :
 
@@ -154,7 +154,7 @@ Les **couleurs de marque** (`--c-brand`, `--c-bg` et leurs dérivées) ne sont p
   --c-brand-light:   #E8566B; /* texte d'accent, liens : ≥ 4.5:1 sur --c-bg */
   --c-brand-glow:    rgb(168 34 52 / .45);
 
-  /* Dégradé signature (équivalent du dégradé magenta→violet de la référence) */
+  /* Dégradé signature (équivalent du dégradé de la référence) */
   --g-brand: linear-gradient(135deg, #FF5A6E 0%, #A82234 50%, #5A1230 100%);
   --g-text:  linear-gradient(90deg, #FF8A98 0%, #E8566B 50%, #C23A50 100%); /* titres en dégradé */
 
@@ -323,7 +323,7 @@ Nom Excelcio ; bureaux Paris, Rennes, Nantes ; `contact@excelcio.com`, `rh@excel
 
 ### 8.1 Accueil — ordre calqué sur la référence
 
-| # | Section (`type`) | Équivalent la référence | Contenu Excelcio |
+| # | Section (`type`) | Équivalent dans la référence | Contenu Excelcio |
 |---|---|---|---|
 | 1 | `hero` | Hero + 2 CTA | Badge d'annonce cliquable (ex. événement), H1 avec mot-clé en dégradé, sous-titre, CTA primaire « Nous contacter », CTA secondaire « Découvrir nos formations », visuel de dashboard stylisé avec halo, fond en grille estompée |
 | 2 | `logos` | Bandeau de logos clients | Marquee infini de logos clients (placeholders), pause au survol et au focus |
@@ -546,7 +546,7 @@ hugo_2/                              # C:\Users\vtexier.EXCELCIO\Desktop\excelci
 ├── assets/                          # propre au site : images de contenu partagées, logos ; surcharges éventuelles
 ├── static/                          # favicon et fichiers servis tels quels uniquement
 ├── scripts/                         # contrôles de recette (contraste, budgets, liens)
-├── docs/ (SPEC.md, DECISIONS.md, CONTENU.md, RECETTE.md, relevé de la référence, reference/)
+├── docs/ (SPEC.md, DECISIONS.md, CONTENU.md, RECETTE.md)
 └── themes/
     └── excelcio/
         ├── hugo.toml                # config du thème : valeurs par défaut des params, formats de sortie, types de médias, module.hugoVersion
@@ -622,7 +622,7 @@ Chaque lot se termine par la vérification de **tous** ses critères, un compte 
 **Première version (V1) = Lots 0, 1 et 2.** Les lots 3 à 6 sont spécifiés pour cadrer l'architecture dès le départ (le thème doit déjà les rendre possibles), mais ne sont réalisés qu'après validation de la V1.
 
 ### Lot 0 — Étude de la référence
-- **Livrables** : `relevé de la référence (Lot 0)` (§ 4), captures dans `docs/reference/`, proposition de polices.
+- **Livrables** : relevé de la référence (§ 4), proposition de polices.
 - **Acceptation** : relevés chiffrés (pas d'estimation « à l'œil ») ; inventaire de l'accueil + 3 pages intérieures ; tableau de transposition ; licence des polices vérifiée ; choix de polices validé par l'utilisateur.
 
 ### Lot 1 — Socle et design system

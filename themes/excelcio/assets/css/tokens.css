@@ -2,7 +2,7 @@
  * Design tokens.
  * Brand colours (--brand, --ink, --dark-*, --light-*…) come from site.Params.style
  * through @import "hugo:vars" (see main.css). Everything else is defined here.
- * Values measured on the reference site: relevé de la référence (Lot 0).
+ * Values measured on the reference site during Lot 0 (see docs/DECISIONS.md).
  */
 @layer tokens {
   :root {

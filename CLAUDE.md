@@ -1,6 +1,6 @@
 # CLAUDE.md — excelcio.com (Hugo)
 
-Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo**, dans l'esprit visuel de la référence, aux couleurs `#A82234` / `#1A171B`. Accueil en ambiances alternées comme la référence (aplats bordeaux, sections claires, sections sombres) ; **pages intérieures claires** avec header en barre sombre pleine (voir `docs/DECISIONS.md`).
+Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo**, dans un style « produit tech » premium inspiré d'un site de référence (Lot 0), aux couleurs `#A82234` / `#1A171B`. Accueil en ambiances alternées comme la référence (aplats bordeaux, sections claires, sections sombres) ; **pages intérieures claires** avec header en barre sombre pleine (voir `docs/DECISIONS.md`).
 
 **Source de vérité : `docs/SPEC.md`** (le *quoi*). Ce fichier donne le *comment* : consignes permanentes, conventions et commandes. En cas de conflit, SPEC.md l'emporte ; signale-le.
 
@@ -29,7 +29,7 @@ Site vitrine d'Excelcio (conseil et formation BI) refait en site statique **Hugo
 
 ## Règles non négociables
 
-- **Pas de copie de la référence** : reproduire le langage visuel (mise en page, typographie, effets, animations), jamais son code, ses images, logos, icônes ni ses textes.
+- **Pas de copie de la référence de design** : reproduire le langage visuel (mise en page, typographie, effets, animations), jamais son code, ses images, logos, icônes ni ses textes.
 - **Pas de contenu inventé** : les textes viennent du **site actuel excelcio.com** (repris et adaptés librement, sans ajouter de fait : avenant du 27/09/2026) ou de l'utilisateur ; à défaut, placeholders `[À RÉDIGER — consigne…]`, chiffres en `[XX]`, `placeholder: true` dans le front matter. Jamais de *lorem ipsum*, de faux clients, de faux témoignages ni de faux chiffres. **Noms de clients réels autorisés** tels qu'ils figurent sur le site actuel (avenant du 27/09/2026) ; pas de logo de client sans fourniture par l'utilisateur. Le logo Excelcio est fourni par l'utilisateur, ne pas le récupérer en ligne. Images : ne pas reprendre celles du site actuel (texte seulement).
 - **Zéro tiers au chargement** : pas de CDN, pas de Google Fonts distant, pas de framework JS. Polices auto-hébergées.
 - **Amélioration progressive** : chaque page est lisible et navigable sans JavaScript.
@@ -78,6 +78,5 @@ Pour tester la recherche : `public/` vidé, build de production, puis `npx pagef
 
 - `docs/SPEC.md` : cahier des charges
 - `docs/DECISIONS.md` : journal des décisions
-- `relevé de la référence (Lot 0)` : relevés de la référence (Lot 0), à consulter pour toute question de style
 - `docs/CONTENU.md` : guide de rédaction et des placeholders
 - `themes/excelcio/README.md` : paramètres, sections, shortcodes du thème
