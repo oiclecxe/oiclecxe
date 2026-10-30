@@ -111,7 +111,8 @@ Interface d'édition en ligne : **https://oiclecxe.github.io/oiclecxe/admin/** (
 **Accès d'un rédacteur** (une fois) :
 
 1. Un compte GitHub avec l'accès en écriture au dépôt (**Settings › Collaborators › Add people** sur `oiclecxe/oiclecxe`).
-2. Sur `/admin/`, **Se connecter avec un jeton d'accès** : le lien proposé ouvre la création d'un jeton GitHub avec les bons droits. Pour un jeton « fine-grained » créé à la main : dépôt `oiclecxe/oiclecxe` seul, permission **Contents : Read and write**. Le jeton est gardé dans le navigateur ; il expire à la date choisie.
+2. Créer un jeton **classique** (pas « fine-grained ») : GitHub › **Settings › Developer settings › Personal access tokens › Tokens (classic) › Generate new token (classic)**, portée **`repo`**, date d'expiration au choix. Un jeton « fine-grained » ne fonctionne pas pour un collaborateur : il ne donne accès qu'aux dépôts du compte ou d'une organisation dont on est membre, et le CMS répond alors « Resource not accessible by personal access token ». Seul le propriétaire du dépôt (`oiclecxe`) peut utiliser un jeton « fine-grained » (dépôt `oiclecxe/oiclecxe`, permission **Contents : Read and write**).
+3. Sur `/admin/`, **Se connecter avec un jeton d'accès** et coller le jeton. Il est gardé dans le navigateur.
 
 **Fonctionnement** :
 
