@@ -102,7 +102,7 @@ L’outil d’amélioration des performances dispose d’un nouvel onglet « Rec
 
 Pour aller plus loin, retrouvez la présentation des nouveautés des précédentes versions :
 
-Qlik Cloud 2026
+**Qlik Cloud 2026**
 
 - [Qlik Cloud Janvier 2026](/actualites/qlik-cloud-janvier-2026/)
 - [Qlik Cloud Février 2026](/actualites/qlik-cloud-fevrier-2026/)
@@ -111,7 +111,7 @@ Qlik Cloud 2026
 - [Qlik Cloud Mai 2026](/actualites/qlik-cloud-mai-2026/)
 - [Qlik Cloud Juin 2026](/actualites/qlik-cloud-juin-2026/)
 
-Qlik Cloud 2025
+**Qlik Cloud 2025**
 
 - [Qlik Cloud Janvier 2025](https://excelcio.com/2025/02/17/qlik-sense-saas-janvier-2025/)
 - [Qlik Cloud Février 2025](https://excelcio.com/2025/03/25/qlik-sense-saas-fevrier-2025/)
@@ -125,7 +125,7 @@ Qlik Cloud 2025
 - [Qlik Cloud Novembre 2025](/actualites/qlik-sense-saas-novembre-2025/)
 - [Qlik Cloud Décembre 2025](/actualites/qlik-sense-saas-decembre-2025/)
 
-Qlik Cloud 2024
+**Qlik Cloud 2024**
 
 - [Qlik Cloud Janvier 2024](https://excelcio.com/2024/02/14/qlik-sense-saas-janvier-2024-le-recap/)
 - [Qlik Cloud Février 2024](https://excelcio.com/2024/03/07/qlik-sense-saas-fevrier-2024-le-recap/)
@@ -139,7 +139,7 @@ Qlik Cloud 2024
 - [Qlik Cloud Novembre 2024](https://excelcio.com/2025/01/13/qlik-sense-saas-novembre-2024/)
 - [Qlik Cloud Décembre 2024](https://excelcio.com/2025/02/14/qlik-sense-saas-decembre-2024/)
 
-Qlik Cloud 2023
+**Qlik Cloud 2023**
 
 - [Qlik Cloud Janvier 2023](https://excelcio.com/2023/02/10/qlik-sense-saas-janvier-2023/)
 - [Qlik Cloud Février 2023](https://excelcio.com/2023/03/10/qlik-sense-saas-fevrier-2023/)
@@ -153,7 +153,7 @@ Qlik Cloud 2023
 - [Qlik Cloud Novembre 2023](https://excelcio.com/2023/12/11/qlik-sense-saas-novembre-2023-le-recap/)
 - [Qlik Cloud Décembre 2023](https://excelcio.com/2024/01/08/qlik-sense-saas-decembre-2023-le-recap/)
 
-Qlik Cloud 2022
+**Qlik Cloud 2022**
 
 - [Qlik Cloud Février 2022](https://excelcio.com/2022/03/07/qlik-sense-saas-fevrier-2022/)
 - [Qlik Cloud Mars 2022](https://excelcio.com/2022/04/07/qlik-sense-saas-mars-2022)
